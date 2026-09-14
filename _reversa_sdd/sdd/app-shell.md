@@ -1,6 +1,6 @@
 # Spec: app-shell
 
-**Versão:** 1.0
+**Versão:** 1.1
 **Status:** Rascunho
 **Autor:** reversa-spec-sdd
 **Data:** 2026-09-14
@@ -84,7 +84,7 @@
 | RF-06 | 🟡 O sistema deve permitir ligar e desligar o modo de condução pelo menu e pela ação `toggleMode` do controle. | Must | 🟡 Desligar pelo menu faz o controle deixar de mover o cursor; o `longPress` de Options liga de novo. |
 | RF-07 | 🟡 O sistema deve refletir o modo no ícone da barra de menus com duas variantes visuais distintas (ativo e desligado). | Must | 🟡 Alternar o modo troca o ícone em até 1 s. |
 | RF-08 | 🟡 O sistema deve oferecer no menu os itens "Abrir configuração" (abre o JSON no editor padrão), "Recarregar configuração" e "Sair". | Must | 🟡 "Abrir configuração" abre `~/.config/joystick-ai/config.json`. |
-| RF-09 | 🟡 O sistema deve, ao sair, desligar o modo, soltar botões de mouse e teclas pressionados, encerrar o ditado e restaurar o microfone padrão. | Must | 🟡 Sair com R2 segurado não deixa o botão do mouse preso. |
+| RF-09 | 🟡 O sistema deve, ao sair, desligar o modo, soltar botões de mouse e teclas pressionados, e encerrar o ditado, sem alterar a entrada padrão de áudio (`voice-dictation`, RF-04). | Must | 🟡 Sair com R2 segurado não deixa o botão do mouse preso. |
 | RF-10 | 🟡 O sistema deve oferecer a opção "Abrir ao iniciar sessão", desligada por padrão. | Should | 🟡 Com a opção ligada, o app abre após reiniciar o Mac. |
 | RF-11 | 🟡 O sistema deve exibir notificação do sistema quando o controle conectar ou desconectar e quando uma permissão for revogada. | Should | 🟡 Desligar o controle gera a notificação "DualSense desconectado". |
 | RF-12 | 🟡 O sistema deve registrar erros dos componentes num log em `~/Library/Logs/joystick-ai/` e oferecer no menu o item "Mostrar log". | Should | 🟡 Um JSON inválido gera entrada no log com a mensagem de validação. |
@@ -157,7 +157,6 @@ AppState {                        // em memória
 PersistedState {                  // ~/.config/joystick-ai/state.json
   conductionModeOn: Bool          // restaurado ao iniciar; padrão true
   launchAtLogin: Bool             // padrão false
-  previousDefaultInputUID: String?// ver voice-dictation, EC-04
 }
 ```
 
@@ -240,6 +239,7 @@ PersistedState {                  // ~/.config/joystick-ai/state.json
 | Versão | Data | Autor | Mudanças |
 |--------|------|-------|---------|
 | 1.0 | 2026-09-14 | reversa-spec-sdd | Criação inicial |
+| 1.1 | 2026-09-14 | iago | RF-09 deixa de restaurar o microfone padrão e `PersistedState` perde `previousDefaultInputUID`, alinhados a `voice-dictation` 1.3. |
 
 ---
 
