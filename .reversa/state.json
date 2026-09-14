@@ -18,6 +18,14 @@
     "revisao"
   ],
   "checkpoints": {},
+  "newproject_progress": {
+    "mode": "guiado",
+    "stage": "done",
+    "started_at": "2026-09-14T17:59:10Z",
+    "last_checkpoint_at": "2026-09-14T18:24:08Z",
+    "completed_stages": ["ideator", "researcher", "drafter", "spec-sdd"],
+    "brief": "criar uma aplicação que permita, inicialmente no MacOS, conectar o joystick do ps5 e utilizá-lo como mouse e adicionar alguns botões para abrir o vs code, utilizar o microfone para escrever prompts para IA, etc."
+  },
   "engines": [
     "claude-code",
     "antigravity"
