@@ -1,6 +1,6 @@
 # PRD: joystick-AI
 
-> Selo 🟡 PLANEJADO. Documento gerado a partir de ideation + personas.
+> Selo 🟡 PLANEJADO nos itens sem outra marca; 🟢 CONFIRMADO nos fatos verificados no hardware. Documento gerado a partir de ideation + personas.
 
 **Versão:** 1.0
 **Data:** 2026-09-14T18:11:44Z
@@ -95,7 +95,7 @@ O produto é um app para macOS que transforma o controle DualSense (PS5) em disp
 |---|---|---|---|
 | 🟡 Apontamento pelo touchpad ou analógico impreciso para alvos pequenos da IDE | 🟡 alto | 🟡 média | 🟡 Prova de conceito de apontamento antes do restante; sensibilidade e aceleração ajustáveis; privilegiar ações por botão e navegação por teclado sobre o clique fino. |
 | 🟡 macOS não expõe todos os controles do DualSense ou bloqueia a injeção de eventos | 🟡 alto | 🟡 baixa | 🟡 Validar cedo leitura de touchpad, gatilhos e botões via GameController e a injeção sob as permissões; fluxo guiado de concessão de permissões. |
-| 🟡 Microfone do DualSense não disponível como entrada no macOS, sobretudo via Bluetooth | 🟡 alto | 🟡 média | 🟡 Testar microfone por USB e por Bluetooth antes de especificar o ditado; plano B: microfone do Mac ou fone Bluetooth, mantendo o acionamento pelo controle. |
+| 🟡 Microfone do DualSense não disponível como entrada no macOS, sobretudo via Bluetooth | 🟡 alto | 🟡 média | 🟡 Testar microfone por USB e por Bluetooth antes de especificar o ditado; plano B: microfone do Mac ou fone Bluetooth, mantendo o acionamento pelo controle. 🟢 Testado em 2026-09-14: o risco se confirma por Bluetooth (só serviço HID, nenhum dispositivo de áudio) e não se materializa por USB (entrada "DualSense Wireless Controller", 2 canais a 48 kHz, captura com média de −38,7 dBFS e pico de −18,8 dBFS). O plano B vale para o uso sem cabo; detalhes em `sdd/voice-dictation.md`, OQ-02. |
 | 🟡 Acionamento do ditado do Raycast frágil (atalho alterado, mudança de versão) | 🟡 médio | 🟡 média | 🟡 Isolar a integração num componente próprio e tornar o atalho configurável. |
 | 🟡 Correções pequenas de texto inviáveis só com voz, forçando o retorno ao teclado | 🟡 médio | 🟡 média | 🟡 Mapear edição básica (apagar palavra, desfazer, Enter, Esc) em botões; reavaliar teclado virtual após uso real. |
 | 🟡 Ferramentas existentes combinadas já resolverem o problema | 🟡 médio | 🟡 baixa | 🟡 Teste rápido de um mapeador de controle acionando o atalho do Raycast antes de investir além da prova de conceito. |

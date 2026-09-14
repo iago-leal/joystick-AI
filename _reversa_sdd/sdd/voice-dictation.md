@@ -1,12 +1,12 @@
 # Spec: voice-dictation
 
-**Versão:** 1.1
+**Versão:** 1.2
 **Status:** Rascunho
 **Autor:** reversa-spec-sdd
 **Data:** 2026-09-14
 **Reviewers:** iago
 
-> Selo 🟡 PLANEJADO em todos os itens. Fonte primária: [`prd.md`](../prd.md).
+> Selo 🟡 PLANEJADO nos itens sem outra marca; 🟢 CONFIRMADO nos fatos verificados no hardware pelo teste do microfone de 2026-09-14 (seção 13). Fonte primária: [`prd.md`](../prd.md).
 
 ---
 
@@ -23,6 +23,7 @@
 
 **Evidências:**
 🟡 Premissa 3 do `ideation.md`, reformulada pelo usuário: a transcrição do Raycast atende bem; falta usar o microfone do DualSense. Decisão do usuário: modo segurar para falar. Risco de impacto alto na seção 8 do PRD para o microfone via Bluetooth.
+🟢 Teste de 2026-09-14 no Mac do usuário: por Bluetooth, o controle negocia apenas o serviço `HID ACL` e não surge nenhum dispositivo de áudio; por USB, o macOS expõe a entrada "DualSense Wireless Controller" (Sony Interactive Entertainment, 2 canais, 48 kHz), listada também pelo AVFoundation, e uma saída de 4 canais. Uma captura de 5 s pela entrada USB registrou nível médio de −38,7 dBFS e pico de −18,8 dBFS, sem silêncio digital, com os dois canais idênticos (cápsula mono duplicada). A conexão do controle não altera a entrada padrão do sistema, que permaneceu no microfone do Mac.
 
 **Por que agora:**
 🟡 Sem ditado, a meta de 10 h semanais só com o controle é inalcançável, porque todo prompt exigiria teclado.
@@ -100,7 +101,7 @@
 ### 6.3 Fluxos Alternativos
 
 **Fluxo Alternativo A: microfone do controle indisponível**
-1. 🟡 O controle está conectado por Bluetooth e o macOS não expõe o microfone.
+1. 🟢 O controle está conectado só por Bluetooth, e o macOS não expõe o microfone (confirmado no teste de 2026-09-14).
 2. 🟡 O sistema mantém a entrada padrão, exibe o aviso e o ditado segue pelo microfone disponível.
 
 **Fluxo Alternativo B: controle desconecta durante o ditado**
@@ -165,7 +166,7 @@ AudioInputState {                   // em memória, não persistido
 |-------------|------|------------------------|
 | 🟡 Raycast com ditado configurado | Obrigatória | 🟡 Sem Raycast ou sem atalho, o ditado fica indisponível e o menu exibe o motivo; as demais funções seguem. |
 | 🟡 Core Audio (dispositivos de entrada) | Obrigatória | 🟡 Falha ao trocar a entrada mantém a entrada atual e registra aviso. |
-| 🟡 Microfone do DualSense | Opcional | 🟡 Indisponível leva ao Fluxo Alternativo A. |
+| 🟡 Microfone do DualSense | Opcional | 🟢 Exposto só por USB, como entrada "DualSense Wireless Controller", nome que casa com o padrão de `micNameContains`; por Bluetooth fica indisponível. 🟡 Indisponível leva ao Fluxo Alternativo A. |
 | 🟡 `action-mapping` | Obrigatória | 🟡 Entrega início e fim da ação e recebe o aviso de ditado ativo. |
 | 🟡 `controller-input` (feedback e desconexão) | Obrigatória | 🟡 Sem feedback, o ditado funciona sem vibração e sem luz. |
 | 🟡 Permissão de Acessibilidade | Obrigatória | 🟡 Sem ela, o atalho do Raycast não é injetado. |
@@ -178,7 +179,7 @@ AudioInputState {                   // em memória, não persistido
 |---------|---------|----------------------|
 | EC-01: 🟡 Raycast fechado ou não instalado | 🟡 Atalho injetado sem Raycast em execução | 🟡 O sistema detecta a ausência do processo do Raycast antes de acionar, não injeta o atalho, vibra duas vezes e mostra "Raycast não está em execução". |
 | EC-02: 🟡 Atalho não configurado | 🟡 `dictation.shortcut` ausente no JSON | 🟡 A ação de ditado é desativada e o menu orienta a configurar o atalho. |
-| EC-03: 🟡 Microfone indisponível via Bluetooth | 🟡 Controle sem cabo | 🟡 Fluxo Alternativo A, com aviso persistente no menu enquanto durar. |
+| EC-03: 🟢 Microfone indisponível via Bluetooth | 🟢 Controle sem cabo | 🟡 Fluxo Alternativo A, com aviso persistente no menu enquanto durar. |
 | EC-04: 🟡 App encerrado à força com a entrada trocada | 🟡 Travamento ou `kill -9` | 🟡 No próximo início, o sistema lê a entrada anterior salva em `~/.config/joystick-ai/state.json` e a restaura se o controle não estiver conectado. |
 | EC-05: 🟡 Usuário trocou a entrada manualmente | 🟡 Escolhe outro microfone em Ajustes com o controle conectado | 🟡 O sistema respeita a escolha, não força a troca de novo até a próxima conexão do controle e não restaura a anterior na desconexão. |
 | EC-06: 🟡 Duração máxima atingida | 🟡 L2 segurado por mais de 120 s | 🟡 Encerra o ditado, vibra e ignora o soltar posterior de L2. |
@@ -197,7 +198,7 @@ AudioInputState {                   // em memória, não persistido
 
 ## 13. Plano de Rollout
 
-- **Estratégia:** 🟡 Antes de implementar, teste manual de 15 minutos: conectar o DualSense por USB e por Bluetooth e verificar se aparece em Ajustes > Som > Entrada, acionando o ditado do Raycast com ele. O resultado define se RF-04 e RF-05 entram no MVP ou se o controle só aciona o ditado.
+- **Estratégia:** 🟡 Antes de implementar, teste manual de 15 minutos: conectar o DualSense por USB e por Bluetooth e verificar se aparece em Ajustes > Som > Entrada, acionando o ditado do Raycast com ele. O resultado define se RF-04 e RF-05 entram no MVP ou se o controle só aciona o ditado. 🟢 Metade feita em 2026-09-14: a exposição do microfone foi verificada por USB (disponível e captando) e por Bluetooth (indisponível), respondendo OQ-02. 🟡 Falta acionar o ditado do Raycast com o microfone do controle, que responde OQ-03 e fecha a decisão sobre RF-04 e RF-05.
 - **Como reverter (rollback):** 🟡 Definir `preferControllerMic: false` no JSON ou reinstalar a versão anterior pela tag git.
 - **Monitoramento pós-deploy:** 🟡 Na primeira semana, anotar falhas de ditado e casos em que a entrada padrão não foi restaurada.
 
@@ -208,7 +209,7 @@ AudioInputState {                   // em memória, não persistido
 | # | Pergunta | Impacto | Dono | Prazo |
 |---|---------|---------|------|-------|
 | OQ-01 | 🟡 Qual o atalho e o modo (segurar ou alternar) do ditado do Raycast usado hoje? Existe deeplink estável como alternativa ao atalho? | Alto | iago | antes do plano |
-| OQ-02 | 🟡 O macOS expõe o microfone do DualSense por Bluetooth, ou só por USB? | Alto | iago | teste da seção 13 |
+| OQ-02 | 🟢 O macOS expõe o microfone do DualSense por Bluetooth, ou só por USB? **Respondida: só por USB**, com captação de sinal real; por Bluetooth não há dispositivo de áudio (seção 2, Evidências). | Alto | iago | respondida em 2026-09-14 |
 | OQ-03 | 🟡 O Raycast usa a entrada padrão do sistema ou tem seleção própria de microfone que ignora a troca? | Alto | iago | teste da seção 13 |
 
 ---
@@ -236,6 +237,7 @@ AudioInputState {                   // em memória, não persistido
 |--------|------|-------|---------|
 | 1.0 | 2026-09-14 | reversa-spec-sdd | Criação inicial |
 | 1.1 | 2026-09-14 | reversa-spec-sdd | Ditado passa para L2 segurado; clique direito passa para R1 (pedido do usuário). |
+| 1.2 | 2026-09-14 | iago | Registro do teste do microfone: exposto e captando por USB, indisponível por Bluetooth; OQ-02 respondida. |
 
 ---
 
@@ -256,7 +258,7 @@ AudioInputState {                   // em memória, não persistido
 
 - 🟡 Iterações: 1
 - 🟡 Gaps críticos: nenhum
-- 🟡 Open questions pendentes: 3 (seção 14)
+- 🟡 Open questions pendentes: 2 (seção 14; OQ-02 respondida em 2026-09-14)
 - 🟡 Observação: o scorer é heurístico e verifica estrutura e vocabulário, não a correção técnica; as open questions de impacto alto continuam bloqueando o plano.
 
 ---
