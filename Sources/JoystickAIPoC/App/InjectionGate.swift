@@ -1,0 +1,56 @@
+import Foundation
+import JoystickCore
+
+/// Suspende e retoma a injeção conforme a Acessibilidade (RF-22, D-15, R-08).
+final class InjectionGate {
+    private let context: InputContext
+    private let injector: EventInjector
+    private let buttons: ButtonActions
+    private let shortcuts: ShortcutActions
+    private var allowed: Bool?
+    /// Solturas feitas na suspensão, que o sistema provavelmente descartou; repetidas na retomada.
+    private var pendingMouseReleases: [MouseButton] = []
+    private var pendingKeyReleases: [ShortcutAction] = []
+
+    /// Chamado na main thread quando a injeção é suspensa.
+    var onSuspended: (() -> Void)?
+
+    init(context: InputContext, injector: EventInjector, buttons: ButtonActions, shortcuts: ShortcutActions) {
+        self.context = context
+        self.injector = injector
+        self.buttons = buttons
+        self.shortcuts = shortcuts
+    }
+
+    /// Pode ser chamado de qualquer fila.
+    func setAllowed(_ value: Bool) {
+        context.queue.async { [self] in
+            let previous = allowed
+            allowed = value
+            guard let previous else {
+                // Estado inicial: sem suspensão nem retomada a registrar.
+                injector.enabled = value
+                return
+            }
+            guard previous != value else { return }
+            if value {
+                injector.enabled = true
+                // A revogação já descartava os eventos quando a PoC soltou os botões; sem repetir, o sistema
+                // ficaria com botão de mouse ou Command pressionado.
+                buttons.postReleases(pendingMouseReleases)
+                shortcuts.repeatReleases(pendingKeyReleases)
+                pendingMouseReleases = []
+                pendingKeyReleases = []
+                context.log.log(LogEventCatalog.injectionResumed(heldButtons: []))
+            } else {
+                // Solta antes de desativar, para não deixar botão de mouse preso quando a permissão voltar.
+                pendingKeyReleases = shortcuts.releaseAll()
+                let held = buttons.releaseAll()
+                pendingMouseReleases = held
+                injector.enabled = false
+                context.log.log(LogEventCatalog.injectionSuspended(heldButtons: held))
+                DispatchQueue.main.async { self.onSuspended?() }
+            }
+        }
+    }
+}

@@ -1,0 +1,232 @@
+import Foundation
+
+public enum PermissionTrigger: String, Sendable { case startup, poll }
+public enum TouchSource: String, Sendable { case touchState, zeroTransition = "zero_transition" }
+public enum TouchBoundary: String, Sendable { case began, ended }
+public enum PostedKind: String, Sendable { case move, drag, scroll, down, up }
+public enum PostSource: String, Sendable { case touch, stickOnset = "stick_onset", button }
+public enum TerminationReason: String, Sendable { case quit, sigterm, sigint, sighup }
+
+/// Tela listada em `targets.screens`, numerada a partir de 1.
+public struct ScreenListing: Equatable, Sendable {
+    public var index: Int
+    public var name: String
+    public var widthPt: Int
+    public var heightPt: Int
+    public var backingScale: Double
+
+    public init(index: Int, name: String, widthPt: Int, heightPt: Int, backingScale: Double) {
+        self.index = index
+        self.name = name
+        self.widthPt = widthPt
+        self.heightPt = heightPt
+        self.backingScale = backingScale
+    }
+}
+
+/// Fábricas tipadas de todos os eventos de `diagnostic-log.md` §3 (D-18, RN-12).
+///
+/// Nenhuma fábrica aceita coordenadas do cursor, deltas, posições do toque ou valores de eixo.
+public enum LogEventCatalog {
+    public static func sessionStart(appVersion: String, macOS: String, pid: Int32, debug: Bool, args: [String], signing: JSONValue) -> LogEvent {
+        LogEvent("session.start", level: .info, fields: [
+            "logSchema": 1,
+            "appVersion": .string(appVersion),
+            "macOS": .string(macOS),
+            "pid": .int(Int64(pid)),
+            "debug": .bool(debug),
+            "args": .array(args.map(JSONValue.string)),
+            "signing": signing,
+        ])
+    }
+
+    public static func permissionsStatus(postEvent: Bool, listenEvent: Bool, trigger: PermissionTrigger) -> LogEvent {
+        LogEvent("permissions.status", level: .info, fields: [
+            "postEvent": .bool(postEvent), "listenEvent": .bool(listenEvent), "trigger": .string(trigger.rawValue),
+        ])
+    }
+
+    public static func permissionsGuidance(message: String) -> LogEvent {
+        LogEvent("permissions.guidance", level: .warn, fields: ["message": .string(message)])
+    }
+
+    /// Eventos `config.*` correspondentes ao resultado da leitura (`config-pointer.md` §3).
+    public static func config(_ result: ConfigLoadResult) -> [LogEvent] {
+        var events: [LogEvent] = []
+        var invalidOrUnreadable = false
+        for issue in result.issues {
+            switch issue {
+            case .invalidJSON(let line, let message):
+                invalidOrUnreadable = true
+                var fields: [String: JSONValue] = ["message": .string(message)]
+                if let line { fields["line"] = .int(Int64(line)) }
+                events.append(LogEvent("config.invalid_json", level: .error, fields: fields))
+            case .unreadable(let message):
+                invalidOrUnreadable = true
+                events.append(LogEvent("config.unreadable", level: .error, fields: ["message": .string(message)]))
+            case .valueRejected: break
+            }
+        }
+        if !invalidOrUnreadable {
+            var fields: [String: JSONValue] = ["status": .string(result.status.rawValue), "settings": result.settings.jsonValue]
+            if let reason = result.reason { fields["reason"] = .string(reason) }
+            events.append(LogEvent("config.loaded", level: .info, fields: fields))
+        }
+        for issue in result.issues {
+            if case .valueRejected(let field, let rejected, let min, let max, let defaultValue) = issue {
+                events.append(LogEvent("config.value_rejected", level: .warn, fields: [
+                    "field": .string(field),
+                    "rejected": rejected,
+                    "min": min.map(JSONValue.double) ?? .null,
+                    "max": max.map(JSONValue.double) ?? .null,
+                    "default": defaultValue,
+                ]))
+            }
+        }
+        return events
+    }
+
+    public static func displaysChanged(count: Int) -> LogEvent {
+        LogEvent("displays.changed", level: .info, fields: ["count": .int(Int64(count))])
+    }
+
+    public static func cursorReclamped() -> LogEvent {
+        LogEvent("cursor.reclamped", level: .info)
+    }
+
+    public static func controllerConnected(_ info: ControllerInfo, tArrival: UInt64) -> LogEvent {
+        LogEvent("controller.connected", level: .info, fields: [
+            "id": .string(info.id.uuidString),
+            "name": .string(info.name),
+            "connection": .string(info.connection.rawValue),
+            "atStartup": .bool(info.atStartup),
+            "t_arrival": .uint(tArrival),
+        ])
+    }
+
+    public static func controllerIgnored(name: String, productCategory: String, reason: String) -> LogEvent {
+        LogEvent("controller.ignored", level: .info, fields: [
+            "name": .string(name), "productCategory": .string(productCategory), "reason": .string(reason),
+        ])
+    }
+
+    public static func controllerQueued(id: UUID, position: Int) -> LogEvent {
+        LogEvent("controller.queued", level: .info, fields: ["id": .string(id.uuidString), "position": .int(Int64(position))])
+    }
+
+    public static func controllerDisconnected(id: UUID, tArrival: UInt64) -> LogEvent {
+        LogEvent("controller.disconnected", level: .info, fields: ["id": .string(id.uuidString), "t_arrival": .uint(tArrival)])
+    }
+
+    public static func controllerElements(names: [String], touchpads: [String]) -> LogEvent {
+        LogEvent("controller.elements", level: .debug, fields: [
+            "names": .array(names.map(JSONValue.string)), "touchpads": .array(touchpads.map(JSONValue.string)),
+        ])
+    }
+
+    public static func controllerTouchSource(id: UUID, source: TouchSource) -> LogEvent {
+        LogEvent("controller.touch_source", level: .info, fields: ["id": .string(id.uuidString), "source": .string(source.rawValue)])
+    }
+
+    public static func controllerGestureSuppression(elements: [String], message: String) -> LogEvent {
+        LogEvent("controller.gesture_suppression", level: .info, fields: [
+            "elements": .array(elements.map(JSONValue.string)), "message": .string(message),
+        ])
+    }
+
+    /// Pedido do relatório de recurso `0x05` a um DualSense por Bluetooth, que o tira do relatório simplificado sem touchpad.
+    /// `result` é `ok` ou o código `IOReturn` em hexadecimal.
+    public static func controllerExtendedReport(transport: ConnectionType, result: String) -> LogEvent {
+        LogEvent("controller.extended_report", level: .info, fields: [
+            "transport": .string(transport.rawValue), "result": .string(result),
+        ])
+    }
+
+    public static func controllerError(message: String) -> LogEvent {
+        LogEvent("controller.error", level: .error, fields: ["message": .string(message)])
+    }
+
+    public static func inputButton(_ button: ButtonID, phase: ButtonPhase, synthetic: Bool, tArrival: UInt64, tDelivered: UInt64, tFramework: Double?) -> LogEvent {
+        var fields: [String: JSONValue] = [
+            "button": .string(button.rawValue),
+            "phase": .string(phase.rawValue),
+            "synthetic": .bool(synthetic),
+            "t_arrival": .uint(tArrival),
+            "t_delivered": .uint(tDelivered),
+        ]
+        if let tFramework { fields["t_framework"] = .double(tFramework) }
+        return LogEvent("input.button", level: .debug, fields: fields)
+    }
+
+    public static func inputTouch(finger: Int, phase: TouchBoundary, tArrival: UInt64, tDelivered: UInt64) -> LogEvent {
+        LogEvent("input.touch", level: .debug, fields: [
+            "finger": .int(Int64(finger)), "phase": .string(phase.rawValue), "t_arrival": .uint(tArrival), "t_delivered": .uint(tDelivered),
+        ])
+    }
+
+    public static func touchRawTransition(finger: Int, toZero: Bool) -> LogEvent {
+        LogEvent("touch.raw_transition", level: .debug, fields: ["finger": .int(Int64(finger)), "toZero": .bool(toZero)])
+    }
+
+    public static func pointerPosted(kind: PostedKind, button: MouseButton?, source: PostSource, clickState: Int?, tArrival: UInt64, tPosted: UInt64) -> LogEvent {
+        var fields: [String: JSONValue] = [
+            "kind": .string(kind.rawValue), "source": .string(source.rawValue), "t_arrival": .uint(tArrival), "t_posted": .uint(tPosted),
+        ]
+        if let button { fields["button"] = .string(button.rawValue) }
+        if let clickState { fields["clickState"] = .int(Int64(clickState)) }
+        return LogEvent("pointer.posted", level: .debug, fields: fields)
+    }
+
+    public static func injectionSuspended(heldButtons: [MouseButton]) -> LogEvent {
+        LogEvent("pointer.injection_suspended", level: .warn, fields: ["heldButtons": .array(heldButtons.map { .string($0.rawValue) })])
+    }
+
+    public static func injectionResumed(heldButtons: [MouseButton]) -> LogEvent {
+        LogEvent("pointer.injection_resumed", level: .info, fields: ["heldButtons": .array(heldButtons.map { .string($0.rawValue) })])
+    }
+
+    public static func targetsScreens(_ screens: [ScreenListing]) -> LogEvent {
+        LogEvent("targets.screens", level: .info, fields: [
+            "screens": .array(screens.map {
+                .object([
+                    "index": .int(Int64($0.index)), "name": .string($0.name),
+                    "widthPt": .int(Int64($0.widthPt)), "heightPt": .int(Int64($0.heightPt)), "backingScale": .double($0.backingScale),
+                ])
+            }),
+        ])
+    }
+
+    public static func targetsStarted(environment: TargetEnvironment, seed: UInt64) -> LogEvent {
+        LogEvent("targets.started", level: .info, fields: ["env": .string(environment.rawValue), "seed": .uint(seed)])
+    }
+
+    public static func targetsFinished(environment: TargetEnvironment, seed: UInt64, complete: Bool, abortReason: AbortReason?, file: String) -> LogEvent {
+        var fields: [String: JSONValue] = [
+            "env": .string(environment.rawValue), "seed": .uint(seed), "complete": .bool(complete), "file": .string(file),
+        ]
+        if let abortReason { fields["abortReason"] = .string(abortReason.rawValue) }
+        return LogEvent("targets.finished", level: .info, fields: fields)
+    }
+
+    public static func targetsInvalidArgs(message: String) -> LogEvent {
+        LogEvent("targets.invalid_args", level: .warn, fields: ["message": .string(message)])
+    }
+
+    public static func targetsScreenFallback(message: String) -> LogEvent {
+        LogEvent("targets.screen_fallback", level: .warn, fields: ["message": .string(message)])
+    }
+
+    public static func targetsWriteFailed(message: String, payload: String) -> LogEvent {
+        LogEvent("targets.write_failed", level: .error, fields: ["message": .string(message), "payload": .string(payload)])
+    }
+
+    public static func appTerminating(reason: TerminationReason, releasedButtons: [MouseButton]) -> LogEvent {
+        LogEvent("app.terminating", level: .info, fields: [
+            "reason": .string(reason.rawValue), "releasedButtons": .array(releasedButtons.map { .string($0.rawValue) }),
+        ])
+    }
+
+    public static func logDebugSuspended(sizeBytes: Int) -> LogEvent {
+        LogEvent("log.debug_suspended", level: .warn, fields: ["sizeBytes": .int(Int64(sizeBytes))])
+    }
+}
