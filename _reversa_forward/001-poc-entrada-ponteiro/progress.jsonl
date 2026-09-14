@@ -1,0 +1,89 @@
+{"ts": "2026-09-14T20:21:28Z", "action": "T001", "status": "done", "files": ["Package.swift", "scripts/test.sh"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T002", "status": "done", "files": [".gitignore"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T003", "status": "done", "files": ["Resources/Info.plist"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T004", "status": "done", "files": ["Sources/JoystickCore/Support/MonotonicClock.swift", "Sources/JoystickCore/Support/JSONValue.swift", "Tests/JoystickCoreTests/SupportTests.swift"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T005", "status": "done", "files": ["Sources/poc-tools/main.swift", "Sources/poc-tools/ButtonsCommand.swift", "Sources/poc-tools/RunsCommand.swift", "Sources/poc-tools/LatencyCommand.swift", "Sources/poc-tools/CyclesCommand.swift"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T006", "status": "done", "files": ["Sources/JoystickAIPoC/Log/DiagnosticLog.swift", "Sources/JoystickCore/Log/LogEvent.swift"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T007", "status": "done", "files": ["Sources/JoystickAIPoC/App/SigningInfo.swift"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T008", "status": "done", "files": ["Sources/JoystickAIPoC/App/PermissionMonitor.swift"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T009", "status": "done", "files": ["Sources/JoystickAIPoC/main.swift", "Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T010", "status": "done", "files": ["scripts/build-app.sh"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T011", "status": "done", "files": ["scripts/check-signature.sh"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T012", "status": "done", "files": ["scripts/create-local-signing-identity.sh"]}
+{"ts": "2026-09-14T20:21:28Z", "action": "T013", "status": "done", "files": ["_reversa_forward/001-poc-entrada-ponteiro/validation-report.md"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T014", "status": "done", "files": ["Tests/JoystickCoreTests/NormalizationTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T015", "status": "done", "files": ["Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T016", "status": "done", "files": ["Tests/JoystickCoreTests/StickKinematicsTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T017", "status": "done", "files": ["Tests/JoystickCoreTests/TouchpadTrackerTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T018", "status": "done", "files": ["Tests/JoystickCoreTests/PointerMotionEngineTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T019", "status": "done", "files": ["Tests/JoystickCoreTests/ClickStateMachineTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T020", "status": "done", "files": ["Tests/JoystickCoreTests/ScreenUnionTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T021", "status": "done", "files": ["Tests/JoystickCoreTests/ScrollMapperTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T022", "status": "done", "files": ["Tests/JoystickCoreTests/ConfigLoaderTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T023", "status": "done", "files": ["Tests/JoystickCoreTests/PointerSettingsValidationTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T024", "status": "done", "files": ["Tests/JoystickCoreTests/LaunchArgumentsTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T025", "status": "done", "files": ["Tests/JoystickCoreTests/LatencyStatsTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T026", "status": "done", "files": ["Tests/JoystickCoreTests/LogAnalysisTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T027", "status": "done", "files": ["Tests/JoystickCoreTests/TargetRunTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T028", "status": "done", "files": ["Tests/JoystickCoreTests/RunsReportTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T029", "status": "done", "files": ["Tests/JoystickCoreTests/LogEventCatalogTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T075", "status": "done", "files": ["Tests/JoystickCoreTests/StartupAdoptionTests.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T030", "status": "done", "files": ["Sources/JoystickCore/Input/InputEvent.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T031", "status": "done", "files": ["Sources/JoystickCore/Pointer/PointerSettings.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T032", "status": "done", "files": ["Sources/JoystickCore/Input/Normalization.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T033", "status": "done", "files": ["Sources/JoystickCore/Input/ActiveControllerRegistry.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T034", "status": "done", "files": ["Sources/JoystickCore/Pointer/StickKinematics.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T035", "status": "done", "files": ["Sources/JoystickCore/Pointer/TouchpadTracker.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T036", "status": "done", "files": ["Sources/JoystickCore/Pointer/PointerMotionEngine.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T037", "status": "done", "files": ["Sources/JoystickCore/Pointer/ClickStateMachine.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T038", "status": "done", "files": ["Sources/JoystickCore/Pointer/ScrollMapper.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T039", "status": "done", "files": ["Sources/JoystickCore/Pointer/ScreenUnion.swift", "Sources/JoystickCore/Pointer/Geometry.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T040", "status": "done", "files": ["Sources/JoystickCore/Config/PointerSettingsValidation.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T041", "status": "done", "files": ["Sources/JoystickCore/Config/ConfigLoader.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T042", "status": "done", "files": ["Sources/JoystickCore/App/LaunchArguments.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T043", "status": "done", "files": ["Sources/JoystickCore/Log/LogEventCatalog.swift", "Sources/JoystickAIPoC/App/PermissionMonitor.swift", "Sources/JoystickAIPoC/App/AppDelegate.swift", "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T044", "status": "done", "files": ["Sources/JoystickCore/Analysis/LatencyStats.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T045", "status": "done", "files": ["Sources/JoystickCore/Analysis/LogAnalysis.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T046", "status": "done", "files": ["Sources/JoystickCore/Targets/TargetRun.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T047", "status": "done", "files": ["Sources/JoystickCore/Analysis/RunsReport.swift"]}
+{"ts": "2026-09-14T20:34:54Z", "action": "T076", "status": "done", "files": ["Sources/JoystickCore/Input/StartupAdoption.swift"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T053", "status": "done", "files": ["Sources/poc-tools/ButtonsCommand.swift"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T065", "status": "done", "files": ["Sources/JoystickAIPoC/Targets/TargetRunWriter.swift"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T069", "status": "done", "files": ["Sources/poc-tools/LatencyCommand.swift"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T070", "status": "done", "files": ["Sources/poc-tools/CyclesCommand.swift"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T071", "status": "done", "files": ["Sources/poc-tools/RunsCommand.swift"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T072", "status": "done", "files": ["scripts/config-samples/stick-1800.json", "scripts/config-samples/invalid-line4.json", "scripts/config-samples/out-of-range.json"]}
+{"ts": "2026-09-14T20:36:31Z", "action": "T074", "status": "done", "files": ["Sources/poc-tools/main.swift", "Sources/poc-tools/ToolInput.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T048", "status": "done", "files": ["Sources/JoystickAIPoC/Controller/TransportResolver.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T077", "status": "done", "files": ["Sources/JoystickAIPoC/Controller/InputSink.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T049", "status": "done", "files": ["Sources/JoystickAIPoC/Controller/ControllerReader.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T078", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T050", "status": "done", "files": ["Sources/JoystickAIPoC/Controller/ButtonReader.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T051", "status": "done", "files": ["Sources/JoystickAIPoC/Controller/AxisTouchReader.swift"]}
+{"ts": "2026-09-14T20:58:26Z", "action": "T052", "status": "done", "files": ["Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift"]}
+{"ts": "2026-09-14T21:37:58Z", "action": "T051", "status": "corrected", "note": "PM-2: por Bluetooth o DualSense não envia touchpad até a leitura do relatório de recurso 0x05; ativação na conexão, diverge de D-07", "files": ["Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift", "Sources/JoystickAIPoC/Controller/ControllerReader.swift", "Sources/JoystickCore/Log/LogEventCatalog.swift", "Tests/JoystickCoreTests/LogEventCatalogTests.swift"]}
+{"ts": "2026-09-14T21:37:58Z", "action": "T050", "status": "corrected", "note": "PM-2: o macOS retém o PS antes do GameController; leitura pelo relatório HID bruto", "files": ["Sources/JoystickCore/Input/DualSenseReport.swift", "Tests/JoystickCoreTests/DualSenseReportTests.swift", "Sources/JoystickAIPoC/Controller/ButtonReader.swift", "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift", "Sources/JoystickCore/Input/ActiveControllerRegistry.swift"]}
+{"ts": "2026-09-14T21:37:58Z", "action": "PM-2", "status": "gate_passed", "note": "18 de 18 por Bluetooth, touchpad por Bluetooth e USB, Input Monitoring dispensado; evidências no validation-report.md", "files": ["_reversa_forward/001-poc-entrada-ponteiro/validation-report.md"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T054", "status": "done", "files": ["Sources/JoystickAIPoC/Injection/EventInjector.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T055", "status": "done", "files": ["Sources/JoystickAIPoC/Injection/ScrollInjector.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T079", "status": "done", "files": ["Sources/JoystickAIPoC/Display/ScreenCatalog.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T056", "status": "done", "files": ["Sources/JoystickAIPoC/Display/DisplayMonitor.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T057", "status": "done", "files": ["Sources/JoystickAIPoC/Pointer/MotionLoop.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T058", "status": "done", "files": ["Sources/JoystickAIPoC/Pointer/ButtonActions.swift", "Sources/JoystickAIPoC/Pointer/InputRouter.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T059", "status": "done", "files": ["Sources/JoystickAIPoC/App/InjectionGate.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T060", "status": "done", "files": ["Sources/JoystickAIPoC/App/Lifecycle.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T061", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T062", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T063", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T064", "status": "done", "files": ["Sources/JoystickAIPoC/Targets/TargetWindow.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T066", "status": "done", "files": ["Sources/JoystickAIPoC/Targets/TargetSession.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T067", "status": "done", "files": ["Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T068", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T21:47:59Z", "action": "T073", "status": "done", "files": ["_reversa_forward/001-poc-entrada-ponteiro/onboarding.md"]}
+{"ts": "2026-09-14T21:59:33Z", "action": "T035", "status": "corrected", "note": "TouchpadTracker descarta a amostra intermediária em que um eixo entra ou sai do zero com o outro igual; o GameController atualiza um eixo por vez", "files": ["Sources/JoystickCore/Pointer/TouchpadTracker.swift", "Tests/JoystickCoreTests/TouchpadTrackerTests.swift"]}
+{"ts": "2026-09-14T21:59:33Z", "action": "T054", "status": "corrected", "note": "EventInjector acompanha a posição postada enquanto CGEvent(source: nil).location não reflete o evento anterior; sem isso o movimento horizontal do touchpad era desfeito", "files": ["Sources/JoystickAIPoC/Injection/EventInjector.swift"]}
+{"ts":"2026-09-14T22:13:30Z","action":"T058","status":"corrected","note":"PM-3: mapeamento de cliques invertido a pedido do usuário (R1 e clique do touchpad no botão esquerdo, R2 no direito), divergindo de RN-11 e D-06; testes ajustados, 130 passam","files":["Sources/JoystickCore/Pointer/ClickStateMachine.swift","Tests/JoystickCoreTests/ClickStateMachineTests.swift","_reversa_forward/001-poc-entrada-ponteiro/onboarding.md"]}
+{"ts": "2026-09-14T22:35:24Z", "action": "PM-3", "status": "gate_partial", "note": "interrompido pelo usuário: §3 itens 1 a 14 e §4 aprovados (item 11 com scrollSpeed 100, item 12 sem TV), CPU parada 1,66%, privacidade sem violação; item 15 reprovado (P-08: CGPreflightPostEventAccess não reflete a revogação); pendentes item 16, blocos (b), (c), latência, CPU em movimento e ciclos", "files": ["_reversa_forward/001-poc-entrada-ponteiro/validation-report.md", "_reversa_forward/001-poc-entrada-ponteiro/onboarding.md"]}
+{"ts": "2026-09-14T22:41:47Z", "action": "EXP-01", "status": "done", "note": "protótipo de atalhos fora do escopo da PoC, pedido pelo usuário no PM-3 (action-mapping com mapeamento fixo: direcional, ✕ Enter, ○ Esc, □ Backspace, △ Tab, L1+✕ CONTINUAR, L1+△ Shift+Tab, Create Mission Control, L2+direcional mesas e App Exposé, L2+△ Cmd+`, Options+direcional Cmd+Tab); 138 testes passam", "files": ["Sources/JoystickCore/Shortcuts/ShortcutMapper.swift", "Tests/JoystickCoreTests/ShortcutMapperTests.swift", "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift", "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift", "Sources/JoystickAIPoC/Injection/EventInjector.swift", "Sources/JoystickAIPoC/Pointer/InputRouter.swift", "Sources/JoystickAIPoC/App/Lifecycle.swift", "Sources/JoystickAIPoC/App/InjectionGate.swift", "Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-14T22:49:22Z", "action": "T008", "status": "corrected", "note": "PM-3 (P-08): postEvent lido por AXIsProcessTrusted(), pois CGPreflightPostEventAccess() não reflete a revogação com o app aberto; InjectionGate repete na retomada os mouseUp e as solturas de teclas feitos na suspensão, que o sistema já descartava", "files": ["Sources/JoystickAIPoC/App/PermissionMonitor.swift", "Sources/JoystickAIPoC/App/InjectionGate.swift", "Sources/JoystickAIPoC/Pointer/ButtonActions.swift", "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift", "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"]}
+{"ts": "2026-09-14T22:49:22Z", "action": "EXP-01", "status": "corrected", "note": "R3 aciona Command+M (transcritor do Raycast, pedido do usuário); atalhos de sistema lidos de com.apple.symbolichotkeys; 140 testes passam", "files": ["Sources/JoystickCore/Shortcuts/ShortcutMapper.swift", "Tests/JoystickCoreTests/ShortcutMapperTests.swift", "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"]}
