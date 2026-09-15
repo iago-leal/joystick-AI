@@ -8,22 +8,170 @@
   "doc_level": "completo",
   "output_folder": "_reversa_sdd",
   "forward_folder": "_reversa_forward",
-  "phase": null,
-  "completed": [],
-  "pending": [
+  "phase": "revisao",
+  "completed": [
     "reconhecimento",
     "escavacao",
     "interpretacao",
     "geracao",
     "revisao"
   ],
-  "checkpoints": {},
+  "pending": [],
+  "checkpoints": {
+    "scout": {
+      "completed_at": "2026-09-15T16:31:23Z",
+      "files": [
+        "_reversa_sdd/inventory.md",
+        "_reversa_sdd/dependencies.md",
+        ".reversa/context/surface.json"
+      ]
+    },
+    "archaeologist": {
+      "completed_at": "2026-09-15T17:10:00Z",
+      "modules_analyzed": [
+        "app-shell",
+        "controller-input",
+        "pointer",
+        "injection",
+        "shortcuts",
+        "palette",
+        "config",
+        "editor",
+        "diagnostics-log",
+        "targets-analysis"
+      ],
+      "modules_pending": [],
+      "files": [
+        "_reversa_sdd/code-analysis.md",
+        "_reversa_sdd/data-dictionary.md",
+        "_reversa_sdd/flowcharts/app-shell.md",
+        "_reversa_sdd/flowcharts/controller-input.md",
+        "_reversa_sdd/flowcharts/pointer.md",
+        "_reversa_sdd/flowcharts/injection.md",
+        "_reversa_sdd/flowcharts/shortcuts.md",
+        "_reversa_sdd/flowcharts/palette.md",
+        "_reversa_sdd/flowcharts/config.md",
+        "_reversa_sdd/flowcharts/editor.md",
+        "_reversa_sdd/flowcharts/diagnostics-log.md",
+        "_reversa_sdd/flowcharts/targets-analysis.md",
+        ".reversa/context/modules.json"
+      ]
+    },
+    "detective": {
+      "completed_at": "2026-09-15T17:45:00Z",
+      "files": [
+        "_reversa_sdd/domain.md",
+        "_reversa_sdd/state-machines.md",
+        "_reversa_sdd/permissions.md",
+        "_reversa_sdd/adrs/"
+      ],
+      "rules_identified": 63,
+      "adrs": 15,
+      "state_machines": 11,
+      "gaps": [
+        "L-01 voice-dictation",
+        "L-02 DV-04/05/06 aceitas ou defeitos",
+        "L-03 medições pendentes do PM-3"
+      ]
+    },
+    "architect": {
+      "completed_at": "2026-09-15T18:05:00Z",
+      "files": [
+        "_reversa_sdd/architecture.md",
+        "_reversa_sdd/c4-context.md",
+        "_reversa_sdd/c4-containers.md",
+        "_reversa_sdd/c4-components.md",
+        "_reversa_sdd/traceability/spec-impact-matrix.md"
+      ],
+      "containers": 6,
+      "integrations": 12,
+      "tech_debts": 16,
+      "notes": "erd-complete.md não gerado: plano aprovado dispensa ERD; modelo de dados em arquivo em architecture.md §5"
+    },
+    "writer": {
+      "completed_at": "2026-09-15T20:30:00Z",
+      "granularity": "module",
+      "units": [
+        "aplicativo",
+        "entrada-do-controle",
+        "ponteiro",
+        "injecao-de-eventos",
+        "atalhos",
+        "paleta",
+        "configuracao",
+        "editor",
+        "log-de-diagnostico",
+        "tela-de-alvos-e-analise"
+      ],
+      "files": [
+        "_reversa_sdd/aplicativo/",
+        "_reversa_sdd/entrada-do-controle/",
+        "_reversa_sdd/ponteiro/",
+        "_reversa_sdd/injecao-de-eventos/",
+        "_reversa_sdd/atalhos/",
+        "_reversa_sdd/paleta/",
+        "_reversa_sdd/configuracao/",
+        "_reversa_sdd/editor/",
+        "_reversa_sdd/log-de-diagnostico/",
+        "_reversa_sdd/tela-de-alvos-e-analise/",
+        "_reversa_sdd/user-stories/",
+        "_reversa_sdd/traceability/code-spec-matrix.md"
+      ],
+      "canonical_files": 30,
+      "user_stories": 4,
+      "code_spec_coverage": "100% (100 arquivos de produção, 29 de teste)",
+      "notes": "questions.md por unit não gerado; lacunas L-01, L-02, L-03 consolidadas pelo Revisor em _reversa_sdd/questions.md"
+    },
+    "reviewer": {
+      "completed_at": "2026-09-15T21:10:00Z",
+      "specs_reviewed": 11,
+      "cross_review": "não (Codex indisponível)",
+      "reclassifications": {
+        "🟡→🟢": 12,
+        "🔴→🟢": 4
+      },
+      "questions": 5,
+      "answered": 5,
+      "confidence": "97,5%",
+      "counts": {
+        "green": 802,
+        "yellow": 42,
+        "red": 0
+      },
+      "files": [
+        "_reversa_sdd/confidence-report.md",
+        "_reversa_sdd/questions.md",
+        "_reversa_sdd/gaps.md"
+      ],
+      "open_gaps": []
+    },
+    "regression_check": {
+      "completed_at": "2026-09-15T21:20:00Z",
+      "features": 3,
+      "main_watch_items": 0,
+      "observations_checked": 63,
+      "verdicts": {
+        "green": 58,
+        "yellow": 4,
+        "red": 1
+      },
+      "red": [
+        "003 W013 (DV-05)"
+      ],
+      "addenda_superseded": 3
+    }
+  },
   "newproject_progress": {
     "mode": "guiado",
     "stage": "done",
     "started_at": "2026-09-14T17:59:10Z",
     "last_checkpoint_at": "2026-09-14T18:24:08Z",
-    "completed_stages": ["ideator", "researcher", "drafter", "spec-sdd"],
+    "completed_stages": [
+      "ideator",
+      "researcher",
+      "drafter",
+      "spec-sdd"
+    ],
     "brief": "criar uma aplicação que permita, inicialmente no MacOS, conectar o joystick do ps5 e utilizá-lo como mouse e adicionar alguns botões para abrir o vs code, utilizar o microfone para escrever prompts para IA, etc."
   },
   "engines": [
@@ -273,5 +421,53 @@
     ".reversa/plan.md",
     ".reversa/version",
     ".reversa/_config/manifest.yaml"
-  ]
+  ],
+  "redator_progress": {
+    "granularity": "module",
+    "units": [
+      "aplicativo",
+      "entrada-do-controle",
+      "ponteiro",
+      "injecao-de-eventos",
+      "atalhos",
+      "paleta",
+      "configuracao",
+      "editor",
+      "log-de-diagnostico",
+      "tela-de-alvos-e-analise"
+    ],
+    "done": [
+      "aplicativo/requirements.md",
+      "aplicativo/design.md",
+      "aplicativo/tasks.md",
+      "entrada-do-controle/requirements.md",
+      "entrada-do-controle/design.md",
+      "entrada-do-controle/tasks.md",
+      "ponteiro/requirements.md",
+      "ponteiro/design.md",
+      "ponteiro/tasks.md",
+      "injecao-de-eventos/requirements.md",
+      "injecao-de-eventos/design.md",
+      "injecao-de-eventos/tasks.md",
+      "atalhos/requirements.md",
+      "atalhos/design.md",
+      "atalhos/tasks.md",
+      "paleta/requirements.md",
+      "paleta/design.md",
+      "paleta/tasks.md",
+      "configuracao/requirements.md",
+      "configuracao/design.md",
+      "configuracao/tasks.md",
+      "editor/requirements.md",
+      "editor/design.md",
+      "editor/tasks.md",
+      "log-de-diagnostico/requirements.md",
+      "log-de-diagnostico/design.md",
+      "log-de-diagnostico/tasks.md",
+      "tela-de-alvos-e-analise/requirements.md",
+      "tela-de-alvos-e-analise/design.md",
+      "tela-de-alvos-e-analise/tasks.md"
+    ],
+    "globals_pending": []
+  }
 }

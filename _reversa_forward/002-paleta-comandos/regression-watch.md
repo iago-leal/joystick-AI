@@ -29,4 +29,23 @@ Itens implementados na rodada 1 (2026-09-14), com testes automatizados verdes e 
 
 ## Histórico de re-extrações
 
+### Re-extração 2026-09-15 21:20
+
+Watch principal vazio: nenhum item com peso de regressão. As observações abaixo foram conferidas contra a nova extração, sem mover nem alterar a tabela de observações.
+
+| ID | Veredito | Observação |
+|----|----------|------------|
+| W001 | 🟢 verde | `atalhos` (camada Options define PS como nenhum; L1 e L2 herdam a base) |
+| W002 | 🟢 verde | `paleta` (NSPanel não ativador) |
+| W003 | 🟢 verde | `ponteiro` RF-PT-07; `paleta` |
+| W004 | 🟢 verde | `paleta` (abertura solta teclas e interrompe repetição) |
+| W005 | 🟢 verde | `paleta` (navegação circular, 400/50 ms) |
+| W006 | 🟡 amarelo | padrão preservado, mas a 003 tornou o Enter configurável por item; itens com Enter gravados pelo usuário são enviados |
+| W007 | 🟢 verde | RN-PA-13 (17 itens padrão, nenhum com Enter) |
+| W008 | 🟡 amarelo | os padrões equivalem ao protótipo (003 W009), mas os atalhos passaram a configuráveis e `ShortcutMapperTests` foi reescrito na 003 |
+| W009 | 🟢 verde | RN-PA-09 |
+| W010 | 🟢 verde | RN-LG-10; `paleta` usa índices |
+| W011 | 🟢 verde | `paleta` (`palette.blocked`) |
+| W012 | 🟢 verde | `spec-impact-matrix.md` §2; `injecao-de-eventos` |
+
 ## Arquivadas

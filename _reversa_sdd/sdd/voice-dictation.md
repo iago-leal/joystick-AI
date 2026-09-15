@@ -1,10 +1,12 @@
 # Spec: voice-dictation
 
-**Versão:** 1.3
-**Status:** Rascunho
+**Versão:** 1.4
+**Status:** Superada
 **Autor:** reversa-spec-sdd
 **Data:** 2026-09-14
 **Reviewers:** iago
+
+> **Superada em 2026-09-15:** o componente não será implementado. O ditado de prompts é o atalho configurável R3 → ⌘M, que aciona o transcritor do Raycast (unit `atalhos`, RN-AT-21; ADR-015). Os testes de microfone da seção 2 seguem válidos como registro.
 
 > Selo 🟡 PLANEJADO nos itens sem outra marca; 🟢 CONFIRMADO nos fatos verificados no hardware pelos testes do microfone e do ditado de 2026-09-14 (seção 13). Fonte primária: [`prd.md`](../prd.md).
 
@@ -243,6 +245,7 @@ AudioInputState {                   // em memória, não persistido
 | 1.1 | 2026-09-14 | reversa-spec-sdd | Ditado passa para L2 segurado; clique direito passa para R1 (pedido do usuário). |
 | 1.2 | 2026-09-14 | iago | Registro do teste do microfone: exposto e captando por USB, indisponível por Bluetooth; OQ-02 respondida. |
 | 1.3 | 2026-09-14 | iago | Registro do teste do ditado: o Raycast escolhe o microfone pela própria lista de prioridade e ignora a troca da entrada padrão; OQ-03 respondida; RF-04, RF-05, RF-06, fluxos, RNF-03, RNF-04, modelo de dados, dependências e EC-04, EC-05 e EC-07 reescritos para o app não trocar a entrada padrão; `preferControllerMic` removido. Registro da sonda HID por Bluetooth, com resultado negativo, e da decisão de não buscar o microfone do controle sem cabo. |
+| 1.4 | 2026-09-15 | iago | Spec superada: o atalho configurável R3 → ⌘M do Raycast substitui o componente (L-01, `questions.md` Pergunta 1). |
 
 ---
 

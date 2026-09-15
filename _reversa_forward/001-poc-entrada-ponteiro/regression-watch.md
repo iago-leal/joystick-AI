@@ -66,4 +66,45 @@ Itens do PM-3 (2026-09-14), mesma condição: sem peso de regressão. W011 conti
 
 ## Histórico de re-extrações
 
+### Re-extração 2026-09-15 21:20
+
+Watch principal vazio: nenhum item com peso de regressão. As observações abaixo foram conferidas contra a nova extração, sem mover nem alterar a tabela de observações.
+
+| ID | Veredito | Observação |
+|----|----------|------------|
+| W001 | 🟢 verde | `entrada-do-controle/requirements.md` RN-EC-08 |
+| W002 | 🟢 verde | RN-EC-09 |
+| W003 | 🟢 verde | `entrada-do-controle` RN-EC-01 a RN-EC-04; RN-EC-17 é exceção aceita só para o PS |
+| W004 | 🟢 verde | `entrada-do-controle` (soltura sintética na desconexão) |
+| W005 | 🟢 verde | RN-EC-05 |
+| W006 | 🟢 verde | `ponteiro/requirements.md` RN-PT-06 |
+| W007 | 🟢 verde | RN-PT-12 |
+| W008 | 🟢 verde | RN-PT-09 |
+| W009 | 🟢 verde | `ponteiro/design.md`: precisão desliga com qualquer segundo botão |
+| W010 | 🟢 verde | RN-PT-17 (sem teto de `clickState`) |
+| W011 | 🟡 amarelo | registro histórico: contradito pelo mapeamento vigente de W032 (R1 e touchpad esquerdos, R2 direito), por decisão do usuário no PM-3 |
+| W012 | 🟢 verde | `ponteiro/design.md` (união, D-14) |
+| W013 | 🟢 verde | `ponteiro/tasks.md` T de rolagem: 20 px por linha |
+| W014 | 🟢 verde | `configuracao/requirements.md` RN-CF-01 a RN-CF-07 |
+| W015 | 🟢 verde | `log-de-diagnostico` RN-LG-10; `config.value_rejected` usa `rejected` com valor de configuração, não coordenada |
+| W016 | 🟢 verde | `tela-de-alvos-e-analise` RN-TA-01 a RN-TA-17 |
+| W017 | 🟢 verde | RN-TA-21 a RN-TA-23 (posição mais próxima) |
+| W018 | 🟢 verde | `aplicativo` RN-AP-15, RF-AP-11 |
+| W019 | 🟢 verde | `entrada-do-controle/design.md`, ordem de observadores na fila `input` |
+| W020 | 🟢 verde | RN-EC-14; abertura HID só para PS e `0x05` |
+| W021 | 🟡 amarelo | regra preservada, com exceção aceita pelo usuário: PS de controle em fila age no ativo (RN-EC-17, DV-04) |
+| W022 | 🟢 verde | RN-LG-10 |
+| W023 | 🟢 verde | `entrada-do-controle/design.md` (`buttonHome`, `controller.gesture_suppression`) |
+| W024 | 🟢 verde | RN-EC-13 |
+| W025 | 🟢 verde | `entrada-do-controle/design.md` (PS pelo HID) |
+| W026 | 🟢 verde | `injecao-de-eventos` (marca `0x4A4F5953`, `.cghidEventTap`) |
+| W027 | 🟢 verde | RN-IN-03 |
+| W028 | 🟢 verde | `entrada-do-controle/design.md` (inferência por zero) |
+| W029 | 🟢 verde | `aplicativo` RN-AP-08 |
+| W030 | 🟢 verde | `aplicativo/requirements.md` (sinais e limpeza idempotente) |
+| W031 | 🟢 verde | `tela-de-alvos-e-analise/design.md` (`ignoredPhysicalClicks`) |
+| W032 | 🟢 verde | `ponteiro` (`ClickStateMachine`, `ButtonActions`) |
+| W033 | 🟢 verde | `atalhos` (ação resolvida no pressionar, solturas); RN-LG-10 |
+| W034 | 🟢 verde | `aplicativo/design.md` (`AXIsProcessTrusted`, solturas repetidas) |
+
 ## Arquivadas

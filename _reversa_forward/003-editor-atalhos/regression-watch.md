@@ -39,4 +39,28 @@ Itens implementados na rodada 7 (2026-09-15), com testes automatizados verdes on
 
 ## Histórico de re-extrações
 
+### Re-extração 2026-09-15 21:20
+
+Watch principal vazio: nenhum item com peso de regressão. As observações abaixo foram conferidas contra a nova extração, sem mover nem alterar a tabela de observações.
+
+| ID | Veredito | Observação |
+|----|----------|------------|
+| W001 | 🟢 verde | `paleta` (entrada fixa no índice `items.count`) |
+| W002 | 🟢 verde | `editor` RN-ED-32; DV-07 confirma ausência de `palette.confirmed` |
+| W003 | 🟢 verde | `aplicativo` RF-AP-09 |
+| W004 | 🟢 verde | `editor` RN-ED-32 a RN-ED-34 |
+| W005 | 🟢 verde | `editor` (`KeyCaptureField`, monitor local) |
+| W006 | 🟢 verde | RN-AT-17; RN-LG-10 |
+| W007 | 🟢 verde | `editor` RN-ED-13: 32 pt, alvo 60 pt |
+| W008 | 🟢 verde | RN-PA-14 |
+| W009 | 🟢 verde | `atalhos` (tabela padrão); RN-CF-01 |
+| W010 | 🟢 verde | `atalhos` (camadas, precedência, ação no pressionar) |
+| W011 | 🟢 verde | `configuracao` (observador com espera de 150 ms) |
+| W012 | 🟢 verde | `configuracao` RN-CF-26 a RN-CF-31 |
+| W013 | 🔴 vermelho | violada no caminho "Copiar e gravar": `save(confirmBackup:)` ignora `canSave` (DV-05). O defeito existe desde a entrega e não é regressão posterior; o usuário o classificou como defeito (`configuracao` T-11, `editor` T-10) |
+| W014 | 🟢 verde | `editor` (folha de fechamento, `editor.closed`) |
+| W015 | 🟢 verde | `editor` RN-ED-31 |
+| W016 | 🟢 verde | `editor` RN-ED-26, RN-ED-27 |
+| W017 | 🟢 verde | RN-PA-15; RN-ED-31 |
+
 ## Arquivadas

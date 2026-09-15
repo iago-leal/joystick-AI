@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-09-15T16:31:23Z",
+  "project_root": "/Users/iagoleal/dev/joystick-AI",
+  "languages": [
+    { "name": "Swift", "extensions": [".swift"], "file_count": 116 },
+    { "name": "Shell", "extensions": [".sh"], "file_count": 4 },
+    { "name": "JSON", "extensions": [".json"], "file_count": 7 },
+    { "name": "Property List", "extensions": [".plist"], "file_count": 1 }
+  ],
+  "primary_language": "Swift",
+  "frameworks": [
+    { "name": "Swift Package Manager", "version": "tools 6.0", "source": "Package.swift" },
+    { "name": "AppKit", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC" },
+    { "name": "SwiftUI", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/Editor" },
+    { "name": "Combine", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/Editor" },
+    { "name": "GameController", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/Controller" },
+    { "name": "IOKit HID", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/Controller" },
+    { "name": "CoreGraphics", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/Injection" },
+    { "name": "ApplicationServices", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/App" },
+    { "name": "Security", "version": "SDK macOS (mínimo 13)", "source": "imports JoystickAIPoC/App" },
+    { "name": "Swift Testing", "version": "Command Line Tools (Swift 6.3.3)", "source": "imports Tests" }
+  ],
+  "package_manager": "swiftpm",
+  "entry_points": [
+    { "path": "Sources/JoystickAIPoC/main.swift", "type": "app_entry" },
+    { "path": "Sources/JoystickAIPoC/App/AppDelegate.swift", "type": "bootstrap" },
+    { "path": "Sources/poc-tools/main.swift", "type": "cli_entry" },
+    { "path": "Sources/JoystickCore/App/LaunchArguments.swift", "type": "launch_arguments" }
+  ],
+  "config_files": [
+    "Package.swift",
+    "Resources/Info.plist",
+    "scripts/build-app.sh",
+    "scripts/test.sh",
+    "scripts/check-signature.sh",
+    "scripts/create-local-signing-identity.sh",
+    "scripts/config-samples/",
+    ".vscode/launch.json",
+    "~/.config/joystick-ai/config.json (runtime)"
+  ],
+  "ci_cd": [],
+  "database_hints": [],
+  "file_persistence": [
+    { "path": "~/.config/joystick-ai/config.json", "type": "user_config", "evidence": "Sources/JoystickCore/Config/ConfigLoader.swift" },
+    { "path": "~/.config/joystick-ai/config.json.bak", "type": "backup", "evidence": "Sources/JoystickAIPoC/Config/ConfigWriter.swift" },
+    { "path": "~/Library/Logs/joystick-ai/*.jsonl", "type": "diagnostic_log", "evidence": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift" },
+    { "path": "~/Library/Application Support/joystick-ai/target-runs/", "type": "target_runs", "evidence": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift" }
+  ],
+  "targets": [
+    { "name": "JoystickCore", "kind": "library", "language_mode": "6", "files": 35, "lines": 3515 },
+    { "name": "JoystickAIPoC", "kind": "executable", "language_mode": "5", "files": 46, "lines": 4078 },
+    { "name": "poc-tools", "kind": "executable", "language_mode": "6", "files": 6, "lines": 243 },
+    { "name": "JoystickCoreTests", "kind": "test", "language_mode": "6", "files": 29, "lines": 2924 }
+  ],
+  "test_framework": "Swift Testing",
+  "test_file_count": 29,
+  "test_case_count": 253,
+  "modules": [
+    "app-shell",
+    "controller-input",
+    "pointer",
+    "injection",
+    "shortcuts",
+    "palette",
+    "config",
+    "editor",
+    "diagnostics-log",
+    "targets-analysis"
+  ],
+  "module_map": {
+    "app-shell": ["Sources/JoystickCore/App/", "Sources/JoystickAIPoC/App/", "Sources/JoystickAIPoC/main.swift", "Resources/", "scripts/*.sh"],
+    "controller-input": ["Sources/JoystickCore/Input/", "Sources/JoystickAIPoC/Controller/"],
+    "pointer": ["Sources/JoystickCore/Pointer/", "Sources/JoystickAIPoC/Pointer/MotionLoop.swift", "Sources/JoystickAIPoC/Pointer/ButtonActions.swift", "Sources/JoystickAIPoC/Pointer/InputRouter.swift", "Sources/JoystickAIPoC/Display/"],
+    "injection": ["Sources/JoystickAIPoC/Injection/"],
+    "shortcuts": ["Sources/JoystickCore/Shortcuts/", "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"],
+    "palette": ["Sources/JoystickCore/Palette/", "Sources/JoystickAIPoC/Palette/"],
+    "config": ["Sources/JoystickCore/Config/ (exceto EditorDraft.swift)", "Sources/JoystickAIPoC/Config/", "scripts/config-samples/"],
+    "editor": ["Sources/JoystickCore/Config/EditorDraft.swift", "Sources/JoystickAIPoC/Editor/", "Sources/JoystickAIPoC/App/EditMenu.swift"],
+    "diagnostics-log": ["Sources/JoystickCore/Log/", "Sources/JoystickCore/Support/", "Sources/JoystickAIPoC/Log/"],
+    "targets-analysis": ["Sources/JoystickCore/Targets/", "Sources/JoystickCore/Analysis/", "Sources/JoystickAIPoC/Targets/", "Sources/poc-tools/"]
+  },
+  "total_files": 205,
+  "organization_suggestion": {
+    "granularity": "module",
+    "rationale": "As pastas de JoystickCore e JoystickAIPoC se organizam pelas mesmas áreas de domínio (Input/Controller, Pointer, Shortcuts, Palette, Config, Editor, Log, Targets).",
+    "signals": [
+      {
+        "type": "top_level_domain_folders",
+        "evidence": [
+          "Sources/JoystickCore/Input/",
+          "Sources/JoystickCore/Pointer/",
+          "Sources/JoystickCore/Palette/",
+          "Sources/JoystickCore/Config/",
+          "Sources/JoystickAIPoC/Controller/",
+          "Sources/JoystickAIPoC/Editor/",
+          "Sources/JoystickAIPoC/Injection/"
+        ]
+      }
+    ],
+    "features": []
+  }
+}

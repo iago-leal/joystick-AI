@@ -1,0 +1,2426 @@
+{
+  "generated_at": "2026-09-15T17:10:00Z",
+  "modules": [
+    {
+      "name": "app-shell",
+      "path": "Sources/JoystickAIPoC/App",
+      "purpose": "Processo agente sem Dock: instância única, montagem ordenada dos componentes, permissões, portão de injeção, encerramento limpo, menu de status e argumentos de abertura",
+      "primary_files": [
+        "Sources/JoystickAIPoC/main.swift",
+        "Sources/JoystickAIPoC/App/AppDelegate.swift",
+        "Sources/JoystickAIPoC/App/InjectionGate.swift",
+        "Sources/JoystickAIPoC/App/Lifecycle.swift",
+        "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+        "Sources/JoystickAIPoC/App/SigningInfo.swift",
+        "Sources/JoystickAIPoC/App/StatusMenu.swift",
+        "Sources/JoystickCore/App/LaunchArguments.swift"
+      ],
+      "functions": [
+        {
+          "name": "applicationDidFinishLaunching",
+          "file": "Sources/JoystickAIPoC/App/AppDelegate.swift:31",
+          "params": [
+            "notification: Notification"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "openTargets",
+          "file": "Sources/JoystickAIPoC/App/AppDelegate.swift:146",
+          "params": [
+            "arguments: LaunchArguments"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "anotherInstanceIsRunning",
+          "file": "Sources/JoystickAIPoC/App/AppDelegate.swift:192",
+          "params": [],
+          "returns": "Bool",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "InjectionGate.setAllowed",
+          "file": "Sources/JoystickAIPoC/App/InjectionGate.swift:33",
+          "params": [
+            "allowed: Bool"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "Lifecycle.cleanUp",
+          "file": "Sources/JoystickAIPoC/App/Lifecycle.swift:34",
+          "params": [
+            "reason"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PermissionMonitor.check",
+          "file": "Sources/JoystickAIPoC/App/PermissionMonitor.swift:39",
+          "params": [
+            "trigger"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "LaunchArguments.parse",
+          "file": "Sources/JoystickCore/App/LaunchArguments.swift:56",
+          "params": [
+            "arguments: [String]"
+          ],
+          "returns": "LaunchArguments",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "LaunchArguments",
+          "fields": [
+            {
+              "name": "targets",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "debug",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "env",
+              "type": "mesa|sofa?",
+              "required": false
+            },
+            {
+              "name": "screen",
+              "type": "Int?",
+              "required": false
+            },
+            {
+              "name": "seed",
+              "type": "UInt64?",
+              "required": false
+            },
+            {
+              "name": "scrollUnit",
+              "type": "ScrollUnit",
+              "required": true
+            },
+            {
+              "name": "paletteEnterDelayMs",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "errors",
+              "type": "[ArgumentError]",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Instância única por bundleIdentifier; a segunda encerra",
+          "location": "Sources/JoystickAIPoC/App/AppDelegate.swift:32-35",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "ControllerReader inicia por último, depois de todos os consumidores",
+          "location": "Sources/JoystickAIPoC/App/AppDelegate.swift:133-134",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Seção pointer lida só no início (sem recarga em tempo real)",
+          "location": "Sources/JoystickAIPoC/App/AppDelegate.swift:50",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Permissões consultadas a cada 2 s; postEvent por AXIsProcessTrusted, não CGPreflightPostEventAccess (P-08)",
+          "location": "Sources/JoystickAIPoC/App/PermissionMonitor.swift:12,39-48",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "CGRequestPostEventAccess pedido uma vez, só se faltar no início",
+          "location": "Sources/JoystickAIPoC/App/PermissionMonitor.swift:35-38",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Suspensão fecha a paleta, solta teclas e botões antes de desativar o injetor e guarda as solturas",
+          "location": "Sources/JoystickAIPoC/App/InjectionGate.swift:53-62",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Retomada reativa e repete as solturas guardadas",
+          "location": "Sources/JoystickAIPoC/App/InjectionGate.swift:41-51",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "SIGTERM/SIGINT/SIGHUP: limpeza idempotente e exit(0)",
+          "location": "Sources/JoystickAIPoC/App/Lifecycle.swift:17-44",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Tela de alvos só abre com --targets e --env válido",
+          "location": "Sources/JoystickCore/App/LaunchArguments.swift:53",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Ícone de alerta e item 'Configuração inválida: linha N' com configuração inválida",
+          "location": "Sources/JoystickAIPoC/App/StatusMenu.swift:32-46",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Sem Accessibility desde o início, o portão nunca transita e nada avisa na tela",
+          "location": "Sources/JoystickAIPoC/App/InjectionGate.swift:33-37",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "controller-input",
+        "pointer",
+        "injection",
+        "shortcuts",
+        "palette",
+        "config",
+        "editor",
+        "diagnostics-log",
+        "targets-analysis"
+      ],
+      "algorithms": [
+        "Ordem estrita de bootstrap",
+        "Portão de injeção com replay de solturas",
+        "Polling de permissões com transição"
+      ],
+      "complexity": "medium"
+    },
+    {
+      "name": "controller-input",
+      "path": "Sources/JoystickAIPoC/Controller",
+      "purpose": "Descobrir DualSense, eleger o controle ativo, ler 18 botões, dois analógicos e dois dedos do touchpad e entregar InputEvent normalizados à fila input",
+      "primary_files": [
+        "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+        "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+        "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+        "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+        "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+        "Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift",
+        "Sources/JoystickAIPoC/Controller/InputSink.swift",
+        "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+        "Sources/JoystickCore/Input/DualSenseReport.swift",
+        "Sources/JoystickCore/Input/InputEvent.swift",
+        "Sources/JoystickCore/Input/Normalization.swift",
+        "Sources/JoystickCore/Input/StartupAdoption.swift"
+      ],
+      "functions": [
+        {
+          "name": "ControllerReader.start",
+          "file": "Sources/JoystickAIPoC/Controller/ControllerReader.swift:20",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ControllerReader.connect",
+          "file": "Sources/JoystickAIPoC/Controller/ControllerReader.swift:59",
+          "params": [
+            "controller: GCController",
+            "source: ConnectionSource"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ControllerReader.disconnect",
+          "file": "Sources/JoystickAIPoC/Controller/ControllerReader.swift:94",
+          "params": [
+            "controller: GCController"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ActiveControllerRegistry.connect",
+          "file": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift:39",
+          "params": [
+            "key: Key",
+            "info: ControllerInfo"
+          ],
+          "returns": "ConnectOutcome",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ActiveControllerRegistry.disconnect",
+          "file": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift:50",
+          "params": [
+            "key: Key"
+          ],
+          "returns": "DisconnectOutcome",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "DualSenseReport.homeButton",
+          "file": "Sources/JoystickCore/Input/DualSenseReport.swift:7",
+          "params": [
+            "report: [UInt8]"
+          ],
+          "returns": "Bool?",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "applyDeadzone",
+          "file": "Sources/JoystickCore/Input/Normalization.swift:8",
+          "params": [
+            "value: Double",
+            "deadzone: Double"
+          ],
+          "returns": "Double",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TransportResolver.resolve",
+          "file": "Sources/JoystickAIPoC/Controller/TransportResolver.swift:11",
+          "params": [],
+          "returns": "ConnectionType",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "ButtonID",
+          "fields": [
+            {
+              "name": "cross|circle|square|triangle|l1|r1|l2|r2|l3|r3|options|create|ps|touchpadClick|dpadUp|dpadDown|dpadLeft|dpadRight",
+              "type": "enum String",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ControllerInfo",
+          "fields": [
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "connection",
+              "type": "ConnectionType",
+              "required": true
+            },
+            {
+              "name": "connectedAt",
+              "type": "UInt64",
+              "required": true
+            },
+            {
+              "name": "atStartup",
+              "type": "Bool",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "InputEvent",
+          "fields": [
+            {
+              "name": "kind",
+              "type": "InputEventKind",
+              "required": true
+            },
+            {
+              "name": "element",
+              "type": "InputElement?",
+              "required": false
+            },
+            {
+              "name": "value",
+              "type": "Double?",
+              "required": false
+            },
+            {
+              "name": "x",
+              "type": "Double?",
+              "required": false
+            },
+            {
+              "name": "y",
+              "type": "Double?",
+              "required": false
+            },
+            {
+              "name": "touchIndex",
+              "type": "Int?",
+              "required": false
+            },
+            {
+              "name": "touchPhase",
+              "type": "TouchPhase?",
+              "required": false
+            },
+            {
+              "name": "synthetic",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "timestamp",
+              "type": "UInt64",
+              "required": true
+            },
+            {
+              "name": "frameworkTimestamp",
+              "type": "Double?",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ActiveControllerRegistry",
+          "fields": [
+            {
+              "name": "entries",
+              "type": "[(Key, ControllerInfo)]",
+              "required": true
+            },
+            {
+              "name": "pressed",
+              "type": "Set<ButtonID>",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "InputContext",
+          "fields": [
+            {
+              "name": "queue",
+              "type": "DispatchQueue",
+              "required": true
+            },
+            {
+              "name": "log",
+              "type": "DiagnosticLog",
+              "required": true
+            },
+            {
+              "name": "registry",
+              "type": "ActiveControllerRegistry",
+              "required": true
+            },
+            {
+              "name": "settings",
+              "type": "PointerSettings",
+              "required": true
+            },
+            {
+              "name": "sink",
+              "type": "InputSink",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Só GCDualSenseGamepad é aceito; outros são ignorados com controller.ignored",
+          "location": "Sources/JoystickAIPoC/Controller/ControllerReader.swift:59-92",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "O primeiro controle conectado é o ativo; os demais ficam em fila",
+          "location": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift:39-68",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Desconectar o ativo emite buttonUp sintético de cada pressionado em ordem estável (RN-04)",
+          "location": "Sources/JoystickAIPoC/Controller/ControllerReader.swift:94-116",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "atStartup = enumeração ou chegada em menos de 2 s",
+          "location": "Sources/JoystickCore/Input/StartupAdoption.swift:10-14",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Zona morta por eixo sem reescala; limitada a ±1",
+          "location": "Sources/JoystickCore/Input/Normalization.swift:8-11",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "L2/R2 digitais com limiar 0,5, sem histerese",
+          "location": "Sources/JoystickCore/Input/Normalization.swift:5,18-40",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "PS lido do relatório HID bruto (índices 10, 11 ou 7) porque o macOS o retém",
+          "location": "Sources/JoystickCore/Input/DualSenseReport.swift:7-16",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Por Bluetooth, ler o relatório de recurso 0x05 ativa o modo estendido com touchpad",
+          "location": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift:57-65",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Transporte por exclusão no IORegistry; unknown se candidatos divergem",
+          "location": "Sources/JoystickAIPoC/Controller/TransportResolver.swift:11-47",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Eixos e posições de toque nunca vão ao log (RN-12)",
+          "location": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Mapeamento options→buttonMenu e create→buttonOptions confirmado no hardware pela P-05 (validation-report 001:136); comentário no código ainda diz 'a confirmar'",
+          "location": "Sources/JoystickAIPoC/Controller/ButtonReader.swift:7-38",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "PS do HID vai ao controle ativo mesmo se pressionado no controle em fila",
+          "location": "Sources/JoystickAIPoC/Controller/ControllerReader.swift:38-44",
+          "confidence": "inferred"
+        },
+        {
+          "description": "DisconnectOutcome.promoted não é registrado no log",
+          "location": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift:56",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "diagnostics-log",
+        "pointer"
+      ],
+      "algorithms": [
+        "Fila de controle ativo com soltura sintética",
+        "Filtro/deduplicação de botão por chave ativa",
+        "Leitura do PS por HID bruto",
+        "Inferência de fase do toque por transição a zero",
+        "Resolução de transporte por exclusão"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "pointer",
+      "path": "Sources/JoystickCore/Pointer",
+      "purpose": "Converter analógico esquerdo e touchpad em movimento, analógico direito em rolagem, R1/R2/clique do touchpad em cliques e arrastes, e manter o cursor dentro das telas",
+      "primary_files": [
+        "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+        "Sources/JoystickCore/Pointer/Geometry.swift",
+        "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+        "Sources/JoystickCore/Pointer/PointerSettings.swift",
+        "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+        "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+        "Sources/JoystickCore/Pointer/StickKinematics.swift",
+        "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+        "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+        "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+        "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+        "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+        "Sources/JoystickAIPoC/Display/ScreenCatalog.swift"
+      ],
+      "functions": [
+        {
+          "name": "InputRouter.handle",
+          "file": "Sources/JoystickAIPoC/Pointer/InputRouter.swift:38",
+          "params": [
+            "event: InputEvent"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "InputRouter.setIdentifying",
+          "file": "Sources/JoystickAIPoC/Pointer/InputRouter.swift:29",
+          "params": [
+            "on: Bool"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "MotionLoop.handle",
+          "file": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift:30",
+          "params": [
+            "event: InputEvent"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "StickKinematics.velocity",
+          "file": "Sources/JoystickCore/Pointer/StickKinematics.swift:29",
+          "params": [
+            "x: Double",
+            "y: Double",
+            "settings: PointerSettings"
+          ],
+          "returns": "PointDelta",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TouchpadTracker.update",
+          "file": "Sources/JoystickCore/Pointer/TouchpadTracker.swift:17",
+          "params": [
+            "index: Int",
+            "phase: TouchPhase",
+            "x: Double",
+            "y: Double"
+          ],
+          "returns": "PointDelta?",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ClickStateMachine.press",
+          "file": "Sources/JoystickCore/Pointer/ClickStateMachine.swift:44",
+          "params": [
+            "button: ButtonID",
+            "point: ScreenPoint",
+            "timeNs: UInt64"
+          ],
+          "returns": "MouseAction?",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ScrollMapper.step",
+          "file": "Sources/JoystickCore/Pointer/ScrollMapper.swift:25",
+          "params": [
+            "x: Double",
+            "y: Double",
+            "dt: Double"
+          ],
+          "returns": "(vertical, horizontal)",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ScreenUnion.clamp",
+          "file": "Sources/JoystickCore/Pointer/ScreenUnion.swift:11",
+          "params": [
+            "point: ScreenPoint"
+          ],
+          "returns": "ScreenPoint",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "PointerSettings",
+          "fields": [
+            {
+              "name": "touchpadSensitivity",
+              "type": "Double=1.0 [0.1,5]",
+              "required": false
+            },
+            {
+              "name": "stickMaxSpeed",
+              "type": "Double=1500 [150,7500]",
+              "required": false
+            },
+            {
+              "name": "stickExponent",
+              "type": "Double=2.0 [0.5,4]",
+              "required": false
+            },
+            {
+              "name": "deadzone",
+              "type": "Double=0.12 [0,0.5]",
+              "required": false
+            },
+            {
+              "name": "scrollSpeed",
+              "type": "Double=40 [1,1000]",
+              "required": false
+            },
+            {
+              "name": "invertScrollY",
+              "type": "Bool=false",
+              "required": false
+            },
+            {
+              "name": "precisionFactor",
+              "type": "Double=0.3 [0.05,1]",
+              "required": false
+            },
+            {
+              "name": "doubleClickIntervalMs",
+              "type": "Int=400 [100,2000]",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ScreenPoint",
+          "fields": [
+            {
+              "name": "x",
+              "type": "Double",
+              "required": true
+            },
+            {
+              "name": "y",
+              "type": "Double",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ScreenRect",
+          "fields": [
+            {
+              "name": "x",
+              "type": "Double",
+              "required": true
+            },
+            {
+              "name": "y",
+              "type": "Double",
+              "required": true
+            },
+            {
+              "name": "width",
+              "type": "Double",
+              "required": true
+            },
+            {
+              "name": "height",
+              "type": "Double",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PointerState",
+          "fields": [
+            {
+              "name": "leftStick",
+              "type": "(x,y)",
+              "required": true
+            },
+            {
+              "name": "rightStick",
+              "type": "(x,y)",
+              "required": true
+            },
+            {
+              "name": "pendingTouchDelta",
+              "type": "PointDelta",
+              "required": true
+            },
+            {
+              "name": "subpixel",
+              "type": "SubpixelAccumulator",
+              "required": true
+            },
+            {
+              "name": "timerRunning",
+              "type": "Bool",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ClickStateMachine",
+          "fields": [
+            {
+              "name": "heldMouseButtons",
+              "type": "Set<MouseButton>",
+              "required": true
+            },
+            {
+              "name": "leftHolders",
+              "type": "Set<ButtonID>",
+              "required": true
+            },
+            {
+              "name": "lastLeftClick",
+              "type": "(timeNs, point, clickState)?",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "v = stickMaxSpeed · min(1,h)^stickExponent na direção (x/h, −y/h)",
+          "location": "Sources/JoystickCore/Pointer/StickKinematics.swift:29-35",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Precisão só quando pressionados == {L1}",
+          "location": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift:52-54,89-97",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Onset do analógico emite deslocamento de 1/120 s imediato e liga o temporizador de 120 Hz",
+          "location": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift:56-72",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "dt real limitado a 50 ms por tick",
+          "location": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift:72-84",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Touchpad relativo: só o primeiro dedo move; Δ = (Δx,−Δy)·400·sensibilidade",
+          "location": "Sources/JoystickCore/Pointer/TouchpadTracker.swift:8,17-47",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Rolagem: scrollSpeed·(pixel?20:1)·dt, inversão opcional do Y",
+          "location": "Sources/JoystickCore/Pointer/ScrollMapper.swift:12,25-35",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "R1 e clique do touchpad → botão esquerdo (dois detentores); R2 → direito (inversão de RN-11, PM-3)",
+          "location": "Sources/JoystickCore/Pointer/ClickStateMachine.swift:18-19,44-65",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Duplo clique: intervalo ≤ doubleClickIntervalMs e distância ≤ 4 pt; clickState sem teto",
+          "location": "Sources/JoystickCore/Pointer/ClickStateMachine.swift:21,83-89",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Cursor limitado à união das telas, recuado 1 pt",
+          "location": "Sources/JoystickCore/Pointer/ScreenUnion.swift:11-31",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Reconfiguração de telas agregada em 200 ms com CGWarpMouseCursorPosition se o cursor ficou fora",
+          "location": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift:44-70",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "No modo de identificação, botões não de apontamento vão só ao editor",
+          "location": "Sources/JoystickAIPoC/Pointer/InputRouter.swift:38-69",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Qualquer segundo botão desliga a precisão, inclusive R1 durante arraste",
+          "location": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift:52-54",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "controller-input",
+        "injection",
+        "shortcuts",
+        "palette",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "Cinemática exponencial",
+        "Acumulador subpixel",
+        "Temporizador único de 120 Hz",
+        "Rastreador relativo de touchpad com descarte de atualização por eixo",
+        "Duplo clique por tempo e distância",
+        "Clamp à união de telas"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "injection",
+      "path": "Sources/JoystickAIPoC/Injection",
+      "purpose": "Postar eventos sintéticos de mouse, rolagem e teclado marcados com 0x4A4F5953",
+      "primary_files": [
+        "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+        "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+        "Sources/JoystickAIPoC/Injection/ScrollInjector.swift"
+      ],
+      "functions": [
+        {
+          "name": "EventInjector.move",
+          "file": "Sources/JoystickAIPoC/Injection/EventInjector.swift:65",
+          "params": [
+            "delta: PointDelta",
+            "kind: MoveKind",
+            "origin: String?"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EventInjector.currentLocation",
+          "file": "Sources/JoystickAIPoC/Injection/EventInjector.swift:16",
+          "params": [],
+          "returns": "ScreenPoint",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EventInjector.activationClick",
+          "file": "Sources/JoystickAIPoC/Injection/EventInjector.swift:115",
+          "params": [
+            "point: ScreenPoint"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "KeyboardInjector.chordDown",
+          "file": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:35",
+          "params": [
+            "chord: KeyChord",
+            "autorepeat: Bool"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "KeyboardInjector.type",
+          "file": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:79",
+          "params": [
+            "text: String",
+            "pressEnter: Bool"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ScrollInjector.scroll",
+          "file": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift:15",
+          "params": [
+            "vertical: Int32",
+            "horizontal: Int32"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "EventInjector",
+          "fields": [
+            {
+              "name": "enabled",
+              "type": "Bool=false",
+              "required": true
+            },
+            {
+              "name": "screens",
+              "type": "ScreenUnion",
+              "required": true
+            },
+            {
+              "name": "tracked",
+              "type": "ScreenPoint?",
+              "required": false
+            },
+            {
+              "name": "recentPosted",
+              "type": "[ScreenPoint] (32)",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "KeyboardInjector",
+          "fields": [
+            {
+              "name": "modifierCounts",
+              "type": "[KeyModifier: Int]",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Eventos por CGEventSource(.hidSystemState), eventSourceUserData 0x4A4F5953, post em .cghidEventTap",
+          "location": "Sources/JoystickAIPoC/Injection/EventInjector.swift:10,28,134-142",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "enabled=false descarta tudo em silêncio; só o InjectionGate altera",
+          "location": "Sources/JoystickAIPoC/Injection/EventInjector.swift:22,65-66,90",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Posição acompanhada vale se a leitura for uma das 32 últimas postadas e < 100 ms",
+          "location": "Sources/JoystickAIPoC/Injection/EventInjector.swift:16-62",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "pointer.posted só com origem; ticks de 120 Hz não registram (D-19)",
+          "location": "Sources/JoystickAIPoC/Injection/EventInjector.swift:64,143-146",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Modificadores com contagem de referência; flagsChanged só no primeiro down e último up",
+          "location": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:11,35-50,96-103",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Setas recebem maskNumericPad e maskSecondaryFn",
+          "location": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:110-111",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Texto por unidade UTF-16 com keyboardSetUnicodeString, independente de layout",
+          "location": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:79-94",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Teclas e textos nunca vão ao log (RN-14)",
+          "location": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Caracteres fora do BMP enviados como metades de par substituto",
+          "location": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:79-94",
+          "confidence": "inferred"
+        },
+        {
+          "description": "Contagem de modificadores muda com injeção desativada",
+          "location": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift:35-50",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "pointer",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "Rastreamento de posição sintética vs. física",
+        "Contagem de referência de modificadores"
+      ],
+      "complexity": "medium"
+    },
+    {
+      "name": "shortcuts",
+      "path": "Sources/JoystickCore/Shortcuts",
+      "purpose": "Traduzir botões não de apontamento em acordes, atalhos de sistema, textos e abertura da paleta, com camadas por botão modificador",
+      "primary_files": [
+        "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+        "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+        "Sources/JoystickCore/Shortcuts/KeyRepeat.swift",
+        "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"
+      ],
+      "functions": [
+        {
+          "name": "ShortcutMapper.press",
+          "file": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:163",
+          "params": [
+            "button: ButtonID"
+          ],
+          "returns": "[ShortcutAction]",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutMapper.release",
+          "file": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:195",
+          "params": [
+            "button: ButtonID"
+          ],
+          "returns": "[ShortcutAction]",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutMapper.releaseAll",
+          "file": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:206",
+          "params": [],
+          "returns": "[ShortcutAction]",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "SystemShortcut.chord",
+          "file": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:38-103",
+          "params": [
+            "hotkeys: [String: Any]?"
+          ],
+          "returns": "KeyChord",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutActions.perform",
+          "file": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift:90",
+          "params": [
+            "actions: [ShortcutAction]"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutActions.apply",
+          "file": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift:50",
+          "params": [
+            "config: ShortcutConfig"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "KeyChord",
+          "fields": [
+            {
+              "name": "keyCode",
+              "type": "UInt16",
+              "required": true
+            },
+            {
+              "name": "modifiers",
+              "type": "Set<KeyModifier>",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "KeyEntry",
+          "fields": [
+            {
+              "name": "name",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "keyCode",
+              "type": "UInt16",
+              "required": true
+            },
+            {
+              "name": "group",
+              "type": "KeyGroup",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "SystemShortcut",
+          "fields": [
+            {
+              "name": "nextWindow=27|missionControl=32|applicationWindows=33|spaceLeft=79|spaceRight=81",
+              "type": "enum Int",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TriggerAction",
+          "fields": [
+            {
+              "name": "type",
+              "type": "chord|systemShortcut|text|openPalette|none",
+              "required": true
+            },
+            {
+              "name": "chord",
+              "type": "KeyChord?",
+              "required": false
+            },
+            {
+              "name": "repeat",
+              "type": "Bool",
+              "required": false
+            },
+            {
+              "name": "systemShortcut",
+              "type": "SystemShortcut?",
+              "required": false
+            },
+            {
+              "name": "text",
+              "type": "String?",
+              "required": false
+            },
+            {
+              "name": "pressEnter",
+              "type": "Bool",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutMapper",
+          "fields": [
+            {
+              "name": "held",
+              "type": "Set<ButtonID>",
+              "required": true
+            },
+            {
+              "name": "modifierOrder",
+              "type": "[ButtonID]",
+              "required": true
+            },
+            {
+              "name": "resolved",
+              "type": "[ButtonID: ShortcutAction]",
+              "required": true
+            },
+            {
+              "name": "lastTrigger",
+              "type": "Trigger?",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Resolução no pressionar pela camada do modificador segurado há mais tempo",
+          "location": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:161,167-188",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Ação própria da camada, senão herdada da base, senão nenhuma",
+          "location": "Sources/JoystickCore/Config/ShortcutConfig.swift:60-65",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Acorde e atalho de sistema mantidos até soltar o gatilho, mesmo com o modificador solto (RN-01)",
+          "location": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:175-188",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "R1, R2 e touchpad ignorados pelo mapeador",
+          "location": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:163-166",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Repetição 400 ms e depois 50 ms, um só temporizador",
+          "location": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift:7-8",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "openPalette solta tudo antes de abrir (002 D-04)",
+          "location": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift:98-100",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Acorde de sistema lido de AppleSymbolicHotKeys no instante do uso",
+          "location": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift:101-107",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "shortcut.triggered após executar, com gatilho lido antes",
+          "location": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift:30-36",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Aplicar configuração nova solta tudo e recria o mapeador",
+          "location": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift:50-55",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "KeyCatalog com 73 teclas em 6 grupos; fora dele não se grava (D-03)",
+          "location": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift:26-105",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Atalho de sistema desativado nos Ajustes ainda posta o acorde padrão",
+          "location": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift:89",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "config",
+        "injection",
+        "palette",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "Mapeador de camadas com resolução no pressionar",
+        "Conversão de máscara AppleSymbolicHotKeys",
+        "Auto-repetição"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "palette",
+      "path": "Sources/JoystickCore/Palette",
+      "purpose": "Lista flutuante de textos navegada pelo direcional e confirmada por ✕, que digita no app em foco sem roubar o foco; entrada fixa abre o editor",
+      "primary_files": [
+        "Sources/JoystickCore/Palette/CommandPalette.swift",
+        "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+        "Sources/JoystickAIPoC/Palette/PalettePanel.swift"
+      ],
+      "functions": [
+        {
+          "name": "PaletteMachine.handle",
+          "file": "Sources/JoystickCore/Palette/CommandPalette.swift:86",
+          "params": [
+            "input: PaletteInput"
+          ],
+          "returns": "[PaletteEffect]",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PaletteActions.open",
+          "file": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:43",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PaletteActions.apply",
+          "file": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:59",
+          "params": [
+            "items: [PaletteItem]"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PalettePanel.show",
+          "file": "Sources/JoystickAIPoC/Palette/PalettePanel.swift:50",
+          "params": [
+            "selection: Int"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "PaletteItem",
+          "fields": [
+            {
+              "name": "text",
+              "type": "String (1..1000, 1 linha)",
+              "required": true
+            },
+            {
+              "name": "pressEnter",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "label",
+              "type": "String? (≤80)",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PaletteMachine",
+          "fields": [
+            {
+              "name": "items",
+              "type": "[PaletteItem]",
+              "required": true
+            },
+            {
+              "name": "isOpen",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "selection",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "lastConfirmed",
+              "type": "Int?",
+              "required": false
+            },
+            {
+              "name": "repeating",
+              "type": "Direction?",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "PaletteCloseReason",
+          "fields": [
+            {
+              "name": "circle|ps|disconnected|idle|injection_suspended|config_changed|identify",
+              "type": "enum",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Seleção inicial = último confirmado ou 0; passo circular sobre itens+1",
+          "location": "Sources/JoystickCore/Palette/CommandPalette.swift:86-178",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "✕ na entrada fixa abre o editor sem alterar o último confirmado",
+          "location": "Sources/JoystickCore/Palette/CommandPalette.swift:86-178",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Bloqueada durante a tela de alvos (palette.blocked)",
+          "location": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:43-48",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Fecha por inatividade após 60 s",
+          "location": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:11-12,145-157",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "palette.confirmed registra índice e enter, nunca o texto; Enter após --palette-enter-delay-ms",
+          "location": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:10,99-126",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Configuração nova fecha e recria a máquina sem último confirmado",
+          "location": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:59-65",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "NSPanel não ativador, nunca chave, nível statusBar, em todas as mesas",
+          "location": "Sources/JoystickAIPoC/Palette/PalettePanel.swift:12-30",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Legibilidade a 3 m: 26 pt, linha 40 pt, largura mínima 520 pt",
+          "location": "Sources/JoystickAIPoC/Palette/PalettePanel.swift:65-139",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Paleta padrão com 17 itens, nenhum com Enter",
+          "location": "Sources/JoystickCore/Palette/CommandPalette.swift:37-57",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Abre e 'confirma' sem permissão de Accessibility, sem aviso",
+          "location": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:43",
+          "confidence": "inferred"
+        },
+        {
+          "description": "Enter atrasado não é cancelado se o foco mudar",
+          "location": "Sources/JoystickAIPoC/Palette/PaletteActions.swift:119",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "injection",
+        "editor",
+        "config",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "Máquina de estados da paleta com repetição e inatividade"
+      ],
+      "complexity": "medium"
+    },
+    {
+      "name": "config",
+      "path": "Sources/JoystickCore/Config",
+      "purpose": "Ler, validar, localizar erros, observar, gravar e aplicar ~/.config/joystick-ai/config.json (pointer, shortcuts, palette)",
+      "primary_files": [
+        "Sources/JoystickCore/Config/ConfigLoader.swift",
+        "Sources/JoystickCore/Config/ConfigDocument.swift",
+        "Sources/JoystickCore/Config/ConfigLineLocator.swift",
+        "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+        "Sources/JoystickCore/Config/ShortcutConfig.swift",
+        "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+        "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+        "Sources/JoystickCore/Config/ActionSummary.swift",
+        "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+        "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+        "Sources/JoystickAIPoC/Config/ConfigWriter.swift"
+      ],
+      "functions": [
+        {
+          "name": "ConfigLoader.load",
+          "file": "Sources/JoystickCore/Config/ConfigLoader.swift:39",
+          "params": [
+            "url: URL"
+          ],
+          "returns": "ConfigLoadResult",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutConfigValidation.validate",
+          "file": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift:12",
+          "params": [
+            "document: ShortcutsDocument"
+          ],
+          "returns": "[ShortcutIssue]",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigLineLocator.nearestLine",
+          "file": "Sources/JoystickCore/Config/ConfigLineLocator.swift:15",
+          "params": [
+            "path: [PathComponent]"
+          ],
+          "returns": "Int",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigStore.reload",
+          "file": "Sources/JoystickAIPoC/Config/ConfigStore.swift:67",
+          "params": [
+            "trigger"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigStore.save",
+          "file": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+          "params": [
+            "document",
+            "confirmBackup: Bool"
+          ],
+          "returns": "WriteResult",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigWriter.write",
+          "file": "Sources/JoystickAIPoC/Config/ConfigWriter.swift:24",
+          "params": [
+            "document",
+            "confirmBackup: Bool"
+          ],
+          "returns": "WriteResult",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigWatcher.start",
+          "file": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift:3",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "ShortcutsDocument",
+          "fields": [
+            {
+              "name": "shortcuts",
+              "type": "ShortcutConfig",
+              "required": true
+            },
+            {
+              "name": "palette",
+              "type": "[PaletteItem]",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutConfig",
+          "fields": [
+            {
+              "name": "version",
+              "type": "Int == 1",
+              "required": true
+            },
+            {
+              "name": "modifiers",
+              "type": "[ButtonID: Set<KeyModifier>]",
+              "required": false
+            },
+            {
+              "name": "layers",
+              "type": "[Layer: [ButtonID: TriggerAction]]",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ShortcutIssue",
+          "fields": [
+            {
+              "name": "path",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "rule",
+              "type": "ShortcutIssueRule",
+              "required": true
+            },
+            {
+              "name": "line",
+              "type": "Int?",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigLoadResult",
+          "fields": [
+            {
+              "name": "pointer",
+              "type": "PointerSettings",
+              "required": true
+            },
+            {
+              "name": "document",
+              "type": "ShortcutsDocument?",
+              "required": false
+            },
+            {
+              "name": "issues",
+              "type": "[ConfigIssue]",
+              "required": true
+            },
+            {
+              "name": "source",
+              "type": "file|defaults",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "ConfigState",
+          "fields": [
+            {
+              "name": "current",
+              "type": "ShortcutsDocument",
+              "required": true
+            },
+            {
+              "name": "status",
+              "type": "valid|invalid",
+              "required": true
+            },
+            {
+              "name": "lastBytes",
+              "type": "Data?",
+              "required": false
+            },
+            {
+              "name": "source",
+              "type": "String",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "config.json",
+          "fields": [
+            {
+              "name": "pointer",
+              "type": "object",
+              "required": false
+            },
+            {
+              "name": "shortcuts",
+              "type": "object",
+              "required": false
+            },
+            {
+              "name": "palette",
+              "type": "object {items}",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Arquivo ausente → padrões; nunca é criado na leitura",
+          "location": "Sources/JoystickCore/Config/ConfigLoader.swift:39,52-55",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Maior que 1 MiB, diretório ou ilegível → unreadable",
+          "location": "Sources/JoystickCore/Config/ConfigLoader.swift:56-70",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "pointer validado campo a campo; recusado fica no padrão com config.value_rejected",
+          "location": "Sources/JoystickCore/Config/PointerSettingsValidation.swift:11-51",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "shortcuts e palette validados juntos; qualquer problema recusa os dois (RN-08)",
+          "location": "Sources/JoystickCore/Config/ConfigLoader.swift:97-110",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "version obrigatório e igual a 1",
+          "location": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift:129-271",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "pointerButtonNotAllowed, layerWithoutModifier, modifierHasAction, unknownKey",
+          "location": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift:12-62",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Texto 1..1000 sem quebra; rótulo ≤ 80; paleta 1..50 itens",
+          "location": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift:12-62",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Problemas citam caminho e regra, nunca o valor (RN-14)",
+          "location": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Leitura inválida nunca substitui a vigente; remoção mantém a vigente",
+          "location": "Sources/JoystickAIPoC/Config/ConfigStore.swift:67-94",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Bytes iguais aos últimos geram só shortcuts.unchanged",
+          "location": "Sources/JoystickAIPoC/Config/ConfigStore.swift:67-94",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Observação por eventos de arquivo sem polling; releitura agregada em 150 ms",
+          "location": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift:3-94",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Gravação funde preservando outras chaves (inclusive pointer) e troca atômica",
+          "location": "Sources/JoystickAIPoC/Config/ConfigWriter.swift:24-61",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Arquivo com erro de sintaxe exige confirmação e cópia para config.json.bak",
+          "location": "Sources/JoystickAIPoC/Config/ConfigWriter.swift:24-61",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Codificação determinística: chaves ordenadas, pressEnter e label sempre escritos",
+          "location": "Sources/JoystickCore/Config/ConfigDocument.swift:3-79",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Mapeamento padrão com modificadores L1, L2 e Options(⌘)",
+          "location": "Sources/JoystickCore/Config/ShortcutDefaults.swift:8-52",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "\"pointer\": 5 tratado como section_missing sem aviso",
+          "location": "Sources/JoystickCore/Config/ConfigLoader.swift:89-94",
+          "confidence": "inferred"
+        },
+        {
+          "description": "Camada vazia de não modificador não gera layerWithoutModifier",
+          "location": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift:175",
+          "confidence": "inferred"
+        },
+        {
+          "description": "ConfigWriter lê o arquivo existente sem o limite de 1 MiB",
+          "location": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "shortcuts",
+        "palette",
+        "pointer",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "Validação estrutural e semântica",
+        "Localizador léxico de linhas JSON",
+        "Fusão determinística com troca atômica e backup",
+        "Observação de diretório e destino de link simbólico"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "editor",
+      "path": "Sources/JoystickAIPoC/Editor",
+      "purpose": "Janela em escala de TV para editar camadas, ações, modificadores e paleta, operável pelo ponteiro do controle, com gravação e tratamento de conflitos",
+      "primary_files": [
+        "Sources/JoystickCore/Config/EditorDraft.swift",
+        "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+        "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+        "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+        "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+        "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+        "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+        "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+        "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+        "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+        "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+        "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+        "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+        "Sources/JoystickAIPoC/App/EditMenu.swift"
+      ],
+      "functions": [
+        {
+          "name": "EditorDraft.setModifier",
+          "file": "Sources/JoystickCore/Config/EditorDraft.swift:117",
+          "params": [
+            "button: ButtonID",
+            "keys: Set<KeyModifier>"
+          ],
+          "returns": "Result",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorDraft.unsetModifier",
+          "file": "Sources/JoystickCore/Config/EditorDraft.swift:130",
+          "params": [
+            "button: ButtonID"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorDraft.rebase",
+          "file": "Sources/JoystickCore/Config/EditorDraft.swift:220",
+          "params": [
+            "base: ShortcutsDocument",
+            "keepChanges: Bool"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorViewModel.prepareForOpen",
+          "file": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift:60",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorViewModel.save",
+          "file": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift:172",
+          "params": [
+            "confirmBackup: Bool"
+          ],
+          "returns": "Bool",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorWindowController.show",
+          "file": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift:55",
+          "params": [
+            "source: menu|palette|alert"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorWindowController.windowShouldClose",
+          "file": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift:121",
+          "params": [
+            "sender: NSWindow"
+          ],
+          "returns": "Bool",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "EditorDraft",
+          "fields": [
+            {
+              "name": "base",
+              "type": "ShortcutsDocument",
+              "required": true
+            },
+            {
+              "name": "document",
+              "type": "ShortcutsDocument",
+              "required": true
+            },
+            {
+              "name": "isDirty",
+              "type": "Bool (derivado)",
+              "required": true
+            },
+            {
+              "name": "issues",
+              "type": "[EditorIssue]",
+              "required": true
+            },
+            {
+              "name": "rememberedNone",
+              "type": "[Layer: Set<ButtonID>]",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorIssueTarget",
+          "fields": [
+            {
+              "name": "trigger|modifier|paletteItem|palette",
+              "type": "enum",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "EditorBanner",
+          "fields": [
+            {
+              "name": "externalInvalid|conflict|needsBackup|saveFailed",
+              "type": "enum",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Rascunho usa a mesma validação da leitura (D-05)",
+          "location": "Sources/JoystickCore/Config/EditorDraft.swift:46-101",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Aviso não bloqueante noPaletteTrigger",
+          "location": "Sources/JoystickCore/Config/EditorDraft.swift:66-72",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Marcar modificador lembra 'nenhuma' explícitas; desmarcar as devolve",
+          "location": "Sources/JoystickCore/Config/EditorDraft.swift:117-143",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Salvar só com rascunho sujo e sem problemas",
+          "location": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift:78",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Mudança externa com rascunho sujo → conflito com Recarregar/Manter",
+          "location": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift:225-253",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Fechar sujo abre folha Salvar/Descartar/Cancelar",
+          "location": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift:121-151",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Ativação no macOS 26: floating, clique sintético após 150 ms, activation_failed após 500 ms (E003)",
+          "location": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift:55-90",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Ao fechar, devolve o foco ao app que estava à frente",
+          "location": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift:167-179",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Captura de acorde por monitor local, descartando eventos do injetor",
+          "location": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift:12-89",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Menu principal só com Editar para ⌘V/⌘C/⌘X/⌘A/⌘Z",
+          "location": "Sources/JoystickAIPoC/App/EditMenu.swift:3-37",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Escala de TV: corpo 32 pt, título 40 pt, alvo 60 pt, janela mínima 1400×800",
+          "location": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift:9-17",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Acorde aproveitado na troca de tipo começa sem repetição (PM-2)",
+          "location": "Sources/JoystickAIPoC/Editor/ActionPanel.swift:181-199",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "save(confirmBackup:) ignora canSave e pode gravar rascunho com problemas",
+          "location": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift:172",
+          "confidence": "inferred"
+        },
+        {
+          "description": "Linhas da paleta identificadas por offset",
+          "location": "Sources/JoystickAIPoC/Editor/PaletteTab.swift:21",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "config",
+        "shortcuts",
+        "palette",
+        "injection",
+        "pointer",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "Rascunho com memória de 'nenhuma'",
+        "Ativação forçada de janela com clique sintético",
+        "Resolução de conflito de edição externa"
+      ],
+      "complexity": "high"
+    },
+    {
+      "name": "diagnostics-log",
+      "path": "Sources/JoystickCore/Log",
+      "purpose": "Registro JSONL por sessão com esquema tipado e sem dados sensíveis; utilitários de JSON e relógio monotônico",
+      "primary_files": [
+        "Sources/JoystickCore/Log/LogEvent.swift",
+        "Sources/JoystickCore/Log/LogEventCatalog.swift",
+        "Sources/JoystickCore/Support/JSONValue.swift",
+        "Sources/JoystickCore/Support/MonotonicClock.swift",
+        "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+      ],
+      "functions": [
+        {
+          "name": "DiagnosticLog.log",
+          "file": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:44",
+          "params": [
+            "event: LogEvent"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "DiagnosticLog.flush",
+          "file": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:87",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "DiagnosticLog.flushSync",
+          "file": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "LogEvent.jsonLine",
+          "file": "Sources/JoystickCore/Log/LogEvent.swift:33",
+          "params": [
+            "tsNs: UInt64",
+            "wall: Date"
+          ],
+          "returns": "String",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "MonotonicClock.now",
+          "file": "Sources/JoystickCore/Support/MonotonicClock.swift:5",
+          "params": [],
+          "returns": "UInt64",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "LogEvent",
+          "fields": [
+            {
+              "name": "level",
+              "type": "debug|info|warn|error",
+              "required": true
+            },
+            {
+              "name": "event",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "fields",
+              "type": "[String: JSONValue]",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "JSONL line",
+          "fields": [
+            {
+              "name": "ts_ns",
+              "type": "UInt64",
+              "required": true
+            },
+            {
+              "name": "wall",
+              "type": "ISO 8601 ms",
+              "required": true
+            },
+            {
+              "name": "level",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "event",
+              "type": "String",
+              "required": true
+            },
+            {
+              "name": "<campos>",
+              "type": "ordem alfabética",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "JSONValue",
+          "fields": [
+            {
+              "name": "null|bool|int|uint|double|string|array|object",
+              "type": "enum",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "Um arquivo por sessão poc-AAAAMMDD-HHMMSS.jsonl com sufixo em colisão",
+          "location": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:38-80",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "ts_ns em CLOCK_UPTIME_RAW tomado no chamador",
+          "location": "Sources/JoystickCore/Support/MonotonicClock.swift:5-7",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "debug só com --debug",
+          "location": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:45",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Flush a cada 250 ms ou ao passar de 256 KiB",
+          "location": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:8-9,57-59,87-107",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Acima de 50 MiB, debug suspenso e log.debug_suspended uma vez",
+          "location": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:10,102-106",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Catálogo de 50 eventos sem coordenadas, textos, rótulos ou acordes (RN-12, RN-14)",
+          "location": "Sources/JoystickCore/Log/LogEventCatalog.swift:33-333",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Falha de escrita descarta o pendente sem aviso",
+          "location": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift:95-101",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Sem rotação nem limpeza de arquivos antigos",
+          "location": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+          "confidence": "inferred"
+        },
+        {
+          "description": "session.start registra todos os argumentos de abertura",
+          "location": "Sources/JoystickAIPoC/App/AppDelegate.swift:37-46",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [],
+      "algorithms": [
+        "Buffer com flush periódico e por tamanho",
+        "Serialização JSON determinística"
+      ],
+      "complexity": "medium"
+    },
+    {
+      "name": "targets-analysis",
+      "path": "Sources/JoystickAIPoC/Targets",
+      "purpose": "Instrumento de medição da PoC: tela de 20 alvos e CLI poc-tools para análise de log e resultados",
+      "primary_files": [
+        "Sources/JoystickCore/Targets/TargetRun.swift",
+        "Sources/JoystickCore/Analysis/LatencyStats.swift",
+        "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+        "Sources/JoystickCore/Analysis/RunsReport.swift",
+        "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+        "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+        "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+        "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+        "Sources/poc-tools/main.swift",
+        "Sources/poc-tools/ButtonsCommand.swift",
+        "Sources/poc-tools/LatencyCommand.swift",
+        "Sources/poc-tools/CyclesCommand.swift",
+        "Sources/poc-tools/RunsCommand.swift",
+        "Sources/poc-tools/ToolInput.swift"
+      ],
+      "functions": [
+        {
+          "name": "TargetSession.start",
+          "file": "Sources/JoystickAIPoC/Targets/TargetSession.swift:54",
+          "params": [],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TargetSession.recordAttempt",
+          "file": "Sources/JoystickAIPoC/Targets/TargetSession.swift:85",
+          "params": [
+            "event: NSEvent"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TargetRun.positions",
+          "file": "Sources/JoystickCore/Targets/TargetRun.swift:151",
+          "params": [
+            "seed: UInt64",
+            "screen: ScreenRect"
+          ],
+          "returns": "[ScreenRect]",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TargetRunWriter.write",
+          "file": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift:14",
+          "params": [
+            "run: TargetRun"
+          ],
+          "returns": "Void",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "LatencyStats.percentile",
+          "file": "Sources/JoystickCore/Analysis/LatencyStats.swift:15",
+          "params": [
+            "values: [UInt64]",
+            "p: Double"
+          ],
+          "returns": "UInt64",
+          "confidence": "confirmed"
+        },
+        {
+          "name": "RunsReport.markdown",
+          "file": "Sources/JoystickCore/Analysis/RunsReport.swift:4",
+          "params": [
+            "runs: [TargetRun]"
+          ],
+          "returns": "String",
+          "confidence": "confirmed"
+        }
+      ],
+      "entities": [
+        {
+          "name": "TargetRun",
+          "fields": [
+            {
+              "name": "schemaVersion",
+              "type": "Int = 1",
+              "required": true
+            },
+            {
+              "name": "env",
+              "type": "mesa|sofa",
+              "required": true
+            },
+            {
+              "name": "seed",
+              "type": "UInt64",
+              "required": true
+            },
+            {
+              "name": "screen",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "startedAt",
+              "type": "Date",
+              "required": true
+            },
+            {
+              "name": "complete",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "abortReason",
+              "type": "String?",
+              "required": false
+            },
+            {
+              "name": "attempts",
+              "type": "[TargetAttempt]",
+              "required": true
+            },
+            {
+              "name": "ignoredPhysicalClicks",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "settings",
+              "type": "PointerSettings",
+              "required": true
+            },
+            {
+              "name": "summary",
+              "type": "TargetSummary",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TargetAttempt",
+          "fields": [
+            {
+              "name": "index",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "hit",
+              "type": "Bool",
+              "required": true
+            },
+            {
+              "name": "elapsedMs",
+              "type": "Double",
+              "required": true
+            },
+            {
+              "name": "l1Held",
+              "type": "Bool",
+              "required": true
+            }
+          ],
+          "confidence": "confirmed"
+        },
+        {
+          "name": "TargetSummary",
+          "fields": [
+            {
+              "name": "hits",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "total",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "rate",
+              "type": "Double",
+              "required": true
+            },
+            {
+              "name": "meanMs",
+              "type": "Int",
+              "required": true
+            },
+            {
+              "name": "rateWithL1",
+              "type": "Double?",
+              "required": false
+            },
+            {
+              "name": "rateWithoutL1",
+              "type": "Double?",
+              "required": false
+            }
+          ],
+          "confidence": "confirmed"
+        }
+      ],
+      "business_rules": [
+        {
+          "description": "20 alvos de 16×16 pt com margem de 40 pt por SplitMix64",
+          "location": "Sources/JoystickCore/Targets/TargetRun.swift:74-76,151-179",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Só cliques com a marca do injetor contam; físicos em ignoredPhysicalClicks",
+          "location": "Sources/JoystickAIPoC/Targets/TargetSession.swift:72-79",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "O ponto do clique não é guardado (RN-12)",
+          "location": "Sources/JoystickAIPoC/Targets/TargetSession.swift:85-94",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Interrompe por Esc, ○, remoção da tela ou suspensão da injeção",
+          "location": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift:24-38",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Resultado em target-runs sem sobrescrever; falha vai ao log com JSON compacto",
+          "location": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift:14-47",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "latency: aprovado se p95 processamento ≤ 5 ms e entrada→movimento ≤ 20 ms",
+          "location": "Sources/poc-tools/LatencyCommand.swift:6-39",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "Saídas do CLI: 0, 64 uso, 66 arquivo inexistente",
+          "location": "Sources/poc-tools/ToolInput.swift:6-33",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "runs lista só sequências completas; tentativas > 60 s como discrepantes",
+          "location": "Sources/JoystickCore/Analysis/RunsReport.swift:4-61",
+          "confidence": "confirmed"
+        },
+        {
+          "description": "NSApp.activate(ignoringOtherApps:) pode ser recusado no macOS 26",
+          "location": "Sources/JoystickAIPoC/Targets/TargetSession.swift:54",
+          "confidence": "inferred"
+        },
+        {
+          "description": "TargetAbortMonitor sobrescreve onChange e onSuspended",
+          "location": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift:37",
+          "confidence": "inferred"
+        }
+      ],
+      "dependencies": [
+        "app-shell",
+        "pointer",
+        "injection",
+        "palette",
+        "diagnostics-log"
+      ],
+      "algorithms": [
+        "SplitMix64 reprodutível",
+        "Percentis pela posição mais próxima",
+        "Pareamento de ciclos de conexão"
+      ],
+      "complexity": "medium"
+    }
+  ]
+}
