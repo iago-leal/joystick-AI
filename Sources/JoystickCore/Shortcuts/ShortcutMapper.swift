@@ -112,102 +112,113 @@ public enum ShortcutAction: Equatable, Sendable {
     case modifierUp(KeyModifier)
     /// Abre a paleta de comandos; o executor solta antes as teclas mantidas (`002-paleta-comandos` D-02, D-04).
     case openPalette
+    /// Pressiona o atalho de sistema com o acorde lido das preferências do macOS no instante do uso
+    /// (`003-editor-atalhos` D-11, RN-07); o executor guarda o acorde para o soltar.
+    case systemDown(SystemShortcut)
+    case systemUp(SystemShortcut)
 }
 
-/// Protótipo de atalhos do controle, fora do escopo da PoC (`action-mapping`, pedido do usuário no PM-3).
+/// Botões do controle convertidos em ações pela configuração de atalhos (`003-editor-atalhos` D-09, D-10,
+/// `data-delta.md` §4).
 ///
-/// Mapeamento fixo: combinações decididas no pressionar (`action-mapping` EC-04) e soltas pelo mesmo botão.
-/// L1 e L2 são modificadores; Options segura Command para alternar aplicativos com o direcional.
-/// PS abre a paleta de comandos na camada base e, por repasse, com L1 ou L2 segurados (`002-paleta-comandos` RN-01).
+/// A ação é resolvida no pressionar e guardada até o soltar, mesmo que o modificador seja solto antes (RN-01). Com
+/// mais de um modificador segurado, vale a camada do segurado há mais tempo, com herança só da base (RN-03). R1, R2 e
+/// o clique do touchpad não produzem nada aqui: os cliques ficam em `ButtonActions` (RN-05).
 public struct ShortcutMapper: Sendable {
-    public static let continueText = "CONTINUAR"
+    /// Gatilho do último pressionar que executou ação, para `shortcut.triggered` (D-14).
+    public struct Trigger: Equatable, Sendable {
+        public let button: ButtonID
+        /// `nil` é a camada base.
+        public let layer: ButtonID?
+        public let type: TriggerActionType
 
-    public private(set) var held: Set<ButtonID> = []
-    /// Tecla mantida por cada botão, para soltá-la quando o botão soltar.
-    public private(set) var activeChords: [ButtonID: KeyChord] = [:]
-    public private(set) var commandHeldByOptions = false
-    public var systemChords: [SystemShortcut: KeyChord]
-
-    public init(systemChords: [SystemShortcut: KeyChord] = SystemShortcut.chords(fromSymbolicHotKeys: nil)) {
-        self.systemChords = systemChords
+        public init(button: ButtonID, layer: ButtonID?, type: TriggerActionType) {
+            self.button = button
+            self.layer = layer
+            self.type = type
+        }
     }
 
-    public mutating func press(_ button: ButtonID) -> [ShortcutAction] {
-        let modifiers = held
-        guard held.insert(button).inserted else { return [] }
+    enum HeldAction: Equatable, Sendable {
+        case chord(KeyChord)
+        case system(SystemShortcut)
+    }
 
-        if button == .options {
-            commandHeldByOptions = true
-            return [.modifierDown(.command)]
+    public let config: ShortcutConfig
+    public private(set) var held: Set<ButtonID> = []
+    /// Modificadores segurados, do mais antigo ao mais recente.
+    public private(set) var modifierOrder: [ButtonID] = []
+    /// Tecla ou atalho mantido por cada botão, para soltá-lo quando o botão soltar.
+    private(set) var resolved: [ButtonID: HeldAction] = [:]
+    /// Zerado a cada pressionar que não executa ação.
+    public private(set) var lastTrigger: Trigger?
+
+    public init(config: ShortcutConfig = ShortcutDefaults.config) {
+        self.config = config
+    }
+
+    /// Camada vigente: a do modificador segurado há mais tempo, ou a base.
+    public var currentLayer: ButtonID? { modifierOrder.first }
+
+    public mutating func press(_ button: ButtonID) -> [ShortcutAction] {
+        lastTrigger = nil
+        guard held.insert(button).inserted else { return [] }
+        if ShortcutConfig.pointerButtons.contains(button) { return [] }
+        if let keys = config.modifiers[button] {
+            modifierOrder.append(button)
+            return keys.sorted().map { .modifierDown($0) }
         }
-        if modifiers.contains(.options) {
-            switch button {
-            case .dpadRight: return hold(button, KeyChord(KeyChord.tab, [.command]), repeats: false)
-            case .dpadLeft: return hold(button, KeyChord(KeyChord.tab, [.command, .shift]), repeats: false)
-            default: return []
-            }
+
+        let layer = currentLayer
+        let action = config.resolvedAction(for: button, in: layer).action
+        let actions: [ShortcutAction]
+        switch action {
+        case .chord(let chord, let repeats):
+            resolved[button] = .chord(chord)
+            actions = [.keyDown(chord, repeats: repeats)]
+        case .systemShortcut(let shortcut):
+            resolved[button] = .system(shortcut)
+            actions = [.systemDown(shortcut)]
+        case .text(let text, let pressEnter):
+            actions = [.text(text, pressEnter: pressEnter)]
+        case .openPalette:
+            actions = [.openPalette]
+        case .none:
+            actions = []
         }
-        if modifiers.contains(.l2) {
-            switch button {
-            case .dpadLeft: return hold(button, .spaceLeft)
-            case .dpadRight: return hold(button, .spaceRight)
-            case .dpadDown: return hold(button, .applicationWindows)
-            case .dpadUp: return hold(button, .missionControl)
-            case .triangle: return hold(button, .nextWindow)
-            default: break
-            }
+        if let type = action.type {
+            lastTrigger = Trigger(button: button, layer: layer, type: type)
         }
-        if modifiers.contains(.l1) {
-            switch button {
-            case .cross: return [.text(Self.continueText, pressEnter: true)]
-            case .triangle: return hold(button, KeyChord(KeyChord.tab, [.shift]), repeats: false)
-            default: break
-            }
-        }
-        switch button {
-        case .dpadUp: return hold(button, KeyChord(KeyChord.upArrow), repeats: true)
-        case .dpadDown: return hold(button, KeyChord(KeyChord.downArrow), repeats: true)
-        case .dpadLeft: return hold(button, KeyChord(KeyChord.leftArrow), repeats: true)
-        case .dpadRight: return hold(button, KeyChord(KeyChord.rightArrow), repeats: true)
-        case .cross: return hold(button, KeyChord(KeyChord.returnKey), repeats: false)
-        case .circle: return hold(button, KeyChord(KeyChord.escape), repeats: false)
-        case .square: return hold(button, KeyChord(KeyChord.delete), repeats: true)
-        case .triangle: return hold(button, KeyChord(KeyChord.tab), repeats: false)
-        case .create: return hold(button, .missionControl)
-        // Atalho do transcritor do Raycast, configurado pelo usuário.
-        case .r3: return hold(button, KeyChord(KeyChord.m, [.command]), repeats: false)
-        case .ps: return [.openPalette]
-        default: return []
-        }
+        return actions
     }
 
     public mutating func release(_ button: ButtonID) -> [ShortcutAction] {
         guard held.remove(button) != nil else { return [] }
-        if button == .options {
-            guard commandHeldByOptions else { return [] }
-            commandHeldByOptions = false
-            return [.modifierUp(.command)]
+        if let index = modifierOrder.firstIndex(of: button) {
+            modifierOrder.remove(at: index)
+            return (config.modifiers[button] ?? []).sorted().map { .modifierUp($0) }
         }
-        guard let chord = activeChords.removeValue(forKey: button) else { return [] }
-        return [.keyUp(chord)]
+        return resolved.removeValue(forKey: button).map { [Self.up($0)] } ?? []
     }
 
-    /// Solta toda tecla e modificador mantidos (desconexão, encerramento, perda de permissão).
+    /// Solta toda tecla, atalho e modificador mantidos (desconexão, encerramento, perda de permissão, troca de
+    /// configuração) e zera o estado.
     public mutating func releaseAll() -> [ShortcutAction] {
-        var actions = activeChords.sorted { $0.key < $1.key }.map { ShortcutAction.keyUp($0.value) }
-        if commandHeldByOptions { actions.append(.modifierUp(.command)) }
+        var actions = resolved.sorted { $0.key < $1.key }.map { Self.up($0.value) }
+        for modifier in modifierOrder {
+            actions += (config.modifiers[modifier] ?? []).sorted().map { .modifierUp($0) }
+        }
         held.removeAll()
-        activeChords.removeAll()
-        commandHeldByOptions = false
+        modifierOrder.removeAll()
+        resolved.removeAll()
+        lastTrigger = nil
         return actions
     }
 
-    private mutating func hold(_ button: ButtonID, _ shortcut: SystemShortcut) -> [ShortcutAction] {
-        hold(button, systemChords[shortcut] ?? shortcut.defaultChord, repeats: false)
-    }
-
-    private mutating func hold(_ button: ButtonID, _ chord: KeyChord, repeats: Bool) -> [ShortcutAction] {
-        activeChords[button] = chord
-        return [.keyDown(chord, repeats: repeats)]
+    private static func up(_ action: HeldAction) -> ShortcutAction {
+        switch action {
+        case .chord(let chord): .keyUp(chord)
+        case .system(let shortcut): .systemUp(shortcut)
+        }
     }
 }

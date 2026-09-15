@@ -6,6 +6,7 @@ import JoystickCore
 /// Todo acesso ocorre na fila `input` (`002-paleta-comandos` D-11); o painel recebe cópias pela main thread.
 final class PaletteActions {
     /// Intervalo entre o texto e o Enter quando `--palette-enter-delay-ms` não é informado (D-06, sonda P-01).
+    /// Vale para os itens configurados com Enter ao final (`003-editor-atalhos` RN-12); os 17 padrões não enviam Enter.
     static let defaultEnterDelayMs = 0
     static let idleTimeoutNs: UInt64 = 60_000_000_000
     static let idleCheckInterval: DispatchTimeInterval = .seconds(1)
@@ -13,7 +14,7 @@ final class PaletteActions {
     private let context: InputContext
     private let keyboard: KeyboardInjector
     private let enterDelayMs: Int
-    private var machine = PaletteMachine()
+    private var machine: PaletteMachine
     private var repeatTimer: DispatchSourceTimer?
     private var idleTimer: DispatchSourceTimer?
     private var lastInputNs: UInt64 = 0
@@ -24,11 +25,14 @@ final class PaletteActions {
     var onRender: ((PaletteSnapshot) -> Void)?
     /// Chamado na main thread ao confirmar "Editar atalhos" (`003-editor-atalhos` RF-07); defina antes de ler o controle.
     var onOpenEditor: (() -> Void)?
+    /// Chamado na main thread com a lista de uma configuração aplicada, depois do fechamento da paleta.
+    var onItems: (([PaletteItem]) -> Void)?
 
-    init(context: InputContext, keyboard: KeyboardInjector, enterDelayMs: Int) {
+    init(context: InputContext, keyboard: KeyboardInjector, enterDelayMs: Int, items: [PaletteItem]) {
         self.context = context
         self.keyboard = keyboard
         self.enterDelayMs = enterDelayMs
+        machine = PaletteMachine(items: items)
     }
 
     var isOpen: Bool {
@@ -48,6 +52,16 @@ final class PaletteActions {
         lastInputNs = MonotonicClock.nowNs()
         startIdleTimer()
         perform(effects)
+    }
+
+    /// Aplica a lista de uma configuração nova (`003-editor-atalhos` D-12): fecha a paleta aberta com `config_changed` e
+    /// recria a máquina, sem último item confirmado, pois o índice lembrado pode não existir na lista nova.
+    func apply(items: [PaletteItem]) {
+        context.assertOnQueue()
+        close(.configChanged)
+        machine = PaletteMachine(items: items)
+        let onItems = onItems
+        DispatchQueue.main.async { onItems?(items) }
     }
 
     func handle(_ event: InputEvent) {

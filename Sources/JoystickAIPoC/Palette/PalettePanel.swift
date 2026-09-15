@@ -29,6 +29,11 @@ final class PalettePanel: NSPanel {
     override var canBecomeKey: Bool { false }
     override var canBecomeMain: Bool { false }
 
+    /// Troca a lista exibida; o tamanho é recalculado na próxima abertura (`003-editor-atalhos` D-12).
+    func update(items: [PaletteItem]) {
+        paletteView.items = items
+    }
+
     func show(_ snapshot: PaletteSnapshot) {
         guard snapshot.isOpen else {
             orderOut(nil)
@@ -68,7 +73,13 @@ final class PaletteView: NSView {
     /// Itens terminados em espaço esperam descrição; o sufixo deixa isso visível.
     static let continuationSuffix = " …"
 
-    private let items: [PaletteItem]
+    var items: [PaletteItem] {
+        didSet {
+            visibleRows = rowCount
+            firstVisible = 0
+            needsDisplay = true
+        }
+    }
     private var visibleRows: Int
     private var firstVisible = 0
 

@@ -1,0 +1,250 @@
+{
+  "palette" : {
+    "items" : [
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "CONTINUAR"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false
+        "text" : "/reversa-forward"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-requirements "
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-clarify"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-plan"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-to-do"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-coding"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-add "
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-audit"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-quality"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-sync"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-resume"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa-debugger "
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/reversa"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/clear"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/compact"
+      },
+      {
+        "label" : "",
+        "pressEnter" : false,
+        "text" : "/resume"
+      }
+    ],
+    "version" : 1
+  },
+  "pointer" : {
+    "stickMaxSpeed" : 1800
+  },
+  "shortcuts" : {
+    "layers" : {
+      "base" : {
+        "circle" : {
+          "key" : "escape",
+          "type" : "chord"
+        },
+        "create" : {
+          "name" : "missionControl",
+          "type" : "systemShortcut"
+        },
+        "cross" : {
+          "key" : "return",
+          "type" : "chord"
+        },
+        "dpadDown" : {
+          "key" : "downArrow",
+          "repeat" : true,
+          "type" : "chord"
+        },
+        "dpadLeft" : {
+          "key" : "leftArrow",
+          "repeat" : true,
+          "type" : "chord"
+        },
+        "dpadRight" : {
+          "key" : "rightArrow",
+          "repeat" : true,
+          "type" : "chord"
+        },
+        "dpadUp" : {
+          "key" : "upArrow",
+          "repeat" : true,
+          "type" : "chord"
+        },
+        "l3" : {
+          "type" : "none"
+        },
+        "ps" : {
+          "type" : "openPalette"
+        },
+        "r3" : {
+          "key" : "m",
+          "modifiers" : [
+            "command"
+          ],
+          "type" : "chord"
+        },
+        "square" : {
+          "key" : "delete",
+          "repeat" : true,
+          "type" : "chord"
+        },
+        "triangle" : {
+          "key" : "tab",
+          "type" : "chord"
+        }
+      },
+      "l1" : {
+        "cross" : {
+          "pressEnter" : true,
+          "text" : "CONTINUAR",
+          "type" : "text"
+        },
+        "triangle" : {
+          "key" : "tab",
+          "modifiers" : [
+            "shift"
+          ],
+          "type" : "chord"
+        }
+      },
+      "l2" : {
+        "dpadDown" : {
+          "name" : "applicationWindows",
+          "type" : "systemShortcut"
+        },
+        "dpadLeft" : {
+          "name" : "spaceLeft",
+          "type" : "systemShortcut"
+        },
+        "dpadRight" : {
+          "name" : "spaceRight",
+          "type" : "systemShortcut"
+        },
+        "dpadUp" : {
+          "name" : "missionControl",
+          "type" : "systemShortcut"
+        },
+        "triangle" : {
+          "name" : "nextWindow",
+          "type" : "systemShortcut"
+        }
+      },
+      "options" : {
+        "circle" : {
+          "type" : "none"
+        },
+        "create" : {
+          "type" : "none"
+        },
+        "cross" : {
+          "type" : "none"
+        },
+        "dpadDown" : {
+          "type" : "none"
+        },
+        "dpadLeft" : {
+          "key" : "tab",
+          "modifiers" : [
+            "shift",
+            "command"
+          ],
+          "type" : "chord"
+        },
+        "dpadRight" : {
+          "key" : "tab",
+          "modifiers" : [
+            "command"
+          ],
+          "type" : "chord"
+        },
+        "dpadUp" : {
+          "type" : "none"
+        },
+        "l3" : {
+          "type" : "none"
+        },
+        "ps" : {
+          "type" : "none"
+        },
+        "r3" : {
+          "type" : "none"
+        },
+        "square" : {
+          "type" : "none"
+        },
+        "triangle" : {
+          "type" : "none"
+        }
+      }
+    },
+    "modifiers" : {
+      "l1" : [
+
+      ],
+      "l2" : [
+
+      ],
+      "options" : [
+        "command"
+      ]
+    },
+    "version" : 1
+  }
+}

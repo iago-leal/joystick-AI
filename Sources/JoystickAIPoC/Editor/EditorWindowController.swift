@@ -2,7 +2,10 @@ import AppKit
 import JoystickCore
 import SwiftUI
 
-/// Janela do editor de atalhos (`003-editor-atalhos` D-19, D-23). Só na main thread.
+/// Janela do editor de atalhos (`003-editor-atalhos` D-19, D-23, D-24). Só na main thread.
+///
+/// Fechar com rascunho sujo abre a folha Salvar, Descartar e Cancelar (RF-13); fechar a janela ou tirar dela o foco
+/// desliga o modo de identificação.
 ///
 /// O app é `.accessory`: para a janela receber teclado e ditado, ele precisa se ativar. O aplicativo em foco na
 /// abertura é guardado e reativado ao fechar (RF-19).
@@ -24,6 +27,21 @@ final class EditorWindowController: NSObject, NSWindowDelegate {
     private let activateByClick: (CGPoint) -> Void
     private var window: NSWindow?
     private var previousApp: NSRunningApplication?
+    /// Resultado registrado em `editor.closed` no próximo fechamento.
+    private var closeOutcome: EditorCloseOutcome = .clean
+    private var closeSheetOpen = false
+    /// Escolha já feita na folha; o fechamento seguinte não pergunta de novo.
+    private var closeApproved = false
+
+    /// Chamado antes de exibir a janela, para o rascunho partir da configuração vigente (RF-04).
+    var onWillShow: (() -> Void)?
+    /// Informa se há alterações não salvas.
+    var isDirty: () -> Bool = { false }
+    /// Tenta gravar o rascunho; devolve verdadeiro se gravou. Se falhar, a janela continua aberta com a faixa do erro.
+    var saveForClose: () -> Bool = { true }
+    var discardForClose: () -> Void = {}
+    /// Desliga o modo de identificação (D-24).
+    var onIdentifyOff: () -> Void = {}
 
     init(log: DiagnosticLog, activateByClick: @escaping (CGPoint) -> Void, content: @escaping () -> AnyView) {
         self.log = log
@@ -40,6 +58,7 @@ final class EditorWindowController: NSObject, NSWindowDelegate {
         if let front, front.processIdentifier != ProcessInfo.processInfo.processIdentifier {
             previousApp = front
         }
+        onWillShow?()
         let window = self.window ?? makeWindow()
         self.window = window
         if #available(macOS 14, *) {
@@ -99,9 +118,48 @@ final class EditorWindowController: NSObject, NSWindowDelegate {
         return window
     }
 
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        if closeApproved || !isDirty() {
+            return true
+        }
+        guard !closeSheetOpen else { return false }
+        closeSheetOpen = true
+        onIdentifyOff()
+        let alert = NSAlert()
+        alert.messageText = "Salvar as alterações dos atalhos?"
+        alert.informativeText = "Se descartar, a configuração vigente continua a do arquivo."
+        alert.addButton(withTitle: "Salvar")
+        alert.addButton(withTitle: "Descartar")
+        alert.addButton(withTitle: "Cancelar")
+        alert.beginSheetModal(for: sender) { [weak self, weak sender] response in
+            guard let self, let sender else { return }
+            self.closeSheetOpen = false
+            switch response {
+            case .alertFirstButtonReturn:
+                guard self.saveForClose() else { return }
+                self.closeOutcome = .saved
+            case .alertSecondButtonReturn:
+                self.discardForClose()
+                self.closeOutcome = .discarded
+            default:
+                return
+            }
+            self.closeApproved = true
+            sender.close()
+        }
+        return false
+    }
+
+    func windowDidResignKey(_ notification: Notification) {
+        onIdentifyOff()
+    }
+
     func windowWillClose(_ notification: Notification) {
         window?.level = .normal
-        log.log(LogEventCatalog.editorClosed(outcome: .clean))
+        onIdentifyOff()
+        log.log(LogEventCatalog.editorClosed(outcome: closeOutcome))
+        closeOutcome = .clean
+        closeApproved = false
         returnFocus()
     }
 

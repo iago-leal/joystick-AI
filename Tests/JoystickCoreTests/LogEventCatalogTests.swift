@@ -54,11 +54,31 @@ import Testing
             LogEventCatalog.paletteClosed(reason: .injectionSuspended),
             LogEventCatalog.paletteBlocked(),
             LogEventCatalog.paletteInvalidArgs(message: "--palette-enter-delay-ms sem valor"),
-        ] + LogEventCatalog.config(ConfigLoadResult(settings: settings, status: .loaded, reason: nil, issues: [
+            LogEventCatalog.paletteClosed(reason: .configChanged),
+        ] + Self.shortcutEvents + LogEventCatalog.config(ConfigLoadResult(settings: settings, status: .loaded, reason: nil, issues: [
             .valueRejected(field: "deadzone", rejected: 0.9, min: 0, max: 0.5, defaultValue: 0.12),
         ])) + LogEventCatalog.config(ConfigLoadResult(settings: PointerSettings(), status: .invalidJSON, reason: nil, issues: [.invalidJSON(line: 4, message: "vírgula")]))
             + LogEventCatalog.config(ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: nil, issues: [.unreadable(message: "diretório")]))
             + LogEventCatalog.config(ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: "file_missing", issues: []))
+    }
+
+    /// Eventos de `003-editor-atalhos/interfaces/diagnostic-log.md` §2.
+    static var shortcutEvents: [LogEvent] {
+        [
+            LogEventCatalog.shortcutsLoaded(trigger: .external, source: .file, reason: nil, modifiers: [.options, .l3, .l1], items: 18),
+            LogEventCatalog.shortcutsUnchanged(trigger: .external),
+            LogEventCatalog.shortcutsInvalid(trigger: .startup, rule: .unknownKey, path: "shortcuts.layers.base.cross.key", line: 12),
+            LogEventCatalog.shortcutsFileRemoved(),
+            LogEventCatalog.shortcutsSaved(created: true, backup: false),
+            LogEventCatalog.shortcutsSaveFailed(message: "/Users/u/.config/joystick-ai/config.json: permissão negada"),
+            LogEventCatalog.shortcutsRestored(),
+            LogEventCatalog.shortcutTriggered(button: .circle, layer: .l3, type: .systemShortcut),
+            LogEventCatalog.editorOpened(source: .palette),
+            LogEventCatalog.editorClosed(outcome: .saved),
+            LogEventCatalog.editorConflict(choice: .pending),
+            LogEventCatalog.editorIdentify(on: true),
+            LogEventCatalog.editorActivationFailed(),
+        ]
     }
 
     @Test func nenhumEventoTemCoordenadasOuValoresDeEixo() {
@@ -87,6 +107,11 @@ import Testing
             "app.terminating": .info, "log.debug_suspended": .warn,
             "palette.opened": .info, "palette.confirmed": .info, "palette.closed": .info, "palette.blocked": .info,
             "palette.invalid_args": .warn,
+            "shortcuts.loaded": .info, "shortcuts.unchanged": .debug, "shortcuts.invalid": .error,
+            "shortcuts.file_removed": .info, "shortcuts.saved": .info, "shortcuts.save_failed": .error,
+            "shortcuts.restored": .info, "shortcut.triggered": .info,
+            "editor.opened": .info, "editor.closed": .info, "editor.conflict": .warn, "editor.identify": .info,
+            "editor.activation_failed": .warn,
         ]
         let events = Self.sampleEvents
         #expect(Set(events.map(\.name)) == Set(expected.keys))
@@ -133,6 +158,53 @@ import Testing
         #expect(Set(fields("palette.confirmed").keys) == ["index", "enter"])
         #expect(fields("palette.closed")["reason"] == "injection_suspended")
         #expect(fields("palette.blocked")["reason"] == "targets")
+    }
+
+    @Test func paletaFechadaPorConfiguracaoNova() {
+        #expect(LogEventCatalog.paletteClosed(reason: .configChanged).fields == ["reason": "config_changed"])
+    }
+
+    /// RN-14: atalhos e editor levam botão, camada, tipo, contagens, caminho, linha e regra; nunca texto, rótulo,
+    /// nome de tecla nem acorde.
+    @Test func eventosDeAtalhosSemTextoTeclaNemAcorde() {
+        let secrets = Set(PaletteDefaults.items.map(\.text) + [ShortcutDefaults.continueText])
+            .union(KeyCatalog.entries.flatMap { [$0.name, $0.display] })
+            .union(KeyModifier.allCases.map(\.rawValue))
+        for event in Self.shortcutEvents {
+            #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: ["text", "label", "key", "keys", "chord", "item"]), "\(event.name)")
+            for value in event.fields.values {
+                let strings: [String] = switch value {
+                case .string(let string): [string]
+                case .array(let items): items.compactMap(\.stringValue)
+                default: []
+                }
+                #expect(strings.allSatisfy { !secrets.contains($0) }, "\(event.name): \(strings)")
+            }
+        }
+    }
+
+    @Test func camposDosEventosDeAtalhos() {
+        #expect(fields("shortcuts.loaded") == [
+            "trigger": "external", "source": "file", "modifiers": .array(["l1", "l3", "options"]), "items": 18,
+        ])
+        #expect(LogEventCatalog.shortcutsLoaded(trigger: .startup, source: .defaults, reason: .fileMissing, modifiers: [], items: 17)
+            .fields["reason"] == "file_missing")
+        #expect(fields("shortcuts.unchanged") == ["trigger": "external"])
+        #expect(fields("shortcuts.invalid") == ["trigger": "startup", "rule": "unknownKey", "path": "shortcuts.layers.base.cross.key", "line": 12])
+        #expect(LogEventCatalog.shortcutsInvalid(trigger: .external, rule: .syntax, path: nil, line: nil).fields == [
+            "trigger": "external", "rule": "syntax",
+        ])
+        #expect(fields("shortcuts.file_removed").isEmpty)
+        #expect(fields("shortcuts.saved") == ["created": true, "backup": false])
+        #expect(Set(fields("shortcuts.save_failed").keys) == ["message"])
+        #expect(fields("shortcuts.restored").isEmpty)
+        #expect(fields("shortcut.triggered") == ["button": "circle", "layer": "l3", "type": "systemShortcut"])
+        #expect(LogEventCatalog.shortcutTriggered(button: .cross, layer: nil, type: .chord).fields["layer"] == "base")
+        #expect(fields("editor.opened") == ["source": "palette"])
+        #expect(fields("editor.closed") == ["outcome": "saved"])
+        #expect(fields("editor.conflict") == ["choice": "pending"])
+        #expect(fields("editor.identify") == ["on": true])
+        #expect(fields("editor.activation_failed").isEmpty)
     }
 
     @Test func campoOpcionalAusenteNaoAparece() {

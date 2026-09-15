@@ -11,15 +11,35 @@ public struct ConfigLoadResult: Equatable, Sendable {
     public var reason: String?
     public var issues: [ConfigIssue]
 
-    public init(settings: PointerSettings, status: ConfigStatus, reason: String?, issues: [ConfigIssue]) {
+    /// Mapeamento e paleta lidos, ou os padrões quando ausentes ou recusados (`003-editor-atalhos` D-08, RN-08).
+    public var shortcuts: ShortcutsDocument
+    public var shortcutsSource: ShortcutsSource
+    /// Motivo dos padrões por ausência: arquivo inexistente ou nenhuma das duas seções.
+    public var shortcutsReason: ShortcutsDefaultReason?
+    /// Problemas que recusaram `shortcuts` e `palette`, com linha quando conhecida; vazio numa leitura aceita.
+    public var shortcutIssues: [ShortcutIssue]
+    /// *Bytes* lidos, para comparar releituras (`003-editor-atalhos` D-16); `nil` sem arquivo legível.
+    public var data: Data?
+
+    public init(settings: PointerSettings, status: ConfigStatus, reason: String?, issues: [ConfigIssue],
+                shortcuts: ShortcutsDocument = ShortcutDefaults.document, shortcutsSource: ShortcutsSource = .defaults,
+                shortcutsReason: ShortcutsDefaultReason? = nil, shortcutIssues: [ShortcutIssue] = [], data: Data? = nil) {
         self.settings = settings
         self.status = status
         self.reason = reason
         self.issues = issues
+        self.shortcuts = shortcuts
+        self.shortcutsSource = shortcutsSource
+        self.shortcutsReason = shortcutsReason
+        self.shortcutIssues = shortcutIssues
+        self.data = data
     }
 }
 
-/// Leitura única de `~/.config/joystick-ai/config.json` ao iniciar (D-17, RF-26). Nunca cria o arquivo.
+/// Leitura de `~/.config/joystick-ai/config.json` (D-17, RF-26). Nunca cria o arquivo.
+///
+/// A raiz é decodificada uma vez e entregue a `pointer` e às seções de atalhos (`003-editor-atalhos` D-08); o
+/// resultado de `pointer` e os eventos `config.*` não mudam.
 public enum ConfigLoader {
     public static let maxBytes = 1 << 20
 
@@ -30,7 +50,8 @@ public enum ConfigLoader {
     public static func load(from url: URL, fileManager: FileManager = .default) -> ConfigLoadResult {
         var isDirectory: ObjCBool = false
         guard fileManager.fileExists(atPath: url.path, isDirectory: &isDirectory) else {
-            return ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: "file_missing", issues: [])
+            return ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: "file_missing", issues: [],
+                                    shortcutsReason: .fileMissing)
         }
         guard !isDirectory.boolValue else {
             return unreadable("\(url.path) é um diretório, não um arquivo")
@@ -55,17 +76,39 @@ public enum ConfigLoader {
             root = try JSONDecoder().decode(JSONValue.self, from: data)
         } catch {
             let (line, message) = describe(error, data: data)
-            return ConfigLoadResult(settings: PointerSettings(), status: .invalidJSON, reason: nil, issues: [.invalidJSON(line: line, message: message)])
+            return ConfigLoadResult(settings: PointerSettings(), status: .invalidJSON, reason: nil, issues: [.invalidJSON(line: line, message: message)],
+                                    shortcutIssues: [ShortcutIssue(path: "", rule: .syntax, line: line)], data: data)
         }
         guard case .object(let fields) = root else {
             return ConfigLoadResult(settings: PointerSettings(), status: .invalidJSON, reason: nil,
-                                    issues: [.invalidJSON(line: nil, message: "a raiz do arquivo não é um objeto JSON")])
+                                    issues: [.invalidJSON(line: nil, message: "a raiz do arquivo não é um objeto JSON")],
+                                    shortcutIssues: [ShortcutIssue(path: "", rule: .wrongType, line: 1)], data: data)
         }
-        guard let pointer = fields["pointer"], case .object = pointer else {
-            return ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: "section_missing", issues: [])
+
+        var result: ConfigLoadResult
+        if let pointer = fields["pointer"], case .object = pointer {
+            let validated = PointerSettingsValidation.validate(pointer)
+            result = ConfigLoadResult(settings: validated.settings, status: .loaded, reason: nil, issues: validated.issues)
+        } else {
+            result = ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: "section_missing", issues: [])
         }
-        let validated = PointerSettingsValidation.validate(pointer)
-        return ConfigLoadResult(settings: validated.settings, status: .loaded, reason: nil, issues: validated.issues)
+        result.data = data
+
+        switch ShortcutConfigValidation.decode(root: root) {
+        case .success(let document):
+            let sections = ShortcutConfigValidation.sections(in: root)
+            let present = sections.shortcuts || sections.palette
+            result.shortcuts = document
+            result.shortcutsSource = present ? .file : .defaults
+            result.shortcutsReason = present ? nil : .sectionMissing
+        case .failure(let failure):
+            result.shortcutIssues = failure.issues.map { issue in
+                var located = issue
+                located.line = ConfigLineLocator.nearestLine(of: issue.path, in: data)
+                return located
+            }
+        }
+        return result
     }
 
     /// Linha pela descrição do Foundation ("around line N") ou, na falta dela, pelo deslocamento do erro (R-11).
@@ -100,6 +143,7 @@ public enum ConfigLoader {
     }
 
     private static func unreadable(_ message: String) -> ConfigLoadResult {
-        ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: nil, issues: [.unreadable(message: message)])
+        ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: nil, issues: [.unreadable(message: message)],
+                         shortcutIssues: [ShortcutIssue(path: "", rule: .unreadable)])
     }
 }

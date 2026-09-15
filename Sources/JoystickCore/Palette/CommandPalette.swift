@@ -27,6 +27,8 @@ public enum PaletteCloseReason: String, Sendable {
     case injectionSuspended = "injection_suspended"
     /// Configuração nova aplicada com a paleta aberta (`003-editor-atalhos` D-12).
     case configChanged = "config_changed"
+    /// Modo de identificação do editor ligado com a paleta aberta (`003-editor-atalhos` D-24).
+    case identify
 }
 
 /// Paleta padrão, usada sem arquivo ou sem a seção `palette` (`003-editor-atalhos` RN-11, D-04): a lista da

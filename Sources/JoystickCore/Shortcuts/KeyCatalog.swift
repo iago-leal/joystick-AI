@@ -53,7 +53,7 @@ public enum KeyCatalog {
     ]
 
     private static let editing: [KeyEntry] = [
-        KeyEntry("return", KeyChord.returnKey, "Return", .editing),
+        KeyEntry("return", KeyChord.returnKey, "Enter", .editing),
         KeyEntry("tab", KeyChord.tab, "Tab", .editing),
         KeyEntry("space", 0x31, "Space", .editing),
         KeyEntry("delete", KeyChord.delete, "Delete", .editing),
@@ -88,14 +88,18 @@ public enum KeyCatalog {
 
     /// Acorde legível, com os modificadores na ordem do macOS (⌃ ⌥ ⇧ ⌘) antes da tecla.
     public static func display(_ chord: KeyChord) -> String {
-        let symbols = chord.modifiers.sorted().map { modifier in
+        symbols(chord.modifiers) + (entry(keyCode: chord.keyCode)?.display ?? "tecla \(chord.keyCode)")
+    }
+
+    /// Símbolos das teclas modificadoras na ordem do macOS.
+    public static func symbols(_ modifiers: Set<KeyModifier>) -> String {
+        modifiers.sorted().map { modifier in
             switch modifier {
             case .control: "⌃"
             case .option: "⌥"
             case .shift: "⇧"
             case .command: "⌘"
             }
-        }
-        return symbols.joined() + (entry(keyCode: chord.keyCode)?.display ?? "tecla \(chord.keyCode)")
+        }.joined()
     }
 }

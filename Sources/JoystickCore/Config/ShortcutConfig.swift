@@ -101,4 +101,16 @@ public struct ShortcutIssue: Equatable, Sendable {
         self.rule = rule
         self.line = line
     }
+
+    /// Caminho para o log; vazio quando o problema é do arquivo inteiro (`syntax`, `unreadable`).
+    public var logPath: String? { path.isEmpty ? nil : path }
+}
+
+/// Problemas que recusaram uma leitura, na ordem em que foram encontrados.
+public struct ShortcutIssues: Error, Equatable, Sendable {
+    public var issues: [ShortcutIssue]
+
+    public init(_ issues: [ShortcutIssue]) {
+        self.issues = issues
+    }
 }

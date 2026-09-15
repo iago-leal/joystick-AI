@@ -15,7 +15,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var shortcutActions: ShortcutActions!
     private var paletteActions: PaletteActions!
     private var palettePanel: PalettePanel!
+    private var configStore: ConfigStore!
+    private var configWatcher: ConfigWatcher!
     private var statusMenu: StatusMenu!
+    private var editorModel: EditorViewModel!
     private var editorWindow: EditorWindowController!
     private var motionLoop: MotionLoop!
     private var router: InputRouter!
@@ -42,44 +45,76 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             args: rawArguments,
             signing: SigningInfo.current().jsonValue))
 
-        // Configuração antes da leitura do controle; o arquivo nunca é criado pela PoC (RF-26).
+        // Configuração antes da leitura do controle; o arquivo só é criado ao salvar pelo editor (`003-editor-atalhos` RN-10).
+        // `pointer` é lido só aqui; atalhos e paleta ficam com o `ConfigStore`, que os relê a cada alteração (D-15).
         let config = ConfigLoader.load(from: ConfigLoader.defaultURL)
         LogEventCatalog.config(config).forEach(log.log)
         let settings = config.settings
+        configStore = ConfigStore(url: ConfigLoader.defaultURL, log: log)
+        configStore.start(with: config)
+        let shortcuts = configStore.state.current
 
         injector = EventInjector(log: log)
         let scrollInjector = ScrollInjector(injector: injector, unit: arguments.scrollUnit)
         inputContext = InputContext(queue: inputQueue, log: log, settings: settings, sink: LoggingInputSink(log: log))
         buttonActions = ButtonActions(injector: injector, settings: settings)
         motionLoop = MotionLoop(context: inputContext, injector: injector, scrollInjector: scrollInjector, buttons: buttonActions)
-        // Protótipo de atalhos pedido no PM-3, fora do escopo da PoC (`action-mapping`).
+        // Atalhos pela configuração vigente (`003-editor-atalhos` D-09).
         // Um único injetor de teclado, para uma só contagem de modificadores (`002-paleta-comandos` D-05).
         let keyboard = KeyboardInjector(injector: injector)
-        shortcutActions = ShortcutActions(context: inputContext, keyboard: keyboard)
+        shortcutActions = ShortcutActions(context: inputContext, keyboard: keyboard, config: shortcuts.shortcuts)
 
         // Paleta de comandos (`002-paleta-comandos`): painel criado oculto, para abrir sem atraso (D-08).
         for error in arguments.errors where error.concernsPalette {
             log.log(LogEventCatalog.paletteInvalidArgs(message: error.message))
         }
-        palettePanel = PalettePanel(items: PaletteDefaults.items)
+        palettePanel = PalettePanel(items: shortcuts.palette)
         paletteActions = PaletteActions(
             context: inputContext, keyboard: keyboard,
-            enterDelayMs: arguments.paletteEnterDelayMs ?? PaletteActions.defaultEnterDelayMs)
+            enterDelayMs: arguments.paletteEnterDelayMs ?? PaletteActions.defaultEnterDelayMs, items: shortcuts.palette)
         paletteActions.onRender = { [palettePanel] snapshot in palettePanel?.show(snapshot) }
+        paletteActions.onItems = { [palettePanel] items in palettePanel?.update(items: items) }
         shortcutActions.onOpenPalette = { [paletteActions] in paletteActions?.open() }
 
+        // Configuração nova aplicada na fila `input`: primeiro a paleta, depois os atalhos (D-12).
+        configStore.onApply = { [inputQueue, paletteActions, shortcutActions] document in
+            inputQueue.async {
+                paletteActions?.apply(items: document.palette)
+                shortcutActions?.apply(document.shortcuts)
+            }
+        }
+
         // Editor de atalhos (`003-editor-atalhos`): ícone na barra de menus e entrada fixa da paleta (D-18, D-13).
-        // Editor mínimo das sondas do PM-1a, trocado pelo completo em T073.
+        let editorModel = EditorViewModel(store: configStore, log: log)
+        self.editorModel = editorModel
         editorWindow = EditorWindowController(
             log: log,
             activateByClick: { [injector, inputQueue] point in inputQueue.async { injector?.activationClick(at: point) } }
-        ) { AnyView(EditorProbeView()) }
+        ) { AnyView(EditorRootView(model: editorModel)) }
+        editorWindow.onWillShow = { [weak editorModel] in editorModel?.prepareForOpen() }
+        editorWindow.isDirty = { [weak editorModel] in editorModel?.draft.isDirty ?? false }
+        editorWindow.saveForClose = { [weak editorModel] in editorModel?.save() ?? true }
+        editorWindow.discardForClose = { [weak editorModel] in editorModel?.discard() }
+        editorWindow.onIdentifyOff = { [weak editorModel] in editorModel?.identifying = false }
         EditMenu.install()
         statusMenu = StatusMenu()
         statusMenu.onEditShortcuts = { [editorWindow] in editorWindow?.show(source: .menu) }
+        statusMenu.onOpenFromAlert = { [editorWindow] in editorWindow?.show(source: .alert) }
+        statusMenu.update(status: configStore.state.status)
+        configStore.addObserver { [statusMenu] state, _ in statusMenu?.update(status: state.status) }
         paletteActions.onOpenEditor = { [editorWindow] in editorWindow?.show(source: .palette) }
 
+        // Alterações externas do arquivo, sem varredura (D-16, RF-03).
+        configWatcher = ConfigWatcher(url: ConfigLoader.defaultURL) { [configStore] in configStore?.reload(trigger: .external) }
+        configWatcher.start()
+
         router = InputRouter(buttons: buttonActions, motion: motionLoop, shortcuts: shortcutActions, palette: paletteActions)
+        // Modo de identificação do editor (D-24): o botão pressionado seleciona o cartão, e o estado vai à fila `input`.
+        router.onIdentify = { [weak editorModel] button in editorModel?.identified(button) }
+        editorModel.onIdentifyingChange = { [router, inputQueue, log] on in
+            log?.log(LogEventCatalog.editorIdentify(on: on))
+            inputQueue.async { router?.setIdentifying(on) }
+        }
         inputContext.sink = router
         gate = InjectionGate(
             context: inputContext, injector: injector, buttons: buttonActions, shortcuts: shortcutActions, palette: paletteActions)
