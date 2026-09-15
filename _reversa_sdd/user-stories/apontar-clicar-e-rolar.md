@@ -36,6 +36,10 @@ Então o cursor acompanha o deslize, sem salto ao pousar o dedo
 Dado o analógico esquerdo inclinado
 Quando L1 é segurado sozinho
 Então a velocidade é multiplicada por precisionFactor (0,3 por padrão)
+
+Dado o analógico direito inclinado
+Quando L1 é segurado sozinho
+Então a rolagem é multiplicada por precisionFactor, como o cursor
 ```
 
 Units: `ponteiro` (RN-PT sobre cinemática, toque e precisão), `injecao-de-eventos` (RN-IN-03, RN-IN-04). 🟢

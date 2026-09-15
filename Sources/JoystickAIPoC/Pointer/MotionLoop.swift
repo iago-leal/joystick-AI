@@ -85,7 +85,8 @@ final class MotionLoop {
 
     private func scrollStep(dt: Double, origin: PostSource?, tArrival: UInt64?) {
         let right = engine.state.rightStick
-        let step = scrollMapper.step(x: right.x, y: right.y, dt: dt)
+        let precision = PointerMotionEngine.precisionActive(pressed: context.registry.pressed)
+        let step = scrollMapper.step(x: right.x, y: right.y, dt: dt, precision: precision)
         scrollInjector.scroll(vertical: step.vertical, horizontal: step.horizontal, origin: origin, tArrival: tArrival)
     }
 

@@ -62,6 +62,15 @@ import Testing
         #expect(down.vertical > 0)
     }
 
+    @Test func precisaoReduzRolagem() {
+        var settings = PointerSettings()
+        settings.scrollSpeed = 100
+        var mapper = ScrollMapper(unit: .line, settings: settings)
+        var v = 0
+        for _ in 0..<120 { v += Int(mapper.step(x: 0, y: -1.0, dt: 1.0 / 120.0, precision: true).vertical) }
+        #expect(abs(abs(v) - 30) <= 1)
+    }
+
     @Test func eixoHorizontal() {
         var mapper = ScrollMapper(unit: .pixel, settings: PointerSettings())
         let right = run(&mapper, x: 1.0, y: 0, seconds: 0.5)

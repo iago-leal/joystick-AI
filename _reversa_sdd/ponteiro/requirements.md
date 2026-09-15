@@ -24,7 +24,7 @@ Transforma o controle em mouse: o analógico esquerdo e o touchpad movem o curso
 - RN-PT-04: Ligar o modo de identificação fecha a paleta com `identify` e solta as teclas mantidas pelos atalhos. 🟢
 - RN-PT-05: Desconexão fecha a paleta com `disconnected` e é repassada a cliques, atalhos e movimento, nessa ordem. 🟢
 - RN-PT-06: Velocidade do analógico esquerdo: `h = hypot(x, y)`; se `h = 0`, zero; `m = min(1, h)`; `v = stickMaxSpeed · m^stickExponent`; direção `(x/h, −y/h)` (Y invertido para a tela). 🟢
-- RN-PT-07: Precisão ativa só quando o conjunto de botões pressionados do controle ativo é exatamente `{L1}`; multiplica analógico e touchpad por `precisionFactor`. 🟢
+- RN-PT-07: Precisão ativa só quando o conjunto de botões pressionados do controle ativo é exatamente `{L1}`; multiplica analógico esquerdo, touchpad e rolagem do analógico direito por `precisionFactor`. 🟢
 - RN-PT-08: Ao sair da zona morta, o analógico esquerdo emite imediatamente um deslocamento de `1/120 s` (onset) e liga o temporizador. 🟢
 - RN-PT-09: O temporizador (120 Hz, estrito, folga de 1 ms) liga quando qualquer analógico sai do repouso e desliga só quando os dois estão em repouso; ao desligar, emite o delta pendente do touchpad. 🟢
 - RN-PT-10: Cada tick usa o intervalo real desde o anterior, limitado a 50 ms, e emite delta pendente do touchpad + deslocamento do analógico esquerdo, e rolagem se o direito estiver ativo. 🟢
