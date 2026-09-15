@@ -1,0 +1,36 @@
+{
+  "vendorMissing": [],
+  "cdnFallbackUsed": true,
+  "cdnFallbackDetails": [
+    {
+      "lib": "highcharts",
+      "primary": "https://code.highcharts.com/11.4.8/highcharts.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/highcharts.js"
+    },
+    {
+      "lib": "highcharts_accessibility",
+      "primary": "https://code.highcharts.com/11.4.8/modules/accessibility.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/accessibility.js"
+    },
+    {
+      "lib": "highcharts_exporting",
+      "primary": "https://code.highcharts.com/11.4.8/modules/exporting.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/exporting.js"
+    },
+    {
+      "lib": "highcharts_treemap",
+      "primary": "https://code.highcharts.com/11.4.8/modules/treemap.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/treemap.js"
+    },
+    {
+      "lib": "highcharts_sankey",
+      "primary": "https://code.highcharts.com/11.4.8/modules/sankey.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/sankey.js"
+    },
+    {
+      "lib": "highcharts_timeline",
+      "primary": "https://code.highcharts.com/11.4.8/modules/timeline.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/timeline.js"
+    }
+  ]
+}

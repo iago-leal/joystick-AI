@@ -1,0 +1,1293 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-09-15T23:34:34Z",
+ "kpis": {
+  "files": 129,
+  "swift_files": 116,
+  "loc_total": 10799,
+  "loc_swift": 9575,
+  "loc_code": 6968,
+  "loc_tests": 2607,
+  "functions": 690,
+  "types": 219,
+  "complexity_avg": 14.4,
+  "complexity_max": 93,
+  "edges": 407,
+  "cycles": 2,
+  "test_ratio": 0.37,
+  "hot_path": 11,
+  "folders": 27
+ },
+ "treemap_loc_by_folder": [
+  {
+   "folder": "Tests/JoystickCoreTests",
+   "target": "Tests",
+   "loc": 2607,
+   "modules": 29,
+   "complexity": 190
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "target": "JoystickAIPoC",
+   "loc": 1153,
+   "modules": 12,
+   "complexity": 235
+  },
+  {
+   "folder": "Sources/JoystickCore/Config",
+   "target": "JoystickCore",
+   "loc": 1060,
+   "modules": 9,
+   "complexity": 320
+  },
+  {
+   "folder": "scripts/config-samples",
+   "target": "scripts",
+   "loc": 1019,
+   "modules": 7,
+   "complexity": 7
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/App",
+   "target": "JoystickAIPoC",
+   "loc": 461,
+   "modules": 7,
+   "complexity": 73
+  },
+  {
+   "folder": "Sources/JoystickCore/Pointer",
+   "target": "JoystickCore",
+   "loc": 454,
+   "modules": 8,
+   "complexity": 91
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "target": "JoystickAIPoC",
+   "loc": 403,
+   "modules": 7,
+   "complexity": 67
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Pointer",
+   "target": "JoystickAIPoC",
+   "loc": 337,
+   "modules": 4,
+   "complexity": 85
+  },
+  {
+   "folder": "Sources/JoystickCore/Log",
+   "target": "JoystickCore",
+   "loc": 322,
+   "modules": 2,
+   "complexity": 45
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Palette",
+   "target": "JoystickAIPoC",
+   "loc": 303,
+   "modules": 2,
+   "complexity": 43
+  },
+  {
+   "folder": "Sources/JoystickCore/Shortcuts",
+   "target": "JoystickCore",
+   "loc": 298,
+   "modules": 3,
+   "complexity": 73
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Config",
+   "target": "JoystickAIPoC",
+   "loc": 289,
+   "modules": 3,
+   "complexity": 47
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Targets",
+   "target": "JoystickAIPoC",
+   "loc": 264,
+   "modules": 4,
+   "complexity": 30
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Injection",
+   "target": "JoystickAIPoC",
+   "loc": 256,
+   "modules": 3,
+   "complexity": 61
+  },
+  {
+   "folder": "Sources/poc-tools",
+   "target": "poc-tools",
+   "loc": 214,
+   "modules": 6,
+   "complexity": 40
+  },
+  {
+   "folder": "Sources/JoystickCore/Input",
+   "target": "JoystickCore",
+   "loc": 204,
+   "modules": 5,
+   "complexity": 51
+  },
+  {
+   "folder": "Sources/JoystickCore/Analysis",
+   "target": "JoystickCore",
+   "loc": 172,
+   "modules": 3,
+   "complexity": 41
+  },
+  {
+   "folder": "Sources/JoystickCore/Targets",
+   "target": "JoystickCore",
+   "loc": 161,
+   "modules": 1,
+   "complexity": 13
+  },
+  {
+   "folder": "Sources/JoystickCore/Palette",
+   "target": "JoystickCore",
+   "loc": 156,
+   "modules": 1,
+   "complexity": 32
+  },
+  {
+   "folder": "Sources/JoystickCore/Support",
+   "target": "JoystickCore",
+   "loc": 150,
+   "modules": 2,
+   "complexity": 61
+  },
+  {
+   "folder": "scripts",
+   "target": "scripts",
+   "loc": 133,
+   "modules": 4,
+   "complexity": 4
+  },
+  {
+   "folder": "Sources/JoystickCore/App",
+   "target": "JoystickCore",
+   "loc": 118,
+   "modules": 1,
+   "complexity": 46
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Log",
+   "target": "JoystickAIPoC",
+   "loc": 97,
+   "modules": 1,
+   "complexity": 17
+  },
+  {
+   "folder": "Sources/JoystickAIPoC/Display",
+   "target": "JoystickAIPoC",
+   "loc": 90,
+   "modules": 2,
+   "complexity": 11
+  },
+  {
+   "folder": ".",
+   "target": "root",
+   "loc": 46,
+   "modules": 1,
+   "complexity": 2
+  },
+  {
+   "folder": "Resources",
+   "target": "root",
+   "loc": 26,
+   "modules": 1,
+   "complexity": 1
+  },
+  {
+   "folder": "Sources/JoystickAIPoC",
+   "target": "JoystickAIPoC",
+   "loc": 6,
+   "modules": 1,
+   "complexity": 1
+  }
+ ],
+ "top_complexity": [
+  {
+   "id": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "name": "ShortcutConfigValidation.swift",
+   "module": "config",
+   "complexity": 93,
+   "loc": 244,
+   "functions": 19
+  },
+  {
+   "id": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "name": "ShortcutMapper.swift",
+   "module": "shortcuts",
+   "complexity": 65,
+   "loc": 199,
+   "functions": 5
+  },
+  {
+   "id": "Sources/JoystickCore/Support/JSONValue.swift",
+   "name": "JSONValue.swift",
+   "module": "diagnostics-log",
+   "complexity": 60,
+   "loc": 143,
+   "functions": 4
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "name": "ActionPanel.swift",
+   "module": "editor",
+   "complexity": 59,
+   "loc": 188,
+   "functions": 6
+  },
+  {
+   "id": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "name": "EditorDraft.swift",
+   "module": "editor",
+   "complexity": 57,
+   "loc": 203,
+   "functions": 18
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ConfigLineLocator.swift",
+   "name": "ConfigLineLocator.swift",
+   "module": "config",
+   "complexity": 52,
+   "loc": 171,
+   "functions": 11
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "name": "EditorLabels.swift",
+   "module": "editor",
+   "complexity": 48,
+   "loc": 76,
+   "functions": 5
+  },
+  {
+   "id": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "name": "LaunchArguments.swift",
+   "module": "app-shell",
+   "complexity": 46,
+   "loc": 118,
+   "functions": 2
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "name": "EditorViewModel.swift",
+   "module": "editor",
+   "complexity": 43,
+   "loc": 218,
+   "functions": 27
+  },
+  {
+   "id": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "name": "LogEventCatalog.swift",
+   "module": "diagnostics-log",
+   "complexity": 38,
+   "loc": 280,
+   "functions": 47
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "name": "ShortcutActions.swift",
+   "module": "shortcuts",
+   "complexity": 33,
+   "loc": 123,
+   "functions": 8
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "name": "ConfigLoader.swift",
+   "module": "config",
+   "complexity": 33,
+   "loc": 135,
+   "functions": 6
+  },
+  {
+   "id": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "name": "CommandPalette.swift",
+   "module": "palette",
+   "complexity": 32,
+   "loc": 156,
+   "functions": 7
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "name": "AppDelegate.swift",
+   "module": "app-shell",
+   "complexity": 30,
+   "loc": 178,
+   "functions": 4
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "name": "EventInjector.swift",
+   "module": "injection",
+   "complexity": 29,
+   "loc": 135,
+   "functions": 8
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "name": "MotionLoop.swift",
+   "module": "pointer",
+   "complexity": 29,
+   "loc": 99,
+   "functions": 6
+  },
+  {
+   "id": "Sources/JoystickCore/Input/InputEvent.swift",
+   "name": "InputEvent.swift",
+   "module": "controller-input",
+   "complexity": 27,
+   "loc": 84,
+   "functions": 0
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "name": "KeyboardInjector.swift",
+   "module": "injection",
+   "complexity": 26,
+   "loc": 101,
+   "functions": 12
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "name": "PaletteActions.swift",
+   "module": "palette",
+   "complexity": 26,
+   "loc": 146,
+   "functions": 12
+  },
+  {
+   "id": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "name": "PointerSettingsValidation.swift",
+   "module": "config",
+   "complexity": 26,
+   "loc": 47,
+   "functions": 1
+  }
+ ],
+ "top_dependents": [
+  {
+   "id": "Sources/JoystickCore/Input/InputEvent.swift",
+   "name": "InputEvent.swift",
+   "module": "controller-input",
+   "dependents": 35,
+   "dependencies": 0,
+   "loc": 84
+  },
+  {
+   "id": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "name": "LogEventCatalog.swift",
+   "module": "diagnostics-log",
+   "dependents": 24,
+   "dependencies": 8,
+   "loc": 280
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "name": "ShortcutConfig.swift",
+   "module": "config",
+   "dependents": 23,
+   "dependencies": 3,
+   "loc": 97
+  },
+  {
+   "id": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "name": "ShortcutMapper.swift",
+   "module": "shortcuts",
+   "dependents": 23,
+   "dependencies": 3,
+   "loc": 199
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "name": "PointerSettings.swift",
+   "module": "pointer",
+   "dependents": 21,
+   "dependencies": 1,
+   "loc": 52
+  },
+  {
+   "id": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "name": "CommandPalette.swift",
+   "module": "palette",
+   "dependents": 16,
+   "dependencies": 1,
+   "loc": 156
+  },
+  {
+   "id": "Sources/JoystickCore/Support/JSONValue.swift",
+   "name": "JSONValue.swift",
+   "module": "diagnostics-log",
+   "dependents": 16,
+   "dependencies": 0,
+   "loc": 143
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "name": "ShortcutDefaults.swift",
+   "module": "config",
+   "dependents": 13,
+   "dependencies": 4,
+   "loc": 52
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "name": "InputSink.swift",
+   "module": "controller-input",
+   "dependents": 12,
+   "dependencies": 5,
+   "loc": 35
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "name": "DiagnosticLog.swift",
+   "module": "diagnostics-log",
+   "dependents": 12,
+   "dependencies": 3,
+   "loc": 97
+  },
+  {
+   "id": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "name": "MonotonicClock.swift",
+   "module": "diagnostics-log",
+   "dependents": 12,
+   "dependencies": 0,
+   "loc": 7
+  },
+  {
+   "id": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "name": "TargetRun.swift",
+   "module": "targets-analysis",
+   "dependents": 10,
+   "dependencies": 2,
+   "loc": 161
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "name": "EventInjector.swift",
+   "module": "injection",
+   "dependents": 9,
+   "dependencies": 7,
+   "loc": 135
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "name": "EditorMetrics.swift",
+   "module": "editor",
+   "dependents": 8,
+   "dependencies": 0,
+   "loc": 69
+  },
+  {
+   "id": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "name": "KeyCatalog.swift",
+   "module": "shortcuts",
+   "dependents": 8,
+   "dependencies": 1,
+   "loc": 89
+  }
+ ],
+ "loc_histogram": {
+  "bins": [
+   0,
+   25,
+   50,
+   100,
+   150,
+   200,
+   300
+  ],
+  "counts": [
+   12,
+   23,
+   51,
+   12,
+   10,
+   8
+  ],
+  "labels": [
+   "0–24",
+   "25–49",
+   "50–99",
+   "100–149",
+   "150–199",
+   "200+"
+  ]
+ },
+ "dependency_sankey": {
+  "nodes": [
+   {
+    "id": "JoystickAIPoC · app-shell"
+   },
+   {
+    "id": "JoystickAIPoC · config"
+   },
+   {
+    "id": "JoystickAIPoC · controller-input"
+   },
+   {
+    "id": "JoystickAIPoC · diagnostics-log"
+   },
+   {
+    "id": "JoystickAIPoC · editor"
+   },
+   {
+    "id": "JoystickAIPoC · injection"
+   },
+   {
+    "id": "JoystickAIPoC · palette"
+   },
+   {
+    "id": "JoystickAIPoC · pointer"
+   },
+   {
+    "id": "JoystickAIPoC · shortcuts"
+   },
+   {
+    "id": "JoystickAIPoC · targets-analysis"
+   },
+   {
+    "id": "JoystickCore · app-shell"
+   },
+   {
+    "id": "JoystickCore · config"
+   },
+   {
+    "id": "JoystickCore · controller-input"
+   },
+   {
+    "id": "JoystickCore · diagnostics-log"
+   },
+   {
+    "id": "JoystickCore · editor"
+   },
+   {
+    "id": "JoystickCore · palette"
+   },
+   {
+    "id": "JoystickCore · pointer"
+   },
+   {
+    "id": "JoystickCore · shortcuts"
+   },
+   {
+    "id": "JoystickCore · targets-analysis"
+   },
+   {
+    "id": "Tests · tests"
+   },
+   {
+    "id": "poc-tools · targets-analysis"
+   }
+  ],
+  "links": [
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · shortcuts",
+    "weight": 166
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · config",
+    "weight": 154
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · pointer",
+    "weight": 134
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 78
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · controller-input",
+    "weight": 56
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · palette",
+    "weight": 53
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · targets-analysis",
+    "weight": 43
+   },
+   {
+    "from": "JoystickCore · config",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 31
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · editor",
+    "weight": 30
+   },
+   {
+    "from": "JoystickCore · config",
+    "to": "JoystickCore · shortcuts",
+    "weight": 29
+   },
+   {
+    "from": "JoystickAIPoC · controller-input",
+    "to": "JoystickCore · controller-input",
+    "weight": 27
+   },
+   {
+    "from": "JoystickAIPoC · controller-input",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 27
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickCore · shortcuts",
+    "weight": 27
+   },
+   {
+    "from": "JoystickCore · editor",
+    "to": "JoystickCore · config",
+    "weight": 24
+   },
+   {
+    "from": "JoystickCore · config",
+    "to": "JoystickCore · controller-input",
+    "weight": 23
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickCore · controller-input",
+    "weight": 22
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 21
+   },
+   {
+    "from": "JoystickAIPoC · config",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 21
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickCore · pointer",
+    "weight": 20
+   },
+   {
+    "from": "Tests · tests",
+    "to": "JoystickCore · app-shell",
+    "weight": 19
+   },
+   {
+    "from": "JoystickAIPoC · injection",
+    "to": "JoystickCore · pointer",
+    "weight": 17
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickCore · config",
+    "weight": 16
+   },
+   {
+    "from": "JoystickAIPoC · injection",
+    "to": "JoystickCore · shortcuts",
+    "weight": 16
+   },
+   {
+    "from": "JoystickAIPoC · palette",
+    "to": "JoystickCore · palette",
+    "weight": 16
+   },
+   {
+    "from": "JoystickAIPoC · shortcuts",
+    "to": "JoystickCore · shortcuts",
+    "weight": 15
+   },
+   {
+    "from": "JoystickCore · editor",
+    "to": "JoystickCore · controller-input",
+    "weight": 15
+   },
+   {
+    "from": "JoystickAIPoC · config",
+    "to": "JoystickCore · config",
+    "weight": 14
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickCore · targets-analysis",
+    "weight": 14
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · pointer",
+    "weight": 13
+   },
+   {
+    "from": "JoystickCore · config",
+    "to": "JoystickCore · pointer",
+    "weight": 12
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 11
+   },
+   {
+    "from": "poc-tools · targets-analysis",
+    "to": "JoystickCore · targets-analysis",
+    "weight": 11
+   },
+   {
+    "from": "JoystickCore · pointer",
+    "to": "JoystickCore · controller-input",
+    "weight": 10
+   },
+   {
+    "from": "JoystickCore · shortcuts",
+    "to": "JoystickCore · controller-input",
+    "weight": 10
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · controller-input",
+    "weight": 9
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 9
+   },
+   {
+    "from": "JoystickAIPoC · injection",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 9
+   },
+   {
+    "from": "JoystickCore · config",
+    "to": "JoystickCore · palette",
+    "weight": 9
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · palette",
+    "weight": 8
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickAIPoC · injection",
+    "weight": 8
+   },
+   {
+    "from": "JoystickAIPoC · palette",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 7
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickAIPoC · pointer",
+    "weight": 7
+   },
+   {
+    "from": "JoystickCore · targets-analysis",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 7
+   },
+   {
+    "from": "JoystickCore · diagnostics-log",
+    "to": "JoystickCore · controller-input",
+    "weight": 7
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · editor",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · config",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · injection",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · shortcuts",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · controller-input",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickCore · editor",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · diagnostics-log",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 6
+   },
+   {
+    "from": "JoystickCore · targets-analysis",
+    "to": "JoystickCore · pointer",
+    "weight": 6
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · targets-analysis",
+    "weight": 5
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickAIPoC · config",
+    "weight": 5
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickCore · controller-input",
+    "weight": 5
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickCore · config",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · palette",
+    "to": "JoystickCore · shortcuts",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickAIPoC · controller-input",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickCore · pointer",
+    "weight": 4
+   },
+   {
+    "from": "JoystickCore · editor",
+    "to": "JoystickCore · palette",
+    "weight": 4
+   },
+   {
+    "from": "JoystickCore · diagnostics-log",
+    "to": "JoystickCore · pointer",
+    "weight": 4
+   },
+   {
+    "from": "JoystickAIPoC · controller-input",
+    "to": "JoystickCore · pointer",
+    "weight": 3
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 3
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickAIPoC · controller-input",
+    "weight": 3
+   },
+   {
+    "from": "JoystickCore · targets-analysis",
+    "to": "JoystickCore · controller-input",
+    "weight": 3
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickCore · app-shell",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickCore · pointer",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · config",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickCore · targets-analysis",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickCore · palette",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · injection",
+    "to": "JoystickAIPoC · diagnostics-log",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · palette",
+    "to": "JoystickAIPoC · controller-input",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · palette",
+    "to": "JoystickAIPoC · injection",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickAIPoC · palette",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickAIPoC · shortcuts",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · shortcuts",
+    "to": "JoystickAIPoC · controller-input",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · shortcuts",
+    "to": "JoystickAIPoC · injection",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · shortcuts",
+    "to": "JoystickCore · config",
+    "weight": 2
+   },
+   {
+    "from": "JoystickCore · app-shell",
+    "to": "JoystickCore · pointer",
+    "weight": 2
+   },
+   {
+    "from": "JoystickCore · app-shell",
+    "to": "JoystickCore · targets-analysis",
+    "weight": 2
+   },
+   {
+    "from": "JoystickCore · palette",
+    "to": "JoystickCore · controller-input",
+    "weight": 2
+   },
+   {
+    "from": "JoystickAIPoC · app-shell",
+    "to": "JoystickCore · shortcuts",
+    "weight": 1
+   },
+   {
+    "from": "JoystickAIPoC · editor",
+    "to": "JoystickAIPoC · injection",
+    "weight": 1
+   },
+   {
+    "from": "JoystickAIPoC · palette",
+    "to": "JoystickCore · controller-input",
+    "weight": 1
+   },
+   {
+    "from": "JoystickAIPoC · pointer",
+    "to": "JoystickCore · config",
+    "weight": 1
+   },
+   {
+    "from": "JoystickAIPoC · shortcuts",
+    "to": "JoystickCore · controller-input",
+    "weight": 1
+   },
+   {
+    "from": "JoystickAIPoC · shortcuts",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 1
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickAIPoC · injection",
+    "weight": 1
+   },
+   {
+    "from": "JoystickCore · editor",
+    "to": "JoystickCore · shortcuts",
+    "weight": 1
+   },
+   {
+    "from": "JoystickCore · diagnostics-log",
+    "to": "JoystickCore · palette",
+    "weight": 1
+   },
+   {
+    "from": "poc-tools · targets-analysis",
+    "to": "JoystickCore · controller-input",
+    "weight": 1
+   }
+  ],
+  "droppedForCycles": [
+   {
+    "from": "JoystickCore · shortcuts",
+    "to": "JoystickCore · config",
+    "weight": 6
+   },
+   {
+    "from": "JoystickCore · diagnostics-log",
+    "to": "JoystickCore · config",
+    "weight": 4
+   },
+   {
+    "from": "JoystickCore · diagnostics-log",
+    "to": "JoystickCore · targets-analysis",
+    "weight": 3
+   },
+   {
+    "from": "JoystickAIPoC · targets-analysis",
+    "to": "JoystickAIPoC · app-shell",
+    "weight": 2
+   },
+   {
+    "from": "JoystickCore · pointer",
+    "to": "JoystickCore · diagnostics-log",
+    "weight": 2
+   }
+  ]
+ },
+ "language_distribution": [
+  {
+   "language": "swift",
+   "modules": 116,
+   "loc": 9575
+  },
+  {
+   "language": "shell",
+   "modules": 4,
+   "loc": 133
+  },
+  {
+   "language": "config",
+   "modules": 8,
+   "loc": 1045
+  },
+  {
+   "language": "markdown",
+   "modules": 0,
+   "loc": 0
+  }
+ ],
+ "target_distribution": [
+  {
+   "target": "JoystickAIPoC",
+   "modules": 46,
+   "loc": 3659
+  },
+  {
+   "target": "JoystickCore",
+   "modules": 35,
+   "loc": 3095
+  },
+  {
+   "target": "Tests",
+   "modules": 29,
+   "loc": 2607
+  },
+  {
+   "target": "scripts",
+   "modules": 11,
+   "loc": 1152
+  },
+  {
+   "target": "poc-tools",
+   "modules": 6,
+   "loc": 214
+  },
+  {
+   "target": "root",
+   "modules": 2,
+   "loc": 72
+  }
+ ],
+ "type_distribution": [
+  {
+   "type": "code",
+   "modules": 87,
+   "loc": 6968
+  },
+  {
+   "type": "test",
+   "modules": 29,
+   "loc": 2607
+  },
+  {
+   "type": "config",
+   "modules": 9,
+   "loc": 1091
+  },
+  {
+   "type": "script",
+   "modules": 4,
+   "loc": 133
+  }
+ ],
+ "module_summary": [
+  {
+   "module": "tests",
+   "files": 29,
+   "loc": 2607,
+   "functions": 281,
+   "types": 30,
+   "complexity_sum": 190,
+   "complexity_max": 25,
+   "dependents": 0,
+   "complexity_avg": 6.6
+  },
+  {
+   "module": "editor",
+   "files": 14,
+   "loc": 1389,
+   "functions": 84,
+   "types": 27,
+   "complexity_sum": 293,
+   "complexity_max": 59,
+   "dependents": 32,
+   "complexity_avg": 20.9
+  },
+  {
+   "module": "config",
+   "files": 11,
+   "loc": 1146,
+   "functions": 68,
+   "types": 30,
+   "complexity_sum": 310,
+   "complexity_max": 93,
+   "dependents": 62,
+   "complexity_avg": 28.2
+  },
+  {
+   "module": "targets-analysis",
+   "files": 14,
+   "loc": 811,
+   "functions": 39,
+   "types": 27,
+   "complexity_sum": 124,
+   "complexity_max": 24,
+   "dependents": 34,
+   "complexity_avg": 8.9
+  },
+  {
+   "module": "pointer",
+   "files": 13,
+   "loc": 758,
+   "functions": 44,
+   "types": 25,
+   "complexity_sum": 154,
+   "complexity_max": 29,
+   "dependents": 67,
+   "complexity_avg": 11.8
+  },
+  {
+   "module": "controller-input",
+   "files": 12,
+   "loc": 607,
+   "functions": 33,
+   "types": 27,
+   "complexity_sum": 118,
+   "complexity_max": 27,
+   "dependents": 64,
+   "complexity_avg": 9.8
+  },
+  {
+   "module": "diagnostics-log",
+   "files": 5,
+   "loc": 569,
+   "functions": 58,
+   "types": 20,
+   "complexity_sum": 123,
+   "complexity_max": 60,
+   "dependents": 68,
+   "complexity_avg": 24.6
+  },
+  {
+   "module": "app-shell",
+   "files": 8,
+   "loc": 552,
+   "functions": 17,
+   "types": 8,
+   "complexity_sum": 119,
+   "complexity_max": 46,
+   "dependents": 9,
+   "complexity_avg": 14.9
+  },
+  {
+   "module": "palette",
+   "files": 3,
+   "loc": 459,
+   "functions": 27,
+   "types": 10,
+   "complexity_sum": 75,
+   "complexity_max": 32,
+   "dependents": 20,
+   "complexity_avg": 25.0
+  },
+  {
+   "module": "shortcuts",
+   "files": 4,
+   "loc": 421,
+   "functions": 18,
+   "types": 12,
+   "complexity_sum": 106,
+   "complexity_max": 65,
+   "dependents": 37,
+   "complexity_avg": 26.5
+  },
+  {
+   "module": "injection",
+   "files": 3,
+   "loc": 256,
+   "functions": 21,
+   "types": 3,
+   "complexity_sum": 61,
+   "complexity_max": 29,
+   "dependents": 14,
+   "complexity_avg": 20.3
+  }
+ ]
+}

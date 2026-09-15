@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitetura 3D · joystick-AI</title>
+<meta name="reversa-category" content="diagram">
+<meta name="reversa-producer-agent" content="reversa-docs-mapper">
+<meta name="reversa-template" content="arquitetura">
+<meta name="reversa-visual-style" content="premium">
+<meta name="reversa-generated-at" content="2026-09-15T23:28:13Z">
+<meta name="description" content="Code City 3D do joystick-AI: cada arquivo Swift é um prédio, agrupado por pasta, com altura por linhas e base por complexidade.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27%230a0a14%27 stroke=%27%23d4af37%27 stroke-width=%273%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2712%27 fill=%27%23d4af37%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/reversa.css">
+<!-- HEAD_EXTRAS -->
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/vendor/OrbitControls.js"></script>
+<style>
+#city{position:absolute;inset:0}
+#legend{margin-top:8px}
+.district-count{color:var(--muted)}
+</style>
+</head>
+<body data-page-id="arquitetura" data-style="premium" data-base="">
+<header class="rv-header">
+  <a class="rv-brand" href="index.html"><span class="seal-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Selo do projeto joystick-AI" class="seal-mini">
+<defs><clipPath id="clip64"><circle cx="32.0" cy="32.0" r="31.04"/></clipPath><radialGradient id="glow64" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f4d03f" stop-opacity=".22"/><stop offset="1" stop-color="#0a0a14" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32.0" cy="32.0" r="31.04" fill="#0a0a14"/>
+<g clip-path="url(#clip64)">
+<circle cx="20.2" cy="31.1" r="2.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.84"/>
+<circle cx="20.2" cy="31.1" r="6.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="20.2" cy="31.1" r="10.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.78"/>
+<circle cx="20.2" cy="31.1" r="14.5" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="20.2" cy="31.1" r="18.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.73"/>
+<circle cx="20.2" cy="31.1" r="22.8" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.70"/>
+<circle cx="20.2" cy="31.1" r="27.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.67"/>
+<circle cx="20.2" cy="31.1" r="31.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.65"/>
+<circle cx="20.2" cy="31.1" r="35.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.62"/>
+<circle cx="20.2" cy="31.1" r="39.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="20.2" cy="31.1" r="43.6" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.57"/>
+<circle cx="20.2" cy="31.1" r="47.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.54"/>
+<circle cx="20.2" cy="31.1" r="51.9" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.51"/>
+<circle cx="20.2" cy="31.1" r="56.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.49"/>
+<circle cx="20.2" cy="31.1" r="60.2" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="6.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="43.8" cy="42.3" r="13.2" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="43.8" cy="42.3" r="19.9" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.72"/>
+<circle cx="43.8" cy="42.3" r="26.6" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.68"/>
+<circle cx="43.8" cy="42.3" r="33.4" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.63"/>
+<circle cx="43.8" cy="42.3" r="40.1" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="43.8" cy="42.3" r="46.8" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.55"/>
+<circle cx="43.8" cy="42.3" r="53.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.50"/>
+<circle cx="43.8" cy="42.3" r="60.3" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="67.0" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.41"/>
+<circle cx="43.8" cy="42.3" r="73.7" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.37"/>
+<circle cx="32.0" cy="32.0" r="32.0" fill="url(#glow64)"/>
+</g>
+<circle cx="32.0" cy="32.0" r="31.04" fill="none" stroke="#d4af37" stroke-width="1.0" stroke-opacity=".9"/>
+<circle cx="32.0" cy="32.0" r="28.8" fill="none" stroke="#f4d03f" stroke-width="0.5" stroke-opacity=".5"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="#f4d03f"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="none" stroke="#0a0a14" stroke-width="1.0" stroke-opacity=".6"/>
+</svg></span><span>joystick-AI<small>Reversa Docs</small></span></a>
+  <button class="rv-nav-toggle" aria-label="Menu">☰</button>
+  <nav class="reversa-doc-nav" aria-label="Páginas do mini-site"><a href="index.html" data-page-id="index">Visão geral</a><a href="arquitetura.html" data-page-id="arquitetura">Arquitetura 3D</a><a href="modulos.html" data-page-id="modulos">Módulos</a><a href="metricas.html" data-page-id="metricas">Métricas</a><a href="glossario.html" data-page-id="glossario">Glossário</a><a href="deck.html" data-page-id="deck">Deck</a><a href="index.html#features" data-page-id="features">Features</a></nav>
+</header>
+<!-- PAYLOAD -->
+
+<div class="rv-canvas-layout" id="layout">
+  <div class="rv-stage">
+    <div class="overlay-loader" id="loader">Carregando a cidade de código…</div>
+    <canvas id="city"></canvas>
+    <button class="btn ghost rv-sidebar-toggle" title="Mostrar ou ocultar os controles">⚙ Controles</button>
+    <div class="hud" id="hud"><b>Code City</b> · cada prédio é um arquivo; altura = linhas, base = complexidade, distrito = pasta. Arraste para orbitar, role para aproximar, clique num prédio para focar.</div>
+    <div class="tooltip" id="tip"></div>
+  </div>
+  <aside class="rv-sidebar" id="sidebar">
+    <h3>Arquitetura 3D</h3>
+    <div class="hint">Cidade de código do joystick-AI: 129 arquivos em 3 alvos Swift, testes e scripts.</div>
+    <label>Altura por linha <span class="value"></span><input type="range" min="0.03" max="0.4" step="0.01" value="0.12" data-param="locScale"></label>
+    <label>Base por complexidade <span class="value"></span><input type="range" min="0.1" max="1" step="0.05" value="0.35" data-param="complexityScale"></label>
+    <label>Limiar de hot path (dependentes) <span class="value"></span><input type="range" min="1" max="40" step="1" value="12" data-param="hotPathThreshold"></label>
+    <label>Intensidade da luz <span class="value"></span><input type="range" min="0.2" max="3" step="0.1" value="1.4" data-param="light"></label>
+    <label>Colorir por
+      <select data-param="colorMode"><option value="module">Módulo lógico</option><option value="target">Alvo SwiftPM</option><option value="type">Tipo de arquivo</option></select></label>
+    <label>Filtrar pasta <select data-param="folderFilter"><option value="all">Todas</option></select></label>
+    <label class="inline"><input type="checkbox" data-param="showLabels" checked> Rótulos dos distritos</label>
+    <label class="inline"><input type="checkbox" data-param="showDistricts" checked> Mostrar distritos</label>
+    <label class="inline"><input type="checkbox" data-param="showTests" checked> Incluir testes e scripts</label>
+    <label class="inline"><input type="checkbox" data-param="autoRotate"> Girar automaticamente</label>
+    <div class="actions"><button class="btn" id="reset">Reset</button><button class="btn ghost" id="export-png">Exportar PNG</button><button class="btn ghost" id="fit">Enquadrar</button></div>
+    <div class="section"><h4>Legenda</h4><div class="legend" id="legend"></div></div>
+    <div class="section"><h4>Selecionado</h4><div id="selected" class="hint">Clique num prédio.</div></div>
+    <div class="section"><h4>Distritos</h4><div id="districts" style="font-size:.8rem;line-height:1.7"></div></div>
+  </aside>
+</div>
+
+<!-- /PAYLOAD -->
+<footer class="rv-footer">
+  <span>Gerado por <code>reversa-docs-mapper</code> em 15/09/2026 20:28</span>
+  <span>Seed <code>f7898882</code></span>
+  <span>Reversa 1.3.3 · estilo premium</span>
+</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<!-- SCRIPTS -->
+<script src="assets/js/sidebar.js"></script>
+<script>
+(function(){
+  // ===== configuração =====
+  var PAL = {
+    module: {"app-shell":"#d4af37","controller-input":"#4a9eff","pointer":"#a0e7e5","injection":"#ff7a3e","shortcuts":"#c9b6e8","palette":"#e93f8f","config":"#ffc857","editor":"#a83244","diagnostics-log":"#6cc46c","targets-analysis":"#5b3fce","tests":"#4f6b5d","build-scripts":"#8a8a99","support":"#b8b8b8","other":"#666677"},
+    target: {"JoystickAIPoC":"#d4af37","JoystickCore":"#4a9eff","poc-tools":"#e93f8f","Tests":"#4f6b5d","scripts":"#8a8a99","root":"#666677"},
+    type: {"code":"#4a9eff","test":"#6cc46c","config":"#ffc857","doc":"#b39ddb","script":"#ff9aa2","asset":"#999999"}
+  };
+  var HOT = 0xf4d03f, BG = 0x0a0a14, CELL = 3.2, GAP = 6;
+  if (!window.THREE) { document.getElementById('loader').textContent = 'Esta visualização requer a biblioteca Three.js em assets/vendor/. Conecte-se à internet e rode /reversa-docs novamente.'; return; }
+  var DATA = (window.RV_DATA && window.RV_DATA.modules && window.RV_DATA.modules.modules) || [];
+  if (!DATA.length) { document.getElementById('loader').textContent = 'Sem dados de módulos (window.RV_DATA.modules vazio).'; return; }
+  var mods = DATA.map(function(m){ return Object.assign({}, m); });
+
+  // ===== cena =====
+  var canvas = document.getElementById('city'), stage = canvas.parentElement;
+  var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, preserveDrawingBuffer: true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.outputEncoding = THREE.sRGBEncoding; renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  var scene = new THREE.Scene(); scene.background = new THREE.Color(BG); scene.fog = new THREE.FogExp2(BG, 0.0045);
+  var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 4000);
+  var controls = new THREE.OrbitControls(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.06; controls.maxPolarAngle = Math.PI/2 - 0.03;
+  var hemi = new THREE.HemisphereLight(0xdde3ff, 0x1a1020, 0.55); scene.add(hemi);
+  var sun = new THREE.DirectionalLight(0xffe6b0, 1.4); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); scene.add(sun);
+  var rim = new THREE.DirectionalLight(0x7a1c2a, 0.6); scene.add(rim);
+  var amb = new THREE.AmbientLight(0x404050, 0.5); scene.add(amb);
+  var ground = new THREE.Mesh(new THREE.PlaneGeometry(4000, 4000), new THREE.MeshStandardMaterial({color: 0x0c0c16, roughness: 1, metalness: 0}));
+  ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+  var grid = new THREE.GridHelper(600, 120, 0x1e2b4f, 0x15151f); grid.position.y = 0.02; scene.add(grid);
+
+  var cityGroup = new THREE.Group(); scene.add(cityGroup);
+  var buildings = null, halo = null, visible = [], districtMeshes = [], labelSprites = [], districtPositions = {};
+  var params = {};
+
+  // ===== layout =====
+  function folderOf(m){ return m.folder; }
+  function targetOrder(t){ return {JoystickCore:0, JoystickAIPoC:1, "poc-tools":2, Tests:3, scripts:4, root:5}[t] ?? 9; }
+  function layout(list){
+    var districts = {};
+    list.forEach(function(m){ (districts[folderOf(m)] = districts[folderOf(m)] || []).push(m); });
+    var folders = Object.keys(districts).sort(function(a,b){
+      var ta = targetOrder(districts[a][0].target), tb = targetOrder(districts[b][0].target);
+      return ta - tb || a.localeCompare(b);
+    });
+    var sizes = folders.map(function(f){ var n = districts[f].length; var cols = Math.ceil(Math.sqrt(n)); var rows = Math.ceil(n/cols); return {f:f, cols:cols, rows:rows, w: cols*CELL, d: rows*CELL}; });
+    var gridCols = Math.ceil(Math.sqrt(folders.length) * 1.2);
+    var x = 0, z = 0, rowH = 0, positions = {};
+    sizes.forEach(function(s, i){
+      if (i > 0 && i % gridCols === 0) { x = 0; z += rowH + GAP; rowH = 0; }
+      positions[s.f] = {x:x, z:z, w:s.w, d:s.d, cols:s.cols, n: districts[s.f].length, target: districts[s.f][0].target};
+      x += s.w + GAP; rowH = Math.max(rowH, s.d);
+    });
+    var totalW = 0, totalD = z + rowH; Object.values(positions).forEach(function(p){ totalW = Math.max(totalW, p.x + p.w); });
+    var ox = -totalW/2, oz = -totalD/2;
+    Object.values(positions).forEach(function(p){ p.x += ox; p.z += oz; });
+    list.forEach(function(m){
+      var p = positions[folderOf(m)], idx = districts[folderOf(m)].indexOf(m);
+      var col = idx % p.cols, row = Math.floor(idx / p.cols);
+      m.x = p.x + col*CELL + CELL/2; m.z = p.z + row*CELL + CELL/2;
+    });
+    return positions;
+  }
+  function size(m){
+    m.h = Math.max(0.6, m.loc * params.locScale);
+    var b = Math.max(0.7, Math.min(CELL*0.85, Math.sqrt(m.complexity) * params.complexityScale * 1.6));
+    m.w = b; m.d = b;
+  }
+  function colorFor(m){
+    if (m.dependents >= params.hotPathThreshold && m.language === 'swift') return HOT;
+    var mode = params.colorMode || 'module', key = mode === 'module' ? m.module : mode === 'target' ? m.target : m.type;
+    return new THREE.Color(PAL[mode][key] || '#666677').getHex();
+  }
+  function makeLabel(text, sub){
+    var c = document.createElement('canvas'); var ctx = c.getContext('2d'); c.width = 512; c.height = 128;
+    ctx.fillStyle = 'rgba(10,10,20,0.0)'; ctx.fillRect(0,0,c.width,c.height);
+    ctx.font = '600 40px Georgia, serif'; ctx.fillStyle = '#f4d03f'; ctx.textAlign = 'center'; ctx.fillText(text, 256, 60);
+    ctx.font = '26px sans-serif'; ctx.fillStyle = '#c8c8d4'; ctx.fillText(sub, 256, 100);
+    var tex = new THREE.CanvasTexture(c); tex.encoding = THREE.sRGBEncoding;
+    var sp = new THREE.Sprite(new THREE.SpriteMaterial({map: tex, transparent: true, depthWrite: false}));
+    sp.scale.set(14, 3.5, 1); return sp;
+  }
+  function clear(){
+    cityGroup.children.slice().forEach(function(o){ cityGroup.remove(o); if (o.geometry) o.geometry.dispose(); if (o.material){ if (o.material.map) o.material.map.dispose(); o.material.dispose(); } });
+    buildings = halo = null; districtMeshes = []; labelSprites = [];
+  }
+  function build(){
+    clear();
+    visible = mods.filter(function(m){
+      if (!params.showTests && (m.type === 'test' || m.target === 'scripts')) return false;
+      if (params.folderFilter && params.folderFilter !== 'all' && m.folder !== params.folderFilter) return false;
+      return true;
+    });
+    districtPositions = layout(visible);
+    visible.forEach(size);
+    var geo = new THREE.BoxGeometry(1,1,1); geo.translate(0,0.5,0);
+    var mat = new THREE.MeshStandardMaterial({roughness: 0.45, metalness: 0.35});
+    buildings = new THREE.InstancedMesh(geo, mat, visible.length); buildings.castShadow = true; buildings.receiveShadow = true;
+    var dummy = new THREE.Object3D(), col = new THREE.Color(), hotIdx = [];
+    visible.forEach(function(m, i){
+      dummy.position.set(m.x, 0, m.z); dummy.scale.set(m.w, m.h, m.d); dummy.updateMatrix(); buildings.setMatrixAt(i, dummy.matrix);
+      var c = colorFor(m); col.setHex(c); buildings.setColorAt(i, col); if (c === HOT) hotIdx.push(i);
+    });
+    buildings.instanceMatrix.needsUpdate = true; if (buildings.instanceColor) buildings.instanceColor.needsUpdate = true;
+    cityGroup.add(buildings);
+    if (hotIdx.length){
+      var hgeo = new THREE.BoxGeometry(1,1,1); hgeo.translate(0,0.5,0);
+      halo = new THREE.InstancedMesh(hgeo, new THREE.MeshBasicMaterial({color: HOT, transparent: true, opacity: 0.18, depthWrite: false}), hotIdx.length);
+      hotIdx.forEach(function(i, k){ var m = visible[i]; dummy.position.set(m.x, 0, m.z); dummy.scale.set(m.w*1.35, m.h*1.06, m.d*1.35); dummy.updateMatrix(); halo.setMatrixAt(k, dummy.matrix); });
+      halo.instanceMatrix.needsUpdate = true; cityGroup.add(halo);
+    }
+    Object.keys(districtPositions).forEach(function(f){
+      var p = districtPositions[f];
+      if (params.showDistricts){
+        var dc = new THREE.Color(PAL.target[p.target] || '#666677');
+        var plane = new THREE.Mesh(new THREE.PlaneGeometry(p.w + 1.2, p.d + 1.2), new THREE.MeshStandardMaterial({color: dc, transparent: true, opacity: 0.10, roughness: 1}));
+        plane.rotation.x = -Math.PI/2; plane.position.set(p.x + p.w/2, 0.05, p.z + p.d/2); plane.receiveShadow = true; cityGroup.add(plane); districtMeshes.push(plane);
+        var edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(p.w + 1.2, p.d + 1.2)), new THREE.LineBasicMaterial({color: dc, transparent: true, opacity: 0.45}));
+        edges.rotation.x = -Math.PI/2; edges.position.copy(plane.position); cityGroup.add(edges); districtMeshes.push(edges);
+      }
+      if (params.showLabels){
+        var lbl = makeLabel(f.split('/').slice(-1)[0], f.split('/').slice(0,-1).join('/') + ' · ' + p.n + (p.n === 1 ? ' arquivo' : ' arquivos'));
+        lbl.position.set(p.x + p.w/2, 1.2, p.z + p.d + 1.4); cityGroup.add(lbl); labelSprites.push(lbl);
+      }
+    });
+    var tallest = Math.max.apply(null, visible.map(function(m){ return m.h; }));
+    sun.position.set(80, Math.max(60, tallest*2), 60); sun.target.position.set(0,0,0);
+    var span = 140; sun.shadow.camera.left = -span; sun.shadow.camera.right = span; sun.shadow.camera.top = span; sun.shadow.camera.bottom = -span; sun.shadow.camera.far = 600; sun.shadow.camera.updateProjectionMatrix();
+    rim.position.set(-80, 40, -60);
+    renderLegend(); renderDistricts();
+  }
+  function fit(){
+    var box = new THREE.Box3().setFromObject(cityGroup); if (box.isEmpty()) return;
+    var c = box.getCenter(new THREE.Vector3()), s = box.getSize(new THREE.Vector3());
+    var r = Math.max(s.x, s.z) * 0.75;
+    camera.position.set(c.x + r*1.25, Math.max(s.y*1.8, r*1.35), c.z + r*1.55); controls.target.copy(c); controls.target.y = 0; controls.update();
+  }
+  function renderLegend(){
+    var mode = params.colorMode || 'module', el = document.getElementById('legend'); el.innerHTML = '';
+    Object.keys(PAL[mode]).forEach(function(k){ var s = document.createElement('span'); s.innerHTML = '<i style="background:' + PAL[mode][k] + '"></i>' + k; el.appendChild(s); });
+    var h = document.createElement('span'); h.innerHTML = '<i style="background:#f4d03f;box-shadow:0 0 8px #f4d03f"></i>hot path (≥ ' + params.hotPathThreshold + ' dependentes)'; el.appendChild(h);
+  }
+  function renderDistricts(){
+    var el = document.getElementById('districts'), keys = Object.keys(districtPositions);
+    el.innerHTML = keys.map(function(f){ var p = districtPositions[f]; return '<div><a href="#" data-folder="' + f + '">' + f + '</a> <span class="district-count">' + p.n + '</span></div>'; }).join('');
+    el.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); var p = districtPositions[a.getAttribute('data-folder')]; flyTo(new THREE.Vector3(p.x + p.w/2, 0, p.z + p.d/2), Math.max(p.w, p.d) * 1.6 + 10); }); });
+  }
+  function flyTo(target, dist){
+    var start = controls.target.clone(), from = camera.position.clone(), dir = new THREE.Vector3(0.7, 0.75, 0.9).normalize();
+    var to = target.clone().add(dir.multiplyScalar(dist)); var t0 = performance.now();
+    function step(){ var k = Math.min(1, (performance.now() - t0) / 700); var e = 1 - Math.pow(1 - k, 3);
+      controls.target.lerpVectors(start, target, e); camera.position.lerpVectors(from, to, e); controls.update(); if (k < 1) requestAnimationFrame(step); }
+    step();
+  }
+  // ===== interação =====
+  var ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), tip = document.getElementById('tip'), hovered = -1;
+  function pick(ev){
+    if (!buildings) return -1; var r = canvas.getBoundingClientRect();
+    mouse.x = ((ev.clientX - r.left) / r.width) * 2 - 1; mouse.y = -((ev.clientY - r.top) / r.height) * 2 + 1;
+    ray.setFromCamera(mouse, camera); var hits = ray.intersectObject(buildings); return hits.length ? hits[0].instanceId : -1;
+  }
+  canvas.addEventListener('mousemove', function(ev){
+    var i = pick(ev);
+    if (i >= 0){ var m = visible[i]; tip.style.display = 'block'; tip.style.left = (ev.clientX + 14) + 'px'; tip.style.top = (ev.clientY + 14) + 'px';
+      tip.innerHTML = '<b>' + m.file + '</b><br>' + m.folder + '<br>' + m.loc + ' linhas · complexidade ' + m.complexity + ' · ' + m.functions + ' funções<br>módulo <b>' + m.module + '</b> · ' + m.dependents + ' dependentes · ' + m.dependencies + ' dependências';
+      canvas.style.cursor = 'pointer';
+    } else { tip.style.display = 'none'; canvas.style.cursor = ''; }
+  });
+  canvas.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
+  var downAt = null;
+  canvas.addEventListener('pointerdown', function(ev){ downAt = [ev.clientX, ev.clientY]; });
+  canvas.addEventListener('pointerup', function(ev){
+    if (!downAt || Math.hypot(ev.clientX - downAt[0], ev.clientY - downAt[1]) > 5) return;
+    var i = pick(ev); if (i < 0) return; var m = visible[i];
+    flyTo(new THREE.Vector3(m.x, m.h/2, m.z), 18 + m.h);
+    var types = (m.types || []).map(function(t){ return t.kind + ' <b>' + t.name + '</b>'; }).join(', ') || 'sem tipos declarados';
+    document.getElementById('selected').innerHTML = '<b style="color:var(--gold2)">' + m.file + '</b><br><code style="font-size:.72rem">' + m.id + '</code><br>' + m.loc + ' linhas, complexidade ' + m.complexity + ', ' + m.functions + ' funções<br>' + types + '<br>' + m.dependents + ' dependentes, ' + m.dependencies + ' dependências' + (m.dependents >= params.hotPathThreshold ? '<br><span class="badge gold">hot path</span>' : '');
+  });
+  document.getElementById('export-png').addEventListener('click', function(){ renderer.render(scene, camera); canvas.toBlob(function(b){ var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'joystick-ai-code-city.png'; a.click(); }); });
+  document.getElementById('fit').addEventListener('click', fit);
+  var folderSel = document.querySelector('[data-param=folderFilter]');
+  Array.from(new Set(mods.map(function(m){ return m.folder; }))).sort().forEach(function(f){ var o = document.createElement('option'); o.value = f; o.textContent = f; folderSel.appendChild(o); });
+  params = RVSidebar.init({ onChange: function(name, v, all){ params = all; if (name === 'light'){ sun.intensity = v; return; } if (name === 'autoRotate'){ controls.autoRotate = v; return; } build(); if (name === 'folderFilter' || name === 'showTests' || name === '*') fit(); }, onReset: function(all){ params = all; sun.intensity = all.light; controls.autoRotate = !!all.autoRotate; build(); fit(); } });
+  sun.intensity = params.light; controls.autoRotate = !!params.autoRotate; controls.autoRotateSpeed = 0.6;
+  function resize(){ var w = stage.clientWidth, h = stage.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  window.addEventListener('resize', resize); resize(); build(); fit();
+  var first = true;
+  (function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); if (first){ first = false; document.getElementById('loader').classList.add('hidden'); } })();
+})();
+</script>
+</body>
+</html>

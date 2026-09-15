@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Selo do projeto joystick-AI" class="seal-mini">
+<defs><clipPath id="clip64"><circle cx="32.0" cy="32.0" r="31.04"/></clipPath><radialGradient id="glow64" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f4d03f" stop-opacity=".22"/><stop offset="1" stop-color="#0a0a14" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32.0" cy="32.0" r="31.04" fill="#0a0a14"/>
+<g clip-path="url(#clip64)">
+<circle cx="20.2" cy="31.1" r="2.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.84"/>
+<circle cx="20.2" cy="31.1" r="6.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="20.2" cy="31.1" r="10.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.78"/>
+<circle cx="20.2" cy="31.1" r="14.5" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="20.2" cy="31.1" r="18.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.73"/>
+<circle cx="20.2" cy="31.1" r="22.8" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.70"/>
+<circle cx="20.2" cy="31.1" r="27.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.67"/>
+<circle cx="20.2" cy="31.1" r="31.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.65"/>
+<circle cx="20.2" cy="31.1" r="35.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.62"/>
+<circle cx="20.2" cy="31.1" r="39.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="20.2" cy="31.1" r="43.6" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.57"/>
+<circle cx="20.2" cy="31.1" r="47.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.54"/>
+<circle cx="20.2" cy="31.1" r="51.9" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.51"/>
+<circle cx="20.2" cy="31.1" r="56.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.49"/>
+<circle cx="20.2" cy="31.1" r="60.2" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="6.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="43.8" cy="42.3" r="13.2" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="43.8" cy="42.3" r="19.9" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.72"/>
+<circle cx="43.8" cy="42.3" r="26.6" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.68"/>
+<circle cx="43.8" cy="42.3" r="33.4" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.63"/>
+<circle cx="43.8" cy="42.3" r="40.1" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="43.8" cy="42.3" r="46.8" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.55"/>
+<circle cx="43.8" cy="42.3" r="53.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.50"/>
+<circle cx="43.8" cy="42.3" r="60.3" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="67.0" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.41"/>
+<circle cx="43.8" cy="42.3" r="73.7" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.37"/>
+<circle cx="32.0" cy="32.0" r="32.0" fill="url(#glow64)"/>
+</g>
+<circle cx="32.0" cy="32.0" r="31.04" fill="none" stroke="#d4af37" stroke-width="1.0" stroke-opacity=".9"/>
+<circle cx="32.0" cy="32.0" r="28.8" fill="none" stroke="#f4d03f" stroke-width="0.5" stroke-opacity=".5"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="#f4d03f"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="none" stroke="#0a0a14" stroke-width="1.0" stroke-opacity=".6"/>
+</svg>

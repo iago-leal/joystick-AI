@@ -1,0 +1,547 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-09-15T23:40:56Z",
+ "source": "domain.md (glossário, regras implícitas, divergências) + adrs/",
+ "purpose": "O joystick-AI transforma o DualSense (PS5) em dispositivo de condução de sessões de programação com agentes no macOS: o controle aponta, clica e rola como mouse, dispara atalhos de teclado configuráveis e abre uma paleta que digita comandos no aplicativo em foco. O usuário-alvo é o \"programador de sofá\", que acompanha agentes na TV a cerca de 3 m e deseja passar a maior parte do tempo sem teclado (`prd.md`). 🟢\n\nO código atual cobre três entregas do ciclo forward: a prova de conceito do ponteiro (001), a paleta de comandos (002) e o editor de atalhos com configuração em arquivo (003). O ditado por voz, previsto no PRD, não tem componente próprio (ver §7). 🟢",
+ "concepts": [
+  {
+   "term": "Controle ativo",
+   "slug": "controle-ativo",
+   "definition": "O único DualSense cujas entradas produzem efeito: o primeiro conectado; os demais aguardam em fila",
+   "where": "`ActiveControllerRegistry`",
+   "confidence": "🟢",
+   "category": "Controle"
+  },
+  {
+   "term": "Controle em fila",
+   "slug": "controle-em-fila",
+   "definition": "DualSense conectado depois do ativo; assume quando o ativo desconecta",
+   "where": "`ActiveControllerRegistry`",
+   "confidence": "🟢",
+   "category": "Controle"
+  },
+  {
+   "term": "Adoção no início",
+   "slug": "adoção-no-início",
+   "definition": "Tratar como \"já conectado\" o controle enumerado ou chegado nos 2 primeiros segundos",
+   "where": "`StartupAdoption`",
+   "confidence": "🟢",
+   "category": "Controle"
+  },
+  {
+   "term": "Soltura sintética",
+   "slug": "soltura-sintética",
+   "definition": "`buttonUp` gerado pelo app para cada botão pressionado quando o controle ativo desconecta; marcado `synthetic`",
+   "where": "`ControllerReader.disconnect`",
+   "confidence": "🟢",
+   "category": "Controle"
+  },
+  {
+   "term": "Zona morta",
+   "slug": "zona-morta",
+   "definition": "Limite por eixo abaixo do qual o analógico conta como repouso (padrão 0,12)",
+   "where": "`Normalization`",
+   "confidence": "🟢",
+   "category": "Controle"
+  },
+  {
+   "term": "Botões de apontamento",
+   "slug": "botões-de-apontamento",
+   "definition": "R1, R2 e clique do touchpad: sempre cliques, nunca atalhos nem modificadores",
+   "where": "`ShortcutConfig.pointerButtons`",
+   "confidence": "🟢",
+   "category": "Controle"
+  },
+  {
+   "term": "Precisão",
+   "slug": "precisão",
+   "definition": "Redução da velocidade (padrão 30%) enquanto só L1 está pressionado",
+   "where": "`PointerMotionEngine`",
+   "confidence": "🟢",
+   "category": "Ponteiro"
+  },
+  {
+   "term": "Onset",
+   "slug": "onset",
+   "definition": "Primeira amostra do analógico fora da zona morta, emitida de imediato para medir latência",
+   "where": "`PointerMotionEngine`",
+   "confidence": "🟢",
+   "category": "Ponteiro"
+  },
+  {
+   "term": "União de telas",
+   "slug": "união-de-telas",
+   "definition": "Conjunto dos retângulos das telas ativas, sem o retângulo envolvente; o cursor não sai dele",
+   "where": "`ScreenUnion`",
+   "confidence": "🟢",
+   "category": "Ponteiro"
+  },
+  {
+   "term": "Injeção",
+   "slug": "injeção",
+   "definition": "Postagem de eventos sintéticos de mouse, rolagem e teclado pelo `CGEvent`",
+   "where": "`EventInjector`, `KeyboardInjector`, `ScrollInjector`",
+   "confidence": "🟢",
+   "category": "Injeção"
+  },
+  {
+   "term": "Marca do injetor",
+   "slug": "marca-do-injetor",
+   "definition": "`eventSourceUserData = 0x4A4F5953` (\"JOYS\"), que distingue eventos do app dos físicos",
+   "where": "`EventInjector.marker`",
+   "confidence": "🟢",
+   "category": "Injeção"
+  },
+  {
+   "term": "Portão de injeção",
+   "slug": "portão-de-injeção",
+   "definition": "Componente que liga e desliga a injeção conforme a permissão de Acessibilidade, soltando e repetindo o que estiver mantido",
+   "where": "`InjectionGate`",
+   "confidence": "🟢",
+   "category": "Injeção"
+  },
+  {
+   "term": "Gatilho",
+   "slug": "gatilho",
+   "definition": "Botão que não é de apontamento nem modificador e recebe uma ação numa camada",
+   "where": "`ShortcutConfig`",
+   "confidence": "🟢",
+   "category": "Atalhos"
+  },
+  {
+   "term": "Modificador",
+   "slug": "modificador",
+   "definition": "Botão que, segurado, seleciona uma camada e pode manter teclas ⌃⌥⇧⌘; nunca recebe ação",
+   "where": "`ShortcutConfig.modifiers`",
+   "confidence": "🟢",
+   "category": "Atalhos"
+  },
+  {
+   "term": "Camada",
+   "slug": "camada",
+   "definition": "Mapa gatilho → ação; a `base` vale sem modificador, e cada modificador tem a sua",
+   "where": "`ShortcutConfig.layers`",
+   "confidence": "🟢",
+   "category": "Atalhos"
+  },
+  {
+   "term": "Herança",
+   "slug": "herança",
+   "definition": "Gatilho sem ação própria numa camada de modificador usa a da base; \"nenhuma\" explícita conta como ação própria",
+   "where": "`ShortcutConfig.action(for:layer:)`",
+   "confidence": "🟢",
+   "category": "Atalhos"
+  },
+  {
+   "term": "Acorde",
+   "slug": "acorde",
+   "definition": "Tecla do `KeyCatalog` com zero ou mais modificadores, opcionalmente com repetição",
+   "where": "`KeyChord`",
+   "confidence": "🟢",
+   "category": "Atalhos"
+  },
+  {
+   "term": "Atalho de sistema",
+   "slug": "atalho-de-sistema",
+   "definition": "Um dos cinco atalhos do macOS (mesas, Mission Control, janelas do app, próxima janela) cujo acorde é lido das preferências no instante do uso",
+   "where": "`SystemShortcut`",
+   "confidence": "🟢",
+   "category": "Atalhos"
+  },
+  {
+   "term": "Paleta",
+   "slug": "paleta",
+   "definition": "Lista flutuante de textos que o controle navega e confirma, digitando no app em foco sem tomar o foco",
+   "where": "`PaletteMachine`, `PalettePanel`",
+   "confidence": "🟢",
+   "category": "Paleta"
+  },
+  {
+   "term": "Entrada fixa",
+   "slug": "entrada-fixa",
+   "definition": "Último item da paleta, \"Editar atalhos\", que abre o editor em vez de digitar",
+   "where": "`PaletteMachine`",
+   "confidence": "🟢",
+   "category": "Paleta"
+  },
+  {
+   "term": "Último confirmado",
+   "slug": "último-confirmado",
+   "definition": "Índice do item confirmado por último, onde a seleção começa na próxima abertura",
+   "where": "`PaletteMachine.lastConfirmed`",
+   "confidence": "🟢",
+   "category": "Paleta"
+  },
+  {
+   "term": "Configuração vigente",
+   "slug": "configuração-vigente",
+   "definition": "Mapeamento e paleta em uso; só é substituída por uma leitura ou gravação válida",
+   "where": "`ConfigStore.current`",
+   "confidence": "🟢",
+   "category": "Configuração e editor"
+  },
+  {
+   "term": "Rascunho",
+   "slug": "rascunho",
+   "definition": "Cópia editável da configuração no editor; \"sujo\" quando difere da base",
+   "where": "`EditorDraft`",
+   "confidence": "🟢",
+   "category": "Configuração e editor"
+  },
+  {
+   "term": "Conflito",
+   "slug": "conflito",
+   "definition": "Mudança externa válida do arquivo com rascunho sujo no editor",
+   "where": "`EditorViewModel`",
+   "confidence": "🟢",
+   "category": "Configuração e editor"
+  },
+  {
+   "term": "Modo de identificação",
+   "slug": "modo-de-identificação",
+   "definition": "Estado do editor em que botões do controle selecionam o gatilho na figura em vez de executar ações",
+   "where": "`InputRouter.setIdentifying`",
+   "confidence": "🟢",
+   "category": "Configuração e editor"
+  },
+  {
+   "term": "Escala de TV",
+   "slug": "escala-de-tv",
+   "definition": "Métricas de interface legíveis a 3 m (32 pt de corpo, alvos de 60 pt)",
+   "where": "`EditorMetrics`",
+   "confidence": "🟢",
+   "category": "Configuração e editor"
+  },
+  {
+   "term": "Tela de alvos",
+   "slug": "tela-de-alvos",
+   "definition": "Instrumento de 20 alvos para medir a taxa de acerto do apontamento, por ambiente (`mesa`, `sofa`)",
+   "where": "`TargetSession`",
+   "confidence": "🟢",
+   "category": "Medição"
+  },
+  {
+   "term": "Portão manual (PM)",
+   "slug": "portão-manual-pm",
+   "definition": "Roteiro de verificação no hardware que libera a fase seguinte de uma feature",
+   "where": "`_reversa_forward/*/onboarding.md`",
+   "confidence": "🟢",
+   "category": "Processo Reversa"
+  },
+  {
+   "term": "Sonda (P-nn)",
+   "slug": "sonda-p-nn",
+   "definition": "Pergunta técnica respondida por experimento no hardware",
+   "where": "`_reversa_forward/*/investigation.md`",
+   "confidence": "🟢",
+   "category": "Processo Reversa"
+  },
+  {
+   "term": "Emenda (E00n)",
+   "slug": "emenda-e00n",
+   "definition": "Mudança de escopo ou de solução aprovada durante a execução de uma feature",
+   "where": "`_reversa_forward/*/actions.md`",
+   "confidence": "🟢",
+   "category": "Processo Reversa"
+  }
+ ],
+ "implicitRules": [
+  {
+   "id": "RI-01",
+   "rule": "Instância única por `bundleIdentifier`; a segunda abertura encerra-se",
+   "evidence": "`AppDelegate.swift:32-35,192-198`"
+  },
+  {
+   "id": "RI-02",
+   "rule": "O leitor do controle só inicia depois de todos os consumidores, para nenhum evento chegar a um destino inexistente",
+   "evidence": "`AppDelegate.swift:133-134`"
+  },
+  {
+   "id": "RI-03",
+   "rule": "A permissão de Acessibilidade é consultada por `AXIsProcessTrusted()`, porque `CGPreflightPostEventAccess()` não reflete revogação no processo vivo (P-08)",
+   "evidence": "`PermissionMonitor.swift:39-48`; `validation-report.md` 001:139"
+  },
+  {
+   "id": "RI-04",
+   "rule": "Suspender a injeção solta tudo **antes** de desligar o injetor e guarda as solturas para repeti-las ao retomar",
+   "evidence": "`InjectionGate.swift:41-62`"
+  },
+  {
+   "id": "RI-05",
+   "rule": "Posição do cursor: a posição sintética vale enquanto a leitura do sistema for uma das 32 últimas postadas e houver menos de 100 ms; o mouse físico retoma o controle em qualquer outro caso",
+   "evidence": "`EventInjector.swift:16-62`"
+  },
+  {
+   "id": "RI-06",
+   "rule": "Setas injetadas levam `maskNumericPad` e `maskSecondaryFn`, como as físicas, senão Mission Control e mesas não respondem",
+   "evidence": "`KeyboardInjector.swift:110-111`"
+  },
+  {
+   "id": "RI-07",
+   "rule": "Texto é injetado por unidade UTF-16 com `unicodeString`, independente do layout do teclado",
+   "evidence": "`KeyboardInjector.swift:79-94`"
+  },
+  {
+   "id": "RI-08",
+   "rule": "O PS é lido do relatório HID bruto, porque o macOS o retém antes do `GameController`",
+   "evidence": "`DualSenseReport.swift:7-16`, `ExtendedReportActivator`"
+  },
+  {
+   "id": "RI-09",
+   "rule": "Por Bluetooth, ler o relatório de recurso `0x05` é o que libera o touchpad (modo estendido)",
+   "evidence": "`ExtendedReportActivator.swift:57-65`"
+  },
+  {
+   "id": "RI-10",
+   "rule": "A fase do toque é inferida pela transição de e para (0, 0), porque `touchpads` vem vazio no DualSense (P-01 da 001)",
+   "evidence": "`AxisTouchReader.swift:22-54`; `validation-report.md` 001:132"
+  },
+  {
+   "id": "RI-11",
+   "rule": "Amostras do touchpad em que só um eixo muda para ou de zero exato são descartadas, por serem estado intermediário do framework",
+   "evidence": "`TouchpadTracker.swift:55-57`"
+  },
+  {
+   "id": "RI-12",
+   "rule": "O `dt` do temporizador de 120 Hz é limitado a 50 ms para evitar saltos após travamentos",
+   "evidence": "`MotionLoop.swift:72-84`"
+  },
+  {
+   "id": "RI-13",
+   "rule": "Reconfigurações de tela são agregadas em 200 ms, e o cursor fora da nova união é reposicionado",
+   "evidence": "`DisplayMonitor.swift:44-70`"
+  },
+  {
+   "id": "RI-14",
+   "rule": "Releitura do arquivo agregada em 150 ms; bytes idênticos aos últimos lidos ou gravados não reaplicam",
+   "evidence": "`ConfigWatcher.swift`, `ConfigStore.swift:67-94`"
+  },
+  {
+   "id": "RI-15",
+   "rule": "Arquivo acima de 1 MiB é recusado na leitura",
+   "evidence": "`ConfigLoader.swift:56-70`"
+  },
+  {
+   "id": "RI-16",
+   "rule": "Gravação atravessa até 16 níveis de link simbólico e grava no destino, por troca atômica",
+   "evidence": "`ConfigWriter.swift:24-61`"
+  },
+  {
+   "id": "RI-17",
+   "rule": "Codificação determinística: o mesmo documento gera os mesmos bytes (chaves ordenadas, campos opcionais estáveis)",
+   "evidence": "`ConfigDocument.swift:3-79`"
+  },
+  {
+   "id": "RI-18",
+   "rule": "Aplicar configuração nova: primeiro a paleta, depois os atalhos; botões segurados na troca ficam ignorados até soltar",
+   "evidence": "`AppDelegate.swift:80-86`, `ShortcutActions.swift:50-55`"
+  },
+  {
+   "id": "RI-19",
+   "rule": "Configuração nova zera o último confirmado da paleta",
+   "evidence": "`PaletteActions.swift:59-65`"
+  },
+  {
+   "id": "RI-20",
+   "rule": "A paleta fecha sozinha após 60 s sem entrada do controle",
+   "evidence": "`PaletteActions.swift:11-12,145-157`"
+  },
+  {
+   "id": "RI-21",
+   "rule": "Com a tela de alvos aberta, a paleta não abre",
+   "evidence": "`PaletteActions.swift:43-48`"
+  },
+  {
+   "id": "RI-22",
+   "rule": "Só cliques com a marca do injetor contam na tela de alvos",
+   "evidence": "`TargetSession.swift:72-79`"
+  },
+  {
+   "id": "RI-23",
+   "rule": "No macOS 26 o editor abre em nível flutuante e recebe clique sintético na barra de título, porque a ativação pedida a partir do controle é recusada (E003)",
+   "evidence": "`EditorWindowController.swift:55-90`"
+  },
+  {
+   "id": "RI-24",
+   "rule": "Ao fechar o editor, o foco volta ao aplicativo que estava à frente",
+   "evidence": "`EditorWindowController.swift:167-179`"
+  },
+  {
+   "id": "RI-25",
+   "rule": "O menu principal oculto só tem \"Editar\", para colar e o ditado do Raycast chegarem aos campos",
+   "evidence": "`EditMenu.swift:3-37`"
+  },
+  {
+   "id": "RI-26",
+   "rule": "Ao mudar o tipo de ação, o acorde aproveitado começa sem repetição (E005)",
+   "evidence": "`ActionPanel.swift:181-199`"
+  },
+  {
+   "id": "RI-27",
+   "rule": "Desmarcar um modificador devolve as \"nenhuma\" que a marcação retirou (E004)",
+   "evidence": "`EditorDraft.swift:117-143`"
+  },
+  {
+   "id": "RI-28",
+   "rule": "Acima de 50 MiB escritos no log, eventos `debug` são suspensos",
+   "evidence": "`DiagnosticLog.swift:10,102-106`"
+  },
+  {
+   "id": "RI-29",
+   "rule": "Latências aprovadas se p95 de processamento ≤ 5 ms e de entrada ao movimento ≤ 20 ms",
+   "evidence": "`LatencyCommand.swift:6-39`"
+  }
+ ],
+ "divergences": [
+  {
+   "id": "DV-01",
+   "spec": "001 RN-11 e D-06: R2 e touchpad → esquerdo, R1 → direito",
+   "code": "R1 e touchpad → esquerdo, R2 → direito",
+   "status": "Mudança pedida pelo usuário no PM-3 e incorporada em 003 RN-05; a 001 não foi reescrita",
+   "confidence": "🟢"
+  },
+  {
+   "id": "DV-02",
+   "spec": "001 D-15: consulta por `CGPreflightPostEventAccess()`",
+   "code": "`AXIsProcessTrusted()`",
+   "status": "Corrigido após a P-08",
+   "confidence": "🟢"
+  },
+  {
+   "id": "DV-03",
+   "spec": "001 RN-08: precisão \"com L1 sem outro botão\"",
+   "code": "`pressed == [.l1]`",
+   "status": "Coerente, mas desliga a precisão durante arraste com L1+R1; a spec não trata o caso",
+   "confidence": "🟡"
+  },
+  {
+   "id": "DV-04",
+   "spec": "001 RN-01: só o controle ativo produz efeito",
+   "code": "PS do HID vai ao ativo, venha de qual controle vier",
+   "status": "Violação em cenário com dois controles",
+   "confidence": "🟡"
+  },
+  {
+   "id": "DV-05",
+   "spec": "003 RN-08: configuração inválida nunca é aplicada",
+   "code": "\"Copiar e gravar\" grava sem reverificar `canSave`",
+   "status": "Violação possível se o rascunho mudar enquanto a faixa está visível",
+   "confidence": "🟡"
+  },
+  {
+   "id": "DV-06",
+   "spec": "003 RN-07: acorde do atalho de sistema lido das preferências",
+   "code": "Atalho **desativado** nas preferências posta o acorde padrão",
+   "status": "A spec não trata desativação",
+   "confidence": "🟡"
+  },
+  {
+   "id": "DV-07",
+   "spec": "002 D-14 e 003 D-27: `palette.closed` cobre todos os fechamentos",
+   "code": "Confirmação e entrada fixa fecham sem `palette.closed`; nos logs, 74 aberturas para 19 fechamentos e 24 confirmações",
+   "status": "Coerente com o desenho (confirmação tem evento próprio), mas a abertura do editor pela paleta não deixa rastro de fechamento",
+   "confidence": "🟡"
+  },
+  {
+   "id": "DV-08",
+   "spec": "`ButtonReader.swift:7`: options/create \"a confirmar\"",
+   "code": "Confirmado no hardware (P-05)",
+   "status": "Comentário desatualizado",
+   "confidence": "🟢"
+  },
+  {
+   "id": "DV-09",
+   "spec": "`prd.md`: ditado de prompts por botão do controle",
+   "code": "Nenhum componente; R3 dispara ⌘M do transcritor do Raycast",
+   "status": "Registrado no adendo 001; destino do componente não decidido",
+   "confidence": "🔴"
+  },
+  {
+   "id": "DV-10",
+   "spec": "003 D-19: janela mínima 1.100 × 720 pt, texto 24/30 pt",
+   "code": "1.400 × 800 pt, 32/40/60 pt",
+   "status": "Ajuste do PM-1a, registrado nas rodadas da 003",
+   "confidence": "🟢"
+  }
+ ],
+ "adrs": [
+  {
+   "id": "001",
+   "title": "SwiftPM sem Xcode, com núcleo puro testável",
+   "file": "_reversa_sdd/adrs/001-swiftpm-sem-xcode-e-nucleo-puro.md"
+  },
+  {
+   "id": "002",
+   "title": "Assinatura local autoassinada e caminho fixo de instalação",
+   "file": "_reversa_sdd/adrs/002-assinatura-local-para-preservar-tcc.md"
+  },
+  {
+   "id": "003",
+   "title": "GameController em segundo plano, complementado por HID bruto",
+   "file": "_reversa_sdd/adrs/003-gamecontroller-em-segundo-plano-com-hid-bruto.md"
+  },
+  {
+   "id": "004",
+   "title": "Um único controle ativo, por ordem de conexão",
+   "file": "_reversa_sdd/adrs/004-controle-ativo-unico-por-ordem-de-conexao.md"
+  },
+  {
+   "id": "005",
+   "title": "Injeção por CGEvent no tap HID, com marca própria",
+   "file": "_reversa_sdd/adrs/005-injecao-por-cgevent-com-marca.md"
+  },
+  {
+   "id": "006",
+   "title": "Temporizador único de 120 Hz, ativo só com analógico fora do repouso",
+   "file": "_reversa_sdd/adrs/006-temporizador-unico-de-120hz-sob-demanda.md"
+  },
+  {
+   "id": "007",
+   "title": "Detecção da Acessibilidade por AXIsProcessTrusted, com portão de injeção",
+   "file": "_reversa_sdd/adrs/007-deteccao-de-permissao-por-axisprocesstrusted.md"
+  },
+  {
+   "id": "008",
+   "title": "Log JSONL por sessão, tipado e sem dados sensíveis",
+   "file": "_reversa_sdd/adrs/008-log-jsonl-tipado-sem-dados-sensiveis.md"
+  },
+  {
+   "id": "009",
+   "title": "R1 e touchpad no clique esquerdo, R2 no direito",
+   "file": "_reversa_sdd/adrs/009-r1-clique-esquerdo-r2-direito.md"
+  },
+  {
+   "id": "010",
+   "title": "Paleta em painel não ativador, que só digita e sem Enter por padrão",
+   "file": "_reversa_sdd/adrs/010-paleta-em-painel-nao-ativador-que-so-digita.md"
+  },
+  {
+   "id": "011",
+   "title": "Configuração em JSON com camadas por modificador e validação conjunta",
+   "file": "_reversa_sdd/adrs/011-configuracao-em-json-com-camadas-e-validacao-conjunta.md"
+  },
+  {
+   "id": "012",
+   "title": "Gravação por fusão atômica, preservando seções e com cópia .bak",
+   "file": "_reversa_sdd/adrs/012-gravacao-por-fusao-atomica-com-backup.md"
+  },
+  {
+   "id": "013",
+   "title": "Ativação do editor por janela flutuante e clique sintético (E003)",
+   "file": "_reversa_sdd/adrs/013-ativacao-do-editor-por-janela-flutuante-e-clique-sintetico.md"
+  },
+  {
+   "id": "014",
+   "title": "Editor em SwiftUI na escala de TV, operável pelo controle",
+   "file": "_reversa_sdd/adrs/014-editor-swiftui-em-escala-de-tv.md"
+  },
+  {
+   "id": "015",
+   "title": "Ditado delegado ao Raycast, sem captura de áudio própria",
+   "file": "_reversa_sdd/adrs/015-ditado-delegado-ao-raycast.md"
+  }
+ ],
+ "sections": {
+  "Propósito": "O joystick-AI transforma o DualSense (PS5) em dispositivo de condução de sessões de programação com agentes no macOS: o controle aponta, clica e rola como mouse, dispara atalhos de teclado configuráveis e abre uma paleta que digita comandos no aplicativo em foco. O usuário-alvo é o \"programador de sofá\", que acompanha agentes na TV a cerca de 3 m e deseja passar a maior parte do tempo sem teclado (`prd.md`). 🟢\n\nO código atual cobre três entregas do ciclo forward: a prova de conceito do ponteiro (001), a paleta de comandos (002) e o editor de atalhos com configuração em arquivo (003). O ditado por voz, previsto no PRD, não tem componente próprio (ver §7). 🟢"
+ }
+}

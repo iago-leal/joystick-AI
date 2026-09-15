@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Selo do projeto joystick-AI" class="seal">
+<defs><clipPath id="clip800"><circle cx="400.0" cy="400.0" r="388.0"/></clipPath><radialGradient id="glow800" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f4d03f" stop-opacity=".22"/><stop offset="1" stop-color="#0a0a14" stop-opacity="0"/></radialGradient></defs>
+<circle cx="400.0" cy="400.0" r="388.0" fill="#0a0a14"/>
+<g clip-path="url(#clip800)">
+<circle cx="388.9" cy="252.2" r="64.6" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.82"/>
+<circle cx="388.9" cy="252.2" r="139.1" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.78"/>
+<circle cx="388.9" cy="252.2" r="213.6" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.74"/>
+<circle cx="388.9" cy="252.2" r="288.1" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.70"/>
+<circle cx="388.9" cy="252.2" r="362.6" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.66"/>
+<circle cx="388.9" cy="252.2" r="437.1" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.62"/>
+<circle cx="388.9" cy="252.2" r="511.7" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.58"/>
+<circle cx="388.9" cy="252.2" r="586.2" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.54"/>
+<circle cx="388.9" cy="252.2" r="660.7" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.51"/>
+<circle cx="388.9" cy="252.2" r="735.2" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.47"/>
+<circle cx="388.9" cy="252.2" r="809.7" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.43"/>
+<circle cx="388.9" cy="252.2" r="884.2" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.39"/>
+<circle cx="388.9" cy="252.2" r="958.7" fill="none" stroke="#d4af37" stroke-width="2.00" stroke-opacity="0.35"/>
+<circle cx="528.6" cy="466.8" r="46.9" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.83"/>
+<circle cx="528.6" cy="466.8" r="148.8" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.77"/>
+<circle cx="528.6" cy="466.8" r="250.7" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.72"/>
+<circle cx="528.6" cy="466.8" r="352.5" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.67"/>
+<circle cx="528.6" cy="466.8" r="454.4" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.61"/>
+<circle cx="528.6" cy="466.8" r="556.3" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.56"/>
+<circle cx="528.6" cy="466.8" r="658.1" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.51"/>
+<circle cx="528.6" cy="466.8" r="760.0" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.45"/>
+<circle cx="528.6" cy="466.8" r="861.9" fill="none" stroke="#7a1c2a" stroke-width="2.00" stroke-opacity="0.40"/>
+<circle cx="400.0" cy="400.0" r="400.0" fill="url(#glow800)"/>
+</g>
+<circle cx="400.0" cy="400.0" r="388.0" fill="none" stroke="#d4af37" stroke-width="4.0" stroke-opacity=".9"/>
+<circle cx="400.0" cy="400.0" r="360.0" fill="none" stroke="#f4d03f" stroke-width="1.0" stroke-opacity=".5"/>
+<circle cx="400.0" cy="400.0" r="48.0" fill="#f4d03f"/>
+<circle cx="400.0" cy="400.0" r="48.0" fill="none" stroke="#0a0a14" stroke-width="5.0" stroke-opacity=".6"/>
+</svg>

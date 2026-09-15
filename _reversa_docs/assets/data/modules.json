@@ -1,0 +1,3191 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-09-15T23:22:00Z",
+ "project": "joystick-AI",
+ "hotPathThreshold": 12,
+ "modules": [
+  {
+   "name": "Package.swift",
+   "id": "Package.swift",
+   "folder": ".",
+   "file": "Package.swift",
+   "loc": 46,
+   "complexity": 2,
+   "functions": 0,
+   "type": "config",
+   "language": "swift",
+   "target": "root",
+   "module": "other",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Resources/Info.plist",
+   "id": "Resources/Info.plist",
+   "folder": "Resources",
+   "file": "Info.plist",
+   "loc": 26,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "root",
+   "module": "other",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "id": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "AppDelegate.swift",
+   "loc": 178,
+   "complexity": 30,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "class",
+     "name": "AppDelegate"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 33,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/EditMenu.swift",
+   "id": "Sources/JoystickAIPoC/App/EditMenu.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "EditMenu.swift",
+   "loc": 33,
+   "complexity": 1,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "EditMenu"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "id": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "InjectionGate.swift",
+   "loc": 56,
+   "complexity": 6,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "class",
+     "name": "InjectionGate"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 8,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "id": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "Lifecycle.swift",
+   "loc": 39,
+   "complexity": 4,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "class",
+     "name": "Lifecycle"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "id": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "PermissionMonitor.swift",
+   "loc": 57,
+   "complexity": 11,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "class",
+     "name": "PermissionMonitor"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/SigningInfo.swift",
+   "id": "Sources/JoystickAIPoC/App/SigningInfo.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "SigningInfo.swift",
+   "loc": 43,
+   "complexity": 15,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "SigningInfo"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/App/StatusMenu.swift",
+   "id": "Sources/JoystickAIPoC/App/StatusMenu.swift",
+   "folder": "Sources/JoystickAIPoC/App",
+   "file": "StatusMenu.swift",
+   "loc": 55,
+   "complexity": 6,
+   "functions": 5,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "class",
+     "name": "StatusMenu"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "id": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "folder": "Sources/JoystickAIPoC/Config",
+   "file": "ConfigStore.swift",
+   "loc": 132,
+   "complexity": 19,
+   "functions": 10,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "config",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ConfigState"
+    },
+    {
+     "kind": "enum",
+     "name": "Status"
+    },
+    {
+     "kind": "class",
+     "name": "ConfigStore"
+    },
+    {
+     "kind": "typealias",
+     "name": "Observer"
+    },
+    {
+     "kind": "enum",
+     "name": "SaveOutcome"
+    }
+   ],
+   "dependents": 3,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+   "id": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+   "folder": "Sources/JoystickAIPoC/Config",
+   "file": "ConfigWatcher.swift",
+   "loc": 86,
+   "complexity": 12,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "config",
+   "types": [
+    {
+     "kind": "class",
+     "name": "ConfigWatcher"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "id": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "folder": "Sources/JoystickAIPoC/Config",
+   "file": "ConfigWriter.swift",
+   "loc": 71,
+   "complexity": 16,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "config",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ConfigWriter"
+    },
+    {
+     "kind": "enum",
+     "name": "Outcome"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "id": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "AxisTouchReader.swift",
+   "loc": 77,
+   "complexity": 15,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "AxisTouchReader"
+    },
+    {
+     "kind": "class",
+     "name": "FingerState"
+    },
+    {
+     "kind": "class",
+     "name": "StickState"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "id": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "ButtonReader.swift",
+   "loc": 54,
+   "complexity": 11,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ButtonReader"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift",
+   "id": "Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "ControllerDiagnostics.swift",
+   "loc": 25,
+   "complexity": 3,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ControllerDiagnostics"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "id": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "ControllerReader.swift",
+   "loc": 103,
+   "complexity": 18,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "class",
+     "name": "ControllerReader"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 10,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "id": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "ExtendedReportActivator.swift",
+   "loc": 63,
+   "complexity": 9,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "class",
+     "name": "ExtendedReportActivator"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "id": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "InputSink.swift",
+   "loc": 35,
+   "complexity": 2,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "protocol",
+     "name": "InputSink"
+    },
+    {
+     "kind": "class",
+     "name": "LoggingInputSink"
+    },
+    {
+     "kind": "class",
+     "name": "InputContext"
+    }
+   ],
+   "dependents": 12,
+   "dependencies": 5,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "id": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "folder": "Sources/JoystickAIPoC/Controller",
+   "file": "TransportResolver.swift",
+   "loc": 46,
+   "complexity": 9,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "TransportResolver"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "id": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "folder": "Sources/JoystickAIPoC/Display",
+   "file": "DisplayMonitor.swift",
+   "loc": 64,
+   "complexity": 9,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "class",
+     "name": "DisplayMonitor"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "id": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "folder": "Sources/JoystickAIPoC/Display",
+   "file": "ScreenCatalog.swift",
+   "loc": 26,
+   "complexity": 2,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ScreenCatalog"
+    }
+   ],
+   "dependents": 4,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "id": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "ActionPanel.swift",
+   "loc": 188,
+   "complexity": 59,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ActionPanel"
+    },
+    {
+     "kind": "enum",
+     "name": "Kind"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 8,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "id": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "ChordEditor.swift",
+   "loc": 59,
+   "complexity": 4,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ChordEditor"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "id": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "ControllerFigureView.swift",
+   "loc": 64,
+   "complexity": 10,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ControllerFigureView"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "id": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "EditorBanners.swift",
+   "loc": 56,
+   "complexity": 9,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "EditorBanners"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "id": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "EditorLabels.swift",
+   "loc": 76,
+   "complexity": 48,
+   "functions": 5,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "EditorLabels"
+    }
+   ],
+   "dependents": 5,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "id": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "EditorMetrics.swift",
+   "loc": 69,
+   "complexity": 6,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "EditorMetrics"
+    },
+    {
+     "kind": "struct",
+     "name": "TVButtonStyle"
+    },
+    {
+     "kind": "struct",
+     "name": "TVToggleStyle"
+    },
+    {
+     "kind": "struct",
+     "name": "TVFieldModifier"
+    }
+   ],
+   "dependents": 8,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "id": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "EditorRootView.swift",
+   "loc": 60,
+   "complexity": 8,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "EditorRootView"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "id": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "EditorViewModel.swift",
+   "loc": 218,
+   "complexity": 43,
+   "functions": 27,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EditorViewModel"
+    },
+    {
+     "kind": "enum",
+     "name": "Tab"
+    },
+    {
+     "kind": "enum",
+     "name": "Conflict"
+    },
+    {
+     "kind": "struct",
+     "name": "PendingBackup"
+    }
+   ],
+   "dependents": 7,
+   "dependencies": 8,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "id": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "EditorWindowController.swift",
+   "loc": 166,
+   "complexity": 23,
+   "functions": 9,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EditorWindowController"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "id": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "KeyCaptureField.swift",
+   "loc": 80,
+   "complexity": 16,
+   "functions": 7,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "KeyCaptureField"
+    },
+    {
+     "kind": "class",
+     "name": "KeyCaptureView"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "id": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "PaletteTab.swift",
+   "loc": 96,
+   "complexity": 8,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PaletteTab"
+    },
+    {
+     "kind": "struct",
+     "name": "RowDropDelegate"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "id": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "folder": "Sources/JoystickAIPoC/Editor",
+   "file": "ShortcutsTab.swift",
+   "loc": 21,
+   "complexity": 1,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ShortcutsTab"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "id": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "folder": "Sources/JoystickAIPoC/Injection",
+   "file": "EventInjector.swift",
+   "loc": 135,
+   "complexity": 29,
+   "functions": 8,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "injection",
+   "types": [
+    {
+     "kind": "class",
+     "name": "EventInjector"
+    }
+   ],
+   "dependents": 9,
+   "dependencies": 7,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "id": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "folder": "Sources/JoystickAIPoC/Injection",
+   "file": "KeyboardInjector.swift",
+   "loc": 101,
+   "complexity": 26,
+   "functions": 12,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "injection",
+   "types": [
+    {
+     "kind": "class",
+     "name": "KeyboardInjector"
+    }
+   ],
+   "dependents": 3,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "id": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "folder": "Sources/JoystickAIPoC/Injection",
+   "file": "ScrollInjector.swift",
+   "loc": 20,
+   "complexity": 6,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "injection",
+   "types": [
+    {
+     "kind": "class",
+     "name": "ScrollInjector"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "id": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "folder": "Sources/JoystickAIPoC/Log",
+   "file": "DiagnosticLog.swift",
+   "loc": 97,
+   "complexity": 17,
+   "functions": 5,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "diagnostics-log",
+   "types": [
+    {
+     "kind": "class",
+     "name": "DiagnosticLog"
+    }
+   ],
+   "dependents": 12,
+   "dependencies": 3,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "id": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "folder": "Sources/JoystickAIPoC/Palette",
+   "file": "PaletteActions.swift",
+   "loc": 146,
+   "complexity": 26,
+   "functions": 12,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "palette",
+   "types": [
+    {
+     "kind": "class",
+     "name": "PaletteActions"
+    }
+   ],
+   "dependents": 3,
+   "dependencies": 8,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Palette/PalettePanel.swift",
+   "id": "Sources/JoystickAIPoC/Palette/PalettePanel.swift",
+   "folder": "Sources/JoystickAIPoC/Palette",
+   "file": "PalettePanel.swift",
+   "loc": 157,
+   "complexity": 17,
+   "functions": 8,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "palette",
+   "types": [
+    {
+     "kind": "class",
+     "name": "PalettePanel"
+    },
+    {
+     "kind": "class",
+     "name": "PaletteView"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "id": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "folder": "Sources/JoystickAIPoC/Pointer",
+   "file": "ButtonActions.swift",
+   "loc": 50,
+   "complexity": 9,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "class",
+     "name": "ButtonActions"
+    }
+   ],
+   "dependents": 5,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "id": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "folder": "Sources/JoystickAIPoC/Pointer",
+   "file": "InputRouter.swift",
+   "loc": 65,
+   "complexity": 14,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "class",
+     "name": "InputRouter"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 7,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "id": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "folder": "Sources/JoystickAIPoC/Pointer",
+   "file": "MotionLoop.swift",
+   "loc": 99,
+   "complexity": 29,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "class",
+     "name": "MotionLoop"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 10,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "id": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "folder": "Sources/JoystickAIPoC/Pointer",
+   "file": "ShortcutActions.swift",
+   "loc": 123,
+   "complexity": 33,
+   "functions": 8,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "shortcuts",
+   "types": [
+    {
+     "kind": "class",
+     "name": "ShortcutActions"
+    }
+   ],
+   "dependents": 4,
+   "dependencies": 7,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "id": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "folder": "Sources/JoystickAIPoC/Targets",
+   "file": "TargetAbortMonitor.swift",
+   "loc": 41,
+   "complexity": 5,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "class",
+     "name": "TargetAbortMonitor"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "id": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "folder": "Sources/JoystickAIPoC/Targets",
+   "file": "TargetRunWriter.swift",
+   "loc": 43,
+   "complexity": 5,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "class",
+     "name": "TargetRunWriter"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "id": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "folder": "Sources/JoystickAIPoC/Targets",
+   "file": "TargetSession.swift",
+   "loc": 124,
+   "complexity": 16,
+   "functions": 7,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "class",
+     "name": "TargetSession"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 11,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+   "id": "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+   "folder": "Sources/JoystickAIPoC/Targets",
+   "file": "TargetWindow.swift",
+   "loc": 56,
+   "complexity": 4,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "class",
+     "name": "TargetWindow"
+    },
+    {
+     "kind": "class",
+     "name": "TargetView"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickAIPoC/main.swift",
+   "id": "Sources/JoystickAIPoC/main.swift",
+   "folder": "Sources/JoystickAIPoC",
+   "file": "main.swift",
+   "loc": 6,
+   "complexity": 1,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickAIPoC",
+   "module": "app-shell",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Analysis/LatencyStats.swift",
+   "id": "Sources/JoystickCore/Analysis/LatencyStats.swift",
+   "folder": "Sources/JoystickCore/Analysis",
+   "file": "LatencyStats.swift",
+   "loc": 21,
+   "complexity": 2,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "LatencySummary"
+    },
+    {
+     "kind": "enum",
+     "name": "LatencyStats"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "id": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "folder": "Sources/JoystickCore/Analysis",
+   "file": "LogAnalysis.swift",
+   "loc": 91,
+   "complexity": 24,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "LogReadResult"
+    },
+    {
+     "kind": "struct",
+     "name": "ButtonObservation"
+    },
+    {
+     "kind": "struct",
+     "name": "ButtonCoverage"
+    },
+    {
+     "kind": "struct",
+     "name": "CycleSummary"
+    },
+    {
+     "kind": "enum",
+     "name": "LogAnalysis"
+    }
+   ],
+   "dependents": 5,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "id": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "folder": "Sources/JoystickCore/Analysis",
+   "file": "RunsReport.swift",
+   "loc": 60,
+   "complexity": 15,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "RunsReport"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "id": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "folder": "Sources/JoystickCore/App",
+   "file": "LaunchArguments.swift",
+   "loc": 118,
+   "complexity": 46,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "app-shell",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "LaunchArgumentError"
+    },
+    {
+     "kind": "struct",
+     "name": "LaunchArguments"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "id": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ActionSummary.swift",
+   "loc": 37,
+   "complexity": 18,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ActionSummary"
+    }
+   ],
+   "dependents": 3,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "id": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ConfigDocument.swift",
+   "loc": 74,
+   "complexity": 17,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ConfigDocument"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ConfigLineLocator.swift",
+   "id": "Sources/JoystickCore/Config/ConfigLineLocator.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ConfigLineLocator.swift",
+   "loc": 171,
+   "complexity": 52,
+   "functions": 11,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ConfigLineLocator"
+    },
+    {
+     "kind": "enum",
+     "name": "Component"
+    },
+    {
+     "kind": "struct",
+     "name": "Scanner"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "id": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ConfigLoader.swift",
+   "loc": 135,
+   "complexity": 33,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ConfigStatus"
+    },
+    {
+     "kind": "struct",
+     "name": "ConfigLoadResult"
+    },
+    {
+     "kind": "enum",
+     "name": "ConfigLoader"
+    }
+   ],
+   "dependents": 7,
+   "dependencies": 8,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "id": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "EditorDraft.swift",
+   "loc": 203,
+   "complexity": 57,
+   "functions": 18,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "editor",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "EditorTarget"
+    },
+    {
+     "kind": "struct",
+     "name": "EditorIssue"
+    },
+    {
+     "kind": "enum",
+     "name": "EditorWarning"
+    },
+    {
+     "kind": "enum",
+     "name": "EditorOperationError"
+    },
+    {
+     "kind": "struct",
+     "name": "EditorDraft"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "id": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "PointerSettingsValidation.swift",
+   "loc": 47,
+   "complexity": 26,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ConfigIssue"
+    },
+    {
+     "kind": "enum",
+     "name": "PointerSettingsValidation"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "id": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ShortcutConfig.swift",
+   "loc": 97,
+   "complexity": 21,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "TriggerActionType"
+    },
+    {
+     "kind": "enum",
+     "name": "TriggerAction"
+    },
+    {
+     "kind": "struct",
+     "name": "ShortcutConfig"
+    },
+    {
+     "kind": "struct",
+     "name": "Resolution"
+    },
+    {
+     "kind": "struct",
+     "name": "ShortcutsDocument"
+    },
+    {
+     "kind": "struct",
+     "name": "ShortcutIssue"
+    },
+    {
+     "kind": "enum",
+     "name": "Rule"
+    },
+    {
+     "kind": "struct",
+     "name": "ShortcutIssues"
+    }
+   ],
+   "dependents": 23,
+   "dependencies": 3,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "id": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ShortcutConfigValidation.swift",
+   "loc": 244,
+   "complexity": 93,
+   "functions": 19,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ShortcutConfigValidation"
+    },
+    {
+     "kind": "struct",
+     "name": "Sections"
+    },
+    {
+     "kind": "struct",
+     "name": "SectionDecoder"
+    }
+   ],
+   "dependents": 5,
+   "dependencies": 7,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "id": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "folder": "Sources/JoystickCore/Config",
+   "file": "ShortcutDefaults.swift",
+   "loc": 52,
+   "complexity": 3,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "config",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ShortcutDefaults"
+    }
+   ],
+   "dependents": 13,
+   "dependencies": 4,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "id": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "folder": "Sources/JoystickCore/Input",
+   "file": "ActiveControllerRegistry.swift",
+   "loc": 58,
+   "complexity": 14,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ActiveControllerRegistry"
+    },
+    {
+     "kind": "enum",
+     "name": "ConnectOutcome"
+    },
+    {
+     "kind": "struct",
+     "name": "DisconnectOutcome"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Input/DualSenseReport.swift",
+   "id": "Sources/JoystickCore/Input/DualSenseReport.swift",
+   "folder": "Sources/JoystickCore/Input",
+   "file": "DualSenseReport.swift",
+   "loc": 17,
+   "complexity": 4,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "DualSenseReport"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Input/InputEvent.swift",
+   "id": "Sources/JoystickCore/Input/InputEvent.swift",
+   "folder": "Sources/JoystickCore/Input",
+   "file": "InputEvent.swift",
+   "loc": 84,
+   "complexity": 27,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ButtonID"
+    },
+    {
+     "kind": "enum",
+     "name": "ButtonPhase"
+    },
+    {
+     "kind": "enum",
+     "name": "TouchPhase"
+    },
+    {
+     "kind": "enum",
+     "name": "ConnectionType"
+    },
+    {
+     "kind": "struct",
+     "name": "ControllerInfo"
+    },
+    {
+     "kind": "enum",
+     "name": "InputElement"
+    },
+    {
+     "kind": "enum",
+     "name": "InputEventKind"
+    },
+    {
+     "kind": "struct",
+     "name": "InputEvent"
+    }
+   ],
+   "dependents": 35,
+   "dependencies": 0,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Input/Normalization.swift",
+   "id": "Sources/JoystickCore/Input/Normalization.swift",
+   "folder": "Sources/JoystickCore/Input",
+   "file": "Normalization.swift",
+   "loc": 33,
+   "complexity": 3,
+   "functions": 5,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "Normalization"
+    },
+    {
+     "kind": "struct",
+     "name": "TriggerTracker"
+    }
+   ],
+   "dependents": 4,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Input/StartupAdoption.swift",
+   "id": "Sources/JoystickCore/Input/StartupAdoption.swift",
+   "folder": "Sources/JoystickCore/Input",
+   "file": "StartupAdoption.swift",
+   "loc": 12,
+   "complexity": 3,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "controller-input",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ConnectionSource"
+    },
+    {
+     "kind": "enum",
+     "name": "StartupAdoption"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Log/LogEvent.swift",
+   "id": "Sources/JoystickCore/Log/LogEvent.swift",
+   "folder": "Sources/JoystickCore/Log",
+   "file": "LogEvent.swift",
+   "loc": 42,
+   "complexity": 7,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "diagnostics-log",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "LogLevel"
+    },
+    {
+     "kind": "struct",
+     "name": "LogEvent"
+    },
+    {
+     "kind": "enum",
+     "name": "LogLineFormatter"
+    }
+   ],
+   "dependents": 4,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "id": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "folder": "Sources/JoystickCore/Log",
+   "file": "LogEventCatalog.swift",
+   "loc": 280,
+   "complexity": 38,
+   "functions": 47,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "diagnostics-log",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "PermissionTrigger"
+    },
+    {
+     "kind": "enum",
+     "name": "TouchSource"
+    },
+    {
+     "kind": "enum",
+     "name": "TouchBoundary"
+    },
+    {
+     "kind": "enum",
+     "name": "PostedKind"
+    },
+    {
+     "kind": "enum",
+     "name": "PostSource"
+    },
+    {
+     "kind": "enum",
+     "name": "TerminationReason"
+    },
+    {
+     "kind": "enum",
+     "name": "ShortcutsTrigger"
+    },
+    {
+     "kind": "enum",
+     "name": "ShortcutsSource"
+    },
+    {
+     "kind": "enum",
+     "name": "ShortcutsDefaultReason"
+    },
+    {
+     "kind": "enum",
+     "name": "EditorOpenSource"
+    },
+    {
+     "kind": "enum",
+     "name": "EditorCloseOutcome"
+    },
+    {
+     "kind": "enum",
+     "name": "EditorConflictChoice"
+    },
+    {
+     "kind": "struct",
+     "name": "ScreenListing"
+    },
+    {
+     "kind": "enum",
+     "name": "LogEventCatalog"
+    }
+   ],
+   "dependents": 24,
+   "dependencies": 8,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "id": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "folder": "Sources/JoystickCore/Palette",
+   "file": "CommandPalette.swift",
+   "loc": 156,
+   "complexity": 32,
+   "functions": 7,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "palette",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PaletteItem"
+    },
+    {
+     "kind": "enum",
+     "name": "PaletteDirection"
+    },
+    {
+     "kind": "enum",
+     "name": "PaletteCloseReason"
+    },
+    {
+     "kind": "enum",
+     "name": "PaletteDefaults"
+    },
+    {
+     "kind": "struct",
+     "name": "PaletteSnapshot"
+    },
+    {
+     "kind": "enum",
+     "name": "PaletteEffect"
+    },
+    {
+     "kind": "struct",
+     "name": "PaletteMachine"
+    }
+   ],
+   "dependents": 16,
+   "dependencies": 1,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "id": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "ClickStateMachine.swift",
+   "loc": 78,
+   "complexity": 20,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "MouseButton"
+    },
+    {
+     "kind": "enum",
+     "name": "MouseAction"
+    },
+    {
+     "kind": "enum",
+     "name": "MoveKind"
+    },
+    {
+     "kind": "struct",
+     "name": "ClickStateMachine"
+    }
+   ],
+   "dependents": 5,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "id": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "Geometry.swift",
+   "loc": 27,
+   "complexity": 1,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ScreenPoint"
+    },
+    {
+     "kind": "struct",
+     "name": "ScreenRect"
+    }
+   ],
+   "dependents": 6,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "id": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "PointerMotionEngine.swift",
+   "loc": 118,
+   "complexity": 21,
+   "functions": 9,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PointerState"
+    },
+    {
+     "kind": "enum",
+     "name": "TimerCommand"
+    },
+    {
+     "kind": "struct",
+     "name": "MotionOutput"
+    },
+    {
+     "kind": "struct",
+     "name": "PointerMotionEngine"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "id": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "PointerSettings.swift",
+   "loc": 52,
+   "complexity": 17,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PointerSettings"
+    },
+    {
+     "kind": "struct",
+     "name": "FieldRange"
+    }
+   ],
+   "dependents": 21,
+   "dependencies": 1,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "id": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "ScreenUnion.swift",
+   "loc": 28,
+   "complexity": 7,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ScreenUnion"
+    }
+   ],
+   "dependents": 3,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "id": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "ScrollMapper.swift",
+   "loc": 36,
+   "complexity": 5,
+   "functions": 2,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ScrollUnit"
+    },
+    {
+     "kind": "struct",
+     "name": "ScrollMapper"
+    }
+   ],
+   "dependents": 6,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "id": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "StickKinematics.swift",
+   "loc": 47,
+   "complexity": 4,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PointDelta"
+    },
+    {
+     "kind": "enum",
+     "name": "StickKinematics"
+    },
+    {
+     "kind": "struct",
+     "name": "SubpixelAccumulator"
+    }
+   ],
+   "dependents": 6,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "id": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "folder": "Sources/JoystickCore/Pointer",
+   "file": "TouchpadTracker.swift",
+   "loc": 68,
+   "complexity": 16,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "pointer",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "TouchpadTracker"
+    },
+    {
+     "kind": "struct",
+     "name": "ZeroTransitionPhaseInference"
+    }
+   ],
+   "dependents": 3,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "id": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "folder": "Sources/JoystickCore/Shortcuts",
+   "file": "KeyCatalog.swift",
+   "loc": 89,
+   "complexity": 7,
+   "functions": 5,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "shortcuts",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "KeyGroup"
+    },
+    {
+     "kind": "struct",
+     "name": "KeyEntry"
+    },
+    {
+     "kind": "enum",
+     "name": "KeyCatalog"
+    }
+   ],
+   "dependents": 8,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift",
+   "id": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift",
+   "folder": "Sources/JoystickCore/Shortcuts",
+   "file": "KeyRepeat.swift",
+   "loc": 10,
+   "complexity": 1,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "shortcuts",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "KeyRepeat"
+    }
+   ],
+   "dependents": 2,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "id": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "folder": "Sources/JoystickCore/Shortcuts",
+   "file": "ShortcutMapper.swift",
+   "loc": 199,
+   "complexity": 65,
+   "functions": 5,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "shortcuts",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "KeyModifier"
+    },
+    {
+     "kind": "struct",
+     "name": "KeyChord"
+    },
+    {
+     "kind": "enum",
+     "name": "SystemShortcut"
+    },
+    {
+     "kind": "enum",
+     "name": "ShortcutAction"
+    },
+    {
+     "kind": "struct",
+     "name": "ShortcutMapper"
+    },
+    {
+     "kind": "struct",
+     "name": "Trigger"
+    },
+    {
+     "kind": "enum",
+     "name": "HeldAction"
+    }
+   ],
+   "dependents": 23,
+   "dependencies": 3,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Support/JSONValue.swift",
+   "id": "Sources/JoystickCore/Support/JSONValue.swift",
+   "folder": "Sources/JoystickCore/Support",
+   "file": "JSONValue.swift",
+   "loc": 143,
+   "complexity": 60,
+   "functions": 4,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "diagnostics-log",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "JSONValue"
+    }
+   ],
+   "dependents": 16,
+   "dependencies": 0,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "id": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "folder": "Sources/JoystickCore/Support",
+   "file": "MonotonicClock.swift",
+   "loc": 7,
+   "complexity": 1,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "diagnostics-log",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "MonotonicClock"
+    }
+   ],
+   "dependents": 12,
+   "dependencies": 0,
+   "isHotPath": true
+  },
+  {
+   "name": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "id": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "folder": "Sources/JoystickCore/Targets",
+   "file": "TargetRun.swift",
+   "loc": 161,
+   "complexity": 13,
+   "functions": 6,
+   "type": "code",
+   "language": "swift",
+   "target": "JoystickCore",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "TargetEnvironment"
+    },
+    {
+     "kind": "enum",
+     "name": "AbortReason"
+    },
+    {
+     "kind": "struct",
+     "name": "RectPt"
+    },
+    {
+     "kind": "struct",
+     "name": "ScreenDescriptor"
+    },
+    {
+     "kind": "struct",
+     "name": "TargetAttempt"
+    },
+    {
+     "kind": "struct",
+     "name": "TargetSummary"
+    },
+    {
+     "kind": "struct",
+     "name": "TargetRun"
+    },
+    {
+     "kind": "struct",
+     "name": "SeededGenerator"
+    },
+    {
+     "kind": "enum",
+     "name": "TargetLayout"
+    }
+   ],
+   "dependents": 10,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/poc-tools/ButtonsCommand.swift",
+   "id": "Sources/poc-tools/ButtonsCommand.swift",
+   "folder": "Sources/poc-tools",
+   "file": "ButtonsCommand.swift",
+   "loc": 24,
+   "complexity": 5,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "poc-tools",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ButtonsCommand"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/poc-tools/CyclesCommand.swift",
+   "id": "Sources/poc-tools/CyclesCommand.swift",
+   "folder": "Sources/poc-tools",
+   "file": "CyclesCommand.swift",
+   "loc": 21,
+   "complexity": 3,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "poc-tools",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "CyclesCommand"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/poc-tools/LatencyCommand.swift",
+   "id": "Sources/poc-tools/LatencyCommand.swift",
+   "folder": "Sources/poc-tools",
+   "file": "LatencyCommand.swift",
+   "loc": 34,
+   "complexity": 4,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "poc-tools",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "LatencyCommand"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/poc-tools/RunsCommand.swift",
+   "id": "Sources/poc-tools/RunsCommand.swift",
+   "folder": "Sources/poc-tools",
+   "file": "RunsCommand.swift",
+   "loc": 55,
+   "complexity": 12,
+   "functions": 1,
+   "type": "code",
+   "language": "swift",
+   "target": "poc-tools",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "RunsCommand"
+    }
+   ],
+   "dependents": 1,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/poc-tools/ToolInput.swift",
+   "id": "Sources/poc-tools/ToolInput.swift",
+   "folder": "Sources/poc-tools",
+   "file": "ToolInput.swift",
+   "loc": 30,
+   "complexity": 5,
+   "functions": 3,
+   "type": "code",
+   "language": "swift",
+   "target": "poc-tools",
+   "module": "targets-analysis",
+   "types": [
+    {
+     "kind": "enum",
+     "name": "ToolInput"
+    }
+   ],
+   "dependents": 5,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Sources/poc-tools/main.swift",
+   "id": "Sources/poc-tools/main.swift",
+   "folder": "Sources/poc-tools",
+   "file": "main.swift",
+   "loc": 50,
+   "complexity": 11,
+   "functions": 0,
+   "type": "code",
+   "language": "swift",
+   "target": "poc-tools",
+   "module": "targets-analysis",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "id": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ActionSummaryTests.swift",
+   "loc": 40,
+   "complexity": 3,
+   "functions": 6,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ActionSummaryTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "id": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ActiveControllerRegistryTests.swift",
+   "loc": 88,
+   "complexity": 2,
+   "functions": 10,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ActiveControllerRegistryTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "id": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ClickStateMachineTests.swift",
+   "loc": 76,
+   "complexity": 1,
+   "functions": 10,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ClickStateMachineTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "id": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "CommandPaletteTests.swift",
+   "loc": 177,
+   "complexity": 14,
+   "functions": 21,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "CommandPaletteTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "id": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ConfigDocumentTests.swift",
+   "loc": 89,
+   "complexity": 7,
+   "functions": 9,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ConfigDocumentTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 8,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ConfigLineLocatorTests.swift",
+   "id": "Tests/JoystickCoreTests/ConfigLineLocatorTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ConfigLineLocatorTests.swift",
+   "loc": 84,
+   "complexity": 1,
+   "functions": 8,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ConfigLineLocatorTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "id": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ConfigLoaderTests.swift",
+   "loc": 159,
+   "complexity": 8,
+   "functions": 17,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ConfigLoaderTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/DualSenseReportTests.swift",
+   "id": "Tests/JoystickCoreTests/DualSenseReportTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "DualSenseReportTests.swift",
+   "loc": 20,
+   "complexity": 3,
+   "functions": 3,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "DualSenseReportTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "id": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "EditorDraftTests.swift",
+   "loc": 215,
+   "complexity": 25,
+   "functions": 20,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "EditorDraftTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 5,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "id": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "KeyCatalogTests.swift",
+   "loc": 61,
+   "complexity": 6,
+   "functions": 6,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "KeyCatalogTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/LatencyStatsTests.swift",
+   "id": "Tests/JoystickCoreTests/LatencyStatsTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "LatencyStatsTests.swift",
+   "loc": 25,
+   "complexity": 3,
+   "functions": 4,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "LatencyStatsTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/LaunchArgumentsTests.swift",
+   "id": "Tests/JoystickCoreTests/LaunchArgumentsTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "LaunchArgumentsTests.swift",
+   "loc": 82,
+   "complexity": 3,
+   "functions": 11,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "LaunchArgumentsTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "id": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "LogAnalysisTests.swift",
+   "loc": 52,
+   "complexity": 3,
+   "functions": 5,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "LogAnalysisTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "id": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "LogEventCatalogTests.swift",
+   "loc": 203,
+   "complexity": 13,
+   "functions": 10,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "LogEventCatalogTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 10,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/NormalizationTests.swift",
+   "id": "Tests/JoystickCoreTests/NormalizationTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "NormalizationTests.swift",
+   "loc": 52,
+   "complexity": 1,
+   "functions": 9,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "NormalizationTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "id": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "PointerMotionEngineTests.swift",
+   "loc": 87,
+   "complexity": 7,
+   "functions": 10,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PointerMotionEngineTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "id": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "PointerSettingsValidationTests.swift",
+   "loc": 71,
+   "complexity": 2,
+   "functions": 8,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "PointerSettingsValidationTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "id": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "RunsReportTests.swift",
+   "loc": 52,
+   "complexity": 3,
+   "functions": 7,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "RunsReportTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "id": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ScreenUnionTests.swift",
+   "loc": 35,
+   "complexity": 1,
+   "functions": 5,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ScreenUnionTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "id": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ScrollMapperTests.swift",
+   "loc": 72,
+   "complexity": 4,
+   "functions": 9,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ScrollMapperTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "id": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ShortcutConfigTests.swift",
+   "loc": 56,
+   "complexity": 10,
+   "functions": 7,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ShortcutConfigTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "id": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ShortcutConfigValidationTests.swift",
+   "loc": 207,
+   "complexity": 13,
+   "functions": 27,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ShortcutConfigValidationTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 6,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "id": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ShortcutDefaultsTests.swift",
+   "loc": 87,
+   "complexity": 9,
+   "functions": 4,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ShortcutDefaultsTests"
+    },
+    {
+     "kind": "struct",
+     "name": "Output"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 3,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "id": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "ShortcutMapperTests.swift",
+   "loc": 234,
+   "complexity": 22,
+   "functions": 18,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "ShortcutMapperTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 4,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/StartupAdoptionTests.swift",
+   "id": "Tests/JoystickCoreTests/StartupAdoptionTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "StartupAdoptionTests.swift",
+   "loc": 16,
+   "complexity": 1,
+   "functions": 3,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "StartupAdoptionTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 1,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "id": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "StickKinematicsTests.swift",
+   "loc": 53,
+   "complexity": 3,
+   "functions": 8,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "StickKinematicsTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/SupportTests.swift",
+   "id": "Tests/JoystickCoreTests/SupportTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "SupportTests.swift",
+   "loc": 32,
+   "complexity": 2,
+   "functions": 5,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "SupportTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "id": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "TargetRunTests.swift",
+   "loc": 103,
+   "complexity": 14,
+   "functions": 11,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "TargetRunTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "id": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "folder": "Tests/JoystickCoreTests",
+   "file": "TouchpadTrackerTests.swift",
+   "loc": 79,
+   "complexity": 6,
+   "functions": 10,
+   "type": "test",
+   "language": "swift",
+   "target": "Tests",
+   "module": "tests",
+   "types": [
+    {
+     "kind": "struct",
+     "name": "TouchpadTrackerTests"
+    }
+   ],
+   "dependents": 0,
+   "dependencies": 2,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/build-app.sh",
+   "id": "scripts/build-app.sh",
+   "folder": "scripts",
+   "file": "build-app.sh",
+   "loc": 55,
+   "complexity": 1,
+   "functions": 0,
+   "type": "script",
+   "language": "shell",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/check-signature.sh",
+   "id": "scripts/check-signature.sh",
+   "folder": "scripts",
+   "file": "check-signature.sh",
+   "loc": 18,
+   "complexity": 1,
+   "functions": 0,
+   "type": "script",
+   "language": "shell",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/invalid-line12.json",
+   "id": "scripts/config-samples/invalid-line12.json",
+   "folder": "scripts/config-samples",
+   "file": "invalid-line12.json",
+   "loc": 248,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/invalid-line4.json",
+   "id": "scripts/config-samples/invalid-line4.json",
+   "folder": "scripts/config-samples",
+   "file": "invalid-line4.json",
+   "loc": 6,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/l3-modifier.json",
+   "id": "scripts/config-samples/l3-modifier.json",
+   "folder": "scripts/config-samples",
+   "file": "l3-modifier.json",
+   "loc": 250,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/out-of-range.json",
+   "id": "scripts/config-samples/out-of-range.json",
+   "folder": "scripts/config-samples",
+   "file": "out-of-range.json",
+   "loc": 5,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/palette-reversa-docs.json",
+   "id": "scripts/config-samples/palette-reversa-docs.json",
+   "folder": "scripts/config-samples",
+   "file": "palette-reversa-docs.json",
+   "loc": 253,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/r1-in-layer.json",
+   "id": "scripts/config-samples/r1-in-layer.json",
+   "folder": "scripts/config-samples",
+   "file": "r1-in-layer.json",
+   "loc": 252,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/config-samples/stick-1800.json",
+   "id": "scripts/config-samples/stick-1800.json",
+   "folder": "scripts/config-samples",
+   "file": "stick-1800.json",
+   "loc": 5,
+   "complexity": 1,
+   "functions": 0,
+   "type": "config",
+   "language": "config",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/create-local-signing-identity.sh",
+   "id": "scripts/create-local-signing-identity.sh",
+   "folder": "scripts",
+   "file": "create-local-signing-identity.sh",
+   "loc": 49,
+   "complexity": 1,
+   "functions": 0,
+   "type": "script",
+   "language": "shell",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  },
+  {
+   "name": "scripts/test.sh",
+   "id": "scripts/test.sh",
+   "folder": "scripts",
+   "file": "test.sh",
+   "loc": 11,
+   "complexity": 1,
+   "functions": 0,
+   "type": "script",
+   "language": "shell",
+   "target": "scripts",
+   "module": "build-scripts",
+   "types": [],
+   "dependents": 0,
+   "dependencies": 0,
+   "isHotPath": false
+  }
+ ]
+}

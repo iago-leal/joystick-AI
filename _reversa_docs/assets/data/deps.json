@@ -1,0 +1,4093 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-09-15T23:22:00Z",
+ "nodes": [
+  {
+   "id": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 178,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/EditMenu.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 33,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 56,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 39,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 57,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/SigningInfo.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 43,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/App/StatusMenu.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 55,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "module": "config",
+   "target": "JoystickAIPoC",
+   "loc": 132,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+   "module": "config",
+   "target": "JoystickAIPoC",
+   "loc": 86,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "module": "config",
+   "target": "JoystickAIPoC",
+   "loc": 71,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 77,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 54,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 25,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 103,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 63,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 35,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "module": "controller-input",
+   "target": "JoystickAIPoC",
+   "loc": 46,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "module": "pointer",
+   "target": "JoystickAIPoC",
+   "loc": 64,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "module": "pointer",
+   "target": "JoystickAIPoC",
+   "loc": 26,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 188,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 59,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 64,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 56,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 76,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 69,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 60,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 218,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 166,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 80,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 96,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "module": "editor",
+   "target": "JoystickAIPoC",
+   "loc": 21,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "module": "injection",
+   "target": "JoystickAIPoC",
+   "loc": 135,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "module": "injection",
+   "target": "JoystickAIPoC",
+   "loc": 101,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "module": "injection",
+   "target": "JoystickAIPoC",
+   "loc": 20,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "module": "diagnostics-log",
+   "target": "JoystickAIPoC",
+   "loc": 97,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "module": "palette",
+   "target": "JoystickAIPoC",
+   "loc": 146,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Palette/PalettePanel.swift",
+   "module": "palette",
+   "target": "JoystickAIPoC",
+   "loc": 157,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "module": "pointer",
+   "target": "JoystickAIPoC",
+   "loc": 50,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "module": "pointer",
+   "target": "JoystickAIPoC",
+   "loc": 65,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "module": "pointer",
+   "target": "JoystickAIPoC",
+   "loc": 99,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "module": "shortcuts",
+   "target": "JoystickAIPoC",
+   "loc": 123,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "module": "targets-analysis",
+   "target": "JoystickAIPoC",
+   "loc": 41,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "module": "targets-analysis",
+   "target": "JoystickAIPoC",
+   "loc": 43,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "module": "targets-analysis",
+   "target": "JoystickAIPoC",
+   "loc": 124,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+   "module": "targets-analysis",
+   "target": "JoystickAIPoC",
+   "loc": 56,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickAIPoC/main.swift",
+   "module": "app-shell",
+   "target": "JoystickAIPoC",
+   "loc": 6,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Analysis/LatencyStats.swift",
+   "module": "targets-analysis",
+   "target": "JoystickCore",
+   "loc": 21,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "module": "targets-analysis",
+   "target": "JoystickCore",
+   "loc": 91,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "module": "targets-analysis",
+   "target": "JoystickCore",
+   "loc": 60,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "module": "app-shell",
+   "target": "JoystickCore",
+   "loc": 118,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 37,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 74,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ConfigLineLocator.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 171,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 135,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "module": "editor",
+   "target": "JoystickCore",
+   "loc": 203,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 47,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 97,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 244,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "module": "config",
+   "target": "JoystickCore",
+   "loc": 52,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "module": "controller-input",
+   "target": "JoystickCore",
+   "loc": 58,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Input/DualSenseReport.swift",
+   "module": "controller-input",
+   "target": "JoystickCore",
+   "loc": 17,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Input/InputEvent.swift",
+   "module": "controller-input",
+   "target": "JoystickCore",
+   "loc": 84,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Input/Normalization.swift",
+   "module": "controller-input",
+   "target": "JoystickCore",
+   "loc": 33,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Input/StartupAdoption.swift",
+   "module": "controller-input",
+   "target": "JoystickCore",
+   "loc": 12,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Log/LogEvent.swift",
+   "module": "diagnostics-log",
+   "target": "JoystickCore",
+   "loc": 42,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "module": "diagnostics-log",
+   "target": "JoystickCore",
+   "loc": 280,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "module": "palette",
+   "target": "JoystickCore",
+   "loc": 156,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 78,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 27,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 118,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 52,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 28,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 36,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 47,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "module": "pointer",
+   "target": "JoystickCore",
+   "loc": 68,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "module": "shortcuts",
+   "target": "JoystickCore",
+   "loc": 89,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift",
+   "module": "shortcuts",
+   "target": "JoystickCore",
+   "loc": 10,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "module": "shortcuts",
+   "target": "JoystickCore",
+   "loc": 199,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Support/JSONValue.swift",
+   "module": "diagnostics-log",
+   "target": "JoystickCore",
+   "loc": 143,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "module": "diagnostics-log",
+   "target": "JoystickCore",
+   "loc": 7,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "module": "targets-analysis",
+   "target": "JoystickCore",
+   "loc": 161,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/poc-tools/ButtonsCommand.swift",
+   "module": "targets-analysis",
+   "target": "poc-tools",
+   "loc": 24,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/poc-tools/CyclesCommand.swift",
+   "module": "targets-analysis",
+   "target": "poc-tools",
+   "loc": 21,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/poc-tools/LatencyCommand.swift",
+   "module": "targets-analysis",
+   "target": "poc-tools",
+   "loc": 34,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/poc-tools/RunsCommand.swift",
+   "module": "targets-analysis",
+   "target": "poc-tools",
+   "loc": 55,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/poc-tools/ToolInput.swift",
+   "module": "targets-analysis",
+   "target": "poc-tools",
+   "loc": 30,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Sources/poc-tools/main.swift",
+   "module": "targets-analysis",
+   "target": "poc-tools",
+   "loc": 50,
+   "type": "code",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 40,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 88,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 76,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 177,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 89,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ConfigLineLocatorTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 84,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 159,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/DualSenseReportTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 20,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 215,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 61,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/LatencyStatsTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 25,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/LaunchArgumentsTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 82,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 52,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 203,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/NormalizationTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 52,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 87,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 71,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 52,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 35,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 72,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 56,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 207,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 87,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 234,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/StartupAdoptionTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 16,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 53,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/SupportTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 32,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 103,
+   "type": "test",
+   "language": "swift"
+  },
+  {
+   "id": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "module": "tests",
+   "target": "Tests",
+   "loc": 79,
+   "type": "test",
+   "language": "swift"
+  }
+ ],
+ "edges": [
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/App/EditMenu.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/App/EditMenu.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/App/InjectionGate.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/App/Lifecycle.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/App/PermissionMonitor.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/App/SigningInfo.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/App/SigningInfo.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/App/StatusMenu.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/App/StatusMenu.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Config/ConfigStore.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Controller/ControllerReader.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorRootView.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Palette/PaletteActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Palette/PalettePanel.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Palette/PalettePanel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/InputRouter.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickAIPoC/Targets/TargetSession.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickCore/App/LaunchArguments.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 8,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickAIPoC/Palette/PaletteActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickCore/Pointer/ClickStateMachine.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/App/Lifecycle.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/App/PermissionMonitor.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/SigningInfo.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/App/SigningInfo.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/App/StatusMenu.swift",
+   "to": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/App/StatusMenu.swift",
+   "target": "Sources/JoystickAIPoC/Config/ConfigStore.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "to": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "target": "Sources/JoystickAIPoC/Config/ConfigWriter.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 7,
+   "source": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 19,
+   "source": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+   "to": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Config/ConfigWatcher.swift",
+   "target": "Sources/JoystickAIPoC/Config/ConfigWriter.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "to": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "target": "Sources/JoystickCore/Config/ConfigDocument.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Config/ConfigWriter.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 6,
+   "source": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "to": "Sources/JoystickCore/Input/Normalization.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "target": "Sources/JoystickCore/Input/Normalization.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "to": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "target": "Sources/JoystickCore/Pointer/TouchpadTracker.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 6,
+   "source": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "to": "Sources/JoystickCore/Input/Normalization.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "target": "Sources/JoystickCore/Input/Normalization.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/AxisTouchReader.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/ButtonReader.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/ButtonReader.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/ControllerDiagnostics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickAIPoC/Controller/TransportResolver.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickCore/Input/StartupAdoption.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickCore/Input/StartupAdoption.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Controller/ControllerReader.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "to": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "target": "Sources/JoystickAIPoC/Controller/TransportResolver.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "to": "Sources/JoystickCore/Input/DualSenseReport.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "target": "Sources/JoystickCore/Input/DualSenseReport.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/ExtendedReportActivator.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "to": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "target": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Controller/TransportResolver.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "to": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "target": "Sources/JoystickCore/Pointer/Geometry.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "to": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "target": "Sources/JoystickCore/Pointer/ScreenUnion.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickAIPoC/Editor/ChordEditor.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorLabels.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 15,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickCore/Config/ActionSummary.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 8,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 7,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorLabels.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 8,
+   "source": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "to": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "target": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Editor/ChordEditor.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "to": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "target": "Sources/JoystickCore/Config/ActionSummary.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorLabels.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 11,
+   "source": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorBanners.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorBanners.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 13,
+   "source": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/PaletteTab.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "to": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorRootView.swift",
+   "target": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickAIPoC/Config/ConfigStore.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickAIPoC/Config/ConfigStore.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "weight": 6,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickCore/Config/EditorDraft.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 10,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Editor/EditorWindowController.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 10,
+   "source": "Sources/JoystickAIPoC/Editor/KeyCaptureField.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorLabels.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 11,
+   "source": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/PaletteTab.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/ActionPanel.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/ActionPanel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/ControllerFigureView.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorLabels.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorLabels.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorMetrics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "to": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Editor/ShortcutsTab.swift",
+   "target": "Sources/JoystickAIPoC/Editor/EditorViewModel.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickCore/Pointer/ClickStateMachine.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "weight": 8,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickCore/Pointer/Geometry.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickCore/Pointer/ScreenUnion.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickCore/Pointer/StickKinematics.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 16,
+   "source": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "to": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "target": "Sources/JoystickCore/Pointer/ScrollMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "to": "Sources/JoystickCore/Log/LogEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "target": "Sources/JoystickCore/Log/LogEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 4,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 10,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Palette/PalettePanel.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 6,
+   "source": "Sources/JoystickAIPoC/Palette/PalettePanel.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "to": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "weight": 5,
+   "source": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "target": "Sources/JoystickCore/Pointer/ClickStateMachine.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickAIPoC/Palette/PaletteActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickAIPoC/Palette/PaletteActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickAIPoC/Injection/ScrollInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/ButtonActions.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "weight": 6,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickCore/Pointer/ScrollMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickCore/Pointer/TouchpadTracker.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/MotionLoop.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyRepeat.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 13,
+   "source": "Sources/JoystickAIPoC/Pointer/ShortcutActions.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "to": "Sources/JoystickAIPoC/App/InjectionGate.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "target": "Sources/JoystickAIPoC/App/InjectionGate.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Display/DisplayMonitor.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Pointer/InputRouter.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Pointer/InputRouter.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "to": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetAbortMonitor.swift",
+   "target": "Sources/JoystickAIPoC/Targets/TargetSession.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 3,
+   "source": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickAIPoC/Controller/InputSink.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickAIPoC/Controller/InputSink.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickAIPoC/Display/ScreenCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickAIPoC/Injection/EventInjector.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickAIPoC/Injection/EventInjector.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickAIPoC/Log/DiagnosticLog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickAIPoC/Targets/TargetRunWriter.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickAIPoC/Targets/TargetWindow.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickCore/Pointer/ScrollMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 10,
+   "source": "Sources/JoystickAIPoC/Targets/TargetSession.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 2,
+   "source": "Sources/JoystickAIPoC/Targets/TargetWindow.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickAIPoC/main.swift",
+   "to": "Sources/JoystickAIPoC/App/AppDelegate.swift",
+   "weight": 1,
+   "source": "Sources/JoystickAIPoC/main.swift",
+   "target": "Sources/JoystickAIPoC/App/AppDelegate.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 6,
+   "source": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "to": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "target": "Sources/JoystickCore/Pointer/ScrollMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 13,
+   "source": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLineLocator.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLineLocator.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Config/PointerSettingsValidation.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 7,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 7,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 18,
+   "source": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "weight": 5,
+   "source": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 15,
+   "source": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 5,
+   "source": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 10,
+   "source": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 41,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 8,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 5,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 5,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 9,
+   "source": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 7,
+   "source": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 14,
+   "source": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 11,
+   "source": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEvent.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 5,
+   "source": "Sources/JoystickCore/Log/LogEvent.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 7,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Log/LogEvent.swift",
+   "weight": 98,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Log/LogEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Pointer/ClickStateMachine.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 14,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "to": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "target": "Sources/JoystickCore/Pointer/Geometry.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 4,
+   "source": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "to": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "weight": 9,
+   "source": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "target": "Sources/JoystickCore/Pointer/StickKinematics.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "to": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "weight": 6,
+   "source": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "target": "Sources/JoystickCore/Pointer/Geometry.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "to": "Sources/JoystickCore/Input/Normalization.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "target": "Sources/JoystickCore/Input/Normalization.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "to": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "target": "Sources/JoystickCore/Pointer/StickKinematics.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 11,
+   "source": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 5,
+   "source": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 10,
+   "source": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "to": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "weight": 2,
+   "source": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "target": "Sources/JoystickCore/Pointer/ScrollMapper.swift"
+  },
+  {
+   "from": "Sources/poc-tools/ButtonsCommand.swift",
+   "to": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/ButtonsCommand.swift",
+   "target": "Sources/JoystickCore/Analysis/LogAnalysis.swift"
+  },
+  {
+   "from": "Sources/poc-tools/ButtonsCommand.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/ButtonsCommand.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Sources/poc-tools/ButtonsCommand.swift",
+   "to": "Sources/poc-tools/ToolInput.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/ButtonsCommand.swift",
+   "target": "Sources/poc-tools/ToolInput.swift"
+  },
+  {
+   "from": "Sources/poc-tools/CyclesCommand.swift",
+   "to": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/CyclesCommand.swift",
+   "target": "Sources/JoystickCore/Analysis/LogAnalysis.swift"
+  },
+  {
+   "from": "Sources/poc-tools/CyclesCommand.swift",
+   "to": "Sources/poc-tools/ToolInput.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/CyclesCommand.swift",
+   "target": "Sources/poc-tools/ToolInput.swift"
+  },
+  {
+   "from": "Sources/poc-tools/LatencyCommand.swift",
+   "to": "Sources/JoystickCore/Analysis/LatencyStats.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/LatencyCommand.swift",
+   "target": "Sources/JoystickCore/Analysis/LatencyStats.swift"
+  },
+  {
+   "from": "Sources/poc-tools/LatencyCommand.swift",
+   "to": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/LatencyCommand.swift",
+   "target": "Sources/JoystickCore/Analysis/LogAnalysis.swift"
+  },
+  {
+   "from": "Sources/poc-tools/LatencyCommand.swift",
+   "to": "Sources/poc-tools/ToolInput.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/LatencyCommand.swift",
+   "target": "Sources/poc-tools/ToolInput.swift"
+  },
+  {
+   "from": "Sources/poc-tools/RunsCommand.swift",
+   "to": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "weight": 1,
+   "source": "Sources/poc-tools/RunsCommand.swift",
+   "target": "Sources/JoystickCore/Analysis/RunsReport.swift"
+  },
+  {
+   "from": "Sources/poc-tools/RunsCommand.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 4,
+   "source": "Sources/poc-tools/RunsCommand.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Sources/poc-tools/RunsCommand.swift",
+   "to": "Sources/poc-tools/ToolInput.swift",
+   "weight": 7,
+   "source": "Sources/poc-tools/RunsCommand.swift",
+   "target": "Sources/poc-tools/ToolInput.swift"
+  },
+  {
+   "from": "Sources/poc-tools/ToolInput.swift",
+   "to": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "weight": 2,
+   "source": "Sources/poc-tools/ToolInput.swift",
+   "target": "Sources/JoystickCore/Analysis/LogAnalysis.swift"
+  },
+  {
+   "from": "Sources/poc-tools/main.swift",
+   "to": "Sources/poc-tools/ButtonsCommand.swift",
+   "weight": 2,
+   "source": "Sources/poc-tools/main.swift",
+   "target": "Sources/poc-tools/ButtonsCommand.swift"
+  },
+  {
+   "from": "Sources/poc-tools/main.swift",
+   "to": "Sources/poc-tools/CyclesCommand.swift",
+   "weight": 2,
+   "source": "Sources/poc-tools/main.swift",
+   "target": "Sources/poc-tools/CyclesCommand.swift"
+  },
+  {
+   "from": "Sources/poc-tools/main.swift",
+   "to": "Sources/poc-tools/LatencyCommand.swift",
+   "weight": 2,
+   "source": "Sources/poc-tools/main.swift",
+   "target": "Sources/poc-tools/LatencyCommand.swift"
+  },
+  {
+   "from": "Sources/poc-tools/main.swift",
+   "to": "Sources/poc-tools/RunsCommand.swift",
+   "weight": 2,
+   "source": "Sources/poc-tools/main.swift",
+   "target": "Sources/poc-tools/RunsCommand.swift"
+  },
+  {
+   "from": "Sources/poc-tools/main.swift",
+   "to": "Sources/poc-tools/ToolInput.swift",
+   "weight": 5,
+   "source": "Sources/poc-tools/main.swift",
+   "target": "Sources/poc-tools/ToolInput.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "to": "Sources/JoystickCore/Config/ActionSummary.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "target": "Sources/JoystickCore/Config/ActionSummary.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ActionSummaryTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "to": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "target": "Sources/JoystickCore/Input/ActiveControllerRegistry.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "to": "Sources/JoystickCore/Pointer/ClickStateMachine.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "target": "Sources/JoystickCore/Pointer/ClickStateMachine.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "to": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "target": "Sources/JoystickCore/Pointer/Geometry.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/ClickStateMachineTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 31,
+   "source": "Tests/JoystickCoreTests/CommandPaletteTests.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Config/ConfigDocument.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Config/ConfigDocument.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 7,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 7,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 6,
+   "source": "Tests/JoystickCoreTests/ConfigDocumentTests.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 20,
+   "source": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 7,
+   "source": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ConfigLoaderTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/DualSenseReportTests.swift",
+   "to": "Sources/JoystickCore/Input/DualSenseReport.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/DualSenseReportTests.swift",
+   "target": "Sources/JoystickCore/Input/DualSenseReport.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "to": "Sources/JoystickCore/Config/EditorDraft.swift",
+   "weight": 30,
+   "source": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "target": "Sources/JoystickCore/Config/EditorDraft.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 10,
+   "source": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 6,
+   "source": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 10,
+   "source": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 7,
+   "source": "Tests/JoystickCoreTests/EditorDraftTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 23,
+   "source": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 16,
+   "source": "Tests/JoystickCoreTests/KeyCatalogTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LatencyStatsTests.swift",
+   "to": "Sources/JoystickCore/Analysis/LatencyStats.swift",
+   "weight": 5,
+   "source": "Tests/JoystickCoreTests/LatencyStatsTests.swift",
+   "target": "Sources/JoystickCore/Analysis/LatencyStats.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LaunchArgumentsTests.swift",
+   "to": "Sources/JoystickCore/App/LaunchArguments.swift",
+   "weight": 19,
+   "source": "Tests/JoystickCoreTests/LaunchArgumentsTests.swift",
+   "target": "Sources/JoystickCore/App/LaunchArguments.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "to": "Sources/JoystickCore/Analysis/LogAnalysis.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "target": "Sources/JoystickCore/Analysis/LogAnalysis.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "to": "Sources/JoystickCore/Log/LogEvent.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "target": "Sources/JoystickCore/Log/LogEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/LogAnalysisTests.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Config/ConfigLoader.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Log/LogEvent.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Log/LogEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Log/LogEventCatalog.swift",
+   "weight": 58,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/KeyCatalog.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/LogEventCatalogTests.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/NormalizationTests.swift",
+   "to": "Sources/JoystickCore/Input/Normalization.swift",
+   "weight": 17,
+   "source": "Tests/JoystickCoreTests/NormalizationTests.swift",
+   "target": "Sources/JoystickCore/Input/Normalization.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift",
+   "weight": 15,
+   "source": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerMotionEngine.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 11,
+   "source": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "to": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "weight": 8,
+   "source": "Tests/JoystickCoreTests/PointerMotionEngineTests.swift",
+   "target": "Sources/JoystickCore/Pointer/StickKinematics.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "to": "Sources/JoystickCore/Config/PointerSettingsValidation.swift",
+   "weight": 11,
+   "source": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "target": "Sources/JoystickCore/Config/PointerSettingsValidation.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/PointerSettingsValidationTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "to": "Sources/JoystickCore/Analysis/RunsReport.swift",
+   "weight": 6,
+   "source": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "target": "Sources/JoystickCore/Analysis/RunsReport.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 6,
+   "source": "Tests/JoystickCoreTests/RunsReportTests.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "to": "Sources/JoystickCore/Pointer/Geometry.swift",
+   "weight": 16,
+   "source": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "target": "Sources/JoystickCore/Pointer/Geometry.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "to": "Sources/JoystickCore/Pointer/ScreenUnion.swift",
+   "weight": 5,
+   "source": "Tests/JoystickCoreTests/ScreenUnionTests.swift",
+   "target": "Sources/JoystickCore/Pointer/ScreenUnion.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 8,
+   "source": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "to": "Sources/JoystickCore/Pointer/ScrollMapper.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/ScrollMapperTests.swift",
+   "target": "Sources/JoystickCore/Pointer/ScrollMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 25,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 8,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 13,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift",
+   "weight": 9,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfigValidation.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 3,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "to": "Sources/JoystickCore/Palette/CommandPalette.swift",
+   "weight": 5,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "target": "Sources/JoystickCore/Palette/CommandPalette.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 7,
+   "source": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 26,
+   "source": "Tests/JoystickCoreTests/ShortcutDefaultsTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "weight": 7,
+   "source": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutConfig.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "to": "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "target": "Sources/JoystickCore/Config/ShortcutDefaults.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "to": "Sources/JoystickCore/Input/InputEvent.swift",
+   "weight": 4,
+   "source": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "target": "Sources/JoystickCore/Input/InputEvent.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "to": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift",
+   "weight": 78,
+   "source": "Tests/JoystickCoreTests/ShortcutMapperTests.swift",
+   "target": "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/StartupAdoptionTests.swift",
+   "to": "Sources/JoystickCore/Input/StartupAdoption.swift",
+   "weight": 6,
+   "source": "Tests/JoystickCoreTests/StartupAdoptionTests.swift",
+   "target": "Sources/JoystickCore/Input/StartupAdoption.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "to": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "weight": 14,
+   "source": "Tests/JoystickCoreTests/StickKinematicsTests.swift",
+   "target": "Sources/JoystickCore/Pointer/StickKinematics.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/SupportTests.swift",
+   "to": "Sources/JoystickCore/Support/JSONValue.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/SupportTests.swift",
+   "target": "Sources/JoystickCore/Support/JSONValue.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/SupportTests.swift",
+   "to": "Sources/JoystickCore/Support/MonotonicClock.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/SupportTests.swift",
+   "target": "Sources/JoystickCore/Support/MonotonicClock.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "to": "Sources/JoystickCore/Pointer/PointerSettings.swift",
+   "weight": 1,
+   "source": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "target": "Sources/JoystickCore/Pointer/PointerSettings.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "to": "Sources/JoystickCore/Targets/TargetRun.swift",
+   "weight": 17,
+   "source": "Tests/JoystickCoreTests/TargetRunTests.swift",
+   "target": "Sources/JoystickCore/Targets/TargetRun.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "to": "Sources/JoystickCore/Pointer/StickKinematics.swift",
+   "weight": 2,
+   "source": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "target": "Sources/JoystickCore/Pointer/StickKinematics.swift"
+  },
+  {
+   "from": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "to": "Sources/JoystickCore/Pointer/TouchpadTracker.swift",
+   "weight": 10,
+   "source": "Tests/JoystickCoreTests/TouchpadTrackerTests.swift",
+   "target": "Sources/JoystickCore/Pointer/TouchpadTracker.swift"
+  }
+ ],
+ "cycles": [
+  [
+   "Sources/JoystickCore/Config/ShortcutConfig.swift",
+   "Sources/JoystickCore/Config/ShortcutDefaults.swift",
+   "Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"
+  ],
+  [
+   "Sources/JoystickCore/Config/ConfigLoader.swift",
+   "Sources/JoystickCore/Log/LogEventCatalog.swift"
+  ]
+ ],
+ "moduleEdges": [
+  {
+   "from": "app-shell",
+   "to": "config",
+   "weight": 10
+  },
+  {
+   "from": "app-shell",
+   "to": "controller-input",
+   "weight": 9
+  },
+  {
+   "from": "app-shell",
+   "to": "diagnostics-log",
+   "weight": 25
+  },
+  {
+   "from": "app-shell",
+   "to": "editor",
+   "weight": 6
+  },
+  {
+   "from": "app-shell",
+   "to": "injection",
+   "weight": 6
+  },
+  {
+   "from": "app-shell",
+   "to": "palette",
+   "weight": 8
+  },
+  {
+   "from": "app-shell",
+   "to": "pointer",
+   "weight": 17
+  },
+  {
+   "from": "app-shell",
+   "to": "shortcuts",
+   "weight": 7
+  },
+  {
+   "from": "app-shell",
+   "to": "targets-analysis",
+   "weight": 7
+  },
+  {
+   "from": "config",
+   "to": "controller-input",
+   "weight": 23
+  },
+  {
+   "from": "config",
+   "to": "diagnostics-log",
+   "weight": 54
+  },
+  {
+   "from": "config",
+   "to": "palette",
+   "weight": 9
+  },
+  {
+   "from": "config",
+   "to": "pointer",
+   "weight": 12
+  },
+  {
+   "from": "config",
+   "to": "shortcuts",
+   "weight": 29
+  },
+  {
+   "from": "controller-input",
+   "to": "diagnostics-log",
+   "weight": 33
+  },
+  {
+   "from": "controller-input",
+   "to": "pointer",
+   "weight": 3
+  },
+  {
+   "from": "diagnostics-log",
+   "to": "config",
+   "weight": 4
+  },
+  {
+   "from": "diagnostics-log",
+   "to": "controller-input",
+   "weight": 7
+  },
+  {
+   "from": "diagnostics-log",
+   "to": "palette",
+   "weight": 1
+  },
+  {
+   "from": "diagnostics-log",
+   "to": "pointer",
+   "weight": 4
+  },
+  {
+   "from": "diagnostics-log",
+   "to": "targets-analysis",
+   "weight": 3
+  },
+  {
+   "from": "editor",
+   "to": "config",
+   "weight": 45
+  },
+  {
+   "from": "editor",
+   "to": "controller-input",
+   "weight": 37
+  },
+  {
+   "from": "editor",
+   "to": "diagnostics-log",
+   "weight": 13
+  },
+  {
+   "from": "editor",
+   "to": "injection",
+   "weight": 1
+  },
+  {
+   "from": "editor",
+   "to": "palette",
+   "weight": 6
+  },
+  {
+   "from": "editor",
+   "to": "shortcuts",
+   "weight": 28
+  },
+  {
+   "from": "injection",
+   "to": "diagnostics-log",
+   "weight": 11
+  },
+  {
+   "from": "injection",
+   "to": "pointer",
+   "weight": 17
+  },
+  {
+   "from": "injection",
+   "to": "shortcuts",
+   "weight": 16
+  },
+  {
+   "from": "palette",
+   "to": "controller-input",
+   "weight": 5
+  },
+  {
+   "from": "palette",
+   "to": "diagnostics-log",
+   "weight": 7
+  },
+  {
+   "from": "palette",
+   "to": "injection",
+   "weight": 2
+  },
+  {
+   "from": "palette",
+   "to": "shortcuts",
+   "weight": 4
+  },
+  {
+   "from": "pointer",
+   "to": "config",
+   "weight": 1
+  },
+  {
+   "from": "pointer",
+   "to": "controller-input",
+   "weight": 18
+  },
+  {
+   "from": "pointer",
+   "to": "diagnostics-log",
+   "weight": 16
+  },
+  {
+   "from": "pointer",
+   "to": "injection",
+   "weight": 8
+  },
+  {
+   "from": "pointer",
+   "to": "palette",
+   "weight": 2
+  },
+  {
+   "from": "pointer",
+   "to": "shortcuts",
+   "weight": 2
+  },
+  {
+   "from": "pointer",
+   "to": "targets-analysis",
+   "weight": 2
+  },
+  {
+   "from": "shortcuts",
+   "to": "config",
+   "weight": 8
+  },
+  {
+   "from": "shortcuts",
+   "to": "controller-input",
+   "weight": 13
+  },
+  {
+   "from": "shortcuts",
+   "to": "diagnostics-log",
+   "weight": 1
+  },
+  {
+   "from": "shortcuts",
+   "to": "injection",
+   "weight": 2
+  },
+  {
+   "from": "targets-analysis",
+   "to": "app-shell",
+   "weight": 2
+  },
+  {
+   "from": "targets-analysis",
+   "to": "controller-input",
+   "weight": 8
+  },
+  {
+   "from": "targets-analysis",
+   "to": "diagnostics-log",
+   "weight": 17
+  },
+  {
+   "from": "targets-analysis",
+   "to": "injection",
+   "weight": 1
+  },
+  {
+   "from": "targets-analysis",
+   "to": "pointer",
+   "weight": 17
+  },
+  {
+   "from": "tests",
+   "to": "app-shell",
+   "weight": 19
+  },
+  {
+   "from": "tests",
+   "to": "config",
+   "weight": 154
+  },
+  {
+   "from": "tests",
+   "to": "controller-input",
+   "weight": 56
+  },
+  {
+   "from": "tests",
+   "to": "diagnostics-log",
+   "weight": 78
+  },
+  {
+   "from": "tests",
+   "to": "editor",
+   "weight": 30
+  },
+  {
+   "from": "tests",
+   "to": "palette",
+   "weight": 53
+  },
+  {
+   "from": "tests",
+   "to": "pointer",
+   "weight": 134
+  },
+  {
+   "from": "tests",
+   "to": "shortcuts",
+   "weight": 166
+  },
+  {
+   "from": "tests",
+   "to": "targets-analysis",
+   "weight": 43
+  }
+ ]
+}

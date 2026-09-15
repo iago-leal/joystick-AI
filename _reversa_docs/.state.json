@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-09-15T23:28:59Z",
+  "lastCheckpoint": "2026-09-15T23:45:49Z",
+  "completedAgents": [
+    "mapper",
+    "analyst",
+    "storyteller",
+    "publisher"
+  ],
+  "pendingAgents": [],
+  "pages": {
+    "arquitetura.html": {
+      "status": "created",
+      "agent": "reversa-docs-mapper",
+      "hash": "sha256:b3b9c914cfe8a32730bb7104da7f4b6518902a923f6092a65f75683cd670df50"
+    },
+    "modulos.html": {
+      "status": "created",
+      "agent": "reversa-docs-mapper",
+      "hash": "sha256:91dc2b3d0f8f1c2bd1589d1184e4ac71120c034c9862aa2e2ae1df32274648e9"
+    },
+    "metricas.html": {
+      "status": "created",
+      "agent": "reversa-docs-analyst",
+      "hash": "sha256:bcbaea3111b90a8a99c457a29cc0c8613dad3af8fa7e1c0012b686ea33a8a7b1"
+    },
+    "glossario.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:63daba30f681cd39486940ce06c627bf3ad766a00609c8e01d8a44db9f8672e8"
+    },
+    "deck.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:15565d17b63db1860dd03b24cd654edf4dda62093748375d817b726994e7e171"
+    },
+    "features/aplicativo.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:2bc8973df5a8dfd5f02f8e50934d71f9035f14a559d3aa8a1ced9d23d058d09c"
+    },
+    "features/atalhos.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:dca7291386fb34adc01896a0401bafc301709b194821ceadff8ee2b2836c63f1"
+    },
+    "features/configuracao.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:fd6a62932da48f3c71c917f9f833cc46d27226fa03f9f1f13b5e059e1431d801"
+    },
+    "features/editor.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:f38723490da03e9af44df6a300e57154c10aa3623c54f11c49c568b0f793f79f"
+    },
+    "features/entrada-do-controle.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:56c551b5bf90c074c3ff9720b34ce3a0645cea306d5a4dedc3ed7b1d4381f6c9"
+    },
+    "features/injecao-de-eventos.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:cb2f752c485ca4849dd4a2506e83d8c68cf057568e583acb5e98e94179fe757e"
+    },
+    "features/log-de-diagnostico.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:910af30c6fe710f17b2ce8578a11d9f6e520b18ee3a5de83814a024b5971c3c2"
+    },
+    "features/paleta.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:6a21b0608b21b4cce7e432febdc37ce4f910f5dd47b45861666d013988a713cf"
+    },
+    "features/ponteiro.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:20c8e416ba6389ae62ba0e19884351e04e365e97865d4f88b177db207ffbeae1"
+    },
+    "features/tela-de-alvos-e-analise.html": {
+      "status": "created",
+      "agent": "reversa-docs-storyteller",
+      "hash": "sha256:8e62ec1086965e8319c1367c007c090a3ffdfda024926e4c8f3926ceb9a66324"
+    },
+    "index.html": {
+      "status": "created",
+      "agent": "reversa-docs-publisher",
+      "hash": "sha256:e6ce8a5ff6c785691d0f193c75d99d83ca3add8f2496806b66b3853994d76a9c"
+    },
+    "topologia.html": {
+      "status": "created",
+      "agent": "reversa-docs-publisher",
+      "hash": "sha256:d3de5e3e9b96fe9177274c99fec8fae316c234b70cf6ff80cbf7d6b2280d7c47",
+      "placeholder": true
+    },
+    "timeline.html": {
+      "status": "created",
+      "agent": "reversa-docs-publisher",
+      "hash": "sha256:32935398302a0ac965513b3f140c760c9e11fc301bb2399931fba6b1f90d798b",
+      "placeholder": true
+    }
+  },
+  "pagesGenerated": [
+    "index.html",
+    "arquitetura.html",
+    "modulos.html",
+    "metricas.html",
+    "glossario.html",
+    "deck.html",
+    "features/aplicativo.html",
+    "features/atalhos.html",
+    "features/configuracao.html",
+    "features/editor.html",
+    "features/entrada-do-controle.html",
+    "features/injecao-de-eventos.html",
+    "features/log-de-diagnostico.html",
+    "features/paleta.html",
+    "features/ponteiro.html",
+    "features/tela-de-alvos-e-analise.html"
+  ],
+  "pagesOmitted": [
+    {
+      "page": "topologia.html",
+      "reason": "topology not detected: _reversa_sdd/architecture.md não declara variantes de topologia (legado/moderno/híbrido)"
+    },
+    {
+      "page": "timeline.html",
+      "reason": "chronicle.md not found: .reversa/chronicle.md ausente (rode /reversa-chronicler para habilitar)"
+    }
+  ],
+  "auxiliaryHtmls": [],
+  "auxiliaryHtmlsDiscovered": 0,
+  "cdnFallbackUsed": true,
+  "cdnFallbackDetails": [
+    {
+      "lib": "highcharts",
+      "primary": "https://code.highcharts.com/11.4.8/highcharts.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/highcharts.js"
+    },
+    {
+      "lib": "highcharts_accessibility",
+      "primary": "https://code.highcharts.com/11.4.8/modules/accessibility.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/accessibility.js"
+    },
+    {
+      "lib": "highcharts_exporting",
+      "primary": "https://code.highcharts.com/11.4.8/modules/exporting.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/exporting.js"
+    },
+    {
+      "lib": "highcharts_treemap",
+      "primary": "https://code.highcharts.com/11.4.8/modules/treemap.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/treemap.js"
+    },
+    {
+      "lib": "highcharts_sankey",
+      "primary": "https://code.highcharts.com/11.4.8/modules/sankey.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/sankey.js"
+    },
+    {
+      "lib": "highcharts_timeline",
+      "primary": "https://code.highcharts.com/11.4.8/modules/timeline.js",
+      "used": "https://cdn.jsdelivr.net/npm/highcharts@11.4.8/modules/timeline.js"
+    }
+  ],
+  "vendorMissing": [],
+  "smokeTestFailed": false,
+  "smokeTestErrors": [],
+  "brokenLinks": [],
+  "pipelineDurationMs": 1010782,
+  "auxiliaryDiscoveryAborted": false,
+  "placeholders": [
+    "topologia.html",
+    "timeline.html"
+  ],
+  "seal": {
+    "pattern": "wave-interference",
+    "seed": "sha256:f789888295984b428a52ad6744c06131ea1921d1e22a50e429d02ab05987e4bd"
+  },
+  "publisherDurationMs": 580
+}

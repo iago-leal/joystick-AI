@@ -1,0 +1,327 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-09-15T23:40:56Z",
+ "sddRoot": "_reversa_sdd",
+ "specs": [
+  {
+   "id": "aplicativo",
+   "slug": "aplicativo",
+   "title": "Aplicativo",
+   "fullTitle": "Aplicativo (app-shell)",
+   "module": "app-shell",
+   "icon": "🖥",
+   "tldr": "Processo agente do macOS que monta todos os componentes na ordem certa, controla a permissão de Acessibilidade, garante que nada fica pressionado ao encerrar e oferece o ícone da barra de menus. É a casca que transforma os módulos do núcleo num app residente, sem Dock, operável só pelo controle. 🟢",
+   "page": "features/aplicativo.html",
+   "counts": {
+    "rules": 16,
+    "functional": 12,
+    "nonFunctional": 6,
+    "acceptance": 8
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "app-shell",
+    "files": 8,
+    "loc": 552,
+    "functions": 17,
+    "types": 8,
+    "complexity_sum": 119,
+    "complexity_max": 46,
+    "dependents": 9,
+    "complexity_avg": 14.9
+   }
+  },
+  {
+   "id": "atalhos",
+   "slug": "atalhos",
+   "title": "Atalhos",
+   "fullTitle": "Atalhos (shortcuts)",
+   "module": "shortcuts",
+   "icon": "⌨",
+   "tldr": "Converte os botões do controle que não são de apontamento em acordes de teclado, atalhos de sistema do macOS, textos e abertura da paleta, segundo um mapeamento em camadas: uma base e uma camada por botão modificador. A decisão é pura (`ShortcutMapper`, no núcleo); a execução, com repetição e leitura das preferências do sistema, fica no app (`ShortcutActions`). 🟢",
+   "page": "features/atalhos.html",
+   "counts": {
+    "rules": 22,
+    "functional": 9,
+    "nonFunctional": 4,
+    "acceptance": 8
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "shortcuts",
+    "files": 4,
+    "loc": 421,
+    "functions": 18,
+    "types": 12,
+    "complexity_sum": 106,
+    "complexity_max": 65,
+    "dependents": 37,
+    "complexity_avg": 26.5
+   }
+  },
+  {
+   "id": "configuracao",
+   "slug": "configuracao",
+   "title": "Configuração",
+   "fullTitle": "Configuração (config)",
+   "module": "config",
+   "icon": "🗂",
+   "tldr": "Lê, valida, localiza erros, observa, grava e aplica `~/.config/joystick-ai/config.json`, com três seções: `pointer` (ajustes do ponteiro, lidos só ao iniciar), `shortcuts` e `palette` (validadas em conjunto e reaplicadas sem reiniciar). O app nunca cria o arquivo por conta própria; só o editor grava. 🟢",
+   "page": "features/configuracao.html",
+   "counts": {
+    "rules": 32,
+    "functional": 10,
+    "nonFunctional": 6,
+    "acceptance": 7
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "config",
+    "files": 11,
+    "loc": 1146,
+    "functions": 68,
+    "types": 30,
+    "complexity_sum": 310,
+    "complexity_max": 93,
+    "dependents": 62,
+    "complexity_avg": 28.2
+   }
+  },
+  {
+   "id": "editor",
+   "slug": "editor",
+   "title": "Editor",
+   "fullTitle": "Editor de atalhos (editor)",
+   "module": "editor",
+   "icon": "✏️",
+   "tldr": "Janela em escala de TV para editar camadas, ações, modificadores e a lista da paleta, operável do sofá pelo ponteiro do controle e, na mesa, pelo teclado. As regras ficam num rascunho puro (`EditorDraft`), validado pelas mesmas regras da leitura do arquivo; a interface SwiftUI e a janela AppKit cuidam de seleção, identificação pelo controle, gravação, conflitos e ativação da janela. 🟢",
+   "page": "features/editor.html",
+   "counts": {
+    "rules": 34,
+    "functional": 13,
+    "nonFunctional": 5,
+    "acceptance": 7
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "editor",
+    "files": 14,
+    "loc": 1389,
+    "functions": 84,
+    "types": 27,
+    "complexity_sum": 293,
+    "complexity_max": 59,
+    "dependents": 32,
+    "complexity_avg": 20.9
+   }
+  },
+  {
+   "id": "entrada-do-controle",
+   "slug": "entrada-do-controle",
+   "title": "Entrada do controle",
+   "fullTitle": "Entrada do controle (controller-input)",
+   "module": "controller-input",
+   "icon": "🎮",
+   "tldr": "Descobre controles DualSense conectados por USB ou Bluetooth, elege um único controle ativo e converte seus 18 botões, dois analógicos e dois dedos do touchpad em `InputEvent` normalizados, entregues à fila `input` mesmo com outro aplicativo em primeiro plano. 🟢",
+   "page": "features/entrada-do-controle.html",
+   "counts": {
+    "rules": 17,
+    "functional": 10,
+    "nonFunctional": 5,
+    "acceptance": 7
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "controller-input",
+    "files": 12,
+    "loc": 607,
+    "functions": 33,
+    "types": 27,
+    "complexity_sum": 118,
+    "complexity_max": 27,
+    "dependents": 64,
+    "complexity_avg": 9.8
+   }
+  },
+  {
+   "id": "injecao-de-eventos",
+   "slug": "injecao-de-eventos",
+   "title": "Injeção de eventos",
+   "fullTitle": "Injeção de eventos (injection)",
+   "module": "injection",
+   "icon": "⚡",
+   "tldr": "Posta eventos sintéticos de mouse, rolagem e teclado no macOS por `CGEvent`, com uma marca que os distingue do hardware físico. É o único ponto do app que produz efeito fora do processo. 🟢",
+   "page": "features/injecao-de-eventos.html",
+   "counts": {
+    "rules": 17,
+    "functional": 9,
+    "nonFunctional": 4,
+    "acceptance": 7
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "injection",
+    "files": 3,
+    "loc": 256,
+    "functions": 21,
+    "types": 3,
+    "complexity_sum": 61,
+    "complexity_max": 29,
+    "dependents": 14,
+    "complexity_avg": 20.3
+   }
+  },
+  {
+   "id": "log-de-diagnostico",
+   "slug": "log-de-diagnostico",
+   "title": "Log de diagnóstico",
+   "fullTitle": "Log de diagnóstico (diagnostics-log)",
+   "module": "diagnostics-log",
+   "icon": "📜",
+   "tldr": "Registro local em JSON Lines, um arquivo por sessão, com carimbos monotônicos para medir latência e 50 eventos tipados que nunca carregam coordenadas, deltas, valores de eixo, teclas ou textos digitados. É a fonte das análises de `poc-tools` e das validações das features. Inclui os tipos de apoio `JSONValue` e `MonotonicClock`. 🟢",
+   "page": "features/log-de-diagnostico.html",
+   "counts": {
+    "rules": 14,
+    "functional": 7,
+    "nonFunctional": 5,
+    "acceptance": 5
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "diagnostics-log",
+    "files": 5,
+    "loc": 569,
+    "functions": 58,
+    "types": 20,
+    "complexity_sum": 123,
+    "complexity_max": 60,
+    "dependents": 68,
+    "complexity_avg": 24.6
+   }
+  },
+  {
+   "id": "paleta",
+   "slug": "paleta",
+   "title": "Paleta",
+   "fullTitle": "Paleta de comandos (palette)",
+   "module": "palette",
+   "icon": "🎨",
+   "tldr": "Lista flutuante de textos prontos (comandos do Claude Code e do Reversa), operada pelo controle e legível a 3 m. Confirmar um item digita o texto no aplicativo em foco, sem tirar esse foco. A última entrada, fixa, abre o editor de atalhos. A decisão é pura (`PaletteMachine`); a execução e o desenho ficam no app (`PaletteActions`, `PalettePanel`). 🟢",
+   "page": "features/paleta.html",
+   "counts": {
+    "rules": 18,
+    "functional": 11,
+    "nonFunctional": 4,
+    "acceptance": 8
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "palette",
+    "files": 3,
+    "loc": 459,
+    "functions": 27,
+    "types": 10,
+    "complexity_sum": 75,
+    "complexity_max": 32,
+    "dependents": 20,
+    "complexity_avg": 25.0
+   }
+  },
+  {
+   "id": "ponteiro",
+   "slug": "ponteiro",
+   "title": "Ponteiro",
+   "fullTitle": "Ponteiro (pointer)",
+   "module": "pointer",
+   "icon": "🖱",
+   "tldr": "Transforma o controle em mouse: o analógico esquerdo e o touchpad movem o cursor, o analógico direito rola, R1 e o clique do touchpad fazem o botão esquerdo e R2 o direito, e L1 sozinho reduz a velocidade. Também distribui cada entrada entre cliques, atalhos, paleta, editor e movimento, e mantém o cursor dentro das telas conectadas. 🟢",
+   "page": "features/ponteiro.html",
+   "counts": {
+    "rules": 22,
+    "functional": 8,
+    "nonFunctional": 5,
+    "acceptance": 10
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "pointer",
+    "files": 13,
+    "loc": 758,
+    "functions": 44,
+    "types": 25,
+    "complexity_sum": 154,
+    "complexity_max": 29,
+    "dependents": 67,
+    "complexity_avg": 11.8
+   }
+  },
+  {
+   "id": "tela-de-alvos-e-analise",
+   "slug": "tela-de-alvos-e-analise",
+   "title": "Tela de alvos e análise",
+   "fullTitle": "Tela de alvos e análise (targets-analysis)",
+   "module": "targets-analysis",
+   "icon": "🎯",
+   "tldr": "Instrumentos de validação da PoC. A tela de alvos mede a precisão do ponteiro em sequências reproduzíveis de 20 alvos de 16 pt, em mesa ou sofá, e grava cada sequência em JSON. A CLI `poc-tools` lê os logs de diagnóstico e esses resultados para produzir as tabelas dos blocos de validação: cobertura de botões, sequências de alvos, latências e ciclos de conexão. 🟢",
+   "page": "features/tela-de-alvos-e-analise.html",
+   "counts": {
+    "rules": 25,
+    "functional": 10,
+    "nonFunctional": 5,
+    "acceptance": 7
+   },
+   "files": {
+    "requirements": true,
+    "design": true,
+    "tasks": true
+   },
+   "metrics": {
+    "module": "targets-analysis",
+    "files": 14,
+    "loc": 811,
+    "functions": 39,
+    "types": 27,
+    "complexity_sum": 124,
+    "complexity_max": 24,
+    "dependents": 34,
+    "complexity_avg": 8.9
+   }
+  }
+ ]
+}

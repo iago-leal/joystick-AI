@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Métricas · joystick-AI</title>
+<meta name="reversa-category" content="diagram">
+<meta name="reversa-producer-agent" content="reversa-docs-analyst">
+<meta name="reversa-template" content="metricas">
+<meta name="reversa-visual-style" content="premium">
+<meta name="reversa-generated-at" content="2026-09-15T23:35:40Z">
+<meta name="description" content="Dashboard de métricas do joystick-AI: linhas por pasta, complexidade, hot path, histograma, distribuição por alvo e sankey de dependências.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27%230a0a14%27 stroke=%27%23d4af37%27 stroke-width=%273%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2712%27 fill=%27%23d4af37%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/reversa.css">
+<!-- HEAD_EXTRAS -->
+<script src="assets/vendor/highcharts.js"></script>
+<script src="assets/vendor/highcharts-accessibility.js"></script>
+<script src="assets/vendor/highcharts-exporting.js"></script>
+<script src="assets/vendor/highcharts-treemap.js"></script>
+<script src="assets/vendor/highcharts-sankey.js"></script>
+<style>
+.dash{display:grid;gap:18px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:1000px){.dash{grid-template-columns:1fr}}
+.chart-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 8px;min-width:0}
+.chart-card.wide{grid-column:1 / -1}
+.chart-card h3{margin:0 0 2px;font-size:1.05rem}
+.chart-card .sub{color:var(--muted);font-size:.8rem;margin-bottom:6px}
+.chart{height:380px;width:100%}
+.chart.tall{height:520px}
+.highcharts-credits{display:none}
+</style>
+</head>
+<body data-page-id="metricas" data-style="premium" data-base="">
+<header class="rv-header">
+  <a class="rv-brand" href="index.html"><span class="seal-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Selo do projeto joystick-AI" class="seal-mini">
+<defs><clipPath id="clip64"><circle cx="32.0" cy="32.0" r="31.04"/></clipPath><radialGradient id="glow64" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f4d03f" stop-opacity=".22"/><stop offset="1" stop-color="#0a0a14" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32.0" cy="32.0" r="31.04" fill="#0a0a14"/>
+<g clip-path="url(#clip64)">
+<circle cx="20.2" cy="31.1" r="2.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.84"/>
+<circle cx="20.2" cy="31.1" r="6.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="20.2" cy="31.1" r="10.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.78"/>
+<circle cx="20.2" cy="31.1" r="14.5" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="20.2" cy="31.1" r="18.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.73"/>
+<circle cx="20.2" cy="31.1" r="22.8" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.70"/>
+<circle cx="20.2" cy="31.1" r="27.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.67"/>
+<circle cx="20.2" cy="31.1" r="31.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.65"/>
+<circle cx="20.2" cy="31.1" r="35.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.62"/>
+<circle cx="20.2" cy="31.1" r="39.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="20.2" cy="31.1" r="43.6" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.57"/>
+<circle cx="20.2" cy="31.1" r="47.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.54"/>
+<circle cx="20.2" cy="31.1" r="51.9" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.51"/>
+<circle cx="20.2" cy="31.1" r="56.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.49"/>
+<circle cx="20.2" cy="31.1" r="60.2" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="6.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="43.8" cy="42.3" r="13.2" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="43.8" cy="42.3" r="19.9" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.72"/>
+<circle cx="43.8" cy="42.3" r="26.6" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.68"/>
+<circle cx="43.8" cy="42.3" r="33.4" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.63"/>
+<circle cx="43.8" cy="42.3" r="40.1" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="43.8" cy="42.3" r="46.8" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.55"/>
+<circle cx="43.8" cy="42.3" r="53.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.50"/>
+<circle cx="43.8" cy="42.3" r="60.3" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="67.0" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.41"/>
+<circle cx="43.8" cy="42.3" r="73.7" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.37"/>
+<circle cx="32.0" cy="32.0" r="32.0" fill="url(#glow64)"/>
+</g>
+<circle cx="32.0" cy="32.0" r="31.04" fill="none" stroke="#d4af37" stroke-width="1.0" stroke-opacity=".9"/>
+<circle cx="32.0" cy="32.0" r="28.8" fill="none" stroke="#f4d03f" stroke-width="0.5" stroke-opacity=".5"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="#f4d03f"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="none" stroke="#0a0a14" stroke-width="1.0" stroke-opacity=".6"/>
+</svg></span><span>joystick-AI<small>Reversa Docs</small></span></a>
+  <button class="rv-nav-toggle" aria-label="Menu">☰</button>
+  <nav class="reversa-doc-nav" aria-label="Páginas do mini-site"><a href="index.html" data-page-id="index">Visão geral</a><a href="arquitetura.html" data-page-id="arquitetura">Arquitetura 3D</a><a href="modulos.html" data-page-id="modulos">Módulos</a><a href="metricas.html" data-page-id="metricas">Métricas</a><a href="glossario.html" data-page-id="glossario">Glossário</a><a href="deck.html" data-page-id="deck">Deck</a><a href="index.html#features" data-page-id="features">Features</a></nav>
+</header>
+<!-- PAYLOAD -->
+
+<main class="rv-main wide">
+  <div class="eyebrow reveal">Analyst · dados quantitativos</div>
+  <h1 class="reveal">Métricas do código</h1>
+  <p class="lead reveal">Linhas, complexidade, distribuição e fluxo de dependências do joystick-AI, derivados por análise estática dos arquivos Swift. Complexidade é uma aproximação ciclomática: contagem de ramificações (if, guard, for, while, case, catch, operadores lógicos) por arquivo.</p>
+  <div class="kpis" id="kpis"></div>
+  <div class="dash">
+    <div class="chart-card wide"><h3>Linhas por alvo e pasta</h3><div class="sub">Treemap hierárquico: clique num alvo SwiftPM para descer até as pastas.</div><div id="c-treemap" class="chart tall"></div></div>
+    <div class="chart-card"><h3>Arquivos mais complexos</h3><div class="sub">Top 20 por ramificações. Barras coloridas pelo módulo lógico.</div><div id="c-complexity" class="chart tall"></div></div>
+    <div class="chart-card"><h3>Arquivos mais usados (hot path)</h3><div class="sub">Top 15 por número de arquivos que os referenciam.</div><div id="c-dependents" class="chart tall"></div></div>
+    <div class="chart-card"><h3>Distribuição de tamanho</h3><div class="sub">Histograma de linhas não vazias por arquivo Swift.</div><div id="c-hist" class="chart"></div></div>
+    <div class="chart-card"><h3>Linhas por alvo</h3><div class="sub">Código de produção, testes, ferramentas e scripts.</div><div id="c-target" class="chart"></div></div>
+    <div class="chart-card wide"><h3>Fluxo de dependências entre módulos</h3><div class="sub">Sankey de referências de tipo, agregado por alvo e módulo lógico. Elos que fechariam ciclo foram removidos (listados abaixo).</div><div id="c-sankey" class="chart tall"></div><div id="dropped" class="sub"></div></div>
+    <div class="chart-card wide"><h3>Módulos lógicos</h3><div class="sub">Resumo por módulo, ordenado por linhas.</div><div id="c-modules" class="chart"></div><table id="t-modules"></table></div>
+  </div>
+</main>
+
+<!-- /PAYLOAD -->
+<footer class="rv-footer">
+  <span>Gerado por <code>reversa-docs-analyst</code> em 15/09/2026 20:35</span>
+  <span>Seed <code>f7898882</code></span>
+  <span>Reversa 1.3.3 · estilo premium</span>
+</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<!-- SCRIPTS -->
+<script>
+(function(){
+  var M = (window.RV_DATA && window.RV_DATA.metrics) || {};
+  if (!window.Highcharts){ document.querySelectorAll('.chart').forEach(function(c){ c.innerHTML = '<p class="hint">Esta página requer a biblioteca Highcharts em assets/vendor/. Conecte-se à internet e rode /reversa-docs novamente.</p>'; }); return; }
+  if (!M.kpis){ document.getElementById('kpis').innerHTML = '<p class="hint">Sem métricas (window.RV_DATA.metrics vazio).</p>'; return; }
+  var PAL = {"app-shell":"#d4af37","controller-input":"#4a9eff","pointer":"#a0e7e5","injection":"#ff7a3e","shortcuts":"#c9b6e8","palette":"#e93f8f","config":"#ffc857","editor":"#a83244","diagnostics-log":"#6cc46c","targets-analysis":"#5b3fce","tests":"#4f6b5d","build-scripts":"#8a8a99","support":"#b8b8b8","other":"#666677"};
+  var TPAL = {"JoystickAIPoC":"#d4af37","JoystickCore":"#4a9eff","poc-tools":"#e93f8f","Tests":"#4f6b5d","scripts":"#8a8a99","root":"#666677"};
+  var fmt = function(n){ return Highcharts.numberFormat(n, 0, ',', '.'); };
+  Highcharts.setOptions({
+    lang: {decimalPoint: ',', thousandsSep: '.', contextButtonTitle: 'Exportar', downloadPNG: 'Baixar PNG', downloadSVG: 'Baixar SVG', printChart: 'Imprimir', viewFullscreen: 'Tela cheia', exitFullscreen: 'Sair da tela cheia'},
+    colors: ['#d4af37','#4a9eff','#a83244','#a0e7e5','#c9b6e8','#ff7a3e','#6cc46c','#e93f8f','#5b3fce','#b8b8b8'],
+    chart: {backgroundColor: 'transparent', style: {fontFamily: 'inherit'}, animation: {duration: 700}},
+    title: {text: null}, credits: {enabled: false},
+    xAxis: {labels: {style: {color: '#c8c8d4'}}, lineColor: '#33334a', tickColor: '#33334a', gridLineColor: '#26263a', title: {style: {color: '#9a9ab0'}}},
+    yAxis: {labels: {style: {color: '#c8c8d4'}}, gridLineColor: '#26263a', title: {style: {color: '#9a9ab0'}}},
+    legend: {itemStyle: {color: '#c8c8d4'}, itemHoverStyle: {color: '#f4d03f'}},
+    tooltip: {backgroundColor: 'rgba(14,14,24,.96)', borderColor: 'rgba(212,175,55,.45)', style: {color: '#eaeaea'}},
+    plotOptions: {series: {dataLabels: {style: {color: '#eaeaea', textOutline: 'none'}}, borderColor: '#0a0a14'}},
+    exporting: {buttons: {contextButton: {symbolStroke: '#9a9ab0', theme: {fill: 'transparent'}}}},
+    accessibility: {landmarkVerbosity: 'one'}
+  });
+  var K = M.kpis;
+  document.getElementById('kpis').innerHTML = [
+    [fmt(K.loc_swift), 'linhas Swift'], [K.swift_files, 'arquivos Swift'], [K.functions, 'funções'], [K.types, 'tipos declarados'],
+    [K.complexity_avg.toString().replace('.', ','), 'complexidade média'], [K.test_ratio.toString().replace('.', ','), 'linhas de teste por linha de código'], [K.edges, 'referências entre arquivos'], [K.cycles, 'ciclos']
+  ].map(function(k){ return '<div class="kpi reveal"><div class="n">' + k[0] + '</div><div class="l">' + k[1] + '</div></div>'; }).join('');
+
+  // 1. treemap target -> folder
+  var tm = [], targets = {};
+  M.treemap_loc_by_folder.forEach(function(f){ targets[f.target] = (targets[f.target] || 0) + f.loc; });
+  Object.keys(targets).forEach(function(t){ tm.push({id: 't-' + t, name: t, color: TPAL[t] || '#666677', value: targets[t]}); });
+  M.treemap_loc_by_folder.forEach(function(f){ tm.push({parent: 't-' + f.target, name: f.folder.split('/').slice(-1)[0], folder: f.folder, value: f.loc, modules: f.modules}); });
+  Highcharts.chart('c-treemap', {series: [{type: 'treemap', layoutAlgorithm: 'squarified', allowTraversingTree: true, animationLimit: 1000, alternateStartingDirection: true, borderWidth: 1, borderColor: '#0a0a14', dataLabels: {enabled: false},
+    levels: [{level: 1, dataLabels: {enabled: true, style: {fontSize: '14px', fontWeight: '600'}}, borderWidth: 3, layoutAlgorithm: 'squarified'}, {level: 2, dataLabels: {enabled: true, style: {fontSize: '11px'}}, colorVariation: {key: 'brightness', to: 0.45}}], data: tm}],
+    tooltip: {pointFormatter: function(){ return '<b>' + (this.folder || this.name) + '</b><br>' + fmt(this.value) + ' linhas' + (this.modules ? ' · ' + this.modules + ' arquivos' : ''); }},
+    breadcrumbs: {buttonTheme: {style: {color: '#f4d03f'}}}});
+
+  // 2. complexidade
+  Highcharts.chart('c-complexity', {chart: {type: 'bar'}, xAxis: {categories: M.top_complexity.map(function(x){ return x.name.replace('.swift',''); }), labels: {style: {fontSize: '11px'}}}, yAxis: {title: {text: 'ramificações'}}, legend: {enabled: false},
+    series: [{name: 'Complexidade', data: M.top_complexity.map(function(x){ return {y: x.complexity, color: PAL[x.module] || '#666677', module: x.module, loc: x.loc, id: x.id, functions: x.functions}; })}],
+    tooltip: {pointFormatter: function(){ return '<b>' + this.id + '</b><br>' + this.y + ' ramificações · ' + this.loc + ' linhas · ' + this.functions + ' funções<br>módulo ' + this.module; }}});
+
+  // 3. dependentes
+  Highcharts.chart('c-dependents', {chart: {type: 'bar'}, xAxis: {categories: M.top_dependents.map(function(x){ return x.name.replace('.swift',''); }), labels: {style: {fontSize: '11px'}}}, yAxis: {title: {text: 'arquivos que dependem'}}, legend: {enabled: false},
+    series: [{name: 'Dependentes', data: M.top_dependents.map(function(x){ return {y: x.dependents, color: PAL[x.module] || '#666677', module: x.module, id: x.id, deps: x.dependencies}; })}],
+    tooltip: {pointFormatter: function(){ return '<b>' + this.id + '</b><br>' + this.y + ' dependentes · ' + this.deps + ' dependências<br>módulo ' + this.module; }}});
+
+  // 4. histograma
+  Highcharts.chart('c-hist', {chart: {type: 'column'}, xAxis: {categories: M.loc_histogram.labels, title: {text: 'linhas por arquivo'}}, yAxis: {title: {text: 'arquivos'}}, legend: {enabled: false},
+    plotOptions: {column: {groupPadding: 0.02, pointPadding: 0.05, borderRadius: 3, color: '#d4af37', dataLabels: {enabled: true}}}, series: [{name: 'Arquivos', data: M.loc_histogram.counts}]});
+
+  // 5. donut por alvo
+  Highcharts.chart('c-target', {chart: {type: 'pie'}, plotOptions: {pie: {innerSize: '58%', borderColor: '#0a0a14', dataLabels: {enabled: true, format: '{point.name}: {point.percentage:.0f}%', style: {fontSize: '11px'}}}},
+    series: [{name: 'Linhas', data: M.target_distribution.map(function(t){ return {name: t.target, y: t.loc, color: TPAL[t.target] || '#666677', modules: t.modules}; })}],
+    tooltip: {pointFormatter: function(){ return '<b>' + this.name + '</b><br>' + fmt(this.y) + ' linhas · ' + this.modules + ' arquivos'; }}});
+
+  // 6. sankey
+  var S = M.dependency_sankey;
+  Highcharts.chart('c-sankey', {series: [{type: 'sankey', name: 'Referências', keys: ['from','to','weight'], linkOpacity: 0.28, nodeWidth: 14, nodePadding: 10,
+    nodes: S.nodes.map(function(n){ var mod = n.id.split(' · ')[1]; return {id: n.id, color: PAL[mod] || '#666677'}; }),
+    data: S.links.map(function(l){ return [l.from, l.to, l.weight]; }), dataLabels: {style: {fontSize: '10px'}}}],
+    tooltip: {nodeFormat: '<b>{point.id}</b><br>{point.sum} referências', pointFormat: '{point.fromNode.id} → {point.toNode.id}: <b>{point.weight}</b> referências'}});
+  document.getElementById('dropped').textContent = S.droppedForCycles.length ? 'Removidos para evitar ciclo: ' + S.droppedForCycles.map(function(d){ return d.from + ' → ' + d.to + ' (' + d.weight + ')'; }).join('; ') + '.' : '';
+
+  // 7. módulos
+  var ms = M.module_summary;
+  Highcharts.chart('c-modules', {chart: {type: 'column'}, xAxis: {categories: ms.map(function(m){ return m.module; })}, yAxis: [{title: {text: 'linhas'}}, {title: {text: 'arquivos'}, opposite: true, gridLineWidth: 0}],
+    series: [{name: 'Linhas', data: ms.map(function(m){ return {y: m.loc, color: PAL[m.module] || '#666677'}; }), borderRadius: 3}, {name: 'Arquivos', type: 'line', yAxis: 1, color: '#f4d03f', data: ms.map(function(m){ return m.files; }), marker: {symbol: 'circle'}}]});
+  document.getElementById('t-modules').innerHTML = '<thead><tr><th>Módulo</th><th>Arquivos</th><th>Linhas</th><th>Funções</th><th>Tipos</th><th>Complexidade média</th><th>Máxima</th><th>Dependentes</th></tr></thead><tbody>' +
+    ms.map(function(m){ return '<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:' + (PAL[m.module]||'#666') + ';margin-right:6px"></span>' + m.module + '</td><td>' + m.files + '</td><td>' + fmt(m.loc) + '</td><td>' + m.functions + '</td><td>' + m.types + '</td><td>' + m.complexity_avg.toString().replace('.', ',') + '</td><td>' + m.complexity_max + '</td><td>' + m.dependents + '</td></tr>'; }).join('') + '</tbody>';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulos · joystick-AI</title>
+<meta name="reversa-category" content="diagram">
+<meta name="reversa-producer-agent" content="reversa-docs-mapper">
+<meta name="reversa-template" content="modulos">
+<meta name="reversa-visual-style" content="premium">
+<meta name="reversa-generated-at" content="2026-09-15T23:29:34Z">
+<meta name="description" content="Grafo de dependências entre os arquivos Swift do joystick-AI, com ciclos em destaque e agregação por módulo lógico.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2730%27 fill=%27%230a0a14%27 stroke=%27%23d4af37%27 stroke-width=%273%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2712%27 fill=%27%23d4af37%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/reversa.css">
+<!-- HEAD_EXTRAS -->
+<script src="assets/vendor/d3.v7.min.js"></script>
+<style>
+#graph{position:absolute;inset:0;background:radial-gradient(800px 500px at 50% 40%,rgba(30,43,79,.35),transparent 70%)}
+.node circle{stroke:rgba(255,255,255,.25);stroke-width:1px;cursor:pointer}
+.node.cycle circle{stroke:#ff5a4f;stroke-width:2.5px;filter:drop-shadow(0 0 6px rgba(255,90,79,.7))}
+.node.dim{opacity:.12}.link.dim{opacity:.03}
+.node text{font-size:10px;fill:#c8c8d4;pointer-events:none;paint-order:stroke;stroke:#0a0a14;stroke-width:3px}
+.link{stroke:#6b6b85;stroke-opacity:.35;fill:none}
+.link.cycle{stroke:#ff5a4f;stroke-opacity:.9}
+.link.hl{stroke:#f4d03f;stroke-opacity:.95}
+.node.hl circle{stroke:#f4d03f;stroke-width:2.5px}
+#detail a{display:block;font-size:.78rem;color:var(--fg2)}#detail a:hover{color:var(--gold2)}
+#detail .grp{margin-top:8px;color:var(--gold);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
+</style>
+</head>
+<body data-page-id="modulos" data-style="premium" data-base="">
+<header class="rv-header">
+  <a class="rv-brand" href="index.html"><span class="seal-slot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Selo do projeto joystick-AI" class="seal-mini">
+<defs><clipPath id="clip64"><circle cx="32.0" cy="32.0" r="31.04"/></clipPath><radialGradient id="glow64" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f4d03f" stop-opacity=".22"/><stop offset="1" stop-color="#0a0a14" stop-opacity="0"/></radialGradient></defs>
+<circle cx="32.0" cy="32.0" r="31.04" fill="#0a0a14"/>
+<g clip-path="url(#clip64)">
+<circle cx="20.2" cy="31.1" r="2.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.84"/>
+<circle cx="20.2" cy="31.1" r="6.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="20.2" cy="31.1" r="10.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.78"/>
+<circle cx="20.2" cy="31.1" r="14.5" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="20.2" cy="31.1" r="18.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.73"/>
+<circle cx="20.2" cy="31.1" r="22.8" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.70"/>
+<circle cx="20.2" cy="31.1" r="27.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.67"/>
+<circle cx="20.2" cy="31.1" r="31.1" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.65"/>
+<circle cx="20.2" cy="31.1" r="35.3" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.62"/>
+<circle cx="20.2" cy="31.1" r="39.4" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="20.2" cy="31.1" r="43.6" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.57"/>
+<circle cx="20.2" cy="31.1" r="47.7" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.54"/>
+<circle cx="20.2" cy="31.1" r="51.9" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.51"/>
+<circle cx="20.2" cy="31.1" r="56.0" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.49"/>
+<circle cx="20.2" cy="31.1" r="60.2" fill="none" stroke="#d4af37" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="6.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.81"/>
+<circle cx="43.8" cy="42.3" r="13.2" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.76"/>
+<circle cx="43.8" cy="42.3" r="19.9" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.72"/>
+<circle cx="43.8" cy="42.3" r="26.6" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.68"/>
+<circle cx="43.8" cy="42.3" r="33.4" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.63"/>
+<circle cx="43.8" cy="42.3" r="40.1" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.59"/>
+<circle cx="43.8" cy="42.3" r="46.8" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.55"/>
+<circle cx="43.8" cy="42.3" r="53.5" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.50"/>
+<circle cx="43.8" cy="42.3" r="60.3" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.46"/>
+<circle cx="43.8" cy="42.3" r="67.0" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.41"/>
+<circle cx="43.8" cy="42.3" r="73.7" fill="none" stroke="#7a1c2a" stroke-width="1.32" stroke-opacity="0.37"/>
+<circle cx="32.0" cy="32.0" r="32.0" fill="url(#glow64)"/>
+</g>
+<circle cx="32.0" cy="32.0" r="31.04" fill="none" stroke="#d4af37" stroke-width="1.0" stroke-opacity=".9"/>
+<circle cx="32.0" cy="32.0" r="28.8" fill="none" stroke="#f4d03f" stroke-width="0.5" stroke-opacity=".5"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="#f4d03f"/>
+<circle cx="32.0" cy="32.0" r="7.04" fill="none" stroke="#0a0a14" stroke-width="1.0" stroke-opacity=".6"/>
+</svg></span><span>joystick-AI<small>Reversa Docs</small></span></a>
+  <button class="rv-nav-toggle" aria-label="Menu">☰</button>
+  <nav class="reversa-doc-nav" aria-label="Páginas do mini-site"><a href="index.html" data-page-id="index">Visão geral</a><a href="arquitetura.html" data-page-id="arquitetura">Arquitetura 3D</a><a href="modulos.html" data-page-id="modulos">Módulos</a><a href="metricas.html" data-page-id="metricas">Métricas</a><a href="glossario.html" data-page-id="glossario">Glossário</a><a href="deck.html" data-page-id="deck">Deck</a><a href="index.html#features" data-page-id="features">Features</a></nav>
+</header>
+<!-- PAYLOAD -->
+
+<div class="rv-canvas-layout" id="layout">
+  <div class="rv-stage">
+    <div class="overlay-loader" id="loader">Montando o grafo de módulos…</div>
+    <svg id="graph"></svg>
+    <button class="btn ghost rv-sidebar-toggle" title="Mostrar ou ocultar os controles">⚙ Controles</button>
+    <div class="hud" id="hud"><b>Mapa de módulos</b> · cada nó é um arquivo Swift, ligado a quem referencia. Tamanho = linhas; cor = módulo lógico; <span style="color:#ff5a4f">vermelho</span> = participa de ciclo. Passe o mouse para destacar vizinhos, clique para detalhar, arraste para fixar.</div>
+    <div class="tooltip" id="tip"></div>
+  </div>
+  <aside class="rv-sidebar" id="sidebar">
+    <h3>Módulos</h3>
+    <div class="hint" id="stats"></div>
+    <label>Buscar arquivo <input type="search" data-param="search" placeholder="ex.: ShortcutMapper"></label>
+    <label>Nível <select data-param="level"><option value="file">Arquivos</option><option value="module">Módulos lógicos (agregado)</option></select></label>
+    <label>Alvo SwiftPM <select data-param="target"><option value="all">Todos</option><option value="JoystickCore">JoystickCore</option><option value="JoystickAIPoC">JoystickAIPoC</option><option value="poc-tools">poc-tools</option><option value="Tests">Tests</option></select></label>
+    <label>Módulo lógico <select data-param="module"><option value="all">Todos</option></select></label>
+    <label>Tipo <select data-param="type"><option value="all">Todos</option><option value="code">Código</option><option value="test">Teste</option></select></label>
+    <label>Repulsão <span class="value"></span><input type="range" min="-900" max="-40" step="10" value="-260" data-param="charge"></label>
+    <label>Distância dos elos <span class="value"></span><input type="range" min="20" max="200" step="5" value="55" data-param="distance"></label>
+    <label>Peso mínimo do elo <span class="value"></span><input type="range" min="1" max="20" step="1" value="1" data-param="minWeight"></label>
+    <label class="inline"><input type="checkbox" data-param="showLabels" checked> Rótulos</label>
+    <label class="inline"><input type="checkbox" data-param="onlyCycles"> Só nós em ciclos</label>
+    <div class="actions"><button class="btn" id="reset">Reset</button><button class="btn ghost" id="export-svg">Exportar SVG</button><button class="btn ghost" id="fit">Enquadrar</button></div>
+    <div class="section"><h4>Legenda</h4><div class="legend" id="legend"></div></div>
+    <div class="section"><h4>Ciclos detectados</h4><div id="cycles" style="font-size:.8rem"></div></div>
+    <div class="section"><h4>Selecionado</h4><div id="detail" class="hint">Clique num nó.</div></div>
+  </aside>
+</div>
+
+<!-- /PAYLOAD -->
+<footer class="rv-footer">
+  <span>Gerado por <code>reversa-docs-mapper</code> em 15/09/2026 20:29</span>
+  <span>Seed <code>f7898882</code></span>
+  <span>Reversa 1.3.3 · estilo premium</span>
+</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/nav.js"></script>
+<!-- SCRIPTS -->
+<script src="assets/js/sidebar.js"></script>
+<script>
+(function(){
+  var PAL = {"app-shell":"#d4af37","controller-input":"#4a9eff","pointer":"#a0e7e5","injection":"#ff7a3e","shortcuts":"#c9b6e8","palette":"#e93f8f","config":"#ffc857","editor":"#a83244","diagnostics-log":"#6cc46c","targets-analysis":"#5b3fce","tests":"#4f6b5d","build-scripts":"#8a8a99","support":"#b8b8b8","other":"#666677"};
+  if (!window.d3){ document.getElementById('loader').textContent = 'Esta visualização requer a biblioteca D3 em assets/vendor/. Conecte-se à internet e rode /reversa-docs novamente.'; return; }
+  var DEPS = (window.RV_DATA && window.RV_DATA.deps) || {}, MODS = (window.RV_DATA && window.RV_DATA.modules && window.RV_DATA.modules.modules) || [];
+  if (!DEPS.nodes || !DEPS.nodes.length){ document.getElementById('loader').textContent = 'Sem dados de dependências (window.RV_DATA.deps vazio).'; return; }
+  var byId = {}; MODS.forEach(function(m){ byId[m.id] = m; });
+  var cycleSet = new Set(); (DEPS.cycles || []).forEach(function(c){ c.forEach(function(id){ cycleSet.add(id); }); });
+  var cycleEdge = new Set(); (DEPS.cycles || []).forEach(function(c){ var s = new Set(c); (DEPS.edges||[]).forEach(function(e){ if (s.has(e.from) && s.has(e.to)) cycleEdge.add(e.from + '>' + e.to); }); });
+  var svg = d3.select('#graph'), stage = document.querySelector('.rv-stage'), tip = document.getElementById('tip');
+  var W = stage.clientWidth, H = stage.clientHeight; svg.attr('viewBox', [0,0,W,H]);
+  var defs = svg.append('defs');
+  defs.append('marker').attr('id','arrow').attr('viewBox','0 -4 8 8').attr('refX',14).attr('refY',0).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto').append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#6b6b85');
+  defs.append('marker').attr('id','arrow-red').attr('viewBox','0 -4 8 8').attr('refX',14).attr('refY',0).attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto').append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#ff5a4f');
+  var root = svg.append('g'), linkG = root.append('g'), nodeG = root.append('g');
+  var zoom = d3.zoom().scaleExtent([0.15, 6]).on('zoom', function(ev){ root.attr('transform', ev.transform); }); svg.call(zoom);
+  var sim = d3.forceSimulation().force('link', d3.forceLink().id(function(d){ return d.id; })).force('charge', d3.forceManyBody()).force('center', d3.forceCenter(W/2, H/2)).force('collide', d3.forceCollide().radius(function(d){ return r(d) + 3; }));
+  var params = {}, nodes = [], links = [], selected = null;
+  var rScale = d3.scaleSqrt().domain([1, d3.max(DEPS.nodes, function(n){ return n.loc; })]).range([3, 16]);
+  function r(d){ return d.level === 'module' ? Math.max(14, Math.sqrt(d.loc) * 0.7) : rScale(Math.max(1, d.loc)); }
+  function label(d){ return d.level === 'module' ? d.id : d.id.split('/').pop().replace('.swift',''); }
+  function data(){
+    var lvl = params.level || 'file';
+    if (lvl === 'module'){
+      var agg = {}; DEPS.nodes.forEach(function(n){ if (n.type === 'test' && params.type === 'code') return; var a = agg[n.module] = agg[n.module] || {id: n.module, module: n.module, loc: 0, files: 0, level: 'module', target: n.target}; a.loc += n.loc; a.files++; });
+      var ns = Object.values(agg), ids = new Set(ns.map(function(n){ return n.id; }));
+      var ls = (DEPS.moduleEdges || []).filter(function(e){ return ids.has(e.from) && ids.has(e.to) && e.weight >= (params.minWeight||1); }).map(function(e){ return {source: e.from, target: e.to, weight: e.weight, cycle: false}; });
+      return {nodes: ns, links: ls};
+    }
+    var ns = DEPS.nodes.filter(function(n){
+      if (params.target && params.target !== 'all' && n.target !== params.target) return false;
+      if (params.module && params.module !== 'all' && n.module !== params.module) return false;
+      if (params.type && params.type !== 'all' && n.type !== params.type) return false;
+      if (params.onlyCycles && !cycleSet.has(n.id)) return false;
+      return true;
+    }).map(function(n){ return Object.assign({level:'file', cycle: cycleSet.has(n.id)}, n); });
+    var ids = new Set(ns.map(function(n){ return n.id; }));
+    var ls = DEPS.edges.filter(function(e){ return ids.has(e.from) && ids.has(e.to) && e.weight >= (params.minWeight||1); }).map(function(e){ return {source: e.from, target: e.to, weight: e.weight, cycle: cycleEdge.has(e.from + '>' + e.to)}; });
+    return {nodes: ns, links: ls};
+  }
+  var link, node;
+  function update(keepPositions){
+    var d = data(); var old = {}; nodes.forEach(function(n){ old[n.id] = n; });
+    nodes = d.nodes.map(function(n){ var o = keepPositions && old[n.id]; if (o){ n.x = o.x; n.y = o.y; n.vx = 0; n.vy = 0; } else { n.x = W/2 + (Math.random()-0.5)*200; n.y = H/2 + (Math.random()-0.5)*200; } return n; }); links = d.links;
+    link = linkG.selectAll('line').data(links, function(l){ return (l.source.id||l.source) + '>' + (l.target.id||l.target); });
+    link.exit().remove();
+    link = link.enter().append('line').attr('class','link').merge(link).attr('class', function(l){ return 'link' + (l.cycle ? ' cycle' : ''); }).attr('stroke-width', function(l){ return Math.min(6, 0.6 + Math.sqrt(l.weight)*0.6); }).attr('marker-end', function(l){ return l.cycle ? 'url(#arrow-red)' : 'url(#arrow)'; });
+    node = nodeG.selectAll('g.node').data(nodes, function(n){ return n.id; });
+    node.exit().remove();
+    var enter = node.enter().append('g').attr('class','node');
+    enter.append('circle'); enter.append('text').attr('dy', function(d){ return r(d) + 11; }).attr('text-anchor','middle');
+    node = enter.merge(node).attr('class', function(d){ return 'node' + (d.cycle ? ' cycle' : ''); });
+    node.select('circle').attr('r', r).attr('fill', function(d){ return PAL[d.module] || '#666677'; });
+    node.select('text').text(label).attr('dy', function(d){ return r(d) + 11; }).style('display', params.showLabels ? null : 'none');
+    node.call(d3.drag().on('start', function(ev, d){ if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }).on('drag', function(ev, d){ d.fx = ev.x; d.fy = ev.y; }).on('end', function(ev, d){ if (!ev.active) sim.alphaTarget(0); if (!ev.sourceEvent.shiftKey){ d.fx = null; d.fy = null; } }));
+    node.on('mouseenter', function(ev, d){ highlight(d); tip.style.display = 'block'; var m = byId[d.id]; tip.innerHTML = d.level === 'module' ? '<b>' + d.id + '</b><br>' + d.files + ' arquivos · ' + d.loc + ' linhas' : '<b>' + label(d) + '</b><br>' + d.id + '<br>' + d.loc + ' linhas · complexidade ' + (m ? m.complexity : '?') + '<br>módulo ' + d.module + ' · ' + (m ? m.dependents + ' dependentes, ' + m.dependencies + ' dependências' : '') + (d.cycle ? '<br><span style="color:#ff5a4f">participa de ciclo</span>' : ''); })
+        .on('mousemove', function(ev){ tip.style.left = (ev.clientX + 14) + 'px'; tip.style.top = (ev.clientY + 14) + 'px'; })
+        .on('mouseleave', function(){ tip.style.display = 'none'; if (!selected) clearHl(); else highlight(selected); })
+        .on('click', function(ev, d){ ev.stopPropagation(); selected = d; highlight(d); detail(d); });
+    svg.on('click', function(){ selected = null; clearHl(); });
+    sim.nodes(nodes).on('tick', tick); sim.force('link').links(links).distance(params.distance || 55).strength(function(l){ return 0.3 + Math.min(0.7, l.weight/20); }); sim.force('charge').strength(params.charge || -260);
+    sim.alpha(keepPositions ? 0.4 : 1).restart();
+    document.getElementById('stats').textContent = nodes.length + ' nós, ' + links.length + ' elos, ' + (DEPS.cycles||[]).length + ' ciclos no grafo completo.';
+    applySearch();
+  }
+  function tick(){
+    link.attr('x1', function(l){ return l.source.x; }).attr('y1', function(l){ return l.source.y; }).attr('x2', function(l){ return l.target.x; }).attr('y2', function(l){ return l.target.y; });
+    node.attr('transform', function(d){ return 'translate(' + d.x + ',' + d.y + ')'; });
+  }
+  function neighbors(d){ var s = new Set([d.id]); links.forEach(function(l){ if (l.source.id === d.id) s.add(l.target.id); if (l.target.id === d.id) s.add(l.source.id); }); return s; }
+  function highlight(d){ var s = neighbors(d); node.classed('dim', function(n){ return !s.has(n.id); }).classed('hl', function(n){ return n.id === d.id; }); link.classed('dim', function(l){ return l.source.id !== d.id && l.target.id !== d.id; }).classed('hl', function(l){ return l.source.id === d.id || l.target.id === d.id; }); }
+  function clearHl(){ node.classed('dim', false).classed('hl', false); link.classed('dim', false).classed('hl', false); applySearch(); }
+  function applySearch(){ var q = (params.search || '').trim().toLowerCase(); if (!q){ return; } node.classed('dim', function(n){ return n.id.toLowerCase().indexOf(q) < 0; }); link.classed('dim', true); }
+  function detail(d){
+    var el = document.getElementById('detail'), m = byId[d.id];
+    var outs = links.filter(function(l){ return l.source.id === d.id; }), ins = links.filter(function(l){ return l.target.id === d.id; });
+    var li = function(x, who){ return '<a href="#" data-id="' + who.id + '">' + label(who) + ' <span style="color:var(--muted)">×' + x.weight + '</span></a>'; };
+    el.innerHTML = '<b style="color:var(--gold2)">' + label(d) + '</b><br><code style="font-size:.72rem">' + d.id + '</code>' + (m ? '<br>' + m.loc + ' linhas, complexidade ' + m.complexity + ', ' + (m.types||[]).map(function(t){ return t.name; }).join(', ') : '<br>' + d.files + ' arquivos, ' + d.loc + ' linhas') + (d.cycle ? '<br><span class="badge danger">ciclo</span>' : '') +
+      '<div class="grp">Depende de (' + outs.length + ')</div>' + (outs.map(function(l){ return li(l, l.target); }).join('') || '<span class="hint">nada</span>') +
+      '<div class="grp">Usado por (' + ins.length + ')</div>' + (ins.map(function(l){ return li(l, l.source); }).join('') || '<span class="hint">ninguém</span>');
+    el.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); var n = nodes.find(function(x){ return x.id === a.getAttribute('data-id'); }); if (n){ selected = n; highlight(n); detail(n); center(n); } }); });
+  }
+  function center(n){ svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity.translate(W/2, H/2).scale(1.6).translate(-n.x, -n.y)); }
+  function fit(){ if (!nodes.length) return; var q = function(acc){ var v = nodes.map(acc).sort(d3.ascending); return [d3.quantileSorted(v, 0.04), d3.quantileSorted(v, 0.96)]; }; var xs = q(function(n){ return n.x; }), ys = q(function(n){ return n.y; }); var w = (xs[1]-xs[0]) + 80, h = (ys[1]-ys[0]) + 80; var k = Math.min(W/w, H/h, 2.5); svg.transition().duration(600).call(zoom.transform, d3.zoomIdentity.translate(W/2, H/2).scale(k).translate(-(xs[0]+xs[1])/2, -(ys[0]+ys[1])/2)); }
+  // legenda, ciclos, filtros
+  var lg = document.getElementById('legend'); Object.keys(PAL).forEach(function(k){ var s = document.createElement('span'); s.innerHTML = '<i style="background:' + PAL[k] + '"></i>' + k; lg.appendChild(s); });
+  var cy = document.getElementById('cycles'); cy.innerHTML = (DEPS.cycles||[]).length ? (DEPS.cycles||[]).map(function(c, i){ return '<div style="margin-bottom:6px"><span class="badge danger">ciclo ' + (i+1) + '</span> ' + c.map(function(id){ return '<a href="#" data-id="' + id + '">' + id.split('/').pop().replace('.swift','') + '</a>'; }).join(' ⇄ ') + '</div>'; }).join('') : '<span class="hint">nenhum</span>';
+  cy.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); var n = nodes.find(function(x){ return x.id === a.getAttribute('data-id'); }); if (n){ selected = n; highlight(n); detail(n); center(n); } }); });
+  var modSel = document.querySelector('[data-param=module]'); Object.keys(PAL).forEach(function(k){ var o = document.createElement('option'); o.value = k; o.textContent = k; modSel.appendChild(o); });
+  params = RVSidebar.init({ onChange: function(name, v, all){ params = all; if (name === 'search'){ clearHl(); return; } if (name === 'showLabels'){ node.select('text').style('display', v ? null : 'none'); return; } if (name === 'charge' || name === 'distance'){ sim.force('charge').strength(params.charge); sim.force('link').distance(params.distance); sim.alpha(0.5).restart(); return; } update(name === 'minWeight'); }, onReset: function(all){ params = all; update(false); setTimeout(fit, 900); } });
+  document.getElementById('fit').addEventListener('click', fit);
+  document.getElementById('export-svg').addEventListener('click', function(){ var clone = svg.node().cloneNode(true); clone.setAttribute('xmlns','http://www.w3.org/2000/svg'); var style = document.createElement('style'); style.textContent = '.link{stroke:#6b6b85;stroke-opacity:.35}.link.cycle{stroke:#ff5a4f}.node text{font:10px sans-serif;fill:#c8c8d4}svg{background:#0a0a14}'; clone.insertBefore(style, clone.firstChild); var b = new Blob([clone.outerHTML], {type:'image/svg+xml'}); var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'joystick-ai-modulos.svg'; a.click(); });
+  window.addEventListener('resize', function(){ W = stage.clientWidth; H = stage.clientHeight; svg.attr('viewBox', [0,0,W,H]); sim.force('center', d3.forceCenter(W/2, H/2)).alpha(0.3).restart(); });
+  var firstFit = true; sim.on('end', function(){ if (firstFit){ firstFit = false; fit(); } }); update(false); setTimeout(fit, 1500); setTimeout(fit, 4000); document.getElementById('loader').classList.add('hidden');
+})();
+</script>
+</body>
+</html>
