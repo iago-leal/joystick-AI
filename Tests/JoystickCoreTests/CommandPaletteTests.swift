@@ -2,10 +2,10 @@ import Testing
 @testable import JoystickCore
 
 @Suite struct CommandPaletteTests {
-    // MARK: Lista fixa (RF-05, RN-05)
+    // MARK: Lista padrão (002 RF-05, RN-05; 003 RN-11, RN-12)
 
     @Test func listaComDezesseteItensNaOrdem() {
-        let texts = CommandPalette.items.map(\.text)
+        let texts = PaletteDefaults.items.map(\.text)
         #expect(texts == [
             "CONTINUAR", "/reversa-forward", "/reversa-requirements ", "/reversa-clarify", "/reversa-plan",
             "/reversa-to-do", "/reversa-coding", "/reversa-add ", "/reversa-audit", "/reversa-quality",
@@ -14,7 +14,7 @@ import Testing
     }
 
     @Test func itensDeUmaLinhaEDentroDoLimite() {
-        for item in CommandPalette.items {
+        for item in PaletteDefaults.items {
             #expect(!item.text.isEmpty && item.text.count <= 1_000, "\(item.text)")
             let hasNewline = item.text.contains { $0.isNewline }
             #expect(!hasNewline, "\(item.text)")
@@ -23,15 +23,33 @@ import Testing
 
     /// Emenda E001: a paleta só coloca o texto na linha; o envio é um ✕ seguinte.
     @Test func nenhumItemEnviaEnter() {
-        for item in CommandPalette.items {
+        for item in PaletteDefaults.items {
             #expect(!item.pressEnter, "\(item.text)")
         }
-        #expect(CommandPalette.items.filter { $0.text.hasSuffix(" ") }.count == 3)
+        #expect(PaletteDefaults.items.filter { $0.text.hasSuffix(" ") }.count == 3)
     }
 
-    // MARK: Máquina de estados (data-delta.md §4)
+    @Test func itensPadraoSemRotulo() {
+        for item in PaletteDefaults.items {
+            #expect(item.label.isEmpty, "\(item.text)")
+            #expect(item.displayText == item.text)
+        }
+    }
 
-    static let count = CommandPalette.items.count
+    @Test func rotuloExibidoNoLugarDoTexto() {
+        #expect(PaletteItem("/reversa-docs", pressEnter: true, label: "Documentação").displayText == "Documentação")
+        #expect(PaletteItem("/reversa-docs", pressEnter: true).displayText == "/reversa-docs")
+    }
+
+    @Test func motivoDeConfiguracaoNova() {
+        #expect(PaletteCloseReason.configChanged.rawValue == "config_changed")
+    }
+
+    // MARK: Máquina de estados (002 data-delta.md §4; 003 D-13)
+
+    static let count = PaletteDefaults.items.count
+    /// Itens mais a entrada fixa "Editar atalhos".
+    static let entries = count + 1
 
     func opened() -> PaletteMachine {
         var machine = PaletteMachine()
@@ -55,7 +73,8 @@ import Testing
 
     @Test func navegacaoCircular() {
         var machine = opened()
-        #expect(machine.press(.dpadUp) == [.render(PaletteSnapshot(isOpen: true, selection: Self.count - 1)), .startRepeat(.up)])
+        // ↑ no primeiro item leva à entrada fixa, a última posição.
+        #expect(machine.press(.dpadUp) == [.render(PaletteSnapshot(isOpen: true, selection: Self.count)), .startRepeat(.up)])
         _ = machine.release(.dpadUp)
         #expect(machine.press(.dpadDown) == [.render(PaletteSnapshot(isOpen: true, selection: 0)), .startRepeat(.down)])
     }
@@ -131,9 +150,54 @@ import Testing
         let presses: [ButtonID] = [.dpadUp, .dpadUp, .dpadDown, .dpadUp, .dpadDown, .dpadDown, .dpadDown]
         for button in presses {
             _ = machine.press(button)
-            for _ in 0..<(Self.count * 2) { _ = machine.repeatTick() }
+            for _ in 0..<(Self.entries * 2) { _ = machine.repeatTick() }
             _ = machine.release(button)
-            #expect((0..<Self.count).contains(machine.selection))
+            #expect((0..<Self.entries).contains(machine.selection))
         }
+    }
+
+    // MARK: Entrada fixa "Editar atalhos" (003 RF-07, RN-12)
+
+    @Test func entradaFixaDepoisDosItens() {
+        let machine = PaletteMachine()
+        #expect(machine.editorEntryIndex == Self.count)
+        #expect(machine.entryCount == Self.entries)
+        #expect(PaletteMachine.editorEntryTitle == "Editar atalhos")
+    }
+
+    @Test func confirmarEntradaFixaAbreOEditorSemDigitar() {
+        var machine = opened()
+        _ = machine.press(.dpadDown)
+        _ = machine.release(.dpadDown)
+        _ = machine.press(.cross)
+        #expect(machine.lastConfirmed == 1)
+
+        _ = machine.open()
+        _ = machine.press(.dpadUp)
+        _ = machine.release(.dpadUp)
+        _ = machine.press(.dpadUp)
+        _ = machine.release(.dpadUp)
+        #expect(machine.selection == Self.count)
+        let effects = machine.press(.cross)
+        #expect(effects == [.render(PaletteSnapshot(isOpen: false, selection: Self.count)), .openEditor])
+        #expect(!effects.contains { if case .confirm = $0 { true } else { false } })
+        // A entrada fixa não passa a ser a última confirmada.
+        #expect(machine.lastConfirmed == 1)
+        #expect(machine.open() == [.render(PaletteSnapshot(isOpen: true, selection: 1))])
+    }
+
+    @Test func listaConfiguradaComEntradaFixa() {
+        let items = [PaletteItem("/reversa-docs", pressEnter: true), PaletteItem("CONTINUAR", pressEnter: false)]
+        var machine = PaletteMachine(items: items)
+        _ = machine.open()
+        _ = machine.press(.dpadDown)
+        _ = machine.release(.dpadDown)
+        _ = machine.press(.dpadDown)
+        _ = machine.release(.dpadDown)
+        #expect(machine.selection == 2)
+        _ = machine.press(.dpadDown)
+        #expect(machine.selection == 0)
+        _ = machine.release(.dpadDown)
+        #expect(machine.press(.cross).last == .confirm(index: 1, item: items[0]))
     }
 }

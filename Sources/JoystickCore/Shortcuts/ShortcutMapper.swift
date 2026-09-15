@@ -41,6 +41,33 @@ public enum SystemShortcut: Int, CaseIterable, Sendable {
     case spaceLeft = 79
     case spaceRight = 81
 
+    /// Nome estável no arquivo de configuração (`003-editor-atalhos` D-03).
+    public var name: String {
+        switch self {
+        case .nextWindow: "nextWindow"
+        case .missionControl: "missionControl"
+        case .applicationWindows: "applicationWindows"
+        case .spaceLeft: "spaceLeft"
+        case .spaceRight: "spaceRight"
+        }
+    }
+
+    public init?(name: String) {
+        guard let shortcut = Self.allCases.first(where: { $0.name == name }) else { return nil }
+        self = shortcut
+    }
+
+    /// Rótulo exibido no editor (`003-editor-atalhos` RN-07, RF-08).
+    public var displayName: String {
+        switch self {
+        case .nextWindow: "próxima janela"
+        case .missionControl: "Mission Control"
+        case .applicationWindows: "janelas do aplicativo"
+        case .spaceLeft: "mesa à esquerda"
+        case .spaceRight: "mesa à direita"
+        }
+    }
+
     public var defaultChord: KeyChord {
         switch self {
         case .nextWindow: KeyChord(KeyChord.grave, [.command])

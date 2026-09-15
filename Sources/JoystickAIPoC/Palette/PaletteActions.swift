@@ -22,6 +22,8 @@ final class PaletteActions {
     var blocked = false
     /// Chamado na main thread a cada mudança de estado; defina antes de o controle começar a ser lido.
     var onRender: ((PaletteSnapshot) -> Void)?
+    /// Chamado na main thread ao confirmar "Editar atalhos" (`003-editor-atalhos` RF-07); defina antes de ler o controle.
+    var onOpenEditor: (() -> Void)?
 
     init(context: InputContext, keyboard: KeyboardInjector, enterDelayMs: Int) {
         self.context = context
@@ -85,6 +87,10 @@ final class PaletteActions {
                 type(item)
             case .closed(let reason):
                 context.log.log(LogEventCatalog.paletteClosed(reason: reason))
+            case .openEditor:
+                // Sem `palette.confirmed`: o editor registra `editor.opened` com `source: palette`.
+                let onOpenEditor = onOpenEditor
+                DispatchQueue.main.async { onOpenEditor?() }
             }
         }
     }

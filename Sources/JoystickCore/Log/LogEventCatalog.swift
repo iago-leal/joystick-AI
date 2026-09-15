@@ -6,6 +6,12 @@ public enum TouchBoundary: String, Sendable { case began, ended }
 public enum PostedKind: String, Sendable { case move, drag, scroll, down, up }
 public enum PostSource: String, Sendable { case touch, stickOnset = "stick_onset", button }
 public enum TerminationReason: String, Sendable { case quit, sigterm, sigint, sighup }
+public enum ShortcutsTrigger: String, Sendable { case startup, external, editor, restore }
+public enum ShortcutsSource: String, Sendable { case defaults, file }
+public enum ShortcutsDefaultReason: String, Sendable { case fileMissing = "file_missing", sectionMissing = "section_missing" }
+public enum EditorOpenSource: String, Sendable { case menu, palette, alert }
+public enum EditorCloseOutcome: String, Sendable { case clean, saved, discarded }
+public enum EditorConflictChoice: String, Sendable { case reload, keep, pending }
 
 /// Tela listada em `targets.screens`, numerada a partir de 1.
 public struct ScreenListing: Equatable, Sendable {
@@ -246,6 +252,79 @@ public enum LogEventCatalog {
 
     public static func paletteInvalidArgs(message: String) -> LogEvent {
         LogEvent("palette.invalid_args", level: .warn, fields: ["message": .string(message)])
+    }
+
+    // Atalhos configuráveis (`003-editor-atalhos/interfaces/diagnostic-log.md` §2): caminho, linha, regra e contagens,
+    // nunca texto, rótulo, nome de tecla nem acorde (RN-14).
+
+    public static func shortcutsLoaded(trigger: ShortcutsTrigger, source: ShortcutsSource, reason: ShortcutsDefaultReason?,
+                                       modifiers: [ButtonID], items: Int) -> LogEvent {
+        var fields: [String: JSONValue] = [
+            "trigger": .string(trigger.rawValue),
+            "source": .string(source.rawValue),
+            "modifiers": .array(modifiers.sorted().map { .string($0.rawValue) }),
+            "items": .int(Int64(items)),
+        ]
+        if let reason { fields["reason"] = .string(reason.rawValue) }
+        return LogEvent("shortcuts.loaded", level: .info, fields: fields)
+    }
+
+    public static func shortcutsUnchanged(trigger: ShortcutsTrigger) -> LogEvent {
+        LogEvent("shortcuts.unchanged", level: .debug, fields: ["trigger": .string(trigger.rawValue)])
+    }
+
+    public static func shortcutsInvalid(trigger: ShortcutsTrigger, rule: ShortcutIssue.Rule, path: String?, line: Int?) -> LogEvent {
+        var fields: [String: JSONValue] = ["trigger": .string(trigger.rawValue), "rule": .string(rule.rawValue)]
+        if let path { fields["path"] = .string(path) }
+        if let line { fields["line"] = .int(Int64(line)) }
+        return LogEvent("shortcuts.invalid", level: .error, fields: fields)
+    }
+
+    public static func shortcutsFileRemoved() -> LogEvent {
+        LogEvent("shortcuts.file_removed", level: .info)
+    }
+
+    public static func shortcutsSaved(created: Bool, backup: Bool) -> LogEvent {
+        LogEvent("shortcuts.saved", level: .info, fields: ["created": .bool(created), "backup": .bool(backup)])
+    }
+
+    /// `message` traz só o caminho e o erro do sistema.
+    public static func shortcutsSaveFailed(message: String) -> LogEvent {
+        LogEvent("shortcuts.save_failed", level: .error, fields: ["message": .string(message)])
+    }
+
+    public static func shortcutsRestored() -> LogEvent {
+        LogEvent("shortcuts.restored", level: .info)
+    }
+
+    /// `layer` é `base` ou o botão modificador cuja camada valeu (`003-editor-atalhos` D-14).
+    public static func shortcutTriggered(button: ButtonID, layer: ButtonID?, type: TriggerActionType) -> LogEvent {
+        LogEvent("shortcut.triggered", level: .info, fields: [
+            "button": .string(button.rawValue), "layer": .string(layer?.rawValue ?? "base"), "type": .string(type.rawValue),
+        ])
+    }
+
+    // Editor de atalhos (`003-editor-atalhos/interfaces/diagnostic-log.md` §2).
+
+    public static func editorOpened(source: EditorOpenSource) -> LogEvent {
+        LogEvent("editor.opened", level: .info, fields: ["source": .string(source.rawValue)])
+    }
+
+    public static func editorClosed(outcome: EditorCloseOutcome) -> LogEvent {
+        LogEvent("editor.closed", level: .info, fields: ["outcome": .string(outcome.rawValue)])
+    }
+
+    public static func editorConflict(choice: EditorConflictChoice) -> LogEvent {
+        LogEvent("editor.conflict", level: .warn, fields: ["choice": .string(choice.rawValue)])
+    }
+
+    public static func editorIdentify(on: Bool) -> LogEvent {
+        LogEvent("editor.identify", level: .info, fields: ["on": .bool(on)])
+    }
+
+    /// A janela não se tornou ativa após o pedido de abertura (sonda P-01).
+    public static func editorActivationFailed() -> LogEvent {
+        LogEvent("editor.activation_failed", level: .warn)
     }
 
     public static func logDebugSuspended(sizeBytes: Int) -> LogEvent {

@@ -120,7 +120,7 @@ import Testing
 
     /// RN-07 da `002-paleta-comandos`: os eventos da paleta levam índice e motivo, nunca o texto do item.
     @Test func eventosDaPaletaSemTextoDeItem() {
-        let texts = Set(CommandPalette.items.map(\.text))
+        let texts = Set(PaletteDefaults.items.map(\.text))
         for event in Self.sampleEvents where event.name.hasPrefix("palette.") {
             #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: ["text", "label", "item"]), "\(event.name)")
             let leaked = event.fields.values.filter { value in

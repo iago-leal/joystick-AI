@@ -1,14 +1,20 @@
 import Foundation
 
-/// Item da paleta: texto de uma linha digitado no aplicativo em foco, com Enter opcional (`002-paleta-comandos` RN-05).
+/// Item da paleta: texto de uma linha digitado no aplicativo em foco, com Enter opcional (`002-paleta-comandos` RN-05)
+/// e rótulo opcional exibido no lugar do texto (`003-editor-atalhos` RN-12).
 public struct PaletteItem: Equatable, Sendable {
     public let text: String
     public let pressEnter: Bool
+    /// Vazio exibe o próprio texto.
+    public let label: String
 
-    public init(_ text: String, pressEnter: Bool) {
+    public init(_ text: String, pressEnter: Bool, label: String = "") {
         self.text = text
         self.pressEnter = pressEnter
+        self.label = label
     }
+
+    public var displayText: String { label.isEmpty ? text : label }
 }
 
 public enum PaletteDirection: Sendable {
@@ -19,11 +25,14 @@ public enum PaletteDirection: Sendable {
 public enum PaletteCloseReason: String, Sendable {
     case circle, ps, disconnected, idle
     case injectionSuspended = "injection_suspended"
+    /// Configuração nova aplicada com a paleta aberta (`003-editor-atalhos` D-12).
+    case configChanged = "config_changed"
 }
 
-/// Lista fixa da paleta (`002-paleta-comandos` RF-05). Nenhum item envia Enter: o texto fica na linha para receber
-/// argumentos, e o envio é um ✕ seguinte (emenda E001). Itens terminados em espaço esperam descrição.
-public enum CommandPalette {
+/// Paleta padrão, usada sem arquivo ou sem a seção `palette` (`003-editor-atalhos` RN-11, D-04): a lista da
+/// `002-paleta-comandos` (RF-05). Nenhum item envia Enter: o texto fica na linha para receber argumentos, e o envio é
+/// um ✕ seguinte (emenda E001). Itens terminados em espaço esperam descrição.
+public enum PaletteDefaults {
     public static let items: [PaletteItem] = [
         PaletteItem("CONTINUAR", pressEnter: false),
         PaletteItem("/reversa-forward", pressEnter: false),
@@ -64,12 +73,17 @@ public enum PaletteEffect: Equatable, Sendable {
     /// `index` conta a partir de 1, como no log.
     case confirm(index: Int, item: PaletteItem)
     case closed(PaletteCloseReason)
+    /// Confirmação da entrada fixa "Editar atalhos": abre o editor, sem digitar (`003-editor-atalhos` RF-07).
+    case openEditor
 }
 
 /// Paleta de comandos operada pelo controle (`002-paleta-comandos` D-01, `data-delta.md` §4).
 ///
-/// Com a paleta fechada, nenhuma entrada exceto `open()` produz efeito.
+/// Com a paleta fechada, nenhuma entrada exceto `open()` produz efeito. Depois dos itens configurados vem a entrada
+/// fixa "Editar atalhos", no índice `items.count`, fora da contagem de 1 a 50 (`003-editor-atalhos` D-13, RN-12).
 public struct PaletteMachine: Sendable {
+    public static let editorEntryTitle = "Editar atalhos"
+
     public let items: [PaletteItem]
     public private(set) var isOpen = false
     public private(set) var selection = 0
@@ -77,12 +91,18 @@ public struct PaletteMachine: Sendable {
     public private(set) var lastConfirmed: Int?
     public private(set) var repeating: PaletteDirection?
 
-    public init(items: [PaletteItem] = CommandPalette.items) {
+    public init(items: [PaletteItem] = PaletteDefaults.items) {
         precondition(!items.isEmpty, "a paleta precisa de ao menos um item")
         self.items = items
     }
 
     public var snapshot: PaletteSnapshot { PaletteSnapshot(isOpen: isOpen, selection: selection) }
+
+    /// Posição da entrada fixa "Editar atalhos".
+    public var editorEntryIndex: Int { items.count }
+
+    /// Itens configurados mais a entrada fixa.
+    public var entryCount: Int { items.count + 1 }
 
     public mutating func open() -> [PaletteEffect] {
         guard !isOpen else { return [] }
@@ -101,6 +121,8 @@ public struct PaletteMachine: Sendable {
             return [.render(snapshot), .startRepeat(direction)]
         case .cross:
             let index = selection
+            // A entrada fixa não passa a ser a última confirmada: a próxima abertura volta ao último comando.
+            guard index != editorEntryIndex else { return finish() + [.openEditor] }
             lastConfirmed = index
             return finish() + [.confirm(index: index + 1, item: items[index])]
         case .circle:
@@ -138,7 +160,7 @@ public struct PaletteMachine: Sendable {
 
     private mutating func step(_ direction: PaletteDirection) {
         let offset = direction == .up ? -1 : 1
-        selection = (selection + offset + items.count) % items.count
+        selection = (selection + offset + entryCount) % entryCount
     }
 
     private mutating func finish() -> [PaletteEffect] {

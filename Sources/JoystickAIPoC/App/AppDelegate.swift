@@ -1,5 +1,6 @@
 import AppKit
 import JoystickCore
+import SwiftUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Tomado na criação do delegate, antes de `NSApplication.run()`: base da janela de 2 s de D-25.
@@ -14,6 +15,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var shortcutActions: ShortcutActions!
     private var paletteActions: PaletteActions!
     private var palettePanel: PalettePanel!
+    private var statusMenu: StatusMenu!
+    private var editorWindow: EditorWindowController!
     private var motionLoop: MotionLoop!
     private var router: InputRouter!
     private var gate: InjectionGate!
@@ -58,12 +61,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         for error in arguments.errors where error.concernsPalette {
             log.log(LogEventCatalog.paletteInvalidArgs(message: error.message))
         }
-        palettePanel = PalettePanel(items: CommandPalette.items)
+        palettePanel = PalettePanel(items: PaletteDefaults.items)
         paletteActions = PaletteActions(
             context: inputContext, keyboard: keyboard,
             enterDelayMs: arguments.paletteEnterDelayMs ?? PaletteActions.defaultEnterDelayMs)
         paletteActions.onRender = { [palettePanel] snapshot in palettePanel?.show(snapshot) }
         shortcutActions.onOpenPalette = { [paletteActions] in paletteActions?.open() }
+
+        // Editor de atalhos (`003-editor-atalhos`): ícone na barra de menus e entrada fixa da paleta (D-18, D-13).
+        // Editor mínimo das sondas do PM-1a, trocado pelo completo em T073.
+        editorWindow = EditorWindowController(log: log) { AnyView(EditorProbeView()) }
+        statusMenu = StatusMenu()
+        statusMenu.onEditShortcuts = { [editorWindow] in editorWindow?.show(source: .menu) }
+        paletteActions.onOpenEditor = { [editorWindow] in editorWindow?.show(source: .palette) }
 
         router = InputRouter(buttons: buttonActions, motion: motionLoop, shortcuts: shortcutActions, palette: paletteActions)
         inputContext.sink = router

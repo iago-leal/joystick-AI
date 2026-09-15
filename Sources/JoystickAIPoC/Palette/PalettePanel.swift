@@ -46,7 +46,7 @@ final class PalettePanel: NSPanel {
         let mouse = NSEvent.mouseLocation
         guard let screen = NSScreen.screens.first(where: { NSMouseInRect(mouse, $0.frame, false) }) ?? NSScreen.main else { return }
         let visible = screen.visibleFrame
-        paletteView.fit(maxHeight: visible.height - 2 * Self.screenMargin)
+        paletteView.fit(maxHeight: visible.height - 2 * Self.screenMargin, maxWidth: visible.width - 2 * Self.screenMargin)
         let size = paletteView.frame.size
         setFrame(NSRect(x: visible.midX - size.width / 2, y: visible.midY - size.height / 2, width: size.width, height: size.height),
                  display: false)
@@ -54,6 +54,8 @@ final class PalettePanel: NSPanel {
 }
 
 /// Lista legível a 3 m (D-09): texto monoespaçado de 26 pt, linha de 40 pt, seleção por cor e por marcador.
+///
+/// Depois dos itens vem a entrada fixa "Editar atalhos", separada por uma linha (`003-editor-atalhos` D-13).
 final class PaletteView: NSView {
     static let fontSize: CGFloat = 26
     static let rowHeight: CGFloat = 40
@@ -62,12 +64,16 @@ final class PaletteView: NSView {
     static let minWidth: CGFloat = 520
     static let background = NSColor(calibratedWhite: 0.1, alpha: 0.96)
     static let highlight = NSColor.systemBlue
+    static let separator = NSColor(calibratedWhite: 0.45, alpha: 1)
     /// Itens terminados em espaço esperam descrição; o sufixo deixa isso visível.
     static let continuationSuffix = " …"
 
     private let items: [PaletteItem]
     private var visibleRows: Int
     private var firstVisible = 0
+
+    /// Itens configurados mais a entrada fixa.
+    private var rowCount: Int { items.count + 1 }
 
     var selection = 0 {
         didSet {
@@ -78,7 +84,7 @@ final class PaletteView: NSView {
 
     init(items: [PaletteItem]) {
         self.items = items
-        visibleRows = items.count
+        visibleRows = items.count + 1
         super.init(frame: .zero)
     }
 
@@ -92,18 +98,23 @@ final class PaletteView: NSView {
         NSFont.monospacedSystemFont(ofSize: fontSize, weight: selected ? .semibold : .regular)
     }
 
-    private func label(_ item: PaletteItem) -> String {
-        item.text.hasSuffix(" ") ? item.text.trimmingCharacters(in: .whitespaces) + Self.continuationSuffix : item.text
+    /// Rótulo quando houver; sem rótulo, o texto, com o sufixo " …" se terminar em espaço.
+    private func label(row: Int) -> String {
+        guard row < items.count else { return PaletteMachine.editorEntryTitle }
+        let item = items[row]
+        guard item.label.isEmpty, item.text.hasSuffix(" ") else { return item.displayText }
+        return item.text.trimmingCharacters(in: .whitespaces) + Self.continuationSuffix
     }
 
-    /// Ajusta o tamanho ao espaço disponível; sem espaço para todas as linhas, mostra as que cabem e rola (RNF de legibilidade).
-    func fit(maxHeight: CGFloat) {
+    /// Ajusta o tamanho ao espaço disponível; sem espaço para todas as linhas, mostra as que cabem e rola
+    /// (RNF de legibilidade). Textos mais largos que a tela são truncados no desenho.
+    func fit(maxHeight: CGFloat, maxWidth: CGFloat) {
         let fitting = Int(((maxHeight - 2 * Self.padding) / Self.rowHeight).rounded(.down))
-        visibleRows = max(1, min(items.count, fitting))
+        visibleRows = max(1, min(rowCount, fitting))
         let attributes: [NSAttributedString.Key: Any] = [.font: Self.font(selected: true)]
-        let textWidth = items.map { label($0).size(withAttributes: attributes).width }.max() ?? 0
-        let width = max(Self.minWidth, Self.markerWidth + textWidth + 3 * Self.padding)
-        setFrameSize(NSSize(width: width.rounded(.up), height: CGFloat(visibleRows) * Self.rowHeight + 2 * Self.padding))
+        let textWidth = (0..<rowCount).map { label(row: $0).size(withAttributes: attributes).width }.max() ?? 0
+        let width = min(max(Self.minWidth, Self.markerWidth + textWidth + 3 * Self.padding), max(Self.minWidth, maxWidth))
+        setFrameSize(NSSize(width: width.rounded(.down), height: CGFloat(visibleRows) * Self.rowHeight + 2 * Self.padding))
         scrollToSelection()
     }
 
@@ -113,7 +124,7 @@ final class PaletteView: NSView {
         } else if selection >= firstVisible + visibleRows {
             firstVisible = selection - visibleRows + 1
         }
-        firstVisible = min(max(0, firstVisible), items.count - visibleRows)
+        firstVisible = min(max(0, firstVisible), rowCount - visibleRows)
     }
 
     override func draw(_ dirtyRect: NSRect) {
@@ -121,11 +132,18 @@ final class PaletteView: NSView {
         Self.background.setFill()
         panel.fill()
 
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .byTruncatingTail
+        let textX = Self.padding + Self.markerWidth
         for row in 0..<visibleRows {
             let index = firstVisible + row
             let selected = index == selection
             let rowRect = NSRect(x: Self.padding / 2, y: Self.padding + CGFloat(row) * Self.rowHeight,
                                  width: bounds.width - Self.padding, height: Self.rowHeight)
+            if index == items.count, row > 0 {
+                Self.separator.setFill()
+                NSRect(x: rowRect.minX + Self.padding, y: rowRect.minY - 1, width: rowRect.width - 2 * Self.padding, height: 2).fill()
+            }
             if selected {
                 Self.highlight.setFill()
                 NSBezierPath(roundedRect: rowRect.insetBy(dx: 0, dy: 2), xRadius: 8, yRadius: 8).fill()
@@ -133,13 +151,16 @@ final class PaletteView: NSView {
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: Self.font(selected: selected),
                 .foregroundColor: selected ? NSColor.white : NSColor(calibratedWhite: 0.82, alpha: 1),
+                .paragraphStyle: paragraph,
             ]
-            let text = label(items[index])
-            let textY = rowRect.midY - text.size(withAttributes: attributes).height / 2
+            let text = label(row: index)
+            let textHeight = text.size(withAttributes: attributes).height
+            let textY = rowRect.midY - textHeight / 2
             if selected {
                 "▶".draw(at: NSPoint(x: Self.padding, y: textY), withAttributes: attributes)
             }
-            text.draw(at: NSPoint(x: Self.padding + Self.markerWidth, y: textY), withAttributes: attributes)
+            let textRect = NSRect(x: textX, y: textY, width: bounds.width - textX - Self.padding, height: textHeight)
+            text.draw(with: textRect, options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine], attributes: attributes)
         }
     }
 }
