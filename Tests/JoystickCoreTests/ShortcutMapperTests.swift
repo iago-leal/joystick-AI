@@ -15,7 +15,7 @@ import Testing
 
     @Test func botoesDoPonteiroNaoGeramTeclas() {
         var mapper = ShortcutMapper()
-        for button in [ButtonID.l1, .l2, .r1, .r2, .touchpadClick, .l3, .ps] {
+        for button in [ButtonID.l1, .l2, .r1, .r2, .touchpadClick, .l3] {
             #expect(mapper.press(button).isEmpty)
             #expect(mapper.release(button).isEmpty)
         }
@@ -88,6 +88,23 @@ import Testing
         var mapper = ShortcutMapper()
         #expect(mapper.press(.r3) == [.keyDown(KeyChord(KeyChord.m, [.command]), repeats: false)])
         #expect(mapper.release(.r3) == [.keyUp(KeyChord(KeyChord.m, [.command]))])
+    }
+
+    /// `002-paleta-comandos` RN-01: L1 e L2 repassam PS à camada base; Options não repassa.
+    @Test func psAbreAPaleta() {
+        var mapper = ShortcutMapper()
+        #expect(mapper.press(.ps) == [.openPalette])
+        #expect(mapper.release(.ps).isEmpty)
+        #expect(mapper.activeChords.isEmpty)
+        for modifier in [ButtonID.l1, .l2] {
+            var layered = ShortcutMapper()
+            _ = layered.press(modifier)
+            #expect(layered.press(.ps) == [.openPalette], "\(modifier)")
+            #expect(layered.release(.ps).isEmpty)
+        }
+        var options = ShortcutMapper()
+        _ = options.press(.options)
+        #expect(options.press(.ps).isEmpty)
     }
 
     @Test func pressionarRepetidoNaoDuplica() {

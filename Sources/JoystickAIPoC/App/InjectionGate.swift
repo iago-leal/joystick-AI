@@ -7,6 +7,7 @@ final class InjectionGate {
     private let injector: EventInjector
     private let buttons: ButtonActions
     private let shortcuts: ShortcutActions
+    private let palette: PaletteActions
     private var allowed: Bool?
     /// Solturas feitas na suspensão, que o sistema provavelmente descartou; repetidas na retomada.
     private var pendingMouseReleases: [MouseButton] = []
@@ -15,11 +16,12 @@ final class InjectionGate {
     /// Chamado na main thread quando a injeção é suspensa.
     var onSuspended: (() -> Void)?
 
-    init(context: InputContext, injector: EventInjector, buttons: ButtonActions, shortcuts: ShortcutActions) {
+    init(context: InputContext, injector: EventInjector, buttons: ButtonActions, shortcuts: ShortcutActions, palette: PaletteActions) {
         self.context = context
         self.injector = injector
         self.buttons = buttons
         self.shortcuts = shortcuts
+        self.palette = palette
     }
 
     /// Pode ser chamado de qualquer fila.
@@ -43,6 +45,8 @@ final class InjectionGate {
                 pendingKeyReleases = []
                 context.log.log(LogEventCatalog.injectionResumed(heldButtons: []))
             } else {
+                // A paleta fecha sem digitar (`002-paleta-comandos` RF-09, D-12).
+                palette.close(.injectionSuspended)
                 // Solta antes de desativar, para não deixar botão de mouse preso quando a permissão voltar.
                 pendingKeyReleases = shortcuts.releaseAll()
                 let held = buttons.releaseAll()

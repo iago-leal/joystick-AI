@@ -63,6 +63,28 @@ import Testing
         #expect(LaunchArguments.parse(["--screen"]).errors == [.missingValue("--screen")])
     }
 
+    @Test func intervaloDoEnterDaPaleta() {
+        #expect(LaunchArguments.parse([]).paletteEnterDelayMs == nil)
+        for value in [0, 120, 500] {
+            let args = LaunchArguments.parse(["--palette-enter-delay-ms", String(value)])
+            #expect(args.paletteEnterDelayMs == value)
+            #expect(args.errors.isEmpty)
+        }
+        for raw in ["-1", "501", "abc"] {
+            let args = LaunchArguments.parse(["--palette-enter-delay-ms", raw])
+            #expect(args.paletteEnterDelayMs == nil)
+            #expect(args.errors == [.invalidPaletteEnterDelay(raw)])
+            #expect(args.errors.first?.concernsPalette == true)
+        }
+        let missing = LaunchArguments.parse(["--palette-enter-delay-ms"])
+        #expect(missing.paletteEnterDelayMs == nil)
+        #expect(missing.errors == [.missingValue("--palette-enter-delay-ms")])
+        #expect(missing.errors.first?.concernsPalette == true)
+        #expect(!LaunchArgumentError.missingValue("--screen").concernsPalette)
+        #expect(LaunchArgumentError.invalidPaletteEnterDelay("abc").message
+            == "--palette-enter-delay-ms inválido: \"abc\"; use um inteiro de 0 a 500")
+    }
+
     @Test func argumentosDesconhecidosIgnorados() {
         let args = LaunchArguments.parse(["-NSDocumentRevisionsDebugMode", "YES", "--debug", "-psn_0_12345"])
         #expect(args.debug)

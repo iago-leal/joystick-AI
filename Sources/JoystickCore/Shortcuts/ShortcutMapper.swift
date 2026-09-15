@@ -82,12 +82,15 @@ public enum ShortcutAction: Equatable, Sendable {
     case text(String, pressEnter: Bool)
     case modifierDown(KeyModifier)
     case modifierUp(KeyModifier)
+    /// Abre a paleta de comandos; o executor solta antes as teclas mantidas (`002-paleta-comandos` D-02, D-04).
+    case openPalette
 }
 
 /// Protótipo de atalhos do controle, fora do escopo da PoC (`action-mapping`, pedido do usuário no PM-3).
 ///
 /// Mapeamento fixo: combinações decididas no pressionar (`action-mapping` EC-04) e soltas pelo mesmo botão.
 /// L1 e L2 são modificadores; Options segura Command para alternar aplicativos com o direcional.
+/// PS abre a paleta de comandos na camada base e, por repasse, com L1 ou L2 segurados (`002-paleta-comandos` RN-01).
 public struct ShortcutMapper: Sendable {
     public static let continueText = "CONTINUAR"
 
@@ -145,6 +148,7 @@ public struct ShortcutMapper: Sendable {
         case .create: return hold(button, .missionControl)
         // Atalho do transcritor do Raycast, configurado pelo usuário.
         case .r3: return hold(button, KeyChord(KeyChord.m, [.command]), repeats: false)
+        case .ps: return [.openPalette]
         default: return []
         }
     }

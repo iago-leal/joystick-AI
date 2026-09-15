@@ -226,6 +226,28 @@ public enum LogEventCatalog {
         ])
     }
 
+    // Paleta de comandos (`002-paleta-comandos/interfaces/diagnostic-log.md` §2): índices a partir de 1, nunca o texto.
+
+    public static func paletteOpened(selection: Int) -> LogEvent {
+        LogEvent("palette.opened", level: .info, fields: ["selection": .int(Int64(selection))])
+    }
+
+    public static func paletteConfirmed(index: Int, enter: Bool) -> LogEvent {
+        LogEvent("palette.confirmed", level: .info, fields: ["index": .int(Int64(index)), "enter": .bool(enter)])
+    }
+
+    public static func paletteClosed(reason: PaletteCloseReason) -> LogEvent {
+        LogEvent("palette.closed", level: .info, fields: ["reason": .string(reason.rawValue)])
+    }
+
+    public static func paletteBlocked() -> LogEvent {
+        LogEvent("palette.blocked", level: .info, fields: ["reason": "targets"])
+    }
+
+    public static func paletteInvalidArgs(message: String) -> LogEvent {
+        LogEvent("palette.invalid_args", level: .warn, fields: ["message": .string(message)])
+    }
+
     public static func logDebugSuspended(sizeBytes: Int) -> LogEvent {
         LogEvent("log.debug_suspended", level: .warn, fields: ["sizeBytes": .int(Int64(sizeBytes))])
     }

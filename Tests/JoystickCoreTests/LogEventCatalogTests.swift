@@ -49,6 +49,11 @@ import Testing
             LogEventCatalog.targetsWriteFailed(message: "disco", payload: "{}"),
             LogEventCatalog.appTerminating(reason: .sigterm, releasedButtons: [.left]),
             LogEventCatalog.logDebugSuspended(sizeBytes: 52_428_801),
+            LogEventCatalog.paletteOpened(selection: 1),
+            LogEventCatalog.paletteConfirmed(index: 2, enter: true),
+            LogEventCatalog.paletteClosed(reason: .injectionSuspended),
+            LogEventCatalog.paletteBlocked(),
+            LogEventCatalog.paletteInvalidArgs(message: "--palette-enter-delay-ms sem valor"),
         ] + LogEventCatalog.config(ConfigLoadResult(settings: settings, status: .loaded, reason: nil, issues: [
             .valueRejected(field: "deadzone", rejected: 0.9, min: 0, max: 0.5, defaultValue: 0.12),
         ])) + LogEventCatalog.config(ConfigLoadResult(settings: PointerSettings(), status: .invalidJSON, reason: nil, issues: [.invalidJSON(line: 4, message: "vírgula")]))
@@ -80,6 +85,8 @@ import Testing
             "targets.screens": .info, "targets.started": .info, "targets.finished": .info,
             "targets.invalid_args": .warn, "targets.screen_fallback": .warn, "targets.write_failed": .error,
             "app.terminating": .info, "log.debug_suspended": .warn,
+            "palette.opened": .info, "palette.confirmed": .info, "palette.closed": .info, "palette.blocked": .info,
+            "palette.invalid_args": .warn,
         ]
         let events = Self.sampleEvents
         #expect(Set(events.map(\.name)) == Set(expected.keys))
@@ -109,6 +116,23 @@ import Testing
         #expect(fields("targets.finished")["abortReason"] == "screen_removed")
         #expect(Set(fields("app.terminating").keys) == ["reason", "releasedButtons"])
         #expect(fields("config.loaded")["reason"] == nil)
+    }
+
+    /// RN-07 da `002-paleta-comandos`: os eventos da paleta levam índice e motivo, nunca o texto do item.
+    @Test func eventosDaPaletaSemTextoDeItem() {
+        let texts = Set(CommandPalette.items.map(\.text))
+        for event in Self.sampleEvents where event.name.hasPrefix("palette.") {
+            #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: ["text", "label", "item"]), "\(event.name)")
+            let leaked = event.fields.values.filter { value in
+                if case .string(let string) = value { return texts.contains(string) }
+                return false
+            }
+            #expect(leaked.isEmpty, "\(event.name)")
+        }
+        #expect(Set(fields("palette.opened").keys) == ["selection"])
+        #expect(Set(fields("palette.confirmed").keys) == ["index", "enter"])
+        #expect(fields("palette.closed")["reason"] == "injection_suspended")
+        #expect(fields("palette.blocked")["reason"] == "targets")
     }
 
     @Test func campoOpcionalAusenteNaoAparece() {

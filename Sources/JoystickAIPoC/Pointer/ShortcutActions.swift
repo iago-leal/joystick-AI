@@ -3,17 +3,17 @@ import JoystickCore
 
 /// Botões do controle convertidos em teclas pelo `ShortcutMapper` (protótipo de atalhos, fora do escopo da PoC).
 ///
-/// Todo acesso ocorre na fila `input`. A repetição segue `action-mapping` RF-10: 400 ms e depois a cada 50 ms.
+/// Todo acesso ocorre na fila `input`. A repetição segue `KeyRepeat` (`action-mapping` RF-10).
 final class ShortcutActions {
-    private static let repeatDelay: DispatchTimeInterval = .milliseconds(400)
-    private static let repeatInterval: DispatchTimeInterval = .milliseconds(50)
-
     private let context: InputContext
     private let keyboard: KeyboardInjector
     private var mapper = ShortcutMapper(systemChords: SystemShortcut.chords(
         fromSymbolicHotKeys: CFPreferencesCopyAppValue("AppleSymbolicHotKeys" as CFString, "com.apple.symbolichotkeys" as CFString) as? [String: Any]))
     private var repeatTimer: DispatchSourceTimer?
     private var repeatingChord: KeyChord?
+
+    /// Chamado na fila `input` depois de soltas as teclas mantidas (`002-paleta-comandos` D-04).
+    var onOpenPalette: (() -> Void)?
 
     init(context: InputContext, keyboard: KeyboardInjector) {
         self.context = context
@@ -69,6 +69,9 @@ final class ShortcutActions {
                 keyboard.modifierDown(modifier)
             case .modifierUp(let modifier):
                 keyboard.modifierUp(modifier)
+            case .openPalette:
+                releaseAll()
+                onOpenPalette?()
             }
         }
     }
@@ -77,7 +80,7 @@ final class ShortcutActions {
         stopRepeat()
         repeatingChord = chord
         let timer = DispatchSource.makeTimerSource(queue: context.queue)
-        timer.schedule(deadline: .now() + Self.repeatDelay, repeating: Self.repeatInterval, leeway: .milliseconds(5))
+        timer.schedule(deadline: .now() + KeyRepeat.delay, repeating: KeyRepeat.interval, leeway: .milliseconds(5))
         timer.setEventHandler { [weak self] in self?.keyboard.chordRepeat(chord) }
         timer.resume()
         repeatTimer = timer

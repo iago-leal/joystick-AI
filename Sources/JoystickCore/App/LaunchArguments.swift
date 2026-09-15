@@ -6,6 +6,7 @@ public enum LaunchArgumentError: Equatable, Sendable {
     case invalidScreen(String)
     case invalidSeed(String)
     case invalidScrollUnit(String)
+    case invalidPaletteEnterDelay(String)
     case missingValue(String)
 
     public var message: String {
@@ -15,7 +16,18 @@ public enum LaunchArgumentError: Equatable, Sendable {
         case .invalidScreen(let value): "--screen inválido: \"\(value)\"; use um inteiro a partir de 1"
         case .invalidSeed(let value): "--seed inválido: \"\(value)\"; use um inteiro sem sinal"
         case .invalidScrollUnit(let value): "--scroll-unit inválido: \"\(value)\"; use pixel ou line"
+        case .invalidPaletteEnterDelay(let value):
+            "--palette-enter-delay-ms inválido: \"\(value)\"; use um inteiro de \(LaunchArguments.paletteEnterDelayRange.lowerBound) a \(LaunchArguments.paletteEnterDelayRange.upperBound)"
         case .missingValue(let flag): "\(flag) sem valor"
+        }
+    }
+
+    /// Erros de argumentos da paleta, registrados em `palette.invalid_args` e não em `targets.invalid_args`.
+    public var concernsPalette: Bool {
+        switch self {
+        case .invalidPaletteEnterDelay: true
+        case .missingValue(let flag): flag == LaunchArguments.paletteEnterDelayFlag
+        default: false
         }
     }
 }
@@ -28,7 +40,13 @@ public struct LaunchArguments: Equatable, Sendable {
     public var seed: UInt64?
     public var debug = false
     public var scrollUnit = ScrollUnit.pixel
+    /// Intervalo entre o texto de um item da paleta e o Enter; `nil` usa o padrão do app
+    /// (`002-paleta-comandos/interfaces/launch-arguments.md`).
+    public var paletteEnterDelayMs: Int?
     public var errors: [LaunchArgumentError] = []
+
+    public static let paletteEnterDelayFlag = "--palette-enter-delay-ms"
+    public static let paletteEnterDelayRange = 0...500
 
     public init() {}
 
@@ -87,6 +105,14 @@ public struct LaunchArguments: Equatable, Sendable {
                         result.scrollUnit = unit
                     } else {
                         result.errors.append(.invalidScrollUnit(raw))
+                    }
+                }
+            case paletteEnterDelayFlag:
+                if let raw = value(for: argument) {
+                    if let delay = Int(raw), paletteEnterDelayRange.contains(delay) {
+                        result.paletteEnterDelayMs = delay
+                    } else {
+                        result.errors.append(.invalidPaletteEnterDelay(raw))
                     }
                 }
             default:

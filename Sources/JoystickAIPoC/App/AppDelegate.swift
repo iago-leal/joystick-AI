@@ -12,6 +12,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var injector: EventInjector!
     private var buttonActions: ButtonActions!
     private var shortcutActions: ShortcutActions!
+    private var paletteActions: PaletteActions!
+    private var palettePanel: PalettePanel!
     private var motionLoop: MotionLoop!
     private var router: InputRouter!
     private var gate: InjectionGate!
@@ -48,10 +50,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         buttonActions = ButtonActions(injector: injector, settings: settings)
         motionLoop = MotionLoop(context: inputContext, injector: injector, scrollInjector: scrollInjector, buttons: buttonActions)
         // Protótipo de atalhos pedido no PM-3, fora do escopo da PoC (`action-mapping`).
-        shortcutActions = ShortcutActions(context: inputContext, keyboard: KeyboardInjector(injector: injector))
-        router = InputRouter(buttons: buttonActions, motion: motionLoop, shortcuts: shortcutActions)
+        // Um único injetor de teclado, para uma só contagem de modificadores (`002-paleta-comandos` D-05).
+        let keyboard = KeyboardInjector(injector: injector)
+        shortcutActions = ShortcutActions(context: inputContext, keyboard: keyboard)
+
+        // Paleta de comandos (`002-paleta-comandos`): painel criado oculto, para abrir sem atraso (D-08).
+        for error in arguments.errors where error.concernsPalette {
+            log.log(LogEventCatalog.paletteInvalidArgs(message: error.message))
+        }
+        palettePanel = PalettePanel(items: CommandPalette.items)
+        paletteActions = PaletteActions(
+            context: inputContext, keyboard: keyboard,
+            enterDelayMs: arguments.paletteEnterDelayMs ?? PaletteActions.defaultEnterDelayMs)
+        paletteActions.onRender = { [palettePanel] snapshot in palettePanel?.show(snapshot) }
+        shortcutActions.onOpenPalette = { [paletteActions] in paletteActions?.open() }
+
+        router = InputRouter(buttons: buttonActions, motion: motionLoop, shortcuts: shortcutActions, palette: paletteActions)
         inputContext.sink = router
-        gate = InjectionGate(context: inputContext, injector: injector, buttons: buttonActions, shortcuts: shortcutActions)
+        gate = InjectionGate(
+            context: inputContext, injector: injector, buttons: buttonActions, shortcuts: shortcutActions, palette: paletteActions)
 
         lifecycle = Lifecycle(context: inputContext, buttons: buttonActions, shortcuts: shortcutActions)
         lifecycle.start()
@@ -78,7 +95,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// `targets.screens` já foi registrado; aqui só a validação e a abertura (RF-27, D-20).
     private func openTargets(arguments: LaunchArguments, settings: PointerSettings) {
-        for error in arguments.errors {
+        for error in arguments.errors where !error.concernsPalette {
             switch error {
             case .invalidScreen: continue
             default: log.log(LogEventCatalog.targetsInvalidArgs(message: error.message))
@@ -108,7 +125,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             environment: environment, seed: seed, settings: settings, scrollUnit: arguments.scrollUnit)
         let abortMonitor = TargetAbortMonitor(
             session: session, context: inputContext, router: router, displayMonitor: displayMonitor, gate: gate)
+        // A paleta não abre sobre a tela de alvos (`002-paleta-comandos` D-13).
+        let palette: PaletteActions = paletteActions
+        inputContext.queue.async { palette.blocked = true }
         session.onFinish = { [weak self] in
+            self?.inputContext.queue.async { palette.blocked = false }
             self?.targetAbortMonitor?.stop()
             self?.targetAbortMonitor = nil
             self?.targetSession = nil
