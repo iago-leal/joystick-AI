@@ -34,7 +34,7 @@ Valores de `rule`: os de `data-delta.md` §2 (`ShortcutIssue.rule`), acrescidos 
 
 | Evento | Campo | Antes | Depois |
 |--------|-------|-------|--------|
-| `palette.closed` | `reason` | `circle \| ps \| disconnected \| injection_suspended \| idle` | Acrescenta `config_changed`, quando uma configuração nova é aplicada com a paleta aberta. |
+| `palette.closed` | `reason` | `circle \| ps \| disconnected \| injection_suspended \| idle` | Acrescenta `config_changed`, quando uma configuração nova é aplicada com a paleta aberta, e `identify`, quando o modo de identificação do editor é ligado com a paleta aberta (D-24; acrescentado no `/reversa-coding`, T057). |
 
 Confirmar "Editar atalhos" na paleta não gera `palette.confirmed`; gera `editor.opened` com `source: palette`.
 
