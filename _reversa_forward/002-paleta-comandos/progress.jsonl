@@ -1,0 +1,22 @@
+{"ts": "2026-09-15T00:27:56Z", "action": "T001", "status": "done", "files": ["Sources/JoystickCore/Shortcuts/KeyRepeat.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T002", "status": "done", "files": ["Sources/JoystickCore/Palette/CommandPalette.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T003", "status": "done", "files": ["Sources/JoystickCore/App/LaunchArguments.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T004", "status": "done", "files": ["Sources/JoystickCore/Log/LogEventCatalog.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T005", "status": "done", "files": ["Tests/JoystickCoreTests/CommandPaletteTests.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T006", "status": "done", "files": ["Tests/JoystickCoreTests/LaunchArgumentsTests.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T007", "status": "done", "files": ["Tests/JoystickCoreTests/LogEventCatalogTests.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T008", "status": "done", "files": ["Sources/JoystickCore/Palette/CommandPalette.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T009", "status": "done", "files": ["Sources/JoystickCore/Palette/CommandPalette.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T010", "status": "done", "files": ["Tests/JoystickCoreTests/CommandPaletteTests.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T011", "status": "done", "files": ["Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T012", "status": "done", "files": ["Tests/JoystickCoreTests/ShortcutMapperTests.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T013", "status": "done", "files": ["Sources/JoystickAIPoC/Pointer/ShortcutActions.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T014", "status": "done", "files": ["Sources/JoystickAIPoC/Palette/PalettePanel.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T015", "status": "done", "files": ["Sources/JoystickAIPoC/Palette/PaletteActions.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T016", "status": "done", "files": ["Sources/JoystickAIPoC/Palette/PaletteActions.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T017", "status": "done", "files": ["Sources/JoystickAIPoC/Pointer/InputRouter.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T018", "status": "done", "files": ["Sources/JoystickAIPoC/App/InjectionGate.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T019", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T020", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "T022", "status": "done", "files": ["_reversa_forward/002-paleta-comandos/onboarding.md"]}
+{"ts": "2026-09-15T00:27:56Z", "action": "PM-1", "status": "waiting", "files": [], "note": "sondas P-01 e P-02 dependem do usuário"}

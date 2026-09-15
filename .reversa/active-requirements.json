@@ -1,9 +1,9 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/001-poc-entrada-ponteiro",
-  "feature-id": "001",
-  "short-name": "poc-entrada-ponteiro",
-  "started-at": "2026-09-14T18:39:39Z",
+  "feature-dir": "_reversa_forward/002-paleta-comandos",
+  "feature-id": "002",
+  "short-name": "paleta-comandos",
+  "started-at": "2026-09-14T23:59:20Z",
   "current-stage": "requirements",
   "stages-completed": [],
   "paused-features": []
