@@ -26,6 +26,9 @@ Diferentemente da 001, esta feature altera arquivos já existentes, criados pela
 | `Tests/JoystickCoreTests/CommandPaletteTests.swift` | testes | componente-novo | LOW | Lista e transições da máquina. |
 | `Tests/JoystickCoreTests/ShortcutMapperTests.swift` | testes | regra-alterada | LOW | PS retirado dos botões sem tecla; teste de RN-01. |
 | `Tests/JoystickCoreTests/LaunchArgumentsTests.swift`, `LogEventCatalogTests.swift` | testes | regra-nova | LOW | Argumento novo e privacidade dos eventos da paleta. |
+| `Sources/JoystickCore/Palette/CommandPalette.swift` (E001) | `action-mapping` RF-09 (texto) | regra-alterada | MEDIUM | Nenhum item envia Enter; o comando fica na linha e o envio é um ✕ seguinte. |
+| `Sources/JoystickAIPoC/Palette/PalettePanel.swift` (E001) | `app-shell` §8 | regra-alterada | LOW | Sufixo " …" decidido pelo espaço final do texto, e não mais pela ausência de Enter. |
+| `Tests/JoystickCoreTests/CommandPaletteTests.swift` (E001) | testes | regra-alterada | LOW | Teste da lista passa a exigir que nenhum item envie Enter. |
 
 ## Diff conceitual por componente
 

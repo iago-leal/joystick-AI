@@ -264,3 +264,11 @@ Cenário: Privacidade do log
 
 - **Q-018 (produto comercial no documento), exceção assumida.** DualSense, macOS, Claude Code, VS Code, Terminal e Raycast aparecem porque são o domínio do problema e os ambientes de uso, não escolhas de solução. Frameworks e APIs de implementação ficam para o `/reversa-plan`.
 - **Q-011 e Q-019, não aplicáveis.** Não existem `_reversa_sdd/domain.md` nem `.reversa/principles.md`; as regras citam as specs SDD e o adendo da feature 001 como origem.
+
+## Emendas
+
+### E001, 2026-09-14
+
+O que muda: nenhum item da paleta envia Enter; confirmar com ✕ apenas digita o texto na linha do aplicativo em foco, e o envio passa a ser um ✕ seguinte, já com a paleta fechada. Na lista, o sufixo " …" continua marcando só os itens que terminam com espaço e esperam descrição.
+Motivo: no PM-1, o usuário confirmou `/reversa-forward` e o comando foi enviado direto ao Claude Code; ele prefere que a paleta só coloque o comando no terminal, para poder acrescentar argumentos antes de enviar. `CONTINUAR` com envio imediato continua disponível em L1+✕. Substitui, na lista fixa da seção 4, a coluna "Enter ao final" e o critério de RF-04 sobre executar o comando.
+Arquivos previstos: `Sources/JoystickCore/Palette/CommandPalette.swift`, `Sources/JoystickAIPoC/Palette/PalettePanel.swift`, `Tests/JoystickCoreTests/CommandPaletteTests.swift`

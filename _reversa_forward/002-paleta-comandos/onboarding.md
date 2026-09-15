@@ -59,15 +59,15 @@ As sondas usam o app já com a paleta, sem utilitário descartável (`actions.md
 
 ## 2. Portão PM-2: cenários da paleta
 
-Abra o app com `--debug`, já com o padrão definido na P-01.
+Abra o app com `--debug`. Pela emenda E001, nenhum item envia Enter: confirmar só digita, e o envio é um ✕ seguinte, já com a paleta fechada.
 
 | # | Passo | Resultado esperado | Cenário |
 |---|-------|--------------------|---------|
-| 1 | Terminal com Claude Code em foco; PS; ↓ até `/reversa-forward`; ✕ | Paleta some; comando executa; Terminal nunca perde o foco | Comando do Reversa pela paleta |
+| 1 | Terminal com Claude Code em foco; PS; ↓ até `/reversa-forward`; ✕; depois ✕ de novo | Paleta some e o comando fica na linha, sem envio; o segundo ✕ o executa; Terminal nunca perde o foco | Comando do Reversa pela paleta (E001) |
 | 2 | Segurar L1 e pressionar PS; fechar; segurar Options e pressionar PS | Com L1, abre; com Options, nada | PS com modificador segurado |
 | 3 | Paleta aberta no 1.º item; ↑; segurar ↓ por 1 s | ↑ seleciona `/resume`; ↓ avança ao menos 10 posições | Navegação circular e repetição |
 | 4 | Selecionar `/clear`; ○; reabrir e pressionar PS | Fecha as duas vezes sem digitar | Fechar sem digitar |
-| 5 | Confirmar `/reversa-requirements ` | Texto na linha, com espaço final, sem envio | Comando que espera descrição |
+| 5 | Confirmar `/reversa-requirements `; ditar ou digitar uma descrição; ✕ | Texto na linha, com espaço final, sem envio; o ✕ envia a linha completa | Comando que espera descrição |
 | 6 | Campo de senha em foco (por exemplo, `sudo -v` no Terminal); confirmar `CONTINUAR` | Nada visível é digitado; log sem o texto | Campo seguro em foco |
 | 7 | Abrir a paleta e contar os itens | 17 itens, de `CONTINUAR` a `/resume`, legíveis a 3 m da TV | Conteúdo da lista; RNF de legibilidade |
 | 8 | Paleta aberta; □; mover o analógico esquerdo; R1 | Sem Backspace; cursor se move; clique acontece | Atalhos suspensos e ponteiro ativo |

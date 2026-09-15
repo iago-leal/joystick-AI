@@ -20,3 +20,6 @@
 {"ts": "2026-09-15T00:27:56Z", "action": "T020", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
 {"ts": "2026-09-15T00:27:56Z", "action": "T022", "status": "done", "files": ["_reversa_forward/002-paleta-comandos/onboarding.md"]}
 {"ts": "2026-09-15T00:27:56Z", "action": "PM-1", "status": "waiting", "files": [], "note": "sondas P-01 e P-02 dependem do usuário"}
+{"ts": "2026-09-15T00:36:13Z", "action": "PM-1", "status": "partial", "files": [], "note": "P-01 aprovada com 0 ms no Terminal; P-02 pendente"}
+{"ts": "2026-09-15T00:36:13Z", "action": "T021", "status": "done", "files": [], "note": "padrão 0 ms mantido pelo resultado da P-01"}
+{"ts": "2026-09-15T00:36:13Z", "action": "E001", "status": "done", "files": ["Sources/JoystickCore/Palette/CommandPalette.swift", "Sources/JoystickAIPoC/Palette/PalettePanel.swift", "Tests/JoystickCoreTests/CommandPaletteTests.swift"]}

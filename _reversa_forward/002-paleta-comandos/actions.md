@@ -87,7 +87,7 @@ O roadmap previa as sondas P-01 e P-02 antes do código, com um utilitário desc
 
 | ID | Descrição | Dependências | Paralelismo | Arquivo alvo | Confidência | Status |
 |----|-----------|--------------|-------------|--------------|-------------|--------|
-| T021 | Fixar `PaletteActions.defaultEnterDelayMs` no menor intervalo aprovado no PM-1 e registrar nas notas de execução os resultados de P-01 e P-02 | PM-1 | `[//]` | `Sources/JoystickAIPoC/Palette/PaletteActions.swift` | 🔴 | `[ ]` |
+| T021 | Fixar `PaletteActions.defaultEnterDelayMs` no menor intervalo aprovado no PM-1 e registrar nas notas de execução os resultados de P-01 e P-02 | PM-1 | `[//]` | `Sources/JoystickAIPoC/Palette/PaletteActions.swift` | 🔴 | `[X]` |
 | T022 | Adaptar o `onboarding.md` §1 ao ajuste de ordem: P-01 com o app aberto por `--palette-enter-delay-ms` 0, 50 e 150 e P-02 com o painel real, sem utilitário descartável; conferir que nomes de arquivos, argumentos e eventos citados no §2 batem com o código | T020 | `[//]` | `_reversa_forward/002-paleta-comandos/onboarding.md` | 🟢 | `[X]` |
 
 ## Notas de execução
@@ -104,9 +104,22 @@ O roadmap previa as sondas P-01 e P-02 antes do código, com um utilitário desc
 - **Nomenclatura dos portões:** o roadmap §8 chama de "PM-1" o roteiro completo; nesta decomposição, PM-1 são as sondas e PM-2 o roteiro. O `onboarding.md` segue a decomposição.
 - **Limitação aceita (D-04):** um modificador pressionado com a paleta aberta e ainda segurado após o fechamento não ativa a camada até ser pressionado de novo.
 
+### Portão PM-1, 2026-09-14 (parcial)
+
+- **P-01 respondida:** com `--palette-enter-delay-ms 0`, confirmar `/reversa-forward` na paleta executou o comando no Claude Code, no Terminal. O padrão 0 de `PaletteActions.defaultEnterDelayMs` fica mantido, e T021 foi fechada sem alteração de código. Não houve teste com 50 e 150 ms nem no VS Code, pois o intervalo 0 já funcionou.
+- **Emenda E001:** o usuário preferiu que a paleta não envie Enter, para poder acrescentar argumentos; com isso o intervalo deixa de ser usado pela lista fixa, e o argumento fica disponível para a paleta editável da feature seguinte.
+- **P-02 pendente:** sobreposição em tela cheia e noutra mesa, sem roubar o foco, ainda não informada; passa ao PM-2.
+
 ## Histórico de alterações
 
 | Data | Alteração | Autor |
 |------|-----------|-------|
 | 2026-09-14 | Versão inicial gerada por `/reversa-to-do` | reversa |
 | 2026-09-14 | Rodada 1 do `/reversa-coding`: T001 a T020 e T022 concluídas; parada no PM-1 | reversa |
+| 2026-09-14 | PM-1 parcial, T021 fechada e emenda E001 pelo `/reversa-add` | reversa |
+
+## Emendas
+
+| ID | Descrição | Dependências | Paralelismo | Arquivo alvo | Confidência | Status |
+|----|-----------|--------------|-------------|--------------|-------------|--------|
+| E001 | Nenhum item da paleta envia Enter; o sufixo " …" passa a depender do espaço final, e o teste da lista verifica a ausência de Enter | - | - | `Sources/JoystickCore/Palette/CommandPalette.swift` | 🟢 | `[X]` |
