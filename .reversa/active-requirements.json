@@ -1,10 +1,13 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/002-paleta-comandos",
-  "feature-id": "002",
-  "short-name": "paleta-comandos",
-  "started-at": "2026-09-14T23:59:20Z",
-  "current-stage": "requirements",
-  "stages-completed": [],
+  "feature-dir": "_reversa_forward/003-editor-atalhos",
+  "feature-id": "003",
+  "short-name": "editor-atalhos",
+  "started-at": "2026-09-15T00:54:36Z",
+  "current-stage": "plan",
+  "stages-completed": [
+    "requirements",
+    "clarify"
+  ],
   "paused-features": []
 }
