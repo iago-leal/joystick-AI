@@ -98,7 +98,7 @@ Abra o app com `--debug`. Entre um grupo de passos e outro, restaure a configura
 | 8 | Com `pointer` calibrado e sem seções novas, alterar um atalho no editor e salvar; `diff` contra `config.pre-003.json` | `pointer` com os mesmos campos e valores; atalho novo vale | Seções preservadas ao salvar |
 | 9 | `chmod a-w ~/.config/joystick-ai`; salvar no editor; `chmod u+w ~/.config/joystick-ai` | Erro com o caminho; vigente e rascunho mantidos | Pasta sem permissão de escrita |
 | 10 | Ícone da barra de menus: "Editar atalhos"; depois "Sair" com □ segurado | Editor em primeiro plano; app encerra sem Backspace preso | Ícone na barra de menus |
-| 11 | Terminal em foco; PS, "Editar atalhos", ✕ | Editor em primeiro plano; nada digitado no Terminal | Editor aberto pela paleta |
+| 11 | Terminal em foco; PS, "Editar atalhos", ✕ | Editor acima do Terminal e em foco, sem `editor.activation_failed`; o ponteiro volta ao lugar depois do clique automático; nada digitado no Terminal (E003) | Editor aberto pela paleta |
 | 12 | Camada L2 no editor | ← "mesa à esquerda"; ✕ "Enter (herdado)"; R1 "clique esquerdo, fixo" | Visão de uma camada |
 | 13 | Atribuir Command+Z a L1+○ gravando pelo teclado; salvar; L1+○ | Desfaz em até 1 s | Atribuir e salvar; Gravação de acorde |
 | 14 | Gravação ativa: Command+Shift+Z no teclado e ✕ no controle | Capturado Command+Shift+Z; nenhum Enter | Gravação de acorde |

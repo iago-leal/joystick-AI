@@ -92,8 +92,8 @@ Nenhuma bloqueia a execução; todas foram resolvidas pela opção indicada, mas
 | T012 | Acrescentar a `PaletteMachine` a entrada fixa "Editar atalhos" no índice `items.count`, com seleção circular sobre `items.count + 1` posições e confirmação que produz o novo efeito `PaletteEffect.openEditor` sem `confirm` nem alteração de `lastConfirmed`; em `PaletteActions`, tratar `openEditor` chamando `onOpenEditor` na main thread (D-13, RF-07) | T004 | - | `Sources/JoystickCore/Palette/CommandPalette.swift` | 🟢 | `[X]` |
 | T013 | Em `PaletteView`, desenhar `displayText` (com o sufixo " …" da 002 quando não houver rótulo), a entrada fixa "Editar atalhos" separada por uma linha e textos longos truncados pela largura disponível da tela em `fit` (D-13) | T004, T012 | `[//]` | `Sources/JoystickAIPoC/Palette/PalettePanel.swift` | 🟢 | `[X]` |
 | T014 | No `AppDelegate`, criar `StatusMenu` e `EditorWindowController` com `EditorProbeView`; ligar "Editar atalhos" do menu a `show(source: .menu)` e `paletteActions.onOpenEditor` a `show(source: .palette)` (roadmap §8, Fase 0) | T009, T010, T011, T012, T013 | - | `Sources/JoystickAIPoC/App/AppDelegate.swift` | 🔴 | `[X]` |
-| T015 | Registrar nas notas de execução os resultados de P-01, P-02, P-03 e P-05 e ajustar as constantes de `EditorMetrics` conforme a legibilidade e a precisão de clique observadas a 3 m | PM-1a | `[//]` | `Sources/JoystickAIPoC/Editor/EditorMetrics.swift` | 🟡 | `[ ]` |
-| T016 | Declarar em `KeyCaptureField` a lista de acordes que P-02 mostrou serem consumidos pelo sistema antes do app (por exemplo Command+Tab e Command+Space), para o editor indicar que exigem a montagem (D-22) | PM-1a | `[//]` | `Sources/JoystickAIPoC/Editor/KeyCaptureField.swift` | 🔴 | `[ ]` |
+| T015 | Registrar nas notas de execução os resultados de P-01, P-02, P-03 e P-05 e ajustar as constantes de `EditorMetrics` conforme a legibilidade e a precisão de clique observadas a 3 m | PM-1a | `[//]` | `Sources/JoystickAIPoC/Editor/EditorMetrics.swift` | 🟡 | ``[X]` |
+| T016 | Declarar em `KeyCaptureField` a lista de acordes que P-02 mostrou serem consumidos pelo sistema antes do app (por exemplo Command+Tab e Command+Space), para o editor indicar que exigem a montagem (D-22) | PM-1a | `[//]` | `Sources/JoystickAIPoC/Editor/KeyCaptureField.swift` | 🔴 | `[X]` |
 | T076 | Adaptar o `onboarding.md` §1 à separação dos portões: PM-1a com P-01, P-02, P-03 e P-05 e registro de quatro resultados; P-04 remetida ao PM-1b, depois de T060, com a releitura verificada pelos eventos `shortcuts.*` de `trigger: external` (acrescentada na revisão pós-auditoria, A005) | - | `[//]` | `_reversa_forward/003-editor-atalhos/onboarding.md` | 🟢 | `[X]` |
 
 ## Fase 2, Testes
@@ -189,6 +189,55 @@ Nenhuma bloqueia a execução; todas foram resolvidas pela opção indicada, mas
 - **T012, entrada fixa:** confirmar "Editar atalhos" fecha a paleta, emite `openEditor` e não altera `lastConfirmed` (inconsistência 6).
 - **Parada no PM-1a:** a instalação (`JOYSTICK_SIGN_IDENTITY="JoystickAI Local Signing" ./scripts/build-app.sh`) fica com o usuário, porque encerra a instância aberta; em seguida, as sondas P-01, P-02, P-03 e P-05 do `onboarding.md` §1.
 
+### Rodada 2, 2026-09-15: PM-1a, primeira execução
+
+Sondas executadas pelo usuário na sessão de log `poc-20260914-230802.jsonl`, com o app instalado em 2026-09-14 às 23:07.
+
+- **P-01, reprovada pela paleta:** a janela abriu atrás do aplicativo em uso nas seis aberturas pela paleta, todas com `editor.activation_failed`. Pelo ícone da barra de menus, quatro de cinco aberturas ativaram a janela; a exceção foi um segundo clique com a janela já aberta. O cursor pisca no campo mesmo com a janela atrás, porque ela é a principal do app, mas o app não fica ativo. Causa: no macOS 14 ou superior, `NSApp.activate()` é recusado sem interação recente com o app, e o botão do controle lido por `GameController` não conta como interação. A devolução do foco ao fechar não foi informada.
+- **P-01, ajuste:** `EditorWindowController` espera 150 ms (`fallbackDelay`); se o app não estiver ativo com a janela em foco, chama `orderFrontRegardless()` e posta, pelo `EventInjector.activationClick(at:)`, um clique no centro da barra de título, com a marca do app e a volta do cursor à posição anterior. `editor.activation_failed` passa a significar falha também do clique, conferida 500 ms depois dele; nenhum evento novo foi criado, e a ausência desse evento em aberturas `source: palette` comprova o ajuste. Se o reteste falhar, adota-se a alternativa de D-23 (paleta levando o ponteiro ao ícone).
+- **P-02, aprovada em parte:** Command+Shift+Z e Command+Q foram gravados, e Command+Q não encerrou o app (mesmo processo antes e depois). Command+Tab abriu a troca de aplicativos e Command+Space abriu o Raycast antes de chegarem ao campo. Não informados: ✕ do controle com a gravação ativa e digitação no Terminal com o campo inativo.
+- **T016:** `KeyCaptureField.consumedBeforeApp` declara Command+Tab e Command+Space; `KeyChord.space` foi acrescentado ao lado das demais teclas nomeadas.
+- **P-03, reprovada:** dez toques em R3 entre 09:20 e 09:22 e nenhum texto no campo. Não se sabe se a interface de ditado do Raycast apareceu nem para onde foi o texto; como a janela estava sujeita à falha de P-01, a sonda será repetida depois do ajuste. Se falhar de novo, a limitação vai ao `onboarding.md` (T075), sem bloquear o editor.
+- **P-05, reprovada:** texto de 24 pt e alvos de 44 pt pequenos a 3 m; contador e erros de clique não informados. `EditorMetrics` passa a texto de 32 pt, títulos de 40 pt, alvo mínimo de 60 pt, janela mínima de 1.400 × 800 pt, espaçamento de 20 pt e margem de 40 pt, acima dos mínimos do RNF de legibilidade; D-19 previa 1.100 × 720 pt. A janela ainda cabe na tela embutida de 900 pt. `EditorProbeView` passa a mostrar os valores das constantes e a quebrar o texto na largura da janela.
+- **Estado:** T016 concluída; T015 com os resultados registrados e o primeiro ajuste feito, mantida aberta até o reteste. `./scripts/test.sh` verde com 163 testes; compilação de release sem avisos. O PM-1a segue pendente: reinstalar e repetir P-01, P-03 e P-05.
+
+### Rodada 3, 2026-09-15: PM-1a, reteste
+
+Sessão de log `poc-20260915-093447.jsonl`, com os ajustes da rodada 2 instalados.
+
+- **P-01, inconclusiva:** a primeira abertura pela paleta, com a janela fechada, ainda registrou `editor.activation_failed`; a lista de janelas mostrou o editor atrás do iTerm2 e do VS Code, e o VS Code passou a ser o app em foco, sinal de que o clique de ativação acertou a janela de cima. As duas aberturas seguintes pela paleta, com a janela já aberta, trouxeram-na à frente sem falha, e o usuário relatou que ela passou a vir para a frente. Falta repetir a abertura com a janela fechada; se falhar, adota-se D-23.
+- **P-03, causa encontrada:** o usuário constatou que o campo do editor aceita digitação, mas não colagem, e o ditado do Raycast insere o texto colando. O app `.accessory` não tinha menu principal, e sem o menu Editar ⌘V, ⌘C, ⌘X, ⌘A, ⌘Z e ⇧⌘Z não chegam ao campo. `EditMenu.install()`, chamado no `AppDelegate`, instala um menu principal só com "Editar", sem "Sair", para ⌘Q não encerrar o app. A gravação de acorde segue antes dos equivalentes de menu, pelo monitor local.
+- **P-05, aprovada:** texto de 32 pt e alvos de 60 pt funcionaram bem a 3 m.
+- **Redimensionamento:** depois de redimensionar a janela, nenhum botão respondia. `EditorWindowController` passa a usar rolagem só vertical, e `EditorProbeView` ocupa a largura da janela, em vez de ter largura fixa centralizada. A causa não foi confirmada; o reteste decide.
+- **Estado:** `./scripts/test.sh` verde com 163 testes; build de release sem avisos; app reinstalado (sessão `poc-20260915-095548.jsonl`). O PM-1a segue pendente de P-01 com a janela fechada, P-03 e redimensionamento.
+
+### Rodada 4, 2026-09-15: PM-1a, segundo reteste e emenda E002
+
+Sessão de log `poc-20260915-095548.jsonl`.
+
+- **P-01, reprovada:** quatro aberturas pela paleta com a janela fechada, as quatro com `editor.activation_failed`. Conforme o combinado com o usuário, adota-se a alternativa de D-23 (`investigation.md` §3.3) pela emenda E002, sem nova tentativa de ativação direta. O clique de ativação da rodada 2 foi removido: acertava a janela de outro aplicativo e o ativava.
+- **E002:** `StatusMenu.arm(_:)` tira o menu do ícone, guarda a ação de abrir o editor e devolve o ponto do ícone na barra de menus da tela do cursor, calculado pela distância à borda direita, igual em cada tela; o clique no ícone armado executa a ação e restaura o menu, que também volta após `armedTimeout` (10 s). `EventInjector.moveCursor(to:)` leva o ponteiro ao ponto. Sem evento novo: `editor.opened` segue com `source: palette`.
+- **P-03, aprovada:** com o menu Editar, colar funciona no campo e o ditado do Raycast insere o texto.
+- **Redimensionamento, aprovado:** os botões respondem depois de redimensionar a janela.
+- **Estado:** `./scripts/test.sh` verde com 163 testes; build de release sem avisos. Falta o reteste de E002 (P-01 pelo ícone armado, com devolução do foco ao fechar, RF-19) e os itens de P-02 ainda não informados (✕ do controle durante a gravação e digitação no Terminal).
+
+### Rodada 5, 2026-09-15: reteste da E002 e emenda E003
+
+Sessão de log `poc-20260915-100331.jsonl`.
+
+- **E002, reprovada:** o ponteiro chegou ao ícone, mas o R1 no ícone armado abriu o editor atrás do terminal (`editor.opened { palette }` seguido de `editor.activation_failed`), e o mesmo ocorreu numa abertura pelo menu. O macOS 26 não trata o clique sintético do controle como interação que autoriza `NSApp.activate()`. As aberturas pelo menu aprovadas na rodada 2 provavelmente usaram o trackpad.
+- **P-02, aprovada:** ✕ do controle com a gravação ativa não é gravado, e digitar no Terminal com a gravação desligada não altera o editor.
+- **E003:** a E002 foi desfeita no código (`StatusMenu` restaurado, `moveCursor(to:)` removido) e a paleta volta a chamar `show(source: .palette)`. `EditorWindowController.show` põe a janela no nível `.floating` quando o app não está ativo, chama `orderFrontRegardless()` e, 150 ms depois, sem foco, clica no centro da barra de título por `EventInjector.activationClick(at:)`, que devolve o cursor à posição anterior; `editor.activation_failed` é conferido 500 ms após o clique. A janela volta a `.normal` em `didBecomeActiveNotification` e ao fechar.
+- **Estado:** `./scripts/test.sh` verde com 163 testes; build de release sem avisos. Falta o reteste de P-01 pela E003, inclusive a devolução do foco ao fechar (RF-19).
+
+### Rodada 6, 2026-09-15: PM-1a aprovado
+
+Sessão de log `poc-20260915-101042.jsonl`.
+
+- **P-01, aprovada pela E003:** quatro aberturas pela paleta com a janela fechada, todas sem `editor.activation_failed`; o usuário confirmou o editor acima do Terminal, com foco e colagem sem clique manual, e o foco devolvido ao Terminal ao fechar (RF-19).
+- **Resultado do portão:** P-01 (E003), P-02, P-03 (com `EditMenu`) e P-05 (métricas de 32 pt e 60 pt) aprovadas. T015 e T016 concluídas. P-04 segue para o PM-1b, depois de T060.
+- **Próximo passo:** Fase 2, a partir de T017.
+
 ## Histórico de alterações
 
 | Data | Alteração | Autor |
@@ -196,3 +245,15 @@ Nenhuma bloqueia a execução; todas foram resolvidas pela opção indicada, mas
 | 2026-09-14 | Versão inicial gerada por `/reversa-to-do` | reversa |
 | 2026-09-14 | Revisão pós-auditoria (`audit/cross-check.md`): A001 em T035 e T038; A002 em T033, T034 e T055; A003 e A004 em T055, T062 e T063; A005 com a nova T076 e T075 reescrita. IDs existentes mantidos | reversa |
 | 2026-09-14 | Rodada 1 do `/reversa-coding`: T001 a T014, T019 e T076 concluídas; parada no PM-1a | reversa |
+| 2026-09-15 | Rodada 2: resultados da primeira execução do PM-1a, ajuste de ativação do editor, métricas de TV maiores e T016 concluída; PM-1a pendente de reteste | reversa |
+| 2026-09-15 | Rodada 3: reteste do PM-1a, P-05 aprovada, menu Editar para colagem e ditado, rolagem só vertical | reversa |
+| 2026-09-15 | Rodada 4: P-01 reprovada, emenda E002 (editor aberto pela paleta por meio do ícone armado), P-03 e redimensionamento aprovados | reversa |
+| 2026-09-15 | Rodada 5: E002 reprovada e revogada, P-02 aprovada, emenda E003 (janela flutuante com clique de ativação) | reversa |
+| 2026-09-15 | Rodada 6: PM-1a aprovado; T015 concluída | reversa |
+
+## Emendas
+
+| ID | Descrição | Dependências | Paralelismo | Arquivo alvo | Confidência | Status |
+|----|-----------|--------------|-------------|--------------|-------------|--------|
+| E002 | Revogada pela E003. A paleta arma o ícone da barra de menus e leva o ponteiro até ele; o clique no ícone abre o editor em primeiro plano, e o clique de ativação automático é removido | PM-1a | - | `Sources/JoystickAIPoC/App/StatusMenu.swift` | 🟡 | `[X]` |
+| E003 | Editor aberto no nível flutuante com clique de ativação na barra de título; volta ao nível normal ao ativar ou fechar; desfaz a E002 | E002 | - | `Sources/JoystickAIPoC/Editor/EditorWindowController.swift` | 🟡 | `[X]` |

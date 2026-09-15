@@ -386,8 +386,25 @@ Cenário: Privacidade do log
 |------|-----------|-------|
 | 2026-09-14 | Versão inicial gerada por `/reversa-requirements`, a partir de `backlog-editor.md` da feature 002 | reversa |
 | 2026-09-14 | Sessão de esclarecimentos: cinco perguntas respondidas, três dúvidas resolvidas; acorde por teclado ou por seleção, escala de TV, precedência pelo modificador mais antigo, Enter opcional por item e alerta de configuração inválida (RF-20) | reversa |
+| 2026-09-15 | Emenda E002: editor aberto pela paleta por meio do ícone da barra de menus, após a sonda P-01 | reversa |
+| 2026-09-15 | Emenda E003: E002 revogada; editor em janela flutuante com clique de ativação, critério original de RF-07 restabelecido | reversa |
 
 ## Pendências de Qualidade
 
 - **Q-018 (produto comercial no documento), exceção assumida.** DualSense, macOS, Raycast, VS Code e Terminal aparecem porque são o domínio do problema e os ambientes de uso, não escolhas de solução. Frameworks e APIs de implementação ficam para o `/reversa-plan`.
 - **Q-011 e Q-019, não aplicáveis.** Não existem `_reversa_sdd/domain.md` nem `.reversa/principles.md`; as regras citam as specs SDD e os adendos das features 001 e 002 como origem.
+
+## Emendas
+
+### E002, 2026-09-15 (revogada pela E003)
+
+O que muda: confirmar "Editar atalhos" na paleta não abre o editor diretamente. A paleta fecha, o ponteiro vai ao ícone do app na barra de menus da tela onde está o cursor, e o ícone fica armado por 10 s: um clique nele (R1) abre o editor em primeiro plano, sem mostrar o menu. Sem o clique, o ícone volta ao menu normal. Nada é digitado no aplicativo anterior. O critério de aceite de RF-07 e o cenário "Editor aberto pela paleta" passam a exigir esse clique no ícone.
+Motivo: a sonda P-01 reprovou a abertura direta em quatro de quatro tentativas com a janela fechada (`editor.activation_failed`, janela atrás do terminal). No macOS 26, um app só é ativado logo após interação com ele, e o botão do controle não conta; um clique automático na barra de título da janela também falhou, pois acertava a janela de outro aplicativo. A abertura pelo ícone já funcionava. É a alternativa prevista em `investigation.md` §3.3 e em D-23, aceita pelo usuário antes do reteste.
+Arquivos previstos: `Sources/JoystickAIPoC/App/StatusMenu.swift`, `Sources/JoystickAIPoC/App/AppDelegate.swift`, `Sources/JoystickAIPoC/Injection/EventInjector.swift`, `Sources/JoystickAIPoC/Editor/EditorWindowController.swift`
+
+### E003, 2026-09-15
+
+O que muda: revoga a E002 e restabelece o critério original de RF-07 e o cenário "Editor aberto pela paleta": confirmar "Editar atalhos" com ✕ abre o editor, sem clique no ícone. O editor abre acima das demais janelas e recebe um clique automático na barra de título, com o ponteiro devolvido à posição anterior. Se ainda assim não ficar em foco, a janela permanece por cima até um clique do usuário nela, e volta ao comportamento de janela comum assim que o app fica ativo.
+Motivo: no reteste da E002, o clique do R1 no ícone também não ativou o app (`editor.activation_failed` em aberturas pelo menu e pelo ícone armado), o que indica que o macOS 26 não aceita o clique sintético do controle como interação que autoriza a ativação pedida pelo app. O clique do R1 dentro da própria janela, porém, sempre a ativou (gravação de acorde e colagem funcionaram depois dele), e o clique automático anterior só falhara por acertar a janela de outro aplicativo, que estava por cima. Escolha do usuário entre esta abordagem, a mesma sem clique automático e a volta ao `/reversa-clarify`.
+Arquivos previstos: `Sources/JoystickAIPoC/Editor/EditorWindowController.swift`, `Sources/JoystickAIPoC/Injection/EventInjector.swift`, `Sources/JoystickAIPoC/App/AppDelegate.swift`, `Sources/JoystickAIPoC/App/StatusMenu.swift`
+
