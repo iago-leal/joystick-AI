@@ -14,7 +14,7 @@ struct EditorProbeView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: EditorMetrics.spacing * 1.5) {
             Text("Editor de atalhos (sondas)").font(EditorMetrics.title)
-            Text("Texto de exemplo a 24 pt: ✕ Enter, ○ Esc, △ Tab, L2 + ← mesa à esquerda, L1 + ✕ CONTINUAR.")
+            Text("Texto de exemplo a \(Int(EditorMetrics.bodySize)) pt: ✕ Enter, ○ Esc, △ Tab, L2 + ← mesa à esquerda, L1 + ✕ CONTINUAR.")
                 .font(EditorMetrics.body)
 
             VStack(alignment: .leading, spacing: EditorMetrics.spacing) {
@@ -35,7 +35,7 @@ struct EditorProbeView: View {
             }
 
             VStack(alignment: .leading, spacing: EditorMetrics.spacing) {
-                Text("P-05: alvos de 44 pt").font(EditorMetrics.body).foregroundColor(.secondary)
+                Text("P-05: alvos de \(Int(EditorMetrics.minTarget)) pt").font(EditorMetrics.body).foregroundColor(.secondary)
                 HStack(spacing: EditorMetrics.spacing) {
                     Button("Clique aqui (\(clicks))") { clicks += 1 }.buttonStyle(TVButtonStyle())
                     Button("Zerar") { clicks = 0 }.buttonStyle(TVButtonStyle())
@@ -44,6 +44,6 @@ struct EditorProbeView: View {
             }
         }
         .padding(EditorMetrics.padding)
-        .frame(minWidth: EditorMetrics.minWindowSize.width, alignment: .topLeading)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
     }
 }

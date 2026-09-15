@@ -21,6 +21,7 @@ public struct KeyChord: Equatable, Hashable, Sendable {
 
     public static let returnKey: UInt16 = 36
     public static let tab: UInt16 = 48
+    public static let space: UInt16 = 49
     public static let grave: UInt16 = 50
     public static let delete: UInt16 = 51
     public static let escape: UInt16 = 53

@@ -70,7 +70,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Editor de atalhos (`003-editor-atalhos`): ícone na barra de menus e entrada fixa da paleta (D-18, D-13).
         // Editor mínimo das sondas do PM-1a, trocado pelo completo em T073.
-        editorWindow = EditorWindowController(log: log) { AnyView(EditorProbeView()) }
+        editorWindow = EditorWindowController(
+            log: log,
+            activateByClick: { [injector, inputQueue] point in inputQueue.async { injector?.activationClick(at: point) } }
+        ) { AnyView(EditorProbeView()) }
+        EditMenu.install()
         statusMenu = StatusMenu()
         statusMenu.onEditShortcuts = { [editorWindow] in editorWindow?.show(source: .menu) }
         paletteActions.onOpenEditor = { [editorWindow] in editorWindow?.show(source: .palette) }

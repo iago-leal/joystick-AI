@@ -9,6 +9,14 @@ import SwiftUI
 /// próprio app (marca `EventInjector.sourceMark`) são descartadas. O primeiro acorde com tecla do `KeyCatalog`
 /// encerra a gravação.
 struct KeyCaptureField: NSViewRepresentable {
+    /// Acordes que a sonda P-02 mostrou serem tomados antes de chegar ao app, e que por isso só entram pela montagem
+    /// (D-22): Command+Tab abre a troca de aplicativos e Command+Space abre o Raycast. Command+Q e Command+Shift+Z
+    /// chegam ao campo.
+    static let consumedBeforeApp: [KeyChord] = [
+        KeyChord(KeyChord.tab, [.command]),
+        KeyChord(KeyChord.space, [.command]),
+    ]
+
     @Binding var isActive: Bool
     var onCapture: (KeyChord) -> Void
 

@@ -1,23 +1,26 @@
 import SwiftUI
 
 /// Escala de TV do editor (`003-editor-atalhos` D-19, RNF de legibilidade): legível e clicável com o ponteiro do
-/// controle a 3 m. O `controlSize` do sistema não chega a 44 pt no macOS 13, daí os estilos próprios abaixo.
+/// controle a 3 m. O `controlSize` do sistema não chega aos alvos pedidos, daí os estilos próprios abaixo.
+///
+/// Os mínimos do requisito (24 pt e 44 pt) ficaram pequenos na sonda P-05; os valores abaixo são os do reteste.
+/// A janela cabe numa tela de 900 pt de altura, a menor em uso.
 enum EditorMetrics {
-    static let bodySize: CGFloat = 24
-    static let titleSize: CGFloat = 30
+    static let bodySize: CGFloat = 32
+    static let titleSize: CGFloat = 40
     /// Menor lado de qualquer alvo de clique.
-    static let minTarget: CGFloat = 44
-    static let minWindowSize = NSSize(width: 1_100, height: 720)
-    static let spacing: CGFloat = 16
-    static let padding: CGFloat = 32
-    static let cornerRadius: CGFloat = 10
-    static let horizontalInset: CGFloat = 20
+    static let minTarget: CGFloat = 60
+    static let minWindowSize = NSSize(width: 1_400, height: 800)
+    static let spacing: CGFloat = 20
+    static let padding: CGFloat = 40
+    static let cornerRadius: CGFloat = 12
+    static let horizontalInset: CGFloat = 24
 
     static var body: Font { .system(size: bodySize) }
     static var title: Font { .system(size: titleSize, weight: .semibold) }
 }
 
-/// Botão com texto de 24 pt e altura mínima de 44 pt; `prominent` destaca a ação principal.
+/// Botão com texto e altura mínima da escala de TV; `prominent` destaca a ação principal.
 struct TVButtonStyle: ButtonStyle {
     var prominent = false
 
@@ -54,13 +57,13 @@ struct TVToggleStyle: ToggleStyle {
     }
 }
 
-/// Campo de texto com fonte de 24 pt e altura mínima de 44 pt.
+/// Campo de texto com fonte e altura mínima da escala de TV.
 struct TVFieldModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .textFieldStyle(.plain)
             .font(EditorMetrics.body)
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 16)
             .frame(minHeight: EditorMetrics.minTarget)
             .background(
                 RoundedRectangle(cornerRadius: EditorMetrics.cornerRadius)

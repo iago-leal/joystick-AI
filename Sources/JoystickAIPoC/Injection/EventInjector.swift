@@ -107,6 +107,29 @@ final class EventInjector {
         deliver(event, kind: kind, button: button, origin: .button, clickState: clickState, tArrival: tArrival)
     }
 
+    /// Clique esquerdo em `point` e volta do cursor à posição anterior, sem registro.
+    ///
+    /// Usado pelo editor para se ativar (`003-editor-atalhos` E003): o macOS 26 recusa `NSApp.activate()` pedido pelo
+    /// controle, mas um clique na janela, já posta por cima, ativa o app. As duas posições entram no acompanhamento,
+    /// para o próximo movimento partir da posição restaurada.
+    func activationClick(at point: CGPoint) {
+        guard enabled else { return }
+        let from = currentLocation()
+        for type in [CGEventType.leftMouseDown, .leftMouseUp] {
+            guard let event = CGEvent(mouseEventSource: eventSource, mouseType: type, mouseCursorPosition: point, mouseButton: .left)
+            else { return }
+            event.setIntegerValueField(.mouseEventClickState, value: 1)
+            deliver(event)
+        }
+        guard let back = CGEvent(
+            mouseEventSource: eventSource, mouseType: .mouseMoved, mouseCursorPosition: CGPoint(x: from.x, y: from.y),
+            mouseButton: .left)
+        else { return }
+        deliver(back)
+        track(ScreenPoint(x: Double(point.x), y: Double(point.y)))
+        track(from)
+    }
+
     /// Marca e posta sem registrar; usado pelo `KeyboardInjector`, cujas teclas e textos não vão ao log.
     func deliver(_ event: CGEvent) {
         event.setIntegerValueField(.eventSourceUserData, value: Self.sourceMark)
