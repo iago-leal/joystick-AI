@@ -21,11 +21,12 @@ import Testing
         }
     }
 
-    @Test func enterSoNosItensSemEspacoFinal() {
+    /// Emenda E001: a paleta só coloca o texto na linha; o envio é um ✕ seguinte.
+    @Test func nenhumItemEnviaEnter() {
         for item in CommandPalette.items {
-            #expect(item.pressEnter == !item.text.hasSuffix(" "), "\(item.text)")
+            #expect(!item.pressEnter, "\(item.text)")
         }
-        #expect(CommandPalette.items.filter { !$0.pressEnter }.count == 3)
+        #expect(CommandPalette.items.filter { $0.text.hasSuffix(" ") }.count == 3)
     }
 
     // MARK: Máquina de estados (data-delta.md §4)
@@ -83,7 +84,7 @@ import Testing
         #expect(machine.press(.cross) == [
             .stopRepeat,
             .render(PaletteSnapshot(isOpen: false, selection: 1)),
-            .confirm(index: 2, item: PaletteItem("/reversa-forward", pressEnter: true)),
+            .confirm(index: 2, item: PaletteItem("/reversa-forward", pressEnter: false)),
         ])
         #expect(!machine.isOpen)
         #expect(machine.repeating == nil)

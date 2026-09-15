@@ -21,26 +21,27 @@ public enum PaletteCloseReason: String, Sendable {
     case injectionSuspended = "injection_suspended"
 }
 
-/// Lista fixa da paleta (`002-paleta-comandos` RF-05). Itens terminados em espaço esperam complemento e não têm Enter.
+/// Lista fixa da paleta (`002-paleta-comandos` RF-05). Nenhum item envia Enter: o texto fica na linha para receber
+/// argumentos, e o envio é um ✕ seguinte (emenda E001). Itens terminados em espaço esperam descrição.
 public enum CommandPalette {
     public static let items: [PaletteItem] = [
-        PaletteItem("CONTINUAR", pressEnter: true),
-        PaletteItem("/reversa-forward", pressEnter: true),
+        PaletteItem("CONTINUAR", pressEnter: false),
+        PaletteItem("/reversa-forward", pressEnter: false),
         PaletteItem("/reversa-requirements ", pressEnter: false),
-        PaletteItem("/reversa-clarify", pressEnter: true),
-        PaletteItem("/reversa-plan", pressEnter: true),
-        PaletteItem("/reversa-to-do", pressEnter: true),
-        PaletteItem("/reversa-coding", pressEnter: true),
+        PaletteItem("/reversa-clarify", pressEnter: false),
+        PaletteItem("/reversa-plan", pressEnter: false),
+        PaletteItem("/reversa-to-do", pressEnter: false),
+        PaletteItem("/reversa-coding", pressEnter: false),
         PaletteItem("/reversa-add ", pressEnter: false),
-        PaletteItem("/reversa-audit", pressEnter: true),
-        PaletteItem("/reversa-quality", pressEnter: true),
-        PaletteItem("/reversa-sync", pressEnter: true),
-        PaletteItem("/reversa-resume", pressEnter: true),
+        PaletteItem("/reversa-audit", pressEnter: false),
+        PaletteItem("/reversa-quality", pressEnter: false),
+        PaletteItem("/reversa-sync", pressEnter: false),
+        PaletteItem("/reversa-resume", pressEnter: false),
         PaletteItem("/reversa-debugger ", pressEnter: false),
-        PaletteItem("/reversa", pressEnter: true),
-        PaletteItem("/clear", pressEnter: true),
-        PaletteItem("/compact", pressEnter: true),
-        PaletteItem("/resume", pressEnter: true),
+        PaletteItem("/reversa", pressEnter: false),
+        PaletteItem("/clear", pressEnter: false),
+        PaletteItem("/compact", pressEnter: false),
+        PaletteItem("/resume", pressEnter: false),
     ]
 }
 

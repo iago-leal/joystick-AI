@@ -62,7 +62,7 @@ final class PaletteView: NSView {
     static let minWidth: CGFloat = 520
     static let background = NSColor(calibratedWhite: 0.1, alpha: 0.96)
     static let highlight = NSColor.systemBlue
-    /// Itens sem Enter ao final esperam complemento; o sufixo deixa isso visível.
+    /// Itens terminados em espaço esperam descrição; o sufixo deixa isso visível.
     static let continuationSuffix = " …"
 
     private let items: [PaletteItem]
@@ -93,7 +93,7 @@ final class PaletteView: NSView {
     }
 
     private func label(_ item: PaletteItem) -> String {
-        item.pressEnter ? item.text : item.text.trimmingCharacters(in: .whitespaces) + Self.continuationSuffix
+        item.text.hasSuffix(" ") ? item.text.trimmingCharacters(in: .whitespaces) + Self.continuationSuffix : item.text
     }
 
     /// Ajusta o tamanho ao espaço disponível; sem espaço para todas as linhas, mostra as que cabem e rola (RNF de legibilidade).
