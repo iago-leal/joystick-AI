@@ -94,7 +94,7 @@ struct ActionPanel: View {
 
         if let keys {
             Text("Enquanto segurado, mantém pressionadas:").font(EditorMetrics.body)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 8)], alignment: .leading, spacing: 0) {
+            FlowLayout(spacing: 8) {
                 ForEach([KeyModifier.command, .option, .control, .shift], id: \.self) { modifier in
                     Toggle(EditorLabels.modifierName(modifier), isOn: Binding(
                         get: { keys.contains(modifier) },
@@ -120,7 +120,7 @@ struct ActionPanel: View {
         let kind = Self.kind(own: own, layer: layer)
 
         Text("Ação").font(EditorMetrics.body.weight(.semibold))
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 8)], alignment: .leading, spacing: 8) {
+        FlowLayout(spacing: 8) {
             ForEach(Kind.allCases.filter { $0 != .inherit || layer != nil }, id: \.self) { candidate in
                 Button(candidate.title) {
                     guard candidate != kind else { return }
@@ -138,7 +138,7 @@ struct ActionPanel: View {
                 set: { model.setAction(.chord(chord, repeats: $0), for: button, in: layer) }))
             .toggleStyle(TVToggleStyle())
         case .systemShortcut(let current)?:
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 260), spacing: 8)], alignment: .leading, spacing: 8) {
+            FlowLayout(spacing: 8) {
                 ForEach(SystemShortcut.allCases, id: \.self) { shortcut in
                     Button(shortcut.displayName) { model.setAction(.systemShortcut(shortcut), for: button, in: layer) }
                         .buttonStyle(TVButtonStyle(prominent: shortcut == current))

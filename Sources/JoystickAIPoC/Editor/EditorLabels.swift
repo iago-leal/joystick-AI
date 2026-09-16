@@ -1,31 +1,7 @@
 import JoystickCore
 
-/// Textos da interface do editor para botões, camadas, teclas modificadoras e regras de validação.
-extension ButtonID {
-    var displayName: String {
-        switch self {
-        case .cross: "✕"
-        case .circle: "○"
-        case .square: "□"
-        case .triangle: "△"
-        case .l1: "L1"
-        case .r1: "R1"
-        case .l2: "L2"
-        case .r2: "R2"
-        case .l3: "L3"
-        case .r3: "R3"
-        case .options: "Options"
-        case .create: "Create"
-        case .ps: "PS"
-        case .touchpadClick: "Touchpad"
-        case .dpadUp: "↑"
-        case .dpadDown: "↓"
-        case .dpadLeft: "←"
-        case .dpadRight: "→"
-        }
-    }
-}
-
+/// Textos da interface do editor para camadas, teclas modificadoras e regras de validação.
+/// O rótulo de cada botão (`ButtonID.displayName`) vive no núcleo desde a `004-figura-controle-web` (D-13).
 enum EditorLabels {
     static func layerName(_ layer: ButtonID?) -> String {
         layer.map { $0.displayName } ?? "Base"

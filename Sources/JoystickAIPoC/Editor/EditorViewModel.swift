@@ -40,6 +40,9 @@ final class EditorViewModel: ObservableObject {
     @Published private(set) var saveError: String?
     @Published private(set) var pendingBackup: PendingBackup?
     @Published private(set) var conflict: Conflict?
+    /// Motivo pelo qual a figura do controle não pôde ser exibida; `nil` com a figura normal
+    /// (`004-figura-controle-web` D-10, D-14). Zerado a cada abertura; o `FigureBridge` o republica se a falha persistir.
+    @Published var figureUnavailable: FigureFailureReason?
 
     private let store: ConfigStore
     private let log: DiagnosticLog
@@ -70,12 +73,19 @@ final class EditorViewModel: ObservableObject {
         operationError = nil
         saveError = nil
         pendingBackup = nil
+        figureUnavailable = nil
         if let layer = selectedLayer, draft.document.shortcuts.modifiers[layer] == nil {
             selectedLayer = nil
         }
     }
 
     var canSave: Bool { draft.isDirty && draft.issues.isEmpty }
+
+    /// Estado da figura na camada selecionada, derivado do rascunho a cada leitura (`004-figura-controle-web` D-14).
+    /// O `FigureBridge` compara com o último enviado e só fala com a página quando difere.
+    var figureState: FigureState {
+        FigureState(config: draft.document.shortcuts, layer: selectedLayer, selected: selectedButton, issues: draft.issues)
+    }
 
     func issues(for target: EditorTarget) -> [EditorIssue] {
         draft.issues.filter { $0.target == target }

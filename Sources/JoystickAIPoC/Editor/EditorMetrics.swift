@@ -74,3 +74,45 @@ struct TVFieldModifier: ViewModifier {
 extension View {
     func tvField() -> some View { modifier(TVFieldModifier()) }
 }
+
+/// Fileira de botões que quebra linha pelo tamanho ideal de cada um, sem espremer o texto (emenda E001 da
+/// `004-figura-controle-web`): a `LazyVGrid` adaptativa dividia a largura em colunas estreitas demais para a fonte de
+/// 32 pt, e "Forward Delete" virava uma coluna de sílabas.
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 8
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let width = proposal.width ?? .infinity
+        let arranged = arrange(width: width, subviews: subviews)
+        return CGSize(width: width.isFinite ? width : arranged.width, height: arranged.height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let arranged = arrange(width: bounds.width, subviews: subviews)
+        for (index, origin) in arranged.origins.enumerated() {
+            subviews[index].place(
+                at: CGPoint(x: bounds.minX + origin.x, y: bounds.minY + origin.y), anchor: .topLeading, proposal: .unspecified)
+        }
+    }
+
+    private func arrange(width: CGFloat, subviews: Subviews) -> (width: CGFloat, height: CGFloat, origins: [CGPoint]) {
+        var origins: [CGPoint] = []
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var rowHeight: CGFloat = 0
+        var widest: CGFloat = 0
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x > 0, x + size.width > width {
+                x = 0
+                y += rowHeight + spacing
+                rowHeight = 0
+            }
+            origins.append(CGPoint(x: x, y: y))
+            rowHeight = max(rowHeight, size.height)
+            x += size.width + spacing
+            widest = max(widest, x - spacing)
+        }
+        return (widest, y + rowHeight, origins)
+    }
+}

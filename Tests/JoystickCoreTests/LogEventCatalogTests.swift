@@ -78,6 +78,7 @@ import Testing
             LogEventCatalog.editorConflict(choice: .pending),
             LogEventCatalog.editorIdentify(on: true),
             LogEventCatalog.editorActivationFailed(),
+            LogEventCatalog.editorFigureUnavailable(reason: .resourceMissing),
         ]
     }
 
@@ -111,7 +112,7 @@ import Testing
             "shortcuts.file_removed": .info, "shortcuts.saved": .info, "shortcuts.save_failed": .error,
             "shortcuts.restored": .info, "shortcut.triggered": .info,
             "editor.opened": .info, "editor.closed": .info, "editor.conflict": .warn, "editor.identify": .info,
-            "editor.activation_failed": .warn,
+            "editor.activation_failed": .warn, "editor.figure_unavailable": .warn,
         ]
         let events = Self.sampleEvents
         #expect(Set(events.map(\.name)) == Set(expected.keys))
@@ -205,6 +206,13 @@ import Testing
         #expect(fields("editor.conflict") == ["choice": "pending"])
         #expect(fields("editor.identify") == ["on": true])
         #expect(fields("editor.activation_failed").isEmpty)
+    }
+
+    /// `004-figura-controle-web/interfaces/diagnostic-log.md` §2: só o motivo, em `snake_case`.
+    @Test func figuraIndisponivelSoComMotivo() {
+        #expect(fields("editor.figure_unavailable") == ["reason": "resource_missing"])
+        #expect(LogEventCatalog.editorFigureUnavailable(reason: .loadFailed).fields == ["reason": "load_failed"])
+        #expect(LogEventCatalog.editorFigureUnavailable(reason: .processTerminated).fields == ["reason": "process_terminated"])
     }
 
     @Test func campoOpcionalAusenteNaoAparece() {

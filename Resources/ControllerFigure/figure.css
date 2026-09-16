@@ -1,0 +1,226 @@
+/*
+  Estilo da figura do controle (`004-figura-controle-web` D-11, D-17, D-18, RF-11, RF-12, RF-14, RF-15).
+  Cores de sistema do WebKit com reserva fixa; tema pelo `color-scheme`, sem script.
+  Os valores numéricos dos estados são os das fichas anteriores: 0,28 (fixo e modificador), 0,55 (herdado),
+  0,25 (problema) e contorno de 5 px (seleção).
+*/
+
+:root {
+  color-scheme: light dark;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 830px;
+  height: 620px;
+  overflow: hidden;
+  background: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  color: #1d1d1f;
+  color: CanvasText;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  cursor: default;
+}
+
+.figure {
+  position: relative;
+  width: 830px;
+  height: 620px;
+}
+
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 830px;
+  height: 620px;
+  display: block;
+  overflow: visible;
+}
+
+/* Quadro arredondado de 48 px, equivalente ao `Color.secondary.opacity(0.08)` das fichas. */
+.frame {
+  fill: rgba(128, 128, 128, 0.08);
+  fill: color-mix(in srgb, CanvasText 8%, transparent);
+  stroke: none;
+}
+
+.body {
+  fill: rgba(128, 128, 128, 0.12);
+  fill: color-mix(in srgb, CanvasText 12%, transparent);
+  stroke: rgba(128, 128, 128, 0.5);
+  stroke: color-mix(in srgb, CanvasText 45%, transparent);
+  stroke-width: 2;
+}
+
+/* Contorno do touchpad dentro do corpo, só decorativo. */
+.body-detail {
+  fill: none;
+  stroke: rgba(128, 128, 128, 0.35);
+  stroke: color-mix(in srgb, CanvasText 30%, transparent);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+/* Grupo do botão: desenho, área de acerto de 60 × 60 e linha-guia. */
+.button {
+  cursor: pointer;
+}
+
+.button .hit {
+  fill: transparent;
+  stroke: none;
+  pointer-events: all;
+}
+
+.button .shape {
+  fill: rgba(128, 128, 128, 0.14);
+  fill: color-mix(in srgb, CanvasText 14%, transparent);
+  stroke: transparent;
+  stroke-width: 5;
+  paint-order: stroke fill;
+  transition: stroke 120ms ease-out, fill 120ms ease-out, opacity 120ms ease-out;
+}
+
+/* O tamanho vem do atributo `font-size` de cada `<text>`: 26 px nos botões grandes, menor nos pequenos. */
+.button .label {
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: #1d1d1f;
+  fill: CanvasText;
+  pointer-events: none;
+}
+
+.button .guide {
+  stroke: rgba(128, 128, 128, 0.55);
+  stroke: color-mix(in srgb, CanvasText 45%, transparent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+/* Balões: camada HTML sobre o SVG, posicionados pelo script a partir da tabela em figure.js. */
+.balloons {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 830px;
+  height: 620px;
+  pointer-events: none;
+}
+
+.balloon {
+  position: absolute;
+  box-sizing: border-box;
+  width: 190px;
+  height: 64px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 5px solid transparent;
+  background: rgba(128, 128, 128, 0.14);
+  background: color-mix(in srgb, CanvasText 14%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: border-color 120ms ease-out, background-color 120ms ease-out, opacity 120ms ease-out;
+}
+
+.balloon .summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: 24px;
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+/* Estados (RN-02, D-17), aplicados por classe no grupo e no balão. */
+.is-fixed .shape, .is-modifier .shape {
+  fill: rgba(128, 128, 128, 0.28);
+  fill: color-mix(in srgb, CanvasText 28%, transparent);
+}
+
+.balloon.is-fixed, .balloon.is-modifier {
+  background: rgba(128, 128, 128, 0.28);
+  background: color-mix(in srgb, CanvasText 28%, transparent);
+}
+
+.balloon.is-inherited .summary {
+  opacity: 0.55;
+}
+
+.is-problem .shape {
+  fill: rgba(255, 59, 48, 0.25);
+  fill: color-mix(in srgb, -apple-system-red 25%, transparent);
+  stroke: #ff3b30;
+  stroke: -apple-system-red;
+}
+
+.balloon.is-problem {
+  background: rgba(255, 59, 48, 0.25);
+  background: color-mix(in srgb, -apple-system-red 25%, transparent);
+  border-color: #ff3b30;
+  border-color: -apple-system-red;
+}
+
+.is-selected .shape {
+  stroke: #0a84ff;
+  stroke: AccentColor;
+}
+
+.balloon.is-selected {
+  border-color: #0a84ff;
+  border-color: AccentColor;
+}
+
+/* Realce sob o ponteiro: 3 px a 40 %, sem mudar a seleção (RF-14). */
+.button:hover:not(.is-selected):not(.is-problem) .shape {
+  stroke: rgba(128, 128, 128, 0.4);
+  stroke: color-mix(in srgb, CanvasText 40%, transparent);
+  stroke-width: 3;
+}
+
+.balloon:hover:not(.is-selected):not(.is-problem) {
+  border-color: rgba(128, 128, 128, 0.4);
+  border-color: color-mix(in srgb, CanvasText 40%, transparent);
+}
+
+/* Símbolos com as cores do aparelho (RF-12), em tons com contraste ≥ 4,5:1 sobre o quadro em cada tema. */
+.symbol-triangle { fill: #1b7f3b; }
+.symbol-circle { fill: #c1272d; }
+.symbol-cross { fill: #0b5cad; }
+.symbol-square { fill: #b0246e; }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #f5f5f7;
+  }
+
+  .button .label {
+    fill: #f5f5f7;
+    fill: CanvasText;
+  }
+
+  .symbol-triangle { fill: #5fd67a; }
+  .symbol-circle { fill: #ff7b72; }
+  .symbol-cross { fill: #6cb6ff; }
+  .symbol-square { fill: #f78fbf; }
+}
+
+/* RF-15: sem animação quando o sistema pede menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  .button .shape, .balloon {
+    transition: none;
+  }
+}

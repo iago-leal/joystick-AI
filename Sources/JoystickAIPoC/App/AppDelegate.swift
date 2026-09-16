@@ -19,6 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var configWatcher: ConfigWatcher!
     private var statusMenu: StatusMenu!
     private var editorModel: EditorViewModel!
+    private var figureBridge: FigureBridge!
     private var editorWindow: EditorWindowController!
     private var motionLoop: MotionLoop!
     private var router: InputRouter!
@@ -87,10 +88,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Editor de atalhos (`003-editor-atalhos`): ícone na barra de menus e entrada fixa da paleta (D-18, D-13).
         let editorModel = EditorViewModel(store: configStore, log: log)
         self.editorModel = editorModel
+        // Figura do controle em página web (`004-figura-controle-web` D-05): uma ponte por processo, carregada uma vez.
+        let figureBridge = FigureBridge(model: editorModel, log: log)
+        self.figureBridge = figureBridge
         editorWindow = EditorWindowController(
             log: log,
             activateByClick: { [injector, inputQueue] point in inputQueue.async { injector?.activationClick(at: point) } }
-        ) { AnyView(EditorRootView(model: editorModel)) }
+        ) { AnyView(EditorRootView(model: editorModel, figure: figureBridge)) }
         editorWindow.onWillShow = { [weak editorModel] in editorModel?.prepareForOpen() }
         editorWindow.isDirty = { [weak editorModel] in editorModel?.draft.isDirty ?? false }
         editorWindow.saveForClose = { [weak editorModel] in editorModel?.save() ?? true }

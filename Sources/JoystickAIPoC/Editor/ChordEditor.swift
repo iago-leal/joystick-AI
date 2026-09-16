@@ -29,7 +29,7 @@ struct ChordEditor: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             Text("Montar").font(EditorMetrics.body.weight(.semibold))
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 8)], alignment: .leading, spacing: 0) {
+            FlowLayout(spacing: 8) {
                 ForEach([KeyModifier.command, .option, .control, .shift], id: \.self) { modifier in
                     Toggle(EditorLabels.modifierName(modifier), isOn: Binding(
                         get: { chord.modifiers.contains(modifier) },
@@ -41,13 +41,13 @@ struct ChordEditor: View {
                     .toggleStyle(TVToggleStyle())
                 }
             }
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 8)], alignment: .leading, spacing: 8) {
+            FlowLayout(spacing: 8) {
                 ForEach(KeyGroup.allCases, id: \.self) { candidate in
                     Button(EditorLabels.groupName(candidate)) { group = candidate }
                         .buttonStyle(TVButtonStyle(prominent: group == candidate))
                 }
             }
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 76), spacing: 8)], alignment: .leading, spacing: 8) {
+            FlowLayout(spacing: 8) {
                 ForEach(KeyCatalog.entries(in: group), id: \.name) { entry in
                     Button(entry.display) {
                         onChange(KeyChord(entry.keyCode, chord.modifiers))

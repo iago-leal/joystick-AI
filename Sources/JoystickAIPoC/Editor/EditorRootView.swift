@@ -5,6 +5,8 @@ import SwiftUI
 /// identificação, faixas e rodapé com Salvar, Descartar e Restaurar padrão.
 struct EditorRootView: View {
     @ObservedObject var model: EditorViewModel
+    /// Ponte da figura do controle, repassada à aba Atalhos (`004-figura-controle-web` D-05).
+    let figure: FigureBridge
     @State private var confirmingRestore = false
 
     var body: some View {
@@ -27,7 +29,7 @@ struct EditorRootView: View {
             EditorBanners(model: model)
 
             switch model.tab {
-            case .shortcuts: ShortcutsTab(model: model)
+            case .shortcuts: ShortcutsTab(model: model, figure: figure)
             case .palette: PaletteTab(model: model)
             }
 

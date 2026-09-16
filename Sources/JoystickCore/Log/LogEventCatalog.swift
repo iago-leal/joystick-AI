@@ -327,6 +327,12 @@ public enum LogEventCatalog {
         LogEvent("editor.activation_failed", level: .warn)
     }
 
+    /// A figura do controle não pôde ser exibida; só o motivo, sem conteúdo
+    /// (`004-figura-controle-web/interfaces/diagnostic-log.md` §2, D-15, RN-12).
+    public static func editorFigureUnavailable(reason: FigureFailureReason) -> LogEvent {
+        LogEvent("editor.figure_unavailable", level: .warn, fields: ["reason": .string(reason.rawValue)])
+    }
+
     public static func logDebugSuspended(sizeBytes: Int) -> LogEvent {
         LogEvent("log.debug_suspended", level: .warn, fields: ["sizeBytes": .int(Int64(sizeBytes))])
     }

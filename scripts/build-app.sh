@@ -1,5 +1,6 @@
 #!/bin/sh
 # Compila, monta, assina e instala JoystickAIPoC.app em caminho fixo (D-01, D-02).
+# Desde a `004-figura-controle-web` (D-01, D-02) o bundle leva Resources/ControllerFigure em Contents/Resources.
 #
 # uso: JOYSTICK_SIGN_IDENTITY="Apple Development: Nome (TEAMID)" ./scripts/build-app.sh
 #
@@ -41,6 +42,22 @@ rm -rf "$STAGING"
 mkdir -p "$STAGING/Contents/MacOS"
 cp "$BIN_DIR/$APP_NAME" "$STAGING/Contents/MacOS/$APP_NAME"
 cp Resources/Info.plist "$STAGING/Contents/Info.plist"
+
+# Página da figura do controle (`004-figura-controle-web` D-01, D-02): entra em Contents/Resources antes da
+# assinatura, para o CodeResources selar os três arquivos junto com o binário e o Info.plist.
+FIGURE_SRC="Resources/ControllerFigure"
+if [ ! -d "$FIGURE_SRC" ]; then
+    echo "erro: pasta $FIGURE_SRC não encontrada; a figura do controle (index.html, figure.css, figure.js) faz parte do bundle." >&2
+    exit 66
+fi
+for f in index.html figure.css figure.js; do
+    if [ ! -f "$FIGURE_SRC/$f" ]; then
+        echo "erro: $FIGURE_SRC/$f não encontrado; o bundle exige os três arquivos da figura." >&2
+        exit 66
+    fi
+done
+mkdir -p "$STAGING/Contents/Resources"
+cp -R "$FIGURE_SRC" "$STAGING/Contents/Resources/ControllerFigure"
 
 echo "==> assinatura com \"$identity\""
 codesign --force --timestamp=none --sign "$identity" "$STAGING"
