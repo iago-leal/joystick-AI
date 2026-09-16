@@ -1,0 +1,25 @@
+{"ts": "2026-09-16T00:33:30Z", "action": "T001", "status": "done", "files": ["Sources/JoystickCore/Config/ButtonLabels.swift", "Sources/JoystickAIPoC/Editor/EditorLabels.swift"]}
+{"ts": "2026-09-16T00:33:30Z", "action": "T002", "status": "done", "files": ["Sources/JoystickCore/Config/FigureState.swift"]}
+{"ts": "2026-09-16T00:33:30Z", "action": "T003", "status": "done", "files": ["Sources/JoystickCore/Log/LogEventCatalog.swift"]}
+{"ts": "2026-09-16T00:33:30Z", "action": "T004", "status": "done", "files": ["scripts/build-app.sh"]}
+{"ts": "2026-09-16T00:33:30Z", "action": "T005", "status": "done", "files": ["Resources/ControllerFigure/index.html"]}
+{"ts": "2026-09-16T00:33:30Z", "action": "T006", "status": "done", "files": ["Resources/ControllerFigure/figure.css"]}
+{"ts": "2026-09-16T00:33:30Z", "action": "T007", "status": "done", "files": ["Resources/ControllerFigure/figure.js"]}
+{"ts": "2026-09-16T00:35:14Z", "action": "T008", "status": "done", "files": ["Tests/JoystickCoreTests/FigureStateTests.swift"]}
+{"ts": "2026-09-16T00:35:14Z", "action": "T009", "status": "done", "files": ["Tests/JoystickCoreTests/LogEventCatalogTests.swift"]}
+{"ts": "2026-09-16T00:35:14Z", "action": "T010", "status": "done", "files": ["Tests/JoystickCoreTests/FigureAssetsTests.swift"]}
+{"ts": "2026-09-16T00:35:51Z", "action": "T011", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/EditorViewModel.swift"]}
+{"ts": "2026-09-16T00:36:24Z", "action": "T012", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/FigureBridge.swift"]}
+{"ts": "2026-09-16T00:36:24Z", "action": "T013", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/FigureBridge.swift"]}
+{"ts": "2026-09-16T00:36:24Z", "action": "T014", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/FigureBridge.swift"]}
+{"ts": "2026-09-16T00:36:24Z", "action": "T015", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/FigureBridge.swift"]}
+{"ts": "2026-09-16T00:36:44Z", "action": "T016", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/ControllerFigureWebView.swift"]}
+{"ts": "2026-09-16T00:36:44Z", "action": "T017", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/ShortcutsTab.swift", "Sources/JoystickAIPoC/Editor/EditorRootView.swift"]}
+{"ts": "2026-09-16T00:36:44Z", "action": "T018", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-16T00:52:58Z", "action": "E001", "status": "done", "files": ["Resources/ControllerFigure/index.html", "Resources/ControllerFigure/figure.js"]}
+{"ts": "2026-09-16T00:52:58Z", "action": "E002", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/EditorMetrics.swift", "Sources/JoystickAIPoC/Editor/ChordEditor.swift", "Sources/JoystickAIPoC/Editor/ActionPanel.swift"]}
+{"ts": "2026-09-16T01:04:22Z", "action": "T023", "status": "done", "files": ["Resources/ControllerFigure/index.html"]}
+{"ts": "2026-09-16T01:04:22Z", "action": "T024", "status": "done", "files": ["Resources/ControllerFigure/figure.js"]}
+{"ts": "2026-09-16T01:04:22Z", "action": "T025", "status": "done", "files": ["Resources/ControllerFigure/figure.css"]}
+{"ts": "2026-09-16T01:04:22Z", "action": "T026", "status": "done", "files": ["Resources/ControllerFigure/figure.css"]}
+{"ts": "2026-09-16T01:04:22Z", "action": "T029", "status": "done", "files": ["Sources/JoystickCore/Config/FigureState.swift", "Sources/JoystickCore/Config/ButtonLabels.swift", "Sources/JoystickAIPoC/Editor/FigureBridge.swift", "Sources/JoystickAIPoC/Editor/ControllerFigureWebView.swift", "Resources/ControllerFigure/index.html", "Resources/ControllerFigure/figure.css", "Resources/ControllerFigure/figure.js", "scripts/build-app.sh"]}

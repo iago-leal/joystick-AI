@@ -1,17 +1,16 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/003-editor-atalhos",
-  "feature-id": "003",
-  "short-name": "editor-atalhos",
-  "started-at": "2026-09-15T00:54:36Z",
-  "current-stage": "sync",
+  "feature-dir": "_reversa_forward/004-figura-controle-web",
+  "feature-id": "004",
+  "short-name": "figura-controle-web",
+  "started-at": "2026-09-15T23:52:32Z",
+  "current-stage": "audit",
   "stages-completed": [
     "requirements",
     "clarify",
     "plan",
     "to-do",
-    "audit",
-    "coding"
+    "audit"
   ],
   "paused-features": []
 }
