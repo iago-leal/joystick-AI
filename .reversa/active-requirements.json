@@ -1,16 +1,15 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/004-figura-controle-web",
-  "feature-id": "004",
-  "short-name": "figura-controle-web",
-  "started-at": "2026-09-15T23:52:32Z",
-  "current-stage": "audit",
+  "feature-dir": "_reversa_forward/005-sinais-matematicos",
+  "feature-id": "005",
+  "short-name": "sinais-matematicos",
+  "started-at": "2026-09-16T21:20:02Z",
+  "current-stage": "to-do",
   "stages-completed": [
     "requirements",
     "clarify",
     "plan",
-    "to-do",
-    "audit"
+    "to-do"
   ],
   "paused-features": []
 }
