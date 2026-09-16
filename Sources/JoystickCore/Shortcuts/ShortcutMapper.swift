@@ -19,6 +19,7 @@ public struct KeyChord: Equatable, Hashable, Sendable {
         self.modifiers = modifiers
     }
 
+    public static let equal: UInt16 = 24
     public static let returnKey: UInt16 = 36
     public static let tab: UInt16 = 48
     public static let space: UInt16 = 49

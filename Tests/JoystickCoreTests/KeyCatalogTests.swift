@@ -64,4 +64,49 @@ import Testing
         #expect(KeyCatalog.display(KeyChord(KeyChord.tab, [.command, .option, .control])) == "⌃⌥⌘Tab")
         #expect(KeyCatalog.display(KeyChord(KeyChord.upArrow)) == "↑")
     }
+
+    /// `005-sinais-matematicos` RF-03 e RF-06: `equal` com ⇧ aparece como `+`, sem ampliar o catálogo.
+    @Test func exibicaoDoSinalDeSoma() {
+        #expect(KeyCatalog.display(KeyChord(KeyChord.equal, [.command, .shift])) == "⌘+")
+        #expect(KeyCatalog.display(KeyChord(KeyChord.equal, [.option, .command, .shift])) == "⌥⌘+")
+        #expect(KeyCatalog.display(KeyChord(KeyChord.equal, [.command])) == "⌘=")
+        #expect(KeyCatalog.display(KeyChord(0x1B, [.command])) == "⌘-")
+        #expect(KeyCatalog.display(KeyChord(KeyChord.equal, [.shift])) == "+")
+        #expect(KeyCatalog.entries.count == 73)
+        #expect(KeyCatalog.entry(named: "plus") == nil)
+    }
+
+    /// `005-sinais-matematicos` RF-01: `+` logo após `-`, só na pontuação.
+    @Test func escolhasDaGrade() {
+        #expect(KeyCatalog.choices(in: .punctuation).prefix(3).map(\.display) == ["-", "+", "="])
+        #expect(KeyCatalog.choices(in: .punctuation).count == KeyCatalog.entries(in: .punctuation).count + 1)
+        for group in KeyGroup.allCases where group != .punctuation {
+            #expect(KeyCatalog.choices(in: group) == KeyCatalog.entries(in: group).map(KeyChoice.key), "\(group)")
+        }
+    }
+
+    /// `005-sinais-matematicos` RF-02 e D-03: as cinco linhas da tabela de `data-delta.md` §3.
+    @Test func aplicacaoESelecaoDasEscolhas() throws {
+        let choices = KeyCatalog.choices(in: .punctuation)
+        let plus = try #require(choices.first { $0.id == "plus" })
+        let equal = try #require(choices.first { $0.id == "equal" })
+        let minus = try #require(choices.first { $0.id == "minus" })
+        let z = KeyChord(0x06, [.command])
+        let cases: [(KeyChord, KeyChoice, KeyChord, String, Bool, Bool)] = [
+            (z, plus, KeyChord(KeyChord.equal, [.command, .shift]), "⌘+", true, false),
+            (KeyChord(0x06, [.option, .command]), plus, KeyChord(KeyChord.equal, [.option, .command, .shift]), "⌥⌘+", true, false),
+            (KeyChord(KeyChord.equal, [.command, .shift]), equal, KeyChord(KeyChord.equal, [.command]), "⌘=", false, true),
+            (KeyChord(KeyChord.equal, [.command, .shift]), minus, KeyChord(0x1B, [.command]), "⌘-", false, false),
+            (KeyChord(0x06, [.command, .shift]), equal, KeyChord(KeyChord.equal, [.command, .shift]), "⌘+", true, false),
+        ]
+        for (current, choice, expected, display, plusSelected, equalSelected) in cases {
+            let result = choice.applied(to: current)
+            #expect(result == expected, "\(KeyCatalog.display(current)) + \(choice.id)")
+            #expect(KeyCatalog.display(result) == display)
+            #expect(plus.isSelected(in: result) == plusSelected, "\(display)")
+            #expect(equal.isSelected(in: result) == equalSelected, "\(display)")
+        }
+        #expect(minus.isSelected(in: KeyChord(0x1B, [.command])))
+        #expect(KeyChoice.key(try #require(KeyCatalog.entry(named: "z"))).isSelected(in: KeyChord(0x06, [.command, .shift])))
+    }
 }

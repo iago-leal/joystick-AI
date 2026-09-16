@@ -32,6 +32,16 @@ import Testing
         #expect(Self.summary(.ps, .l1) == "abrir paleta (herdado)")
     }
 
+    /// `005-sinais-matematicos` RF-03: o resumo, que alimenta a figura, mostra os acordes de zoom com o sinal.
+    @Test func acordesDeZoom() {
+        let config = ShortcutConfig(layers: [.l1: [
+            .dpadUp: .chord(KeyChord(KeyChord.equal, [.command, .shift]), repeats: false),
+            .dpadDown: .chord(KeyChord(0x1B, [.command]), repeats: false),
+        ]])
+        #expect(Self.summary(.dpadUp, .l1, config) == "⌘+")
+        #expect(Self.summary(.dpadDown, .l1, config) == "⌘-")
+    }
+
     @Test func textoLongoTruncado() {
         let config = ShortcutConfig(layers: [nil: [.square: .text(String(repeating: "a", count: 30), pressEnter: false)]])
         #expect(Self.summary(.square, nil, config) == "“" + String(repeating: "a", count: 24) + "…”")

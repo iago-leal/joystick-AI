@@ -22,6 +22,76 @@ public struct KeyEntry: Equatable, Sendable {
     }
 }
 
+/// Sinal da grade de montagem que corresponde a uma tecla do catálogo com um modificador implícito
+/// (`005-sinais-matematicos` D-01): `+` é `equal` com ⇧, como no teclado físico. Fica fora de `KeyCatalog.entries`,
+/// de modo que o arquivo, a validação e a captura continuam só com os nomes do catálogo.
+public struct ComposedKey: Equatable, Sendable {
+    /// Identificador da escolha na grade; nunca gravado no arquivo.
+    public let name: String
+    public let display: String
+    /// Tecla do catálogo usada no acorde.
+    public let keyCode: UInt16
+    public let modifier: KeyModifier
+    public let group: KeyGroup
+    /// Nome da entrada do catálogo que precede o sinal na grade.
+    public let after: String
+
+    public init(name: String, display: String, keyCode: UInt16, modifier: KeyModifier, group: KeyGroup, after: String) {
+        self.name = name
+        self.display = display
+        self.keyCode = keyCode
+        self.modifier = modifier
+        self.group = group
+        self.after = after
+    }
+
+    public func matches(_ chord: KeyChord) -> Bool {
+        chord.keyCode == keyCode && chord.modifiers.contains(modifier)
+    }
+}
+
+/// Escolha da grade de montagem de acordes (`005-sinais-matematicos` D-03): tecla do catálogo ou sinal composto.
+public enum KeyChoice: Equatable, Sendable {
+    case key(KeyEntry)
+    case composed(ComposedKey)
+
+    public var id: String {
+        switch self {
+        case .key(let entry): entry.name
+        case .composed(let composed): composed.name
+        }
+    }
+
+    public var display: String {
+        switch self {
+        case .key(let entry): entry.display
+        case .composed(let composed): composed.display
+        }
+    }
+
+    /// O sinal fica marcado quando casa o acorde; a tecla, quando é a do acorde e nenhum sinal o casa, para que
+    /// `+` e `=` nunca fiquem marcados juntos.
+    public func isSelected(in chord: KeyChord) -> Bool {
+        switch self {
+        case .key(let entry): entry.keyCode == chord.keyCode && KeyCatalog.composedKey(matching: chord) == nil
+        case .composed(let composed): composed.matches(chord)
+        }
+    }
+
+    /// O sinal acrescenta seu modificador aos do acorde (RN-02); a tecla mantém os modificadores, menos o do sinal
+    /// que casava o acorde, de modo que acionar `=` a partir de ⌘+ dá ⌘=.
+    public func applied(to chord: KeyChord) -> KeyChord {
+        switch self {
+        case .key(let entry):
+            var modifiers = chord.modifiers
+            if let composed = KeyCatalog.composedKey(matching: chord) { modifiers.remove(composed.modifier) }
+            return KeyChord(entry.keyCode, modifiers)
+        case .composed(let composed):
+            return KeyChord(composed.keyCode, chord.modifiers.union([composed.modifier]))
+        }
+    }
+}
+
 /// Tabela fixa nome ↔ tecla virtual (`003-editor-atalhos` D-03). Tecla fora da tabela não pode ser gravada.
 public enum KeyCatalog {
     public static let entries: [KeyEntry] = letters + digits + punctuation + editing + navigation + function
@@ -40,7 +110,7 @@ public enum KeyCatalog {
 
     private static let punctuation: [KeyEntry] = [
         KeyEntry("minus", 0x1B, "-", .punctuation),
-        KeyEntry("equal", 0x18, "=", .punctuation),
+        KeyEntry("equal", KeyChord.equal, "=", .punctuation),
         KeyEntry("leftBracket", 0x21, "[", .punctuation),
         KeyEntry("rightBracket", 0x1E, "]", .punctuation),
         KeyEntry("backslash", 0x2A, "\\", .punctuation),
@@ -77,6 +147,11 @@ public enum KeyCatalog {
         (7, 0x62), (8, 0x64), (9, 0x65), (10, 0x6D), (11, 0x67), (12, 0x6F),
     ].map { KeyEntry("f\($0.0)", $0.1, "F\($0.0)", .function) }
 
+    /// Sinais compostos (`005-sinais-matematicos` D-01), fora de `entries`, `byName` e `byKeyCode`.
+    public static let composedKeys: [ComposedKey] = [
+        ComposedKey(name: "plus", display: "+", keyCode: KeyChord.equal, modifier: .shift, group: .punctuation, after: "minus"),
+    ]
+
     private static let byName = Dictionary(uniqueKeysWithValues: entries.map { ($0.name, $0) })
     private static let byKeyCode = Dictionary(uniqueKeysWithValues: entries.map { ($0.keyCode, $0) })
 
@@ -86,9 +161,24 @@ public enum KeyCatalog {
 
     public static func entries(in group: KeyGroup) -> [KeyEntry] { entries.filter { $0.group == group } }
 
-    /// Acorde legível, com os modificadores na ordem do macOS (⌃ ⌥ ⇧ ⌘) antes da tecla.
+    /// Escolhas da grade de um grupo: as teclas do catálogo, com cada sinal composto logo após a entrada `after`.
+    public static func choices(in group: KeyGroup) -> [KeyChoice] {
+        entries(in: group).flatMap { entry in
+            [KeyChoice.key(entry)] + composedKeys.filter { $0.group == group && $0.after == entry.name }.map(KeyChoice.composed)
+        }
+    }
+
+    static func composedKey(matching chord: KeyChord) -> ComposedKey? {
+        composedKeys.first { $0.matches(chord) }
+    }
+
+    /// Acorde legível, com os modificadores na ordem do macOS (⌃ ⌥ ⇧ ⌘) antes da tecla. Acorde que casa um sinal
+    /// composto mostra o sinal sem o modificador implícito (`005-sinais-matematicos` D-02): ⇧⌘= aparece como ⌘+.
     public static func display(_ chord: KeyChord) -> String {
-        symbols(chord.modifiers) + (entry(keyCode: chord.keyCode)?.display ?? "tecla \(chord.keyCode)")
+        if let composed = composedKey(matching: chord) {
+            return symbols(chord.modifiers.subtracting([composed.modifier])) + composed.display
+        }
+        return symbols(chord.modifiers) + (entry(keyCode: chord.keyCode)?.display ?? "tecla \(chord.keyCode)")
     }
 
     /// Símbolos das teclas modificadoras na ordem do macOS.

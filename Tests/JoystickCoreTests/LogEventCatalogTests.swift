@@ -170,6 +170,7 @@ import Testing
     @Test func eventosDeAtalhosSemTextoTeclaNemAcorde() {
         let secrets = Set(PaletteDefaults.items.map(\.text) + [ShortcutDefaults.continueText])
             .union(KeyCatalog.entries.flatMap { [$0.name, $0.display] })
+            .union(KeyCatalog.composedKeys.flatMap { [$0.name, $0.display] })
             .union(KeyModifier.allCases.map(\.rawValue))
         for event in Self.shortcutEvents {
             #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: ["text", "label", "key", "keys", "chord", "item"]), "\(event.name)")

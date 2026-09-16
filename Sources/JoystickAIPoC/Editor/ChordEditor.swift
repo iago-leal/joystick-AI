@@ -3,7 +3,8 @@ import SwiftUI
 
 /// Definição de acorde de duas formas (`003-editor-atalhos` D-22, RF-10): gravado pelo teclado físico, só com o
 /// campo ativo e a janela em foco (RN-15), ou montado com a tecla escolhida numa grade e quatro alternadores,
-/// operável só pelo ponteiro do controle.
+/// operável só pelo ponteiro do controle. A grade inclui os sinais compostos, como `+` logo após `-`, aplicados e
+/// destacados pelo núcleo (`005-sinais-matematicos` D-04).
 struct ChordEditor: View {
     let chord: KeyChord
     let onChange: (KeyChord) -> Void
@@ -48,11 +49,11 @@ struct ChordEditor: View {
                 }
             }
             FlowLayout(spacing: 8) {
-                ForEach(KeyCatalog.entries(in: group), id: \.name) { entry in
-                    Button(entry.display) {
-                        onChange(KeyChord(entry.keyCode, chord.modifiers))
+                ForEach(KeyCatalog.choices(in: group), id: \.id) { choice in
+                    Button(choice.display) {
+                        onChange(choice.applied(to: chord))
                     }
-                    .buttonStyle(TVButtonStyle(prominent: entry.keyCode == chord.keyCode))
+                    .buttonStyle(TVButtonStyle(prominent: choice.isSelected(in: chord)))
                 }
             }
         }
