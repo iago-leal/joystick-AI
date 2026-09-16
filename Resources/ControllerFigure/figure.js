@@ -9,26 +9,27 @@
 
   /*
     Posição do balão de cada botão (canto superior esquerdo, em px da área de 830 × 620) e o lado do balão onde a
-    linha-guia encosta (D-16). Faixa superior: L1, Create, Options, R1 e, numa segunda linha ao centro, Touchpad.
-    Coluna esquerda: L2, ↑, ←, →, ↓, L3. Coluna direita: R2, △, ○, □, ✕, R3. Faixa inferior: PS. As alturas das
+    linha-guia encosta (D-16). Faixa superior: L2, Create, Options, R2 e, numa segunda linha ao centro, Touchpad.
+    Coluna esquerda: L1, ↑, ←, →, ↓, L3. Coluna direita: R1, △, ○, □, ✕, R3. Faixa inferior: PS. Os gatilhos L2 e R2
+    ficam no alto porque a figura é vista de cima, com a borda de trás do controle para cima (emenda E003). As alturas das
     colunas não são uniformes: as de → e □ foram escolhidas para a linha-guia passar entre os braços do direcional
     (e entre □ e ✕) sem cruzar outro botão. Balões de 190 × 64 px.
   */
   var BALLOON_WIDTH = 190;
   var BALLOON_HEIGHT = 64;
   var positions = {
-    l1: { x: 8, y: 8, side: 'bottom' },
+    l2: { x: 8, y: 8, side: 'bottom' },
     create: { x: 216, y: 8, side: 'bottom' },
     options: { x: 424, y: 8, side: 'bottom' },
-    r1: { x: 632, y: 8, side: 'bottom' },
+    r2: { x: 632, y: 8, side: 'bottom' },
     touchpadClick: { x: 320, y: 80, side: 'bottom' },
-    l2: { x: 8, y: 108, side: 'right' },
+    l1: { x: 8, y: 108, side: 'right' },
     dpadUp: { x: 8, y: 191, side: 'right' },
     dpadLeft: { x: 8, y: 262, side: 'right' },
     dpadRight: { x: 8, y: 334, side: 'right' },
     dpadDown: { x: 8, y: 441, side: 'right' },
     l3: { x: 8, y: 524, side: 'right' },
-    r2: { x: 632, y: 108, side: 'left' },
+    r1: { x: 632, y: 108, side: 'left' },
     triangle: { x: 632, y: 191, side: 'left' },
     circle: { x: 632, y: 262, side: 'left' },
     square: { x: 632, y: 334, side: 'left' },

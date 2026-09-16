@@ -4,8 +4,8 @@
   Página local, sem rede, sem bibliotecas: um SVG de 830 × 620 com a silhueta plana do DualSense e um grupo
   `[data-button]` por botão (linha-guia, área de acerto de 60 × 60, desenho e rótulo), mais uma camada de balões com
   o resumo da ação, posicionados pela tabela de figure.js. O estado chega por `figure.render(state)` e o clique volta
-  por `messageHandlers.figure`. Disposição: L1/R1 sobre L2/R2 nos ombros, direcional à esquerda, △ ○ ✕ □ à direita,
-  touchpad ao centro com Create e Options ao lado, PS abaixo, L3 e R3 nas hastes.
+  por `messageHandlers.figure`. Disposição vista de cima: L2/R2 na borda de trás, sobre L1/R1 nos ombros, direcional à esquerda, △ ○ ✕ □ à
+  direita, touchpad ao centro com Create e Options ao lado, PS abaixo, L3 e R3 nas hastes (emenda E003).
 -->
 <html lang="pt-BR">
 <head>
@@ -25,29 +25,29 @@
       <path class="body" d="M 240 190 H 590 Q 626 190 630 226 L 644 400 Q 652 476 610 484 Q 572 490 552 454 L 530 420 Q 472 448 415 448 Q 358 448 300 420 L 278 454 Q 258 490 220 484 Q 178 476 186 400 L 200 226 Q 204 190 240 190 Z"/>
       <path class="body-detail" d="M 335 205 H 495 Q 500 205 500 210 V 280 Q 500 285 495 285 H 335 Q 330 285 330 280 V 210 Q 330 205 335 205 Z"/>
 
-      <g class="button" data-button="l1">
+      <g class="button" data-button="l2">
         <line class="guide" x1="246" y1="132" x2="246" y2="132"/>
         <rect class="hit" x="216" y="102" width="60" height="60"/>
         <rect class="shape" x="212" y="119" width="68" height="26" rx="10" ry="10"/>
-        <text class="label" x="246" y="132" font-size="22">L1</text>
+        <text class="label" x="246" y="132" font-size="22">L2</text>
       </g>
-      <g class="button" data-button="l2">
+      <g class="button" data-button="l1">
         <line class="guide" x1="246" y1="172" x2="246" y2="172"/>
         <rect class="hit" x="216" y="142" width="60" height="60"/>
         <rect class="shape" x="212" y="159" width="68" height="26" rx="10" ry="10"/>
-        <text class="label" x="246" y="172" font-size="22">L2</text>
+        <text class="label" x="246" y="172" font-size="22">L1</text>
       </g>
-      <g class="button" data-button="r1">
+      <g class="button" data-button="r2">
         <line class="guide" x1="584" y1="132" x2="584" y2="132"/>
         <rect class="hit" x="554" y="102" width="60" height="60"/>
         <rect class="shape" x="550" y="119" width="68" height="26" rx="10" ry="10"/>
-        <text class="label" x="584" y="132" font-size="22">R1</text>
+        <text class="label" x="584" y="132" font-size="22">R2</text>
       </g>
-      <g class="button" data-button="r2">
+      <g class="button" data-button="r1">
         <line class="guide" x1="584" y1="172" x2="584" y2="172"/>
         <rect class="hit" x="554" y="142" width="60" height="60"/>
         <rect class="shape" x="550" y="159" width="68" height="26" rx="10" ry="10"/>
-        <text class="label" x="584" y="172" font-size="22">R2</text>
+        <text class="label" x="584" y="172" font-size="22">R1</text>
       </g>
       <g class="button" data-button="create">
         <line class="guide" x1="308" y1="205" x2="308" y2="205"/>
