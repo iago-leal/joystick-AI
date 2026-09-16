@@ -27,12 +27,19 @@ public struct KeyChord: Equatable, Hashable, Sendable {
     public static let delete: UInt16 = 51
     public static let escape: UInt16 = 53
     public static let m: UInt16 = 46
+    /// Tecla do Atalho de Acessibilidade padrão, ⌥⌘F5 (`006-teclado-virtual` D-02).
+    public static let f5: UInt16 = 96
     public static let leftArrow: UInt16 = 123
     public static let rightArrow: UInt16 = 124
     public static let downArrow: UInt16 = 125
     public static let upArrow: UInt16 = 126
 
     public var isArrow: Bool { (Self.leftArrow...Self.upArrow).contains(keyCode) }
+
+    /// F1 a F12, na ordem do catálogo (`006-teclado-virtual` D-03).
+    public static let functionKeys: Set<UInt16> = [0x7A, 0x78, 0x63, 0x76, 0x60, 0x61, 0x62, 0x64, 0x65, 0x6D, 0x67, 0x6F]
+
+    public var isFunctionKey: Bool { Self.functionKeys.contains(keyCode) }
 }
 
 /// Atalhos de sistema cujo acorde vem de `com.apple.symbolichotkeys`, pois o usuário pode tê-los alterado.
@@ -42,6 +49,8 @@ public enum SystemShortcut: Int, CaseIterable, Sendable {
     case applicationWindows = 33
     case spaceLeft = 79
     case spaceRight = 81
+    /// Atalho de Acessibilidade, que alterna o Teclado de Acessibilidade (`006-teclado-virtual` D-02).
+    case accessibilityShortcut = 162
 
     /// Nome estável no arquivo de configuração (`003-editor-atalhos` D-03).
     public var name: String {
@@ -51,6 +60,7 @@ public enum SystemShortcut: Int, CaseIterable, Sendable {
         case .applicationWindows: "applicationWindows"
         case .spaceLeft: "spaceLeft"
         case .spaceRight: "spaceRight"
+        case .accessibilityShortcut: "accessibilityShortcut"
         }
     }
 
@@ -67,6 +77,7 @@ public enum SystemShortcut: Int, CaseIterable, Sendable {
         case .applicationWindows: "janelas do aplicativo"
         case .spaceLeft: "mesa à esquerda"
         case .spaceRight: "mesa à direita"
+        case .accessibilityShortcut: "atalho de acessibilidade"
         }
     }
 
@@ -77,6 +88,7 @@ public enum SystemShortcut: Int, CaseIterable, Sendable {
         case .applicationWindows: KeyChord(KeyChord.downArrow, [.control])
         case .spaceLeft: KeyChord(KeyChord.leftArrow, [.control])
         case .spaceRight: KeyChord(KeyChord.rightArrow, [.control])
+        case .accessibilityShortcut: KeyChord(KeyChord.f5, [.option, .command])
         }
     }
 

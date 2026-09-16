@@ -117,11 +117,38 @@ import Testing
             "27": ["enabled": true, "value": ["type": "standard", "parameters": [65535, 48, 524288]]],
             "32": ["enabled": false, "value": ["type": "standard", "parameters": [65535, 99, 1048576]]],
             "79": ["enabled": true, "value": ["parameters": [65535]]],
+            "162": ["enabled": true, "value": ["type": "standard", "parameters": [65535, 96, 1572864]]],
         ]
         let chords = SystemShortcut.chords(fromSymbolicHotKeys: hotKeys)
         #expect(chords[.nextWindow] == KeyChord(KeyChord.tab, [.option]))
         #expect(chords[.missionControl] == SystemShortcut.missionControl.defaultChord)
         #expect(chords[.spaceLeft] == SystemShortcut.spaceLeft.defaultChord)
+        #expect(chords[.accessibilityShortcut] == KeyChord(KeyChord.f5, [.option, .command]))
+    }
+
+    /// `006-teclado-virtual` D-02: o Atalho de Acessibilidade segue o remapeamento e, desativado, usa ⌥⌘F5 (RN-AT-22).
+    @Test func atalhoDeAcessibilidadeRemapeadoOuDesativado() {
+        let remapped: [String: Any] = [
+            "162": ["enabled": true, "value": ["type": "standard", "parameters": [65535, 0x61, 0x60000]]],
+        ]
+        #expect(SystemShortcut.chords(fromSymbolicHotKeys: remapped)[.accessibilityShortcut] == KeyChord(0x61, [.shift, .control]))
+        let disabled: [String: Any] = [
+            "162": ["enabled": false, "value": ["type": "standard", "parameters": [65535, 0x61, 0x60000]]],
+        ]
+        #expect(SystemShortcut.chords(fromSymbolicHotKeys: disabled)[.accessibilityShortcut] == KeyChord(KeyChord.f5, [.option, .command]))
+        #expect(SystemShortcut.accessibilityShortcut.defaultChord == KeyChord(KeyChord.f5, [.option, .command]))
+    }
+
+    /// `006-teclado-virtual` D-03: só F1 a F12 recebem a máscara de função na injeção.
+    @Test func teclasDeFuncao() {
+        #expect(KeyChord(0x7A).isFunctionKey)
+        #expect(KeyChord(KeyChord.f5, [.option, .command]).isFunctionKey)
+        #expect(KeyChord(0x6F).isFunctionKey)
+        #expect(!KeyChord(KeyChord.equal).isFunctionKey)
+        for arrow in [KeyChord.leftArrow, KeyChord.rightArrow, KeyChord.downArrow, KeyChord.upArrow] {
+            #expect(!KeyChord(arrow).isFunctionKey)
+        }
+        #expect(KeyChord.functionKeys == Set(KeyCatalog.entries(in: .function).map(\.keyCode)))
     }
 
     // MARK: configurações próprias (T039)

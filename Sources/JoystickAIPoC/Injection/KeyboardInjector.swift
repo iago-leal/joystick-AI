@@ -109,6 +109,9 @@ final class KeyboardInjector {
         var flags = heldFlags
         // As setas do teclado físico chegam com essas duas máscaras; os atalhos de Mission Control as esperam.
         if chord.isArrow { flags.formUnion([.maskNumericPad, .maskSecondaryFn]) }
+        // As teclas F do teclado físico chegam com a máscara de função; sem ela, o sistema ignora o ⌥⌘F5
+        // injetado como Atalho de Acessibilidade (`006-teclado-virtual` D-03, sonda P-01).
+        if chord.isFunctionKey { flags.insert(.maskSecondaryFn) }
         event.flags = flags
         if autorepeat { event.setIntegerValueField(.keyboardEventAutorepeat, value: 1) }
         injector.deliver(event)

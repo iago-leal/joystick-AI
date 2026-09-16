@@ -92,4 +92,11 @@ import Testing
             }
         }
     }
+
+    /// `006-teclado-virtual` D-04 e RF-06: nenhum botão de fábrica aciona o Atalho de Acessibilidade.
+    @Test func padraoSemAtalhoDeAcessibilidade() {
+        let actions = ShortcutDefaults.config.layers.values.flatMap(\.values)
+        #expect(!actions.isEmpty)
+        #expect(!actions.contains(.systemShortcut(.accessibilityShortcut)))
+    }
 }

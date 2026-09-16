@@ -42,6 +42,12 @@ import Testing
         #expect(Self.summary(.dpadDown, .l1, config) == "⌘-")
     }
 
+    /// `006-teclado-virtual` RF-04: o atalho de sistema novo aparece pelo rótulo.
+    @Test func atalhoDeAcessibilidade() {
+        let config = ShortcutConfig(layers: [.options: [.circle: .systemShortcut(.accessibilityShortcut)]])
+        #expect(Self.summary(.circle, .options, config) == "atalho de acessibilidade")
+    }
+
     @Test func textoLongoTruncado() {
         let config = ShortcutConfig(layers: [nil: [.square: .text(String(repeating: "a", count: 30), pressEnter: false)]])
         #expect(Self.summary(.square, nil, config) == "“" + String(repeating: "a", count: 24) + "…”")

@@ -54,12 +54,15 @@ import Testing
 
     @Test func atalhoDeSistemaIdaEVoltaPeloNome() {
         let names = SystemShortcut.allCases.map(\.name)
-        #expect(Set(names) == ["spaceLeft", "spaceRight", "missionControl", "applicationWindows", "nextWindow"])
+        #expect(Set(names) == [
+            "spaceLeft", "spaceRight", "missionControl", "applicationWindows", "nextWindow", "accessibilityShortcut",
+        ])
         for shortcut in SystemShortcut.allCases {
             #expect(SystemShortcut(name: shortcut.name) == shortcut)
             #expect(!shortcut.displayName.isEmpty)
         }
         #expect(SystemShortcut(name: "MissionControl") == nil)
         #expect(SystemShortcut.spaceLeft.displayName == "mesa à esquerda")
+        #expect(SystemShortcut.accessibilityShortcut.displayName == "atalho de acessibilidade")
     }
 }

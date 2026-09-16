@@ -67,6 +67,13 @@ import Testing
         #expect(document?.palette == PaletteDefaults.items)
     }
 
+    /// `006-teclado-virtual` D-02: o Atalho de Acessibilidade é aceito pelo nome.
+    @Test func atalhoDeAcessibilidadeAceito() {
+        let json = Self.shortcuts(base: #""l3": {"type": "systemShortcut", "name": "accessibilityShortcut"}"#)
+        #expect(Self.issues(json).isEmpty)
+        #expect(Self.document(json)?.shortcuts.layers[nil]?[.l3] == .systemShortcut(.accessibilityShortcut))
+    }
+
     @Test func versaoNaoSuportada() {
         Self.expectIssue(#"{"shortcuts": {"version": 2}}"#, "shortcuts.version", .unsupportedVersion)
         Self.expectIssue(#"{"shortcuts": {}}"#, "shortcuts.version", .unsupportedVersion)

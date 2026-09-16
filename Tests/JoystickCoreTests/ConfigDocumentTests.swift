@@ -91,6 +91,15 @@ import Testing
         #expect(try Self.decode(data).document.shortcuts == config)
     }
 
+    /// `006-teclado-virtual` D-07: o Atalho de Acessibilidade grava o nome e volta igual.
+    @Test func idaEVoltaComAtalhoDeAcessibilidade() throws {
+        var document = ShortcutDefaults.document
+        document.shortcuts.layers[nil]?[.l3] = .systemShortcut(.accessibilityShortcut)
+        let data = ConfigDocument.merge(existing: nil, document: document)
+        #expect(try Self.decode(data).document == document)
+        #expect(String(decoding: data, as: UTF8.self).contains(#""name" : "accessibilityShortcut""#))
+    }
+
     @Test func teclaForaDoCatalogoRecusada() {
         var document = ShortcutDefaults.document
         document.shortcuts.layers[nil]?[.cross] = .chord(KeyChord(0x39), repeats: false)
