@@ -23,3 +23,10 @@
 {"ts": "2026-09-16T01:04:22Z", "action": "T025", "status": "done", "files": ["Resources/ControllerFigure/figure.css"]}
 {"ts": "2026-09-16T01:04:22Z", "action": "T026", "status": "done", "files": ["Resources/ControllerFigure/figure.css"]}
 {"ts": "2026-09-16T01:04:22Z", "action": "T029", "status": "done", "files": ["Sources/JoystickCore/Config/FigureState.swift", "Sources/JoystickCore/Config/ButtonLabels.swift", "Sources/JoystickAIPoC/Editor/FigureBridge.swift", "Sources/JoystickAIPoC/Editor/ControllerFigureWebView.swift", "Resources/ControllerFigure/index.html", "Resources/ControllerFigure/figure.css", "Resources/ControllerFigure/figure.js", "scripts/build-app.sh"]}
+{"ts": "2026-09-16T19:30:00Z", "action": "T019", "status": "done", "files": ["Sources/JoystickAIPoC/Editor/ControllerFigureView.swift"]}
+{"ts": "2026-09-16T19:30:00Z", "action": "T020", "status": "skipped", "files": []}
+{"ts": "2026-09-16T19:30:00Z", "action": "T021", "status": "skipped", "files": []}
+{"ts": "2026-09-16T19:30:00Z", "action": "T022", "status": "skipped", "files": []}
+{"ts": "2026-09-16T19:30:00Z", "action": "E003", "status": "done", "files": ["Resources/ControllerFigure/index.html", "Resources/ControllerFigure/figure.js"]}
+{"ts": "2026-09-16T19:30:00Z", "action": "T027", "status": "done", "files": ["_reversa_forward/004-figura-controle-web/onboarding.md"]}
+{"ts": "2026-09-16T19:30:00Z", "action": "T028", "status": "done", "files": ["Resources/ControllerFigure/figure.js"]}

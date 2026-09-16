@@ -44,3 +44,26 @@ W001 a W010 no watch principal e O001 a O005 em "Observações", em [`_reversa_f
 - `_reversa_forward/004-figura-controle-web/actions.md` (notas da rodada 1)
 - `_reversa_forward/004-figura-controle-web/interfaces/figure-bridge.md`
 - `_reversa_forward/004-figura-controle-web/interfaces/diagnostic-log.md`
+
+## Atualização 2026-09-16
+
+Sincronização completa: as 29 ações de `actions.md` estão fechadas. T019, T023 a T029 e as emendas E001 a E003 foram executadas nas rodadas 2 a 4; T020 a T022 foram dispensadas porque nenhuma sonda do PM-1 reprovou. A figura agora desenha os 18 botões numa vista de cima do DualSense, e a figura SwiftUI antiga não existe mais. `swift build -c release` e `./scripts/test.sh` estão verdes (270 testes). Só falta o portão manual PM-2, o roteiro de 21 passos na TV. Os deltas abaixo complementam a tabela original; onde contradizem as ressalvas de sincronização parcial acima, prevalecem.
+
+### Impacto por artefato da extração (delta desta atualização)
+
+| Artefato | Seção | Tipo de impacto | Delta |
+|----------|-------|-----------------|-------|
+| `_reversa_sdd/code-analysis.md` | `#8.3 Interface` | regra-alterada | A página `Resources/ControllerFigure/` tem os 18 botões com silhueta, balões e linhas-guia saindo da borda de cada forma (E001). A ressalva "nesta sincronização a página tem três botões" deixa de valer. |
+| `_reversa_sdd/code-analysis.md` | `#8.3 Interface` | regra-alterada | A disposição é uma vista de cima do controle (E003): L2 e R2 ficam acima de L1 e R1, com os balões dos gatilhos na faixa superior e os de L1 e R1 no topo das colunas laterais. Isso corrige a leitura "L1/R1 sobre L2/R2" de RN-01 e D-16 da feature. |
+| `_reversa_sdd/editor/design.md` | `#Interface` (`ShortcutsTab`) | componente-extinto | `ControllerFigureView.swift` foi removido (T019), sem nenhuma referência restante. A ressalva "ainda existe sem uso até T019" deixa de valer. |
+| `_reversa_sdd/editor/design.md` | `#Interface` (painel de ação e editor de acorde) | regra-alterada | Emenda E002, fora do escopo da figura: os grupos de botões de `ChordEditor` e `ActionPanel` usam `FlowLayout` (`EditorMetrics.swift`, `Layout` do macOS 13) em vez de `LazyVGrid` adaptativa, e cada botão aparece no tamanho ideal com quebra de linha entre botões. Opções, ações e alvos mínimos não mudam. |
+| `_reversa_sdd/architecture.md` | `#4. Integrações externas` | delta-de-contrato-externo | O isolamento do WebKit descrito na tabela original foi confirmado em hardware (sonda P-03): figura completa sem rede, CSP com `'self'` aceitando os arquivos irmãos, nenhuma pasta `~/Library/WebKit/dev.iagoleal.joystick-ai.poc`, assinatura e permissões preservadas. |
+
+### Regras sob vigilância (acréscimos)
+
+W011 (posição dos gatilhos na vista de cima) no watch principal e O006 (E002) em "Observações", em [`_reversa_forward/004-figura-controle-web/regression-watch.md`](../../_reversa_forward/004-figura-controle-web/regression-watch.md). W010 passa a valer sem ressalva. O desfecho das sondas está no próprio `regression-watch.md`: O001, O002 e O005 confirmadas; O003 sem confirmação explícita do tema claro, a conferir no PM-2; O004 sem verificação em hardware.
+
+### Fontes (acréscimos)
+
+- `_reversa_forward/004-figura-controle-web/actions.md` (notas das rodadas 2, 3 e 4)
+- `_reversa_forward/004-figura-controle-web/onboarding.md` (resultado do PM-1)

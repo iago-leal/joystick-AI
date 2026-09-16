@@ -100,10 +100,10 @@ Nenhuma bloqueia a execução; todas foram resolvidas pela opção indicada, mas
 | T016 | Criar `ControllerFigureWebView: NSViewRepresentable` que devolve `bridge.webView` em `makeNSView`, não faz nada em `updateNSView` e tem `.frame(width: 830, height: 620)` fixo (D-04, D-05). | T015 | - | `Sources/JoystickAIPoC/Editor/ControllerFigureWebView.swift` | 🟢 | `[X]` |
 | T017 | Em `ShortcutsTab`, substituir `ControllerFigureView(model:)` por `ControllerFigureWebView(bridge:)` ou, com `model.figureUnavailable != nil`, por um quadro de 830 × 620 pt com o texto "A figura do controle não pôde ser carregada; reinstale o app." em `EditorMetrics.body`; `EditorRootView` passa a receber e repassar o `bridge` (D-10). | T016 | - | `Sources/JoystickAIPoC/Editor/ShortcutsTab.swift` | 🟢 | `[X]` |
 | T018 | Em `AppDelegate`, criar `FigureBridge(model:log:)` ao lado de `EditorViewModel` e entregá-lo a `EditorRootView(model:figure:)` no fechamento de conteúdo do `EditorWindowController` (D-05). | T017 | - | `Sources/JoystickAIPoC/App/AppDelegate.swift` | 🟢 | `[X]` |
-| T019 | Remover `ControllerFigureView.swift` e confirmar por `grep` que não resta referência a `ControllerFigureView`; `swift build` e `./scripts/test.sh` verdes. Ao concluir, parar no PM-1. | T018 | - | `Sources/JoystickAIPoC/Editor/ControllerFigureView.swift` | 🟢 | `[ ]` |
-| T020 | **Condicional, só se P-01 reprovar:** em `FigureBridge`, observar `effectiveAppearance` da janela por KVO e chamar `figure.setTheme("dark" \| "light")`; em `figure.js`, `setTheme` alterna a classe `theme-dark` no `:root`, e `figure.css` passa a derivar as cores dessa classe (reserva de D-11). | PM-1 | - | `Sources/JoystickAIPoC/Editor/FigureBridge.swift` | 🟡 | `[ ]` |
-| T021 | **Condicional, só se P-02 reprovar:** ajustar `FigureWebView.scrollWheel` (alvo do encaminhamento, ou `nextResponder` explícito definido pelo representable) e `acceptsFirstResponder` conforme o achado da sonda (D-09). | PM-1 | - | `Sources/JoystickAIPoC/Editor/FigureBridge.swift` | 🟡 | `[ ]` |
-| T022 | **Condicional, só se P-03 reprovar no passo 4:** transformar a página em `index.html` único com CSS e JS inline e CSP `default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'`; ajustar `FigureAssetsTests` para o arquivo único (reserva de D-06). | PM-1 | - | `Resources/ControllerFigure/index.html` | 🟡 | `[ ]` |
+| T019 | Remover `ControllerFigureView.swift` e confirmar por `grep` que não resta referência a `ControllerFigureView`; `swift build` e `./scripts/test.sh` verdes. Ao concluir, parar no PM-1. | T018 | - | `Sources/JoystickAIPoC/Editor/ControllerFigureView.swift` | 🟢 | `[X]` |
+| T020 | **Condicional, só se P-01 reprovar:** em `FigureBridge`, observar `effectiveAppearance` da janela por KVO e chamar `figure.setTheme("dark" \| "light")`; em `figure.js`, `setTheme` alterna a classe `theme-dark` no `:root`, e `figure.css` passa a derivar as cores dessa classe (reserva de D-11). | PM-1 | - | `Sources/JoystickAIPoC/Editor/FigureBridge.swift` | 🟡 | `[X]` |
+| T021 | **Condicional, só se P-02 reprovar:** ajustar `FigureWebView.scrollWheel` (alvo do encaminhamento, ou `nextResponder` explícito definido pelo representable) e `acceptsFirstResponder` conforme o achado da sonda (D-09). | PM-1 | - | `Sources/JoystickAIPoC/Editor/FigureBridge.swift` | 🟡 | `[X]` |
+| T022 | **Condicional, só se P-03 reprovar no passo 4:** transformar a página em `index.html` único com CSS e JS inline e CSP `default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'`; ajustar `FigureAssetsTests` para o arquivo único (reserva de D-06). | PM-1 | - | `Resources/ControllerFigure/index.html` | 🟡 | `[X]` |
 
 ## Fase 4, Integração
 
@@ -118,8 +118,8 @@ Nenhuma bloqueia a execução; todas foram resolvidas pela opção indicada, mas
 
 | ID | Descrição | Dependências | Paralelismo | Arquivo alvo | Confidência | Status |
 |----|-----------|--------------|-------------|--------------|-------------|--------|
-| T027 | Atualizar `onboarding.md` com os nomes reais de arquivos, classes e textos, o resultado das sondas do PM-1 e as reservas acionadas (T020 a T022), para o roteiro do PM-2 refletir o entregue. | T024, T026 | - | `_reversa_forward/004-figura-controle-web/onboarding.md` | 🟢 | `[ ]` |
-| T028 | Limpeza antes do PM-2: remover qualquer `console.log` ou código de depuração de `figure.js`, conferir por `grep` que a página não usa APIs de armazenamento ou rede (RN-09), e rodar `swift build -c release` e `./scripts/test.sh` verdes. Ao concluir, parar no PM-2. | T027 | - | `Resources/ControllerFigure/figure.js` | 🟢 | `[ ]` |
+| T027 | Atualizar `onboarding.md` com os nomes reais de arquivos, classes e textos, o resultado das sondas do PM-1 e as reservas acionadas (T020 a T022), para o roteiro do PM-2 refletir o entregue. | T024, T026 | - | `_reversa_forward/004-figura-controle-web/onboarding.md` | 🟢 | `[X]` |
+| T028 | Limpeza antes do PM-2: remover qualquer `console.log` ou código de depuração de `figure.js`, conferir por `grep` que a página não usa APIs de armazenamento ou rede (RN-09), e rodar `swift build -c release` e `./scripts/test.sh` verdes. Ao concluir, parar no PM-2. | T027 | - | `Resources/ControllerFigure/figure.js` | 🟢 | `[X]` |
 | [//] T029 | Comentários de cabeçalho nos arquivos novos e alterados (`FigureState.swift`, `ButtonLabels.swift`, `FigureBridge.swift`, `ControllerFigureWebView.swift`, `index.html`, `figure.css`, `figure.js`, `build-app.sh`) citando `004-figura-controle-web` e as decisões D-xx e RF-xx que implementam, no padrão dos arquivos da feature 003. | T026 | `[//]` | `Sources/JoystickAIPoC/Editor/FigureBridge.swift` | 🟢 | `[X]` |
 
 ## Notas de execução
@@ -155,6 +155,23 @@ Não use isso para corrigir ações, edits manuais ficam fora desse arquivo, vã
 - **Rótulos.** 26 px nos botões grandes; 22 px em L1, L2, R1, R2, L3 e R3; 18 px em PS, Create e Options (estes com o rótulo acima da tecla, que tem 16 × 30 px). O tamanho vem do atributo `font-size` do `<text>`, não do CSS, para o mesmo estilo servir a todos.
 - **T029.** Os cabeçalhos citando `004-figura-controle-web` já estavam nos oito arquivos desde a criação; marcada como concluída.
 
+### Rodada 4 (2026-09-16, fechamento das ações abertas)
+
+- **Política de edição.** `.reversa/reversa-config.json` relido na ativação: `allowLegacyEdits: true` com `allowedPaths` vazio, liberação irrestrita (aviso dado ao usuário).
+- **T019.** Deleção de `ControllerFigureView.swift` autorizada pelo usuário; removido por `git rm`, sem referências restantes, `swift build` e `./scripts/test.sh` verdes (270 testes em 31 suítes).
+- **PM-1.** P-02 aprovada e P-03 passo 3 (sem rede) aprovado pelo usuário; P-03 passo 5 conferido (`~/Library/WebKit/dev.iagoleal.joystick-ai.poc` ausente) e passo 6 verde após T019. Na P-01, o usuário respondeu "Melhorou", sem apontar defeito de tema, mas sem confirmar explicitamente o tema claro nem a troca ao vivo; tratada como aprovada, com a verificação remetida ao passo 15 do PM-2.
+- **T020, T021 e T022 dispensadas.** As três são condicionais a reprovação de sonda e nenhuma reprovou; marcadas `[X]` com `status: skipped` no `progress.jsonl`, sem alteração de código.
+- **Emenda E003, gatilhos acima dos ombros.** Observação do usuário no PM-1: a figura é vista de cima, e nessa perspectiva L2 e R2 ficam na borda de trás, acima de L1 e R1. Em `index.html`, os grupos trocaram de posição (L2 e R2 em y=132, L1 e R1 em y=172, com os de baixo por último no DOM para ganharem o clique na sobreposição das áreas de acerto); em `figure.js`, L2 e R2 foram para a faixa superior e L1 e R1 para o topo das colunas. A linha-guia de L1 (e R1) sai a cerca de 4 px abaixo de L2 (e R2), sem cruzá-lo. Isso corrige a disposição "L1/R1 sobre L2/R2" de RN-01, D-16 e T023, que ficam como registro histórico.
+- **T027.** `onboarding.md` ganhou a tabela "O que foi entregue", o resultado do PM-1 e as correções do PM-2: ✕ "Enter" em vez de "Return" (passo 1), sufixo " + Enter" (passo 7), exemplo do truncamento (passo 9), ausência de teste da ponte (passo 21, TD-01) e reinstalação antes do roteiro.
+- **T028.** Sem `console.*`, `debugger` ou APIs de armazenamento, rede, temporizador ou marcação nos três arquivos; `swift build -c release` e `./scripts/test.sh` verdes. Parada no PM-2.
+- **Pendente.** PM-2 (21 passos na TV, com a medição dos 500 ms), após reinstalar com `build-app.sh`.
+
+### PM-2 (2026-09-16, aceito pelo usuário sem execução do roteiro)
+
+- **Decisão do usuário.** Após a reinstalação com a emenda E003 (assinatura idêntica, `permissions.status` com `postEvent` e `listenEvent` verdadeiros), o usuário considerou o PM-2 aprovado sem percorrer os 21 passos do `onboarding.md` §2, porque a TV apenas espelha a tela do Mac, e se comprometeu a relatar o que aparecer no uso.
+- **O que isso não cobre.** O espelhamento responde pela legibilidade a 3 m, não pelos passos funcionais, que ficam sem verificação manual: carga sem rede em até 500 ms (19), página ausente com `editor.figure_unavailable` (20), camada removida por fora (17), animação com "Reduzir movimento" (12), estado antes da carga (18) e a troca de tema ao vivo (15), que também respondia a ressalva da P-01. Cobertura automática vigente: `FigureStateTests`, `FigureAssetsTests` e `LogEventCatalogTests`, com 270 testes verdes; `FigureBridge` segue sem teste (TD-01).
+- **Tratamento.** Defeitos relatados pelo usuário entram como emenda nesta feature ou como bug pelo `/reversa-debugger`.
+
 ## Histórico de alterações
 
 | Data | Alteração | Autor |
@@ -162,3 +179,5 @@ Não use isso para corrigir ações, edits manuais ficam fora desse arquivo, vã
 | 2026-09-15 | Versão inicial gerada por `/reversa-to-do` | reversa |
 | 2026-09-15 | Rodada 1 do `/reversa-coding`: T001 a T018 concluídas; T019 aguarda confirmação da deleção; PM-1 pendente | reversa |
 | 2026-09-15 | Rodadas 2 e 3: emendas E001 e E002; Fase 4 (T023 a T026) e T029 antecipadas a pedido do usuário | reversa |
+| 2026-09-16 | Rodada 4: T019, T027 e T028 concluídas; T020 a T022 dispensadas pelo PM-1; emenda E003; parada no PM-2 | reversa |
+| 2026-09-16 | PM-2 aceito pelo usuário sem execução do roteiro; passos funcionais sem verificação manual registrados | reversa |
