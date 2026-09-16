@@ -1,0 +1,15 @@
+{"ts": "2026-09-16T22:37:09Z", "action": "T001", "status": "done", "files": ["_reversa_forward/006-teclado-virtual/actions.md"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T003", "status": "done", "files": ["Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T004", "status": "done", "files": ["Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T005", "status": "done", "files": ["Sources/JoystickCore/Shortcuts/ShortcutMapper.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T006", "status": "done", "files": ["Tests/JoystickCoreTests/ShortcutConfigTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T007", "status": "done", "files": ["Tests/JoystickCoreTests/ShortcutMapperTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T008", "status": "done", "files": ["Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T009", "status": "done", "files": ["Tests/JoystickCoreTests/ConfigDocumentTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T010", "status": "done", "files": ["Tests/JoystickCoreTests/ActionSummaryTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T011", "status": "done", "files": ["Tests/JoystickCoreTests/ShortcutDefaultsTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T012", "status": "done", "files": ["Tests/JoystickCoreTests/ShortcutMapperTests.swift"]}
+{"ts": "2026-09-16T22:37:09Z", "action": "T013", "status": "done", "files": ["Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"]}
+{"ts": "2026-09-16T22:41:38Z", "action": "T014", "status": "done", "files": ["_reversa_forward/006-teclado-virtual/actions.md"]}
+{"ts": "2026-09-16T22:50:46Z", "action": "T002", "status": "done", "files": ["_reversa_forward/006-teclado-virtual/onboarding.md"]}
+{"ts": "2026-09-16T22:50:46Z", "action": "T015", "status": "done", "files": ["_reversa_forward/006-teclado-virtual/onboarding.md"]}
