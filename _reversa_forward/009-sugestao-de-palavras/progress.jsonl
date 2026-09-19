@@ -1,0 +1,25 @@
+{"ts":"2026-09-19T21:30:00Z","action":"T001","status":"done","files":["_reversa_forward/009-sugestao-de-palavras/actions.md"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T002", "status": "done", "files": ["Sources/JoystickCore/Remote/SuggestionContext.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T003", "status": "done", "files": ["Sources/JoystickCore/Remote/SuggestionContext.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T004", "status": "done", "files": ["Sources/JoystickCore/Remote/SuggestionContext.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T005", "status": "done", "files": ["Sources/JoystickCore/Remote/RemoteKeyboardMessage.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T006", "status": "done", "files": ["Sources/JoystickCore/Log/LogEventCatalog.swift", "Sources/JoystickAIPoC/Remote/RemoteKeyboardService.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T007", "status": "done", "files": ["Tests/JoystickCoreTests/SuggestionContextTests.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T008", "status": "done", "files": ["Tests/JoystickCoreTests/SuggestionContextTests.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T009", "status": "done", "files": ["Tests/JoystickCoreTests/SuggestionContextTests.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T010", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyboardMessageTests.swift"]}
+{"ts": "2026-09-19T21:30:15Z", "action": "T011", "status": "done", "files": ["Tests/JoystickCoreTests/LogEventCatalogTests.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T013", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/KeyTextTranslator.swift", "Sources/JoystickAIPoC/Remote/KeyboardLayoutReader.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T014", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/WordSuggester.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T015", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteKeyboardActions.swift", "Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T016", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteKeyboardActions.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T017", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteKeyboardService.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T018", "status": "done", "files": ["Sources/JoystickAIPoC/Pointer/InputRouter.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T019", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-19T21:34:03Z", "action": "T020", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/SuggestionProbe.swift"]}
+{"ts": "2026-09-19T21:36:37Z", "action": "T021", "status": "done", "files": ["Resources/RemoteKeyboard/index.html", "Resources/RemoteKeyboard/keyboard.css"]}
+{"ts": "2026-09-19T21:36:37Z", "action": "T022", "status": "done", "files": ["Resources/RemoteKeyboard/keyboard.js"]}
+{"ts": "2026-09-19T21:36:37Z", "action": "T023", "status": "done", "files": ["Resources/RemoteKeyboard/keyboard.js"]}
+{"ts": "2026-09-19T21:36:37Z", "action": "T012", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyboardAssetsTests.swift"]}
+{"ts": "2026-09-19T21:40:27Z", "action": "T024", "status": "done", "files": ["_reversa_forward/009-sugestao-de-palavras/actions.md", "Sources/JoystickAIPoC/Remote/WordSuggester.swift"]}
+{"ts": "2026-09-19T21:40:55Z", "action": "T025", "status": "done", "files": ["scripts/build-app.sh"]}

@@ -1,14 +1,15 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/008-iphone-teclado-remoto",
-  "feature-id": "008",
-  "short-name": "iphone-teclado-remoto",
-  "started-at": "2026-09-19T15:23:12Z",
-  "current-stage": "plan",
+  "feature-dir": "_reversa_forward/009-sugestao-de-palavras",
+  "feature-id": "009",
+  "short-name": "sugestao-de-palavras",
+  "started-at": "2026-09-19T20:57:54Z",
+  "current-stage": "to-do",
   "stages-completed": [
     "requirements",
     "clarify",
-    "plan"
+    "plan",
+    "to-do"
   ],
   "paused-features": [
     {
@@ -19,6 +20,20 @@
       "current-stage": "requirements",
       "stages-completed": [],
       "paused-at": "2026-09-19T15:23:12Z",
+      "paused-from-stage": "coding-em-progresso"
+    },
+    {
+      "feature-dir": "_reversa_forward/008-iphone-teclado-remoto",
+      "feature-id": "008",
+      "short-name": "iphone-teclado-remoto",
+      "started-at": "2026-09-19T15:23:12Z",
+      "current-stage": "plan",
+      "stages-completed": [
+        "requirements",
+        "clarify",
+        "plan"
+      ],
+      "paused-at": "2026-09-19T20:57:54Z",
       "paused-from-stage": "coding-em-progresso"
     }
   ]
