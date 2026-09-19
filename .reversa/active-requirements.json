@@ -1,14 +1,10 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/006-teclado-virtual",
-  "feature-id": "006",
-  "short-name": "teclado-virtual",
-  "started-at": "2026-09-16T21:56:43Z",
-  "current-stage": "plan",
-  "stages-completed": [
-    "requirements",
-    "clarify",
-    "plan"
-  ],
+  "feature-dir": "_reversa_forward/007-controle-ipega",
+  "feature-id": "007",
+  "short-name": "controle-ipega",
+  "started-at": "2026-09-19T14:30:00Z",
+  "current-stage": "requirements",
+  "stages-completed": [],
   "paused-features": []
 }
