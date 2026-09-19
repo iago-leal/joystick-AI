@@ -17,10 +17,10 @@ Registre o resultado de cada sonda com data. Os métodos e critérios estão em 
 
 | Sonda | Resultado | Data |
 |-------|-----------|------|
-| P-01 entrada segura | | |
-| P-02 tradução com tecla morta | | |
-| P-03 inserção nos terminais | | |
-| P-04 altura da barra | | |
+| P-01 entrada segura | Aprovada, relatada pelo usuário | 2026-09-19 |
+| P-02 tradução com tecla morta | Aprovada, relatada pelo usuário | 2026-09-19 |
+| P-03 inserção nos terminais | Aprovada, relatada pelo usuário | 2026-09-19 |
+| P-04 altura da barra | Aprovada, relatada pelo usuário | 2026-09-19 |
 
 ## 3. PM-1: roteiro da feature
 
@@ -53,3 +53,21 @@ Registre aprovado ou reprovado por passo, com observações, nesta seção.
 
 | # | Resultado | Data | Observações |
 |---|-----------|------|-------------|
+| 1 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 2 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 3 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 4 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 5 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 6 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 7 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 8 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 9 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 10 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 11 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 12 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 13 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 14 | Não executado | 2026-09-19 | Por escolha do usuário, que não quis revogar a Acessibilidade. A recusa do `pick` com o portão fechado está no código (`RemoteKeyboardActions.pick`), sem verificação no aparelho |
+| 15 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 16 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 17 | Aprovado | 2026-09-19 | Relatado pelo usuário |
+| 18 | Aprovado | 2026-09-19 | Saída pela página às 18h58: `remote.disconnected` com `reason: bye`, `keys: 140` e `suggestions: 19`, contagem da sessão inteira do roteiro, e não só de 3 aceitações; nenhum campo com palavra, contexto, revisão ou idioma no log |

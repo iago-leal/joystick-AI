@@ -100,9 +100,9 @@ A 009 parte do código atual da 008, pausada com a T036 aberta. Nenhuma ação d
 |----|-----------|--------------|-------------|--------------|-------------|--------|
 | T024 | Rodar `swift build -c release` e os testes; registrar nas notas de execução o total de testes, o número anterior (T001) e os avisos de compilação novos, se houver | T009, T010, T011, T012, T019, T020, T023 | - | `_reversa_forward/009-sugestao-de-palavras/actions.md` | 🟢 | `[X]` |
 | T025 | Instalar o app com `JOYSTICK_SIGN_IDENTITY="JoystickAI Local Signing" ./scripts/build-app.sh`, conferir a assinatura com `./scripts/check-signature.sh` e parar no PM-0 | T024 | - | `scripts/build-app.sh` | 🟢 | `[X]` |
-| T026 | Registrar no `onboarding.md` §2 o resultado de P-01 a P-04; se P-01 for reprovada, parar e devolver ao usuário a decisão sobre a entrada segura | PM-0 | - | `_reversa_forward/009-sugestao-de-palavras/onboarding.md` | 🟡 | `[ ]` |
-| T027 | Só se P-04 for reprovada: ajustar em `keyboard.css` a altura da barra à medida registrada e reinstalar o app; aprovada, registrar "não aplicável" nas notas de execução (D-09) | T026 | - | `Resources/RemoteKeyboard/keyboard.css` | 🟡 | `[ ]` |
-| T028 | Registrar no `onboarding.md` §3 o resultado do PM-1 por passo, com as observações | PM-1 | - | `_reversa_forward/009-sugestao-de-palavras/onboarding.md` | 🟢 | `[ ]` |
+| T026 | Registrar no `onboarding.md` §2 o resultado de P-01 a P-04; se P-01 for reprovada, parar e devolver ao usuário a decisão sobre a entrada segura | PM-0 | - | `_reversa_forward/009-sugestao-de-palavras/onboarding.md` | 🟡 | `[X]` |
+| T027 | Só se P-04 for reprovada: ajustar em `keyboard.css` a altura da barra à medida registrada e reinstalar o app; aprovada, registrar "não aplicável" nas notas de execução (D-09) | T026 | - | `Resources/RemoteKeyboard/keyboard.css` | 🟡 | `[X]` |
+| T028 | Registrar no `onboarding.md` §3 o resultado do PM-1 por passo, com as observações | PM-1 | - | `_reversa_forward/009-sugestao-de-palavras/onboarding.md` | 🟢 | `[X]` |
 
 ## Notas de execução
 
@@ -110,6 +110,12 @@ A 009 parte do código atual da 008, pausada com a T036 aberta. Nenhuma ação d
 - **T002 a T012 (2026-09-19):** núcleo e testes verdes antes da integração: 378 testes em 40 suítes. Um caso provisório `.prefs?, .pick?` no `switch` de `RemoteKeyboardActions` manteve o app compilando até a T016, que o substituiu.
 - **T020 a T023 (2026-09-19):** `keyboard.js` exercitado fora do navegador por um roteiro com DOM e WebSocket simulados (`prefs` após `welcome`, desenho de `suggest` com descarte de itens inválidos, `pick` com `rev` e `i`, esmaecimento por tecla comum e não por modificador, faixa inativa com ⇧ mantido, toque ignorado em faixa vazia ou esmaecida, seletor e botão de ocultar gravando `remoteKeyboardPrefs`, estado no lugar das sugestões sem permissão, leitura das preferências na reabertura e queda no padrão com valor corrompido), todos aprovados; o teste no Safari fica para o PM-0. Fora do previsto: `WordSuggester` dá por encerrado o pedido sem resposta em 1 s, para que um motor mudo não congele a faixa pela sessão; `KeyboardInjector` ganhou `enabled`, lido pelas ações para não alimentar o contexto com teclas barradas pelo portão; `KeyboardLayoutReader.currentLayout()` lê o layout na main thread para o tradutor, que roda na fila `input`. A sonda grava o texto só fora da entrada segura, para que a P-01 não leve senha a disco.
 - **T024 (2026-09-19):** `swift build -c release` concluído sem aviso do código, só com os avisos do `ld` sobre caminhos ausentes das Command Line Tools, os mesmos da 008 (um aviso de captura de `self` no `WordSuggester` apareceu na primeira compilação e foi corrigido). Testes: 379 em 40 suítes, todos verdes, contra 351 em 39 da linha de base (+28 testes, +1 suíte, `SuggestionContextTests`). A contagem veio de `swift test` com o SDK 26.5 e o `-plugin-path`, como na T001.
+- **PM-0, P-01 e P-02 (2026-09-19):** aprovadas, pelo relato do usuário; a proteção de RN-06 se sustenta, e o PM-1 fica liberado desse lado. T026 segue aberta até P-03 e P-04.
+- **PM-0, P-03 e P-04 (2026-09-19):** aprovadas, pelo relato do usuário. PM-0 concluído.
+- **T026 (2026-09-19):** P-01 a P-04 registradas no `onboarding.md` §2, todas aprovadas.
+- **T027 (2026-09-19):** não aplicável: P-04 aprovada, e a altura da barra segue a de uma linha de teclas; nenhuma mudança em `keyboard.css` nem reinstalação.
+- **PM-1, parcial (2026-09-19):** passos 1 a 13 e 15 a 17 aprovados, pelo relato do usuário; o 14 (Acessibilidade revogada) não foi executado, por escolha do usuário; o 18 aguarda o fim da sessão, porque `remote.disconnected` só é gravado quando a página sai. T028 segue aberta até o 18.
+- **PM-1, passo 18, e T028 (2026-09-19):** `remote.disconnected` conferido no log com `suggestions: 19` (todas as aceitações da sessão do roteiro) e sem conteúdo; resultado do PM-1 registrado no `onboarding.md` §3. PM-1 aprovado, exceto o passo 14, não executado por escolha do usuário.
 
 ## Histórico de alterações
 

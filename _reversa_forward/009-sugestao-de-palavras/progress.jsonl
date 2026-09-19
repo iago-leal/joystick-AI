@@ -23,3 +23,6 @@
 {"ts": "2026-09-19T21:36:37Z", "action": "T012", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyboardAssetsTests.swift"]}
 {"ts": "2026-09-19T21:40:27Z", "action": "T024", "status": "done", "files": ["_reversa_forward/009-sugestao-de-palavras/actions.md", "Sources/JoystickAIPoC/Remote/WordSuggester.swift"]}
 {"ts": "2026-09-19T21:40:55Z", "action": "T025", "status": "done", "files": ["scripts/build-app.sh"]}
+{"ts": "2026-09-19T21:49:43Z", "action": "T026", "status": "done", "files": ["_reversa_forward/009-sugestao-de-palavras/onboarding.md"]}
+{"ts": "2026-09-19T21:49:43Z", "action": "T027", "status": "done", "files": ["_reversa_forward/009-sugestao-de-palavras/actions.md"]}
+{"ts": "2026-09-19T21:59:13Z", "action": "T028", "status": "done", "files": ["_reversa_forward/009-sugestao-de-palavras/onboarding.md"]}
