@@ -59,6 +59,16 @@ done
 mkdir -p "$STAGING/Contents/Resources"
 cp -R "$FIGURE_SRC" "$STAGING/Contents/Resources/ControllerFigure"
 
+# Página do teclado remoto (`008-iphone-teclado-remoto` D-15): servida pelo app ao iPhone, selada como a figura.
+REMOTE_SRC="Resources/RemoteKeyboard"
+for f in index.html keyboard.css keyboard.js; do
+    if [ ! -f "$REMOTE_SRC/$f" ]; then
+        echo "erro: $REMOTE_SRC/$f não encontrado; o bundle exige os três arquivos do teclado remoto." >&2
+        exit 66
+    fi
+done
+cp -R "$REMOTE_SRC" "$STAGING/Contents/Resources/RemoteKeyboard"
+
 echo "==> assinatura com \"$identity\""
 codesign --force --timestamp=none --sign "$identity" "$STAGING"
 codesign --verify --strict "$STAGING"

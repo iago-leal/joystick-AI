@@ -8,6 +8,10 @@ final class Lifecycle {
     private let shortcuts: ShortcutActions
     private var signalSources: [DispatchSourceSignal] = []
     private var cleanedUp = false
+    /// Teclado remoto (`008-iphone-teclado-remoto` D-13, 001 RN-04): solto junto com o controle.
+    var remote: RemoteKeyboardActions?
+    /// Chamado na main thread depois das solturas, para fechar os listeners do teclado remoto.
+    var onCleanUp: (() -> Void)?
 
     init(context: InputContext, buttons: ButtonActions, shortcuts: ShortcutActions) {
         self.context = context
@@ -33,10 +37,12 @@ final class Lifecycle {
     func cleanUp(reason: TerminationReason) {
         guard !cleanedUp else { return }
         cleanedUp = true
-        let released = context.queue.sync {
+        let released = context.queue.sync { [remote] in
             shortcuts.releaseAll()
+            remote?.releaseAll()
             return buttons.releaseAll()
         }
+        onCleanUp?()
         context.log.log(LogEventCatalog.appTerminating(reason: reason, releasedButtons: released))
         context.log.flushSync()
     }

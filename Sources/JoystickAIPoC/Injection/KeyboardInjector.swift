@@ -9,6 +9,7 @@ final class KeyboardInjector {
     private let injector: EventInjector
     /// Quantas teclas ou botões mantêm cada modificador pressionado.
     private var modifierCounts: [KeyModifier: Int] = [:]
+    private let capsLockSwitch = CapsLockSwitch()
 
     init(injector: EventInjector) {
         self.injector = injector
@@ -64,6 +65,17 @@ final class KeyboardInjector {
         postKey(chord, down: true, autorepeat: true)
     }
 
+    /// Caps Lock do teclado remoto (`008-iphone-teclado-remoto` D-17, revista no PM-0): cada pressionar inverte a trava
+    /// do sistema pela IOKit, fora da contagem de `KeyModifier`; soltar não faz nada, como numa tecla de trava.
+    /// Devolve o estado da trava depois do toque, para a página.
+    @discardableResult
+    func capsLock(down: Bool) -> Bool? {
+        guard down, injector.enabled else { return capsLockSwitch.isOn }
+        return capsLockSwitch.toggle()
+    }
+
+    var capsLockOn: Bool? { capsLockSwitch.isOn }
+
     /// Solta a tecla e os modificadores do acorde mesmo que a contagem diga que já estão soltos.
     func forceUp(_ chord: KeyChord) {
         postKey(chord, down: false, autorepeat: false)
@@ -102,11 +114,16 @@ final class KeyboardInjector {
         injector.deliver(event)
     }
 
+    private static let capsLockKeyCode: UInt16 = 57
+
     private func postKey(_ chord: KeyChord, down: Bool, autorepeat: Bool) {
         guard injector.enabled,
               let event = CGEvent(keyboardEventSource: injector.eventSource, virtualKey: chord.keyCode, keyDown: down)
         else { return }
         var flags = heldFlags
+        // Com o Caps Lock ligado, físico ou do teclado remoto, a tecla leva a máscara como a do teclado físico; sem ela,
+        // o caractere seria calculado em minúscula (`008-iphone-teclado-remoto` D-17).
+        if CGEventSource.flagsState(.hidSystemState).contains(.maskAlphaShift) { flags.insert(.maskAlphaShift) }
         // As setas do teclado físico chegam com essas duas máscaras; os atalhos de Mission Control as esperam.
         if chord.isArrow { flags.formUnion([.maskNumericPad, .maskSecondaryFn]) }
         // As teclas F do teclado físico chegam com a máscara de função; sem ela, o sistema ignora o ⌥⌘F5

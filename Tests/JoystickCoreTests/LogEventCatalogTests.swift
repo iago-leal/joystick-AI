@@ -57,7 +57,7 @@ import Testing
             LogEventCatalog.paletteBlocked(),
             LogEventCatalog.paletteInvalidArgs(message: "--palette-enter-delay-ms sem valor"),
             LogEventCatalog.paletteClosed(reason: .configChanged),
-        ] + Self.shortcutEvents + LogEventCatalog.config(ConfigLoadResult(settings: settings, status: .loaded, reason: nil, issues: [
+        ] + Self.shortcutEvents + Self.remoteEvents + LogEventCatalog.config(ConfigLoadResult(settings: settings, status: .loaded, reason: nil, issues: [
             .valueRejected(field: "deadzone", rejected: 0.9, min: 0, max: 0.5, defaultValue: 0.12),
         ])) + LogEventCatalog.config(ConfigLoadResult(settings: PointerSettings(), status: .invalidJSON, reason: nil, issues: [.invalidJSON(line: 4, message: "vírgula")]))
             + LogEventCatalog.config(ConfigLoadResult(settings: PointerSettings(), status: .defaults, reason: nil, issues: [.unreadable(message: "diretório")]))
@@ -81,6 +81,18 @@ import Testing
             LogEventCatalog.editorIdentify(on: true),
             LogEventCatalog.editorActivationFailed(),
             LogEventCatalog.editorFigureUnavailable(reason: .resourceMissing),
+        ]
+    }
+
+    /// Eventos de `008-iphone-teclado-remoto/interfaces/diagnostic-log.md` §2.
+    static var remoteEvents: [LogEvent] {
+        [
+            LogEventCatalog.remoteEnabled(port: 47810, channelPort: 47811),
+            LogEventCatalog.remoteDisabled(reason: .listenerFailed),
+            LogEventCatalog.remoteConnected(resumed: true),
+            LogEventCatalog.remoteRejected(reason: .notLocal),
+            LogEventCatalog.remoteWatchdog(held: 2),
+            LogEventCatalog.remoteDisconnected(reason: .invalidMessages, keys: 50),
         ]
     }
 
@@ -115,6 +127,8 @@ import Testing
             "shortcuts.restored": .info, "shortcut.triggered": .info,
             "editor.opened": .info, "editor.closed": .info, "editor.conflict": .warn, "editor.identify": .info,
             "editor.activation_failed": .warn, "editor.figure_unavailable": .warn,
+            "remote.enabled": .info, "remote.disabled": .info, "remote.connected": .info, "remote.rejected": .warn,
+            "remote.watchdog": .warn, "remote.disconnected": .info,
         ]
         let events = Self.sampleEvents
         #expect(Set(events.map(\.name)) == Set(expected.keys))
@@ -231,5 +245,27 @@ import Testing
         #expect(connected.map { $0.fields["model"] } == ["dualSense", "ipega"])
         #expect(fields("controller.ignored")["reason"] == "unsupported_model")
         #expect(Set(fields("controller.ignored").keys) == ["name", "productCategory", "reason"])
+    }
+
+    /// `008-iphone-teclado-remoto` RN-13, D-18: só motivos e contagens; nenhuma tecla, rótulo, código, token,
+    /// endereço, nome de aparelho nem carimbo da página.
+    @Test func eventosDoTecladoRemotoSemConteudo() {
+        #expect(fields("remote.enabled") == ["port": 47810, "channelPort": 47811])
+        #expect(fields("remote.disabled") == ["reason": "listener_failed"])
+        #expect(fields("remote.connected") == ["resumed": true])
+        #expect(fields("remote.rejected") == ["reason": "not_local"])
+        #expect(fields("remote.watchdog") == ["held": 2])
+        #expect(fields("remote.disconnected") == ["reason": "invalid_messages", "keys": 50])
+        let forbidden: Set<String> = ["k", "key", "code", "token", "label", "address", "host", "name", "ts", "device"]
+        for event in Self.remoteEvents {
+            #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: forbidden), "\(event.name)")
+        }
+        let rejectReasons: [RemoteRejectReason] = [.notLocal, .badOrigin, .badCode, .badToken, .busy, .codeRotated, .noIdentity, .hostMismatch, .expired]
+        #expect(rejectReasons.map(\.rawValue) == [
+            "not_local", "bad_origin", "bad_code", "bad_token", "busy", "code_rotated", "no_identity", "host_mismatch", "expired",
+        ])
+        let disconnectReasons: [RemoteDisconnectReason] = [.bye, .closed, .timeout, .invalidMessages, .replaced, .disabled]
+        #expect(disconnectReasons.map(\.rawValue) == ["bye", "closed", "timeout", "invalid_messages", "replaced", "disabled"])
+        #expect([RemoteDisabledReason.menu, .quit, .listenerFailed].map(\.rawValue) == ["menu", "quit", "listener_failed"])
     }
 }

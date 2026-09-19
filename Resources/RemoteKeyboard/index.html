@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+  Teclado remoto no iPhone (`008-iphone-teclado-remoto` D-01, D-15, RF-04, RF-06, RF-10).
+  Página servida pelo app na porta 47810; o canal fica na 47811 (`interfaces/remote-keyboard-protocol.md`).
+  As teclas não estão aqui: keyboard.js as desenha a partir da mensagem `layout`, com os rótulos da fonte de entrada
+  do Mac. A política de conteúdo vem no cabeçalho da resposta, que conhece o nome do host para o `connect-src`.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Teclado do Mac">
+  <meta name="format-detection" content="telephone=no">
+  <title>Teclado do Mac</title>
+  <link rel="stylesheet" href="keyboard.css">
+</head>
+<body>
+  <div class="rotate" role="alert">Gire o iPhone para a horizontal</div>
+  <main class="app">
+    <header class="bar">
+      <span class="status" id="status" role="status" aria-live="polite">Conectando…</span>
+      <button type="button" class="leave" id="leave">Sair</button>
+    </header>
+    <div class="keyboard" id="keyboard" aria-label="Teclado do Mac"></div>
+    <div class="notice" id="notice" hidden></div>
+  </main>
+  <script src="keyboard.js"></script>
+</body>
+</html>

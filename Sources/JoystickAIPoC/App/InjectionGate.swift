@@ -12,9 +12,14 @@ final class InjectionGate {
     /// Solturas feitas na suspensão, que o sistema provavelmente descartou; repetidas na retomada.
     private var pendingMouseReleases: [MouseButton] = []
     private var pendingKeyReleases: [ShortcutAction] = []
+    private var pendingRemoteReleases: [RemoteRelease] = []
 
     /// Chamado na main thread quando a injeção é suspensa.
     var onSuspended: (() -> Void)?
+    /// Teclado remoto (`008-iphone-teclado-remoto` D-13): solto na suspensão, com as solturas repetidas na retomada.
+    var remote: RemoteKeyboardActions?
+    /// Chamado na fila `input` com o estado inicial e a cada mudança, para avisar a página (RN-11, RF-10).
+    var onAllowedChange: ((Bool) -> Void)?
 
     init(context: InputContext, injector: EventInjector, buttons: ButtonActions, shortcuts: ShortcutActions, palette: PaletteActions) {
         self.context = context
@@ -32,6 +37,7 @@ final class InjectionGate {
             guard let previous else {
                 // Estado inicial: sem suspensão nem retomada a registrar.
                 injector.enabled = value
+                onAllowedChange?(value)
                 return
             }
             guard previous != value else { return }
@@ -41,20 +47,24 @@ final class InjectionGate {
                 // ficaria com botão de mouse ou Command pressionado.
                 buttons.postReleases(pendingMouseReleases)
                 shortcuts.repeatReleases(pendingKeyReleases)
+                remote?.repeatReleases(pendingRemoteReleases)
                 pendingMouseReleases = []
                 pendingKeyReleases = []
+                pendingRemoteReleases = []
                 context.log.log(LogEventCatalog.injectionResumed(heldButtons: []))
             } else {
                 // A paleta fecha sem digitar (`002-paleta-comandos` RF-09, D-12).
                 palette.close(.injectionSuspended)
                 // Solta antes de desativar, para não deixar botão de mouse preso quando a permissão voltar.
                 pendingKeyReleases = shortcuts.releaseAll()
+                pendingRemoteReleases = remote?.releaseAll() ?? []
                 let held = buttons.releaseAll()
                 pendingMouseReleases = held
                 injector.enabled = false
                 context.log.log(LogEventCatalog.injectionSuspended(heldButtons: held))
                 DispatchQueue.main.async { self.onSuspended?() }
             }
+            onAllowedChange?(value)
         }
     }
 }

@@ -26,6 +26,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var gate: InjectionGate!
     private var lifecycle: Lifecycle!
     private var displayMonitor: DisplayMonitor!
+    private var remoteActions: RemoteKeyboardActions!
+    private var remoteService: RemoteKeyboardService!
+    private var layoutReader: KeyboardLayoutReader!
+    private var pairingWindow: PairingWindow!
     private var targetSession: TargetSession?
     private var targetAbortMonitor: TargetAbortMonitor?
 
@@ -125,6 +129,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         lifecycle = Lifecycle(context: inputContext, buttons: buttonActions, shortcuts: shortcutActions)
         lifecycle.start()
+
+        // Teclado remoto (`008-iphone-teclado-remoto`): mesmo injetor de teclado do controle, para uma só contagem de
+        // modificadores (D-09, RN-08); desligado a cada abertura (RN-02) e ligado só pelo menu (D-14).
+        remoteActions = RemoteKeyboardActions(
+            context: inputContext, keyboard: keyboard, geometry: .standard(KeyboardLayoutReader.physicalLayout))
+        layoutReader = KeyboardLayoutReader()
+        let remoteResources = Bundle.main.resourceURL?.appendingPathComponent("RemoteKeyboard", isDirectory: true)
+        remoteService = RemoteKeyboardService(
+            context: inputContext, actions: remoteActions, layoutReader: layoutReader,
+            resources: remoteResources.flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil })
+        pairingWindow = PairingWindow()
+        remoteService.onStatusChange = { [statusMenu, pairingWindow] status in
+            statusMenu?.update(remote: status)
+            pairingWindow?.update(status)
+        }
+        remoteService.onConnected = { [pairingWindow] in pairingWindow?.close() }
+        statusMenu.onToggleRemote = { [remoteService, pairingWindow] on in
+            remoteService?.setEnabled(on)
+            if on { pairingWindow?.show() }
+        }
+        statusMenu.onShowPairing = { [pairingWindow] in pairingWindow?.show() }
+        gate.remote = remoteActions
+        gate.onAllowedChange = { [remoteService] allowed in remoteService?.injectionChanged(allowed) }
+        lifecycle.remote = remoteActions
+        lifecycle.onCleanUp = { [remoteService] in remoteService?.disable(reason: .quit) }
 
         displayMonitor = DisplayMonitor(log: log, injector: injector, inputQueue: inputQueue)
         displayMonitor.start()

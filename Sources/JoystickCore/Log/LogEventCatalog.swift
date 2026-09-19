@@ -337,4 +337,44 @@ public enum LogEventCatalog {
     public static func logDebugSuspended(sizeBytes: Int) -> LogEvent {
         LogEvent("log.debug_suspended", level: .warn, fields: ["sizeBytes": .int(Int64(sizeBytes))])
     }
+
+    // Teclado remoto (`008-iphone-teclado-remoto/interfaces/diagnostic-log.md` §2, D-18, RN-13): só motivos e
+    // contagens; nunca tecla, rótulo, código de pareamento, token, endereço nem nome do aparelho.
+
+    public static func remoteEnabled(port: UInt16, channelPort: UInt16) -> LogEvent {
+        LogEvent("remote.enabled", level: .info, fields: ["port": .int(Int64(port)), "channelPort": .int(Int64(channelPort))])
+    }
+
+    public static func remoteDisabled(reason: RemoteDisabledReason) -> LogEvent {
+        LogEvent("remote.disabled", level: .info, fields: ["reason": .string(reason.rawValue)])
+    }
+
+    public static func remoteConnected(resumed: Bool) -> LogEvent {
+        LogEvent("remote.connected", level: .info, fields: ["resumed": .bool(resumed)])
+    }
+
+    public static func remoteRejected(reason: RemoteRejectReason) -> LogEvent {
+        LogEvent("remote.rejected", level: .warn, fields: ["reason": .string(reason.rawValue)])
+    }
+
+    /// `held`: teclas e modificadores soltos pelo vigia (D-11).
+    public static func remoteWatchdog(held: Int) -> LogEvent {
+        LogEvent("remote.watchdog", level: .warn, fields: ["held": .int(Int64(held))])
+    }
+
+    /// `keys`: teclas pressionadas na sessão, sem distinguir quais (D-18).
+    public static func remoteDisconnected(reason: RemoteDisconnectReason, keys: Int) -> LogEvent {
+        LogEvent("remote.disconnected", level: .info, fields: ["reason": .string(reason.rawValue), "keys": .int(Int64(keys))])
+    }
+}
+
+public enum RemoteDisabledReason: String, Sendable { case menu, quit, listenerFailed = "listener_failed" }
+
+public enum RemoteRejectReason: String, Sendable {
+    case notLocal = "not_local", badOrigin = "bad_origin", badCode = "bad_code", badToken = "bad_token", busy
+    case codeRotated = "code_rotated", noIdentity = "no_identity", hostMismatch = "host_mismatch", expired
+}
+
+public enum RemoteDisconnectReason: String, Sendable {
+    case bye, closed, timeout, invalidMessages = "invalid_messages", replaced, disabled
 }
