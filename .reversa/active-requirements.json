@@ -1,10 +1,25 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/007-controle-ipega",
-  "feature-id": "007",
-  "short-name": "controle-ipega",
-  "started-at": "2026-09-19T14:30:00Z",
-  "current-stage": "requirements",
-  "stages-completed": [],
-  "paused-features": []
+  "feature-dir": "_reversa_forward/008-iphone-teclado-remoto",
+  "feature-id": "008",
+  "short-name": "iphone-teclado-remoto",
+  "started-at": "2026-09-19T15:23:12Z",
+  "current-stage": "plan",
+  "stages-completed": [
+    "requirements",
+    "clarify",
+    "plan"
+  ],
+  "paused-features": [
+    {
+      "feature-dir": "_reversa_forward/007-controle-ipega",
+      "feature-id": "007",
+      "short-name": "controle-ipega",
+      "started-at": "2026-09-19T14:30:00Z",
+      "current-stage": "requirements",
+      "stages-completed": [],
+      "paused-at": "2026-09-19T15:23:12Z",
+      "paused-from-stage": "coding-em-progresso"
+    }
+  ]
 }

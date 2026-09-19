@@ -1,0 +1,36 @@
+{"ts":"2026-09-19T16:02:43Z","action":"T001","status":"done","files":["_reversa_forward/008-iphone-teclado-remoto/actions.md"],"note":"306 testes verdes com SDK 26.5; scripts/test.sh quebrado pela atualização das CLT"}
+{"ts": "2026-09-19T16:10:12Z", "action": "T010", "status": "done", "files": ["Sources/JoystickCore/Remote/KeyLabelTable.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T011", "status": "done", "files": ["Sources/JoystickCore/Remote/RemoteKeyGeometry.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T012", "status": "done", "files": ["Sources/JoystickCore/Remote/LocalAddressPolicy.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T013", "status": "done", "files": ["Sources/JoystickCore/Remote/RemotePairing.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T017", "status": "done", "files": ["Sources/JoystickCore/Log/LogEventCatalog.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T014", "status": "done", "files": ["Sources/JoystickCore/Remote/RemoteKeyboardMessage.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T015", "status": "done", "files": ["Sources/JoystickCore/Remote/RemoteKeyboardMachine.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T016", "status": "done", "files": ["Sources/JoystickCore/Remote/RemoteKeyboardMachine.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T003", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyGeometryTests.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T004", "status": "done", "files": ["Tests/JoystickCoreTests/LocalAddressPolicyTests.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T005", "status": "done", "files": ["Tests/JoystickCoreTests/RemotePairingTests.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T006", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyboardMessageTests.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T007", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyboardMachineTests.swift"]}
+{"ts": "2026-09-19T16:10:12Z", "action": "T008", "status": "done", "files": ["Tests/JoystickCoreTests/LogEventCatalogTests.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T002", "status": "done", "files": ["scripts/create-remote-keyboard-identity.sh"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T037", "status": "done", "files": ["Sources/JoystickAIPoC/Injection/KeyboardInjector.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T018", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteKeyboardIdentity.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T019", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemotePageListener.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T020", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteChannelListener.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T021", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteKeyboardActions.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T022", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/KeyboardLayoutReader.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T023", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/RemoteKeyboardService.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T024", "status": "done", "files": ["Sources/JoystickAIPoC/Remote/PairingWindow.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T025", "status": "done", "files": ["Sources/JoystickAIPoC/App/StatusMenu.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T026", "status": "done", "files": ["Sources/JoystickAIPoC/App/InjectionGate.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T027", "status": "done", "files": ["Sources/JoystickAIPoC/App/Lifecycle.swift"]}
+{"ts": "2026-09-19T16:18:46Z", "action": "T028", "status": "done", "files": ["Sources/JoystickAIPoC/App/AppDelegate.swift"]}
+{"ts": "2026-09-19T16:26:31Z", "action": "T029", "status": "done", "files": ["Resources/RemoteKeyboard/index.html", "Resources/RemoteKeyboard/keyboard.css"]}
+{"ts": "2026-09-19T16:26:31Z", "action": "T030", "status": "done", "files": ["Resources/RemoteKeyboard/keyboard.js"]}
+{"ts": "2026-09-19T16:26:31Z", "action": "T031", "status": "done", "files": ["scripts/build-app.sh"]}
+{"ts": "2026-09-19T16:26:31Z", "action": "T009", "status": "done", "files": ["Tests/JoystickCoreTests/RemoteKeyboardAssetsTests.swift"]}
+{"ts": "2026-09-19T16:26:31Z", "action": "T032", "status": "done", "files": ["_reversa_forward/008-iphone-teclado-remoto/actions.md"]}
+{"ts": "2026-09-19T16:26:31Z", "action": "T033", "status": "done", "files": ["~/Applications/JoystickAIPoC.app"]}
+{"ts": "2026-09-19T17:08:32Z", "action": "T034", "status": "done", "files": ["_reversa_forward/008-iphone-teclado-remoto/onboarding.md"]}
+{"ts": "2026-09-19T17:08:32Z", "action": "T035", "status": "done", "files": [], "note": "não aplicável; Caps Lock mantido pela IOKit (D-17 revista)"}
