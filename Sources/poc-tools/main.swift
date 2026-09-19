@@ -6,7 +6,7 @@ let usage = """
 uso: poc-tools <subcomando> [argumentos]
 
 subcomandos:
-  buttons <log>                           cobertura dos 18 botões (bloco a)
+  buttons <log>                           cobertura dos 18 botões do modelo (bloco a)
   runs [--env mesa|sofa] [--dir <dir>]    tabela das sequências da tela de alvos (bloco b)
   latency <log>                           p50, p95 e máximo das latências (bloco d)
   cycles <log>                            ciclos de conexão e reinícios (robustez)

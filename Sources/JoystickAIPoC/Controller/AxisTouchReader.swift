@@ -5,17 +5,25 @@ import JoystickCore
 /// Analógicos e touchpad do controle ativo (D-05, RF-06, RF-08, RN-12, P-01, P-02).
 ///
 /// Nenhum valor de eixo nem posição do toque vai ao log: só inícios e fins de toque e as transições brutas.
+/// O touchpad vale só para o DualSense (`007-controle-ipega` D-03, RN-06). Os analógicos do DualSense vêm da interface
+/// de controles; os do Ipega, do relatório HID, porque o driver do sistema zera os eixos desse clone (revisão de D-03
+/// no PM-1): `ControllerReader` os entrega por `deliverStick`.
 enum AxisTouchReader {
     /// Leitura por dedo, mantida pelo *closure* do elemento na fila `input`.
     private final class FingerState {
         var inference = ZeroTransitionPhaseInference()
     }
 
-    private final class StickState {
+    /// Última amostra normalizada entregue de um analógico.
+    final class StickState {
         var last = (x: 0.0, y: 0.0)
     }
 
-    static func attach(controller: GCController, gamepad: GCDualSenseGamepad, key: ObjectIdentifier, info: ControllerInfo, context: InputContext) {
+    static func attach(
+        controller: GCController, gamepad: GCExtendedGamepad, model: ControllerModel, key: ObjectIdentifier,
+        info: ControllerInfo, context: InputContext
+    ) {
+        guard model == .dualSense, let gamepad = gamepad as? GCDualSenseGamepad else { return }
         attachStick(gamepad.leftThumbstick, element: .leftStick, key: key, context: context)
         attachStick(gamepad.rightThumbstick, element: .rightStick, key: key, context: context)
 
@@ -58,13 +66,21 @@ enum AxisTouchReader {
         let state = StickState()
         stick.valueChangedHandler = { _, x, y in
             let tArrival = MonotonicClock.nowNs()
-            guard context.registry.isActive(key) else { return }
-            let normalized = Normalization.stick(x: Double(x), y: Double(y), deadzone: context.settings.deadzone)
-            // Repetições do mesmo valor normalizado (repouso, sobretudo) não geram entrega.
-            guard normalized != state.last else { return }
-            state.last = normalized
-            context.sink.handle(InputEvent(kind: .axis, element: element, x: normalized.x, y: normalized.y, timestamp: tArrival))
+            deliverStick(element, x: Double(x), y: Double(y), tArrival: tArrival, state: state, key: key, context: context)
         }
+    }
+
+    /// Na fila `input`: normaliza e entrega a amostra do analógico do controle ativo.
+    static func deliverStick(
+        _ element: InputElement, x: Double, y: Double, tArrival: UInt64, state: StickState, key: ObjectIdentifier,
+        context: InputContext
+    ) {
+        guard context.registry.isActive(key) else { return }
+        let normalized = Normalization.stick(x: x, y: y, deadzone: context.settings.deadzone)
+        // Repetições do mesmo valor normalizado (repouso, sobretudo) não geram entrega.
+        guard normalized != state.last else { return }
+        state.last = normalized
+        context.sink.handle(InputEvent(kind: .axis, element: element, x: normalized.x, y: normalized.y, timestamp: tArrival))
     }
 
     private static func deliverTouch(finger: Int, phase: TouchPhase, x: Double, y: Double, tArrival: UInt64, context: InputContext) {

@@ -6,6 +6,8 @@
   o resumo da ação, posicionados pela tabela de figure.js. O estado chega por `figure.render(state)` e o clique volta
   por `messageHandlers.figure`. Disposição vista de cima: L2/R2 na borda de trás, sobre L1/R1 nos ombros, direcional à esquerda, △ ○ ✕ □ à
   direita, touchpad ao centro com Create e Options ao lado, PS abaixo, L3 e R3 nas hastes (emenda E003).
+  O Share do Ipega fica à esquerda do touchpad, abaixo de Create; `data-controller` na raiz decide se ele aparece e se
+  o touchpad é marcado como ausente (`007-controle-ipega` D-08, D-09).
 -->
 <html lang="pt-BR">
 <head>
@@ -17,7 +19,7 @@
   <link rel="stylesheet" href="figure.css">
 </head>
 <body>
-  <div class="figure">
+  <div class="figure" data-controller="dualSense">
     <svg class="canvas" viewBox="0 0 830 620" width="830" height="620" aria-hidden="true">
       <rect class="frame" x="1" y="1" width="828" height="618" rx="48" ry="48"/>
 
@@ -66,6 +68,13 @@
         <rect class="hit" x="385" y="215" width="60" height="60"/>
         <rect class="shape" x="345" y="205" width="140" height="80" rx="12" ry="12"/>
         <text class="label" x="415" y="245" font-size="26">Touchpad</text>
+      </g>
+      <!-- Depois do touchpad e antes do direcional: nas sobreposições da área de acerto, o direcional prevalece. -->
+      <g class="button" data-button="share">
+        <line class="guide" x1="316" y1="246" x2="316" y2="246"/>
+        <rect class="hit" x="286" y="216" width="60" height="60"/>
+        <circle class="shape" cx="316" cy="246" r="9"/>
+        <text class="label" x="316" y="268" font-size="13">Share</text>
       </g>
       <g class="button" data-button="dpadUp">
         <line class="guide" x1="287" y1="250" x2="287" y2="250"/>
@@ -154,6 +163,7 @@
       <div class="balloon" data-button="ps"><span class="summary"></span></div>
       <div class="balloon" data-button="l3"><span class="summary"></span></div>
       <div class="balloon" data-button="r3"><span class="summary"></span></div>
+      <div class="balloon is-compact" data-button="share"><span class="summary"></span></div>
     </div>
   </div>
   <script src="figure.js"></script>

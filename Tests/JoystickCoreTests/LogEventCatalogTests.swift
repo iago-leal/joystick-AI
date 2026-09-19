@@ -18,6 +18,7 @@ import Testing
 
     static var sampleEvents: [LogEvent] {
         let info = ControllerInfo(id: UUID(), name: "DualSense Wireless Controller", connection: .bluetooth, connectedAt: 10, atStartup: true)
+        let ipega = ControllerInfo(id: UUID(), name: "Pro Controller", connection: .usb, connectedAt: 11, atStartup: false, model: .ipega)
         var settings = PointerSettings()
         settings.stickMaxSpeed = 1800
         return [
@@ -27,7 +28,8 @@ import Testing
             LogEventCatalog.displaysChanged(count: 2),
             LogEventCatalog.cursorReclamped(),
             LogEventCatalog.controllerConnected(info, tArrival: 10),
-            LogEventCatalog.controllerIgnored(name: "Xbox", productCategory: "Xbox One", reason: "not_dualsense"),
+            LogEventCatalog.controllerConnected(ipega, tArrival: 11),
+            LogEventCatalog.controllerIgnored(name: "Xbox", productCategory: "Xbox One", reason: "unsupported_model"),
             LogEventCatalog.controllerQueued(id: info.id, position: 1),
             LogEventCatalog.controllerDisconnected(id: info.id, tArrival: 20),
             LogEventCatalog.controllerElements(names: ["Button A"], touchpads: ["Touchpad 1"]),
@@ -129,7 +131,7 @@ import Testing
         #expect(Set(fields("session.start").keys) == ["logSchema", "appVersion", "macOS", "pid", "debug", "args", "signing"])
         #expect(fields("session.start")["logSchema"] == 1)
         #expect(Set(fields("permissions.status").keys) == ["postEvent", "listenEvent", "trigger"])
-        #expect(Set(fields("controller.connected").keys) == ["id", "name", "connection", "atStartup", "t_arrival"])
+        #expect(Set(fields("controller.connected").keys) == ["id", "name", "connection", "atStartup", "model", "t_arrival"])
         #expect(fields("controller.connected")["atStartup"] == true)
         #expect(fields("controller.touch_source")["source"] == "zero_transition")
         #expect(fields("controller.gesture_suppression")["elements"] == .array(["buttonHome"]))
@@ -221,5 +223,13 @@ import Testing
         #expect(Set(posted.fields.keys) == ["kind", "source", "t_arrival", "t_posted"])
         let button = LogEventCatalog.inputButton(.cross, phase: .up, synthetic: true, tArrival: 1, tDelivered: 1, tFramework: nil)
         #expect(button.fields["t_framework"] == nil)
+    }
+
+    /// `007-controle-ipega` D-07: o modelo em `controller.connected` e o motivo de recusa.
+    @Test func modeloNaConexaoEMotivoDeRecusa() {
+        let connected = Self.sampleEvents.filter { $0.name == "controller.connected" }
+        #expect(connected.map { $0.fields["model"] } == ["dualSense", "ipega"])
+        #expect(fields("controller.ignored")["reason"] == "unsupported_model")
+        #expect(Set(fields("controller.ignored").keys) == ["name", "productCategory", "reason"])
     }
 }

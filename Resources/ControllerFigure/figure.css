@@ -145,6 +145,28 @@ body {
   word-break: break-word;
 }
 
+/* Balão compacto do Share (`007-controle-ipega` D-09): a largura vem da tabela de figure.js. */
+.balloon.is-compact .summary {
+  font-size: 18px;
+}
+
+/* Controle ativo (`007-controle-ipega` D-08): o DualSense não tem Share; o Ipega não tem touchpad. */
+.figure[data-controller="dualSense"] [data-button="share"] {
+  display: none;
+}
+
+.figure[data-controller="ipega"] [data-button="touchpadClick"] .shape {
+  stroke: rgba(128, 128, 128, 0.5);
+  stroke: color-mix(in srgb, CanvasText 45%, transparent);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+  opacity: 0.45;
+}
+
+.figure[data-controller="ipega"] .balloon[data-button="touchpadClick"] {
+  opacity: 0.55;
+}
+
 /* Estados (RN-02, D-17), aplicados por classe no grupo e no balão. */
 .is-fixed .shape, .is-modifier .shape {
   fill: rgba(128, 128, 128, 0.28);

@@ -43,6 +43,8 @@ final class EditorViewModel: ObservableObject {
     /// Motivo pelo qual a figura do controle não pôde ser exibida; `nil` com a figura normal
     /// (`004-figura-controle-web` D-10, D-14). Zerado a cada abertura; o `FigureBridge` o republica se a falha persistir.
     @Published var figureUnavailable: FigureFailureReason?
+    /// Modelo do controle ativo, vindo do `ControllerReader`; `nil` sem controle (`007-controle-ipega` D-08).
+    @Published var activeModel: ControllerModel?
 
     private let store: ConfigStore
     private let log: DiagnosticLog
@@ -84,7 +86,8 @@ final class EditorViewModel: ObservableObject {
     /// Estado da figura na camada selecionada, derivado do rascunho a cada leitura (`004-figura-controle-web` D-14).
     /// O `FigureBridge` compara com o último enviado e só fala com a página quando difere.
     var figureState: FigureState {
-        FigureState(config: draft.document.shortcuts, layer: selectedLayer, selected: selectedButton, issues: draft.issues)
+        FigureState(config: draft.document.shortcuts, layer: selectedLayer, selected: selectedButton, issues: draft.issues,
+                    model: activeModel)
     }
 
     func issues(for target: EditorTarget) -> [EditorIssue] {

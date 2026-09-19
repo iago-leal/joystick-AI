@@ -99,4 +99,27 @@ import Testing
         #expect(!actions.isEmpty)
         #expect(!actions.contains(.systemShortcut(.accessibilityShortcut)))
     }
+
+    // MARK: `007-controle-ipega` D-02, RN-08
+
+    /// O documento padrão não ganha `share` em nenhuma camada, e o Share não faz nada na base nem em Options. Fora do
+    /// laço de Options, o Share herda ali a ação da base, ao contrário dos demais botões livres.
+    @Test func padraoSemShare() {
+        #expect(ShortcutDefaults.config.layers.values.allSatisfy { $0[.share] == nil })
+        #expect(ShortcutDefaults.config.modifiers[.share] == nil)
+        #expect(ShortcutDefaults.config.layers[.share] == nil)
+        #expect(ActionSummary.text(for: .share, layer: nil, in: ShortcutDefaults.config) == "nenhuma")
+        #expect(ActionSummary.text(for: .share, layer: .options, in: ShortcutDefaults.config) == "nenhuma (herdado)")
+    }
+
+    /// `share` entra no fim; os 18 identificadores anteriores mantêm a ordem (camadas, solturas sintéticas).
+    @Test func ordemDosBotoesAnterioresPreservada() {
+        let previous: [ButtonID] = [
+            .cross, .circle, .square, .triangle, .l1, .r1, .l2, .r2, .l3, .r3,
+            .options, .create, .ps, .touchpadClick, .dpadUp, .dpadDown, .dpadLeft, .dpadRight,
+        ]
+        #expect(Array(ButtonID.allCases.prefix(18)) == previous)
+        #expect(ButtonID.allCases.count == 19)
+        #expect(ButtonID.allCases.last == .share)
+    }
 }

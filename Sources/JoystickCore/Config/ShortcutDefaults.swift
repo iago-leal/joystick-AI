@@ -43,7 +43,8 @@ public enum ShortcutDefaults {
 
     private static var optionsLayer: [ButtonID: TriggerAction] {
         var layer: [ButtonID: TriggerAction] = [:]
-        for button in ButtonID.allCases where !ShortcutConfig.pointerButtons.contains(button) && ![.l1, .l2, .options].contains(button) {
+        // `share` fica de fora para o documento padrão seguir idêntico ao anterior ao Ipega (`007-controle-ipega` D-02).
+        for button in ButtonID.allCases where !ShortcutConfig.pointerButtons.contains(button) && ![.l1, .l2, .options, .share].contains(button) {
             layer[button] = TriggerAction.none
         }
         layer[.dpadRight] = chord(KeyChord.tab, [.command])

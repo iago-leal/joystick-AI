@@ -3,7 +3,7 @@ import Foundation
 /// Rótulo de cada botão como aparece no editor e na figura do controle (`004-figura-controle-web` D-13, RF-02).
 ///
 /// Vivia em `EditorLabels.swift` do app; migrou para o núcleo porque o `FigureState` leva o rótulo até a página
-/// (RN-04). Os 18 textos são os mesmos; `FigureStateTests` os fixa.
+/// (RN-04). Os 18 textos do DualSense são os mesmos, mais "Share" (`007-controle-ipega` RN-13); `FigureStateTests` os fixa.
 extension ButtonID {
     public var displayName: String {
         switch self {
@@ -25,6 +25,7 @@ extension ButtonID {
         case .dpadDown: "↓"
         case .dpadLeft: "←"
         case .dpadRight: "→"
+        case .share: "Share"
         }
     }
 }

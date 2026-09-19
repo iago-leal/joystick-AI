@@ -135,6 +135,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         permissionMonitor.start()
 
         controllerReader = ControllerReader(context: inputContext, processStartNs: processStartNs)
+        controllerReader.onActiveModelChange = { [weak editorModel] model in editorModel?.activeModel = model }
         controllerReader.start()
 
         if arguments.targets {

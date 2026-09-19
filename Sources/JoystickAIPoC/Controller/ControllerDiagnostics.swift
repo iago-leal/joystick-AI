@@ -2,15 +2,16 @@ import Foundation
 import GameController
 import JoystickCore
 
-/// Lista de elementos e pedido de supressão de gestos (D-06, D-23, RF-24, P-03, P-07).
+/// Lista de elementos e pedido de supressão de gestos (D-06, D-23, RF-24, P-03, P-07), para os dois modelos
+/// (`007-controle-ipega` D-03).
 enum ControllerDiagnostics {
     static let suppressionMessage = """
-    Pedido ao macOS: botão PS sem gestos do sistema (preferredSystemGestureState = disabled). \
-    O macOS não informa se acatou. Verifique visualmente: pressionar PS não deve abrir o Launchpad \
+    Pedido ao macOS: botão PS (Home no Ipega) sem gestos do sistema (preferredSystemGestureState = disabled). \
+    O macOS não informa se acatou. Verifique visualmente: pressionar PS ou Home não deve abrir o Launchpad \
     nem a sobreposição de jogos; se abrir, anote no bloco (f) do relatório.
     """
 
-    static func attach(controller: GCController, gamepad: GCDualSenseGamepad, context: InputContext) {
+    static func attach(controller: GCController, gamepad: GCExtendedGamepad, context: InputContext) {
         let profile = controller.physicalInputProfile
         if context.log.debugEnabled {
             context.log.log(LogEventCatalog.controllerElements(

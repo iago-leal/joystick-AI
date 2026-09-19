@@ -1,11 +1,13 @@
 import Foundation
 
-/// Os 18 identificadores de botão do DualSense (RF-05, `data-delta.md` §1.1).
+/// Os 19 identificadores de botão (RF-05, `data-delta.md` §1.1): os 18 do DualSense e `share`, só do Ipega
+/// (`007-controle-ipega` D-02). `share` fica no fim para não mudar a ordem das camadas e das solturas sintéticas.
 public enum ButtonID: String, CaseIterable, Codable, Sendable, Comparable {
     case cross, circle, square, triangle
     case l1, r1, l2, r2, l3, r3
     case options, create, ps, touchpadClick
     case dpadUp, dpadDown, dpadLeft, dpadRight
+    case share
 
     private var order: Int { Self.allCases.firstIndex(of: self)! }
 
@@ -34,13 +36,17 @@ public struct ControllerInfo: Equatable, Sendable {
     public let connectedAt: UInt64
     /// Veio da enumeração inicial ou de notificação nos primeiros 2 s do processo (D-25).
     public let atStartup: Bool
+    /// Modelo aceito na conexão (`007-controle-ipega` D-05).
+    public let model: ControllerModel
 
-    public init(id: UUID, name: String, connection: ConnectionType, connectedAt: UInt64, atStartup: Bool) {
+    public init(id: UUID, name: String, connection: ConnectionType, connectedAt: UInt64, atStartup: Bool,
+                model: ControllerModel = .dualSense) {
         self.id = id
         self.name = name
         self.connection = connection
         self.connectedAt = connectedAt
         self.atStartup = atStartup
+        self.model = model
     }
 }
 

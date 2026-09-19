@@ -77,4 +77,22 @@ import Testing
         #expect(script.contains("textContent"))
         #expect(script.contains("messageHandlers.figure.postMessage"))
     }
+
+    /// `007-controle-ipega` D-08, D-11: os 19 identificadores têm grupo e balão; o script conhece o Share e o controle.
+    @Test func dezenoveBotoesEControleAtivo() throws {
+        let html = try Self.contents("index.html")
+        for button in ButtonID.allCases {
+            #expect(html.contains(#"<g class="button" data-button="\#(button.rawValue)">"#), "grupo \(button)")
+            let balloon = try Regex(#"<div class="balloon[^"]*" data-button=""# + button.rawValue + #"">"#)
+            #expect(html.firstMatch(of: balloon) != nil, "balão \(button)")
+        }
+        #expect(html.contains(#"<div class="figure" data-controller="dualSense">"#))
+
+        let script = try Self.contents("figure.js")
+        #expect(script.contains("share: {"))
+        #expect(script.contains("data-controller"))
+        let css = try Self.contents("figure.css")
+        #expect(css.contains(#"[data-controller="dualSense"] [data-button="share"]"#))
+        #expect(css.contains(#"[data-controller="ipega"] [data-button="touchpadClick"]"#))
+    }
 }

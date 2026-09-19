@@ -7,19 +7,28 @@ import Foundation
 /// `EditorViewModel.hasIssue`): botão de apontamento é `fixed`; modificador é `modifier`; sem ação própria na camada
 /// de modificador é `inherited`; o restante é `own`. O resumo vem de `ActionSummary.text(for:layer:in:)`.
 public struct FigureState: Codable, Equatable, Sendable {
+    /// Resumo do botão que o controle ativo não tem (`007-controle-ipega` D-08).
+    public static let absentSummary = "ausente neste controle"
+
     /// `"base"` ou o `rawValue` do modificador cuja camada está selecionada.
     public var layer: String
-    /// Sempre 18 itens, na ordem de `ButtonID.allCases`.
+    /// `ControllerModel.rawValue` do controle ativo; `"dualSense"` sem controle (`007-controle-ipega` D-08).
+    public var controller: String
+    /// Sempre 19 itens, na ordem de `ButtonID.allCases`, com `share` por último.
     public var buttons: [FigureButton]
 
-    public init(layer: String, buttons: [FigureButton]) {
+    public init(layer: String, controller: String = ControllerModel.dualSense.rawValue, buttons: [FigureButton]) {
         self.layer = layer
+        self.controller = controller
         self.buttons = buttons
     }
 
-    /// Deriva o estado da configuração do rascunho, da camada e do botão selecionados e dos problemas do rascunho.
-    public init(config: ShortcutConfig, layer: ButtonID?, selected: ButtonID?, issues: [EditorIssue]) {
+    /// Deriva o estado da configuração do rascunho, da camada e do botão selecionados, dos problemas do rascunho e do
+    /// modelo do controle ativo. Com o Ipega, o touchpad segue `fixed`, mas resume que o controle não o tem.
+    public init(config: ShortcutConfig, layer: ButtonID?, selected: ButtonID?, issues: [EditorIssue], model: ControllerModel? = nil) {
+        let model = model ?? .dualSense
         self.layer = layer?.rawValue ?? "base"
+        controller = model.rawValue
         buttons = ButtonID.allCases.map { button in
             let kind: FigureButton.Kind = if ShortcutConfig.pointerButtons.contains(button) {
                 .fixed
@@ -33,7 +42,8 @@ public struct FigureState: Codable, Equatable, Sendable {
             return FigureButton(
                 id: button.rawValue,
                 label: button.displayName,
-                summary: ActionSummary.text(for: button, layer: layer, in: config),
+                summary: model == .ipega && button == .touchpadClick
+                    ? Self.absentSummary : ActionSummary.text(for: button, layer: layer, in: config),
                 kind: kind,
                 problem: Self.hasIssue(button, in: layer, issues: issues),
                 selected: button == selected)

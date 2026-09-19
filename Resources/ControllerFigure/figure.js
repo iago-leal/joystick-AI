@@ -1,7 +1,7 @@
 /*
   Script da figura do controle (`004-figura-controle-web` D-07, D-08, D-16, D-17, D-18, RN-04, RN-07, RN-09).
-  Um objeto global `figure` com `render(state)`: escreve rótulo e resumo por `textContent` e aplica os estados
-  por `classList`. O clique em qualquer parte de um grupo `[data-button]` envia `{ button: id }` ao app.
+  Um objeto global `figure` com `render(state)`: escreve rótulo e resumo por `textContent`, aplica os estados
+  por `classList` e o controle ativo por `data-controller` (`007-controle-ipega` D-08). O clique em qualquer parte de um grupo `[data-button]` envia `{ button: id }` ao app.
   Nunca constrói marcação a partir de texto; sem temporizadores, sem armazenamento, sem rede.
 */
 (function () {
@@ -14,6 +14,8 @@
     ficam no alto porque a figura é vista de cima, com a borda de trás do controle para cima (emenda E003). As alturas das
     colunas não são uniformes: as de → e □ foram escolhidas para a linha-guia passar entre os braços do direcional
     (e entre □ e ✕) sem cruzar outro botão. Balões de 190 × 64 px.
+    O Share do Ipega (`007-controle-ipega` D-09) não tem faixa livre de 190 px: ocupa, com um balão compacto de 104 px, o
+    vão inferior entre L3 e PS. Posição provisória, a confirmar no ajuste visual do portão manual PM-1.
   */
   var BALLOON_WIDTH = 190;
   var BALLOON_HEIGHT = 64;
@@ -35,14 +37,19 @@
     square: { x: 632, y: 334, side: 'left' },
     cross: { x: 632, y: 441, side: 'left' },
     r3: { x: 632, y: 524, side: 'left' },
-    ps: { x: 320, y: 552, side: 'top' }
+    ps: { x: 320, y: 552, side: 'top' },
+    share: { x: 208, y: 552, side: 'top', width: 104 }
   };
+
+  /* `data-controller` da raiz; valor desconhecido ou ausente vale `dualSense` (`007-controle-ipega` D-08). */
+  var CONTROLLERS = { dualSense: true, ipega: true };
 
   var KIND_CLASSES = { fixed: 'is-fixed', modifier: 'is-modifier', inherited: 'is-inherited' };
   var STATE_CLASSES = ['is-fixed', 'is-modifier', 'is-inherited', 'is-problem', 'is-selected'];
 
   /* Nós de cada botão conhecido: grupo do SVG e balão. Só identificadores da tabela entram aqui. */
   var nodes = {};
+  var root = document.querySelector('.figure');
 
   function collectNodes() {
     var elements = document.querySelectorAll('[data-button]');
@@ -82,6 +89,7 @@
         if (target.classList.contains('balloon')) {
           target.style.left = position.x + 'px';
           target.style.top = position.y + 'px';
+          if (position.width) { target.style.width = position.width + 'px'; }
         }
       }
       if (entry.guide && entry.center) {
@@ -116,11 +124,12 @@
   }
 
   function anchorPoint(position) {
+    var width = position.width || BALLOON_WIDTH;
     switch (position.side) {
       case 'left': return { x: position.x, y: position.y + BALLOON_HEIGHT / 2 };
-      case 'right': return { x: position.x + BALLOON_WIDTH, y: position.y + BALLOON_HEIGHT / 2 };
-      case 'top': return { x: position.x + BALLOON_WIDTH / 2, y: position.y };
-      default: return { x: position.x + BALLOON_WIDTH / 2, y: position.y + BALLOON_HEIGHT };
+      case 'right': return { x: position.x + width, y: position.y + BALLOON_HEIGHT / 2 };
+      case 'top': return { x: position.x + width / 2, y: position.y };
+      default: return { x: position.x + width / 2, y: position.y + BALLOON_HEIGHT };
     }
   }
 
@@ -137,6 +146,9 @@
   /* App → página (D-07). Idempotente; itens com `id` desconhecido são ignorados. */
   function render(state) {
     if (!state || !Array.isArray(state.buttons)) { return; }
+    var controller = typeof state.controller === 'string' && Object.prototype.hasOwnProperty.call(CONTROLLERS, state.controller)
+      ? state.controller : 'dualSense';
+    if (root) { root.setAttribute('data-controller', controller); }
     for (var i = 0; i < state.buttons.length; i += 1) {
       var item = state.buttons[i];
       if (!item || typeof item.id !== 'string') { continue; }

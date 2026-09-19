@@ -128,6 +128,19 @@ import Testing
                          "shortcuts.layers.l1.r2", .pointerButtonNotAllowed)
     }
 
+    /// `007-controle-ipega` D-02, RN-05: o Share não é botão de apontamento e vale como gatilho e como modificador.
+    @Test func shareComoGatilhoEModificador() {
+        let trigger = Self.shortcuts(base: #""share": {"type": "systemShortcut", "name": "missionControl"}"#)
+        #expect(Self.issues(trigger).isEmpty)
+        #expect(Self.document(trigger)?.shortcuts.layers[nil]?[.share] == .systemShortcut(.missionControl))
+
+        let modifier = Self.shortcuts(modifiers: #""share": ["command"]"#, layers: #""share": {"cross": {"type": "openPalette"}}"#)
+        #expect(Self.issues(modifier).isEmpty)
+        let config = Self.document(modifier)?.shortcuts
+        #expect(config?.modifiers[.share] == [.command])
+        #expect(config?.layers[.share]?[.cross] == .openPalette)
+    }
+
     @Test func camadaSemModificador() {
         Self.expectIssue(Self.shortcuts(layers: #""l3": {"circle": {"type": "none"}}"#), "shortcuts.layers.l3", .layerWithoutModifier)
     }

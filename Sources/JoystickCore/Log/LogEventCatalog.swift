@@ -106,6 +106,7 @@ public enum LogEventCatalog {
             "name": .string(info.name),
             "connection": .string(info.connection.rawValue),
             "atStartup": .bool(info.atStartup),
+            "model": .string(info.model.rawValue),
             "t_arrival": .uint(tArrival),
         ])
     }

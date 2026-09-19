@@ -5,8 +5,8 @@ import Testing
 /// Contrato do estado da figura (`004-figura-controle-web` D-12, D-13, `data-delta.md` §4).
 @Suite struct FigureStateTests {
     static func state(layer: ButtonID? = nil, selected: ButtonID? = .cross, config: ShortcutConfig = ShortcutDefaults.config,
-                      issues: [EditorIssue] = []) -> FigureState {
-        FigureState(config: config, layer: layer, selected: selected, issues: issues)
+                      issues: [EditorIssue] = [], model: ControllerModel? = nil) -> FigureState {
+        FigureState(config: config, layer: layer, selected: selected, issues: issues, model: model)
     }
 
     static func button(_ id: ButtonID, in state: FigureState) -> FigureButton {
@@ -15,8 +15,9 @@ import Testing
 
     @Test func ordemEContagem() {
         let state = Self.state()
-        #expect(state.buttons.count == 18)
+        #expect(state.buttons.count == 19)
         #expect(state.buttons.map(\.id) == ButtonID.allCases.map(\.rawValue))
+        #expect(state.buttons.last?.id == "share")
         #expect(state.layer == "base")
         #expect(Self.state(layer: .options).layer == "options")
     }
@@ -103,9 +104,10 @@ import Testing
         let state = Self.state()
         let data = try encoder.encode(state)
         let object = try #require(try JSONSerialization.jsonObject(with: data) as? [String: Any])
-        #expect(object.keys.sorted() == ["buttons", "layer"])
+        #expect(object.keys.sorted() == ["buttons", "controller", "layer"])
+        #expect(object["controller"] as? String == "dualSense")
         let buttons = try #require(object["buttons"] as? [[String: Any]])
-        #expect(buttons.count == 18)
+        #expect(buttons.count == 19)
         #expect(buttons[0].keys.sorted() == ["id", "kind", "label", "problem", "selected", "summary"])
         #expect(buttons[0]["kind"] as? String == "own")
         #expect(buttons[0]["selected"] as? Bool == true)
@@ -116,13 +118,13 @@ import Testing
         #expect(try JSONDecoder().decode(FigureState.self, from: data) == state)
     }
 
-    /// Os 18 rótulos de `EditorLabels.swift` da feature 003, agora no núcleo (D-13).
-    @Test func rotulosDos18Botoes() {
+    /// Os 18 rótulos de `EditorLabels.swift` da feature 003, agora no núcleo (D-13), mais o Share (`007-controle-ipega` RN-13).
+    @Test func rotulosDos19Botoes() {
         let expected: [ButtonID: String] = [
             .cross: "✕", .circle: "○", .square: "□", .triangle: "△",
             .l1: "L1", .r1: "R1", .l2: "L2", .r2: "R2", .l3: "L3", .r3: "R3",
             .options: "Options", .create: "Create", .ps: "PS", .touchpadClick: "Touchpad",
-            .dpadUp: "↑", .dpadDown: "↓", .dpadLeft: "←", .dpadRight: "→",
+            .dpadUp: "↑", .dpadDown: "↓", .dpadLeft: "←", .dpadRight: "→", .share: "Share",
         ]
         #expect(expected.count == ButtonID.allCases.count)
         for button in ButtonID.allCases {
@@ -132,6 +134,24 @@ import Testing
         for button in ButtonID.allCases {
             #expect(Self.button(button, in: state).label == expected[button])
         }
+    }
+
+    /// `007-controle-ipega` D-08, RN-12, RN-13: o controle ativo decide o `controller` e o resumo do touchpad.
+    @Test func controleAtivo() {
+        #expect(Self.state().controller == "dualSense")
+        #expect(Self.state(model: .dualSense).controller == "dualSense")
+        let ipega = Self.state(model: .ipega)
+        #expect(ipega.controller == "ipega")
+        let touchpad = Self.button(.touchpadClick, in: ipega)
+        #expect(touchpad.kind == .fixed)
+        #expect(touchpad.summary == "ausente neste controle")
+        #expect(Self.button(.share, in: ipega).summary == "nenhuma")
+        #expect(Self.button(.share, in: ipega).kind == .own)
+        #expect(Self.button(.touchpadClick, in: Self.state()).summary == "clique esquerdo, fixo")
+        // A ação do Share aparece também com o DualSense ativo: a configuração é única (RN-07).
+        let config = ShortcutConfig(layers: [nil: [.share: .openPalette]])
+        #expect(Self.button(.share, in: Self.state(config: config)).summary == "abrir paleta")
+        #expect(Self.button(.share, in: Self.state(config: config, model: .ipega)).summary == "abrir paleta")
     }
 
     @Test func motivoDeFalhaEmSnakeCase() {

@@ -16,8 +16,12 @@ public struct ButtonObservation: Equatable, Sendable {
 }
 
 public struct ButtonCoverage: Sendable {
+    /// Modelo do último `controller.connected` do log; `dualSense` quando o campo falta (`007-controle-ipega` D-10).
+    public var model: ControllerModel
+    /// Botões físicos do modelo, na ordem de `ButtonID`; sempre 18.
+    public var expected: [ButtonID]
     public var observed: [ButtonID: ButtonObservation]
-    /// Botões com pressionar e soltar observados.
+    /// Botões esperados com pressionar e soltar observados.
     public var covered: Int
 }
 
@@ -45,6 +49,8 @@ public enum LogAnalysis {
     }
 
     public static func buttonCoverage(_ records: [[String: JSONValue]]) -> ButtonCoverage {
+        let model = records.last { $0["event"]?.stringValue == "controller.connected" }?["model"]?.stringValue
+            .flatMap(ControllerModel.init(rawValue:)) ?? .dualSense
         var observed = Dictionary(uniqueKeysWithValues: ButtonID.allCases.map { ($0, ButtonObservation(down: false, up: false)) })
         for record in records where record["event"]?.stringValue == "input.button" {
             guard record["synthetic"]?.boolValue != true,
@@ -55,7 +61,9 @@ public enum LogAnalysis {
             default: break
             }
         }
-        return ButtonCoverage(observed: observed, covered: observed.values.filter { $0.down && $0.up }.count)
+        let expected = model.buttons
+        let covered = expected.filter { observed[$0]!.down && observed[$0]!.up }.count
+        return ButtonCoverage(model: model, expected: expected, observed: observed, covered: covered)
     }
 
     public static func cycles(_ records: [[String: JSONValue]]) -> CycleSummary {

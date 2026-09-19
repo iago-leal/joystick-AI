@@ -54,4 +54,35 @@ import Testing
         #expect(samples.processing == [2_000, 400])
         #expect(samples.inputToMotion == [6_000, 1_000])
     }
+
+    // MARK: `007-controle-ipega` D-10
+
+    func pressAndRelease(_ buttons: [ButtonID]) -> String {
+        buttons.map {
+            line("input.button", ["button": .string($0.rawValue), "phase": "down", "synthetic": false])
+                + line("input.button", ["button": .string($0.rawValue), "phase": "up", "synthetic": false])
+        }.joined()
+    }
+
+    @Test func coberturaDoIpega() {
+        var text = line("controller.connected", ["id": "a", "model": "dualSense"])
+        text += line("controller.connected", ["id": "b", "model": "ipega"])
+        text += pressAndRelease(ButtonID.allCases)
+        let coverage = LogAnalysis.buttonCoverage(LogAnalysis.read(contents: text).records)
+        #expect(coverage.model == .ipega)
+        #expect(coverage.expected.contains(.share))
+        #expect(!coverage.expected.contains(.touchpadClick))
+        #expect(coverage.expected.count == 18)
+        #expect(coverage.covered == 18)
+    }
+
+    @Test func logSemModeloEsperaODualSense() {
+        let text = line("controller.connected", ["id": "a"]) + pressAndRelease(ButtonID.allCases.filter { $0 != .touchpadClick })
+        let coverage = LogAnalysis.buttonCoverage(LogAnalysis.read(contents: text).records)
+        #expect(coverage.model == .dualSense)
+        #expect(!coverage.expected.contains(.share))
+        #expect(coverage.expected.count == 18)
+        // O Share observado não conta para o DualSense; falta o touchpad.
+        #expect(coverage.covered == 17)
+    }
 }

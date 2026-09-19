@@ -32,6 +32,17 @@ import Testing
         #expect(Self.summary(.ps, .l1) == "abrir paleta (herdado)")
     }
 
+    /// `007-controle-ipega` RN-05: o Share tem resumo como qualquer botão livre.
+    @Test func share() {
+        #expect(Self.summary(.share, nil) == "nenhuma")
+        let config = ShortcutConfig(modifiers: [.l1: []], layers: [nil: [.share: .text("CONTINUAR", pressEnter: true)]])
+        #expect(Self.summary(.share, nil, config) == "“CONTINUAR” + Enter")
+        #expect(Self.summary(.share, .l1, config) == "“CONTINUAR” + Enter (herdado)")
+        let modifier = ShortcutConfig(modifiers: [.share: [.command]], layers: [.share: [.cross: .openPalette]])
+        #expect(Self.summary(.share, nil, modifier) == "modificador ⌘")
+        #expect(Self.summary(.cross, .share, modifier) == "abrir paleta")
+    }
+
     /// `005-sinais-matematicos` RF-03: o resumo, que alimenta a figura, mostra os acordes de zoom com o sinal.
     @Test func acordesDeZoom() {
         let config = ShortcutConfig(layers: [.l1: [

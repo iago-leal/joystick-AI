@@ -11,7 +11,7 @@ public struct ActiveControllerRegistry<Key: Hashable> {
         case queued(position: Int)
         /// O mesmo controle já estava registrado.
         case duplicate
-        /// Modelo diferente de DualSense.
+        /// Modelo não aceito (`007-controle-ipega` D-05).
         case ignored
     }
 
@@ -36,8 +36,8 @@ public struct ActiveControllerRegistry<Key: Hashable> {
 
     public func info(for key: Key) -> ControllerInfo? { entries.first { $0.key == key }?.info }
 
-    public mutating func connect(key: Key, info: ControllerInfo, isDualSense: Bool) -> ConnectOutcome {
-        guard isDualSense else { return .ignored }
+    public mutating func connect(key: Key, info: ControllerInfo, accepted: Bool) -> ConnectOutcome {
+        guard accepted else { return .ignored }
         guard !entries.contains(where: { $0.key == key }) else { return .duplicate }
         entries.append((key, info))
         return entries.count == 1 ? .active : .queued(position: entries.count - 1)
