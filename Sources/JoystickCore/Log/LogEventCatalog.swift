@@ -363,8 +363,11 @@ public enum LogEventCatalog {
     }
 
     /// `keys`: teclas pressionadas na sessão, sem distinguir quais (D-18).
-    public static func remoteDisconnected(reason: RemoteDisconnectReason, keys: Int) -> LogEvent {
-        LogEvent("remote.disconnected", level: .info, fields: ["reason": .string(reason.rawValue), "keys": .int(Int64(keys))])
+    /// `suggestions`: sugestões aceitas na sessão, sem nenhuma palavra (`009-sugestao-de-palavras` D-13, RN-08).
+    public static func remoteDisconnected(reason: RemoteDisconnectReason, keys: Int, suggestions: Int) -> LogEvent {
+        LogEvent("remote.disconnected", level: .info, fields: [
+            "reason": .string(reason.rawValue), "keys": .int(Int64(keys)), "suggestions": .int(Int64(suggestions)),
+        ])
     }
 }
 

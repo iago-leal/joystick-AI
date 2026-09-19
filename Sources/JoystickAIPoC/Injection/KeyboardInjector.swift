@@ -76,6 +76,9 @@ final class KeyboardInjector {
 
     var capsLockOn: Bool? { capsLockSwitch.isOn }
 
+    /// Portão de injeção (D-15): desligado, nada do que se posta chega ao Mac.
+    var enabled: Bool { injector.enabled }
+
     /// Solta a tecla e os modificadores do acorde mesmo que a contagem diga que já estão soltos.
     func forceUp(_ chord: KeyChord) {
         postKey(chord, down: false, autorepeat: false)

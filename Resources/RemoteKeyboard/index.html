@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--
-  Teclado remoto no iPhone (`008-iphone-teclado-remoto` D-01, D-15, RF-04, RF-06, RF-10).
+  Teclado remoto no iPhone (`008-iphone-teclado-remoto` D-01, D-15, RF-04, RF-06, RF-10), com a faixa de sugestões
+  de palavras na barra superior (`009-sugestao-de-palavras` D-09, RF-01, RF-07, RF-12).
   Página servida pelo app na porta 47810; o canal fica na 47811 (`interfaces/remote-keyboard-protocol.md`).
   As teclas não estão aqui: keyboard.js as desenha a partir da mensagem `layout`, com os rótulos da fonte de entrada
   do Mac. A política de conteúdo vem no cabeçalho da resposta, que conhece o nome do host para o `connect-src`.
@@ -20,13 +21,23 @@
 </head>
 <body>
   <div class="rotate" role="alert">Gire o iPhone para a horizontal</div>
-  <main class="app">
+  <main class="app" id="app">
     <header class="bar">
-      <span class="status" id="status" role="status" aria-live="polite">Conectando…</span>
-      <button type="button" class="leave" id="leave">Sair</button>
+      <span class="indicator" id="indicator" aria-hidden="true"></span>
+      <div class="strip" id="strip">
+        <span class="status" id="status" role="status" aria-live="polite">Conectando…</span>
+        <button type="button" class="suggestion" data-i="0"></button>
+        <button type="button" class="suggestion" data-i="1"></button>
+        <button type="button" class="suggestion" data-i="2"></button>
+      </div>
+      <button type="button" class="control" id="lang" aria-label="Idioma das sugestões">PT</button>
+      <button type="button" class="control" id="toggle">Ocultar</button>
+      <button type="button" class="control" id="leave">Sair</button>
     </header>
-    <div class="keyboard" id="keyboard" aria-label="Teclado do Mac"></div>
-    <div class="notice" id="notice" hidden></div>
+    <div class="board">
+      <div class="keyboard" id="keyboard" aria-label="Teclado do Mac"></div>
+      <div class="notice" id="notice" hidden></div>
+    </div>
   </main>
   <script src="keyboard.js"></script>
 </body>

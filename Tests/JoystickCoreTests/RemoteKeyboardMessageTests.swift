@@ -82,6 +82,42 @@ import Testing
         #expect(try Self.object(.capsLock(on: false)) as NSDictionary == ["t": "caps", "on": false] as NSDictionary)
     }
 
+    /// Mensagens das sugestões (`009-sugestao-de-palavras/interfaces/remote-keyboard-protocol.md` §2 e §3).
+    @Test func decodificaPrefsEPick() {
+        #expect(Self.decode(#"{"t":"prefs","lang":"pt","visible":true}"#) == .prefs(language: .pt, visible: true))
+        #expect(Self.decode(#"{"t":"prefs","lang":"en","visible":false}"#) == .prefs(language: .en, visible: false))
+        #expect(Self.decode(#"{"t":"pick","rev":42,"i":0}"#) == .pick(revision: 42, index: 0))
+        #expect(Self.decode(#"{"t":"pick","rev":0,"i":2}"#) == .pick(revision: 0, index: 2))
+    }
+
+    @Test(arguments: [
+        #"{"t":"prefs","lang":"es","visible":true}"#, #"{"t":"prefs","lang":"PT","visible":true}"#,
+        #"{"t":"prefs","visible":true}"#, #"{"t":"prefs","lang":"pt"}"#, #"{"t":"prefs","lang":"pt","visible":1}"#,
+        #"{"t":"prefs","lang":"pt","visible":"true"}"#, #"{"t":"prefs","lang":1,"visible":true}"#,
+        #"{"t":"pick","rev":1,"i":3}"#, #"{"t":"pick","rev":1,"i":-1}"#, #"{"t":"pick","rev":1,"i":1.5}"#,
+        #"{"t":"pick","rev":1}"#, #"{"t":"pick","i":0}"#, #"{"t":"pick","rev":-1,"i":0}"#, #"{"t":"pick","rev":"1","i":0}"#,
+        #"{"t":"pick","rev":1,"i":true}"#,
+    ])
+    func recusaPrefsEPickInvalidos(_ text: String) {
+        #expect(Self.decode(text) == nil)
+    }
+
+    @Test func codificaSuggest() throws {
+        let complete = try Self.object(.suggest(revision: 7, mode: .complete, words: ["implementar", "implica"]))
+        #expect(complete as NSDictionary == [
+            "t": "suggest", "rev": 7, "mode": "complete", "words": ["implementar", "implica"],
+        ] as NSDictionary)
+        let empty = try Self.object(.suggest(revision: 8, mode: .next, words: []))
+        #expect(empty as NSDictionary == ["t": "suggest", "rev": 8, "mode": "next", "words": [String]()] as NSDictionary)
+    }
+
+    @Test func suggestLimitaATresPalavrasDeAte48Caracteres() throws {
+        let long = String(repeating: "a", count: 49)
+        let edge = String(repeating: "b", count: 48)
+        let object = try Self.object(.suggest(revision: 1, mode: .complete, words: [long, "um", "", edge, "dois", "tres"]))
+        #expect(object["words"] as? [String] == ["um", edge, "dois"])
+    }
+
     @Test func hexadecimalIdaEVolta() {
         let bytes: [UInt8] = [0, 15, 16, 255, 128]
         #expect(RemoteKeyboardMessage.hexBytes(RemoteKeyboardMessage.hex(bytes)) == bytes)

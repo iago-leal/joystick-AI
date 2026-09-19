@@ -29,6 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var remoteActions: RemoteKeyboardActions!
     private var remoteService: RemoteKeyboardService!
     private var layoutReader: KeyboardLayoutReader!
+    private var appActivationObserver: NSObjectProtocol?
     private var pairingWindow: PairingWindow!
     private var targetSession: TargetSession?
     private var targetAbortMonitor: TargetAbortMonitor?
@@ -133,12 +134,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Teclado remoto (`008-iphone-teclado-remoto`): mesmo injetor de teclado do controle, para uma só contagem de
         // modificadores (D-09, RN-08); desligado a cada abertura (RN-02) e ligado só pelo menu (D-14).
         remoteActions = RemoteKeyboardActions(
-            context: inputContext, keyboard: keyboard, geometry: .standard(KeyboardLayoutReader.physicalLayout))
+            context: inputContext, keyboard: keyboard, translator: KeyTextTranslator(),
+            geometry: .standard(KeyboardLayoutReader.physicalLayout))
         layoutReader = KeyboardLayoutReader()
         let remoteResources = Bundle.main.resourceURL?.appendingPathComponent("RemoteKeyboard", isDirectory: true)
         remoteService = RemoteKeyboardService(
-            context: inputContext, actions: remoteActions, layoutReader: layoutReader,
+            context: inputContext, actions: remoteActions, suggester: WordSuggester(queue: inputQueue),
+            layoutReader: layoutReader,
             resources: remoteResources.flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil })
+        // Sugestões (`009-sugestao-de-palavras` D-06): entrada do controle e troca do aplicativo em foco podem mover o
+        // ponto de escrita sem o app saber, e descartam o contexto recente.
+        router.onControllerButtonDown = { [remoteActions] in remoteActions?.discard() }
+        appActivationObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didActivateApplicationNotification, object: nil, queue: nil
+        ) { [remoteActions, inputQueue] _ in inputQueue.async { remoteActions?.discard() } }
         pairingWindow = PairingWindow()
         remoteService.onStatusChange = { [statusMenu, pairingWindow] status in
             statusMenu?.update(remote: status)

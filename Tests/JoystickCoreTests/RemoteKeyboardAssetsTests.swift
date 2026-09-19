@@ -71,4 +71,16 @@ import Testing
         #expect(script.contains("touchcancel"))
         #expect(script.contains("history.replaceState"))
     }
+
+    /// Sugestões de palavras (`009-sugestao-de-palavras` D-10 a D-12): mensagens novas e preferências no `localStorage`.
+    @Test func scriptConheceAsSugestoes() throws {
+        let script = try Self.contents("keyboard.js")
+        for type in ["prefs", "pick", "suggest"] {
+            #expect(script.contains(#""\#(type)""#), "\(type)")
+        }
+        #expect(script.contains("localStorage"))
+        #expect(script.contains("remoteKeyboardPrefs"))
+        let html = try Self.contents("index.html")
+        #expect(html.matches(of: try Regex(#"class="suggestion""#)).count == 3)
+    }
 }

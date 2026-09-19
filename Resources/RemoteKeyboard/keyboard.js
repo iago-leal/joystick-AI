@@ -9,6 +9,12 @@
 
   Reconexão (§3.5): só depois de fechamento sem código de aplicação ou por tempo esgotado, a cada 1 s. `busy` (4001),
   a substituição por outra aba (4004), mensagens inválidas e as recusas do pareamento são finais.
+
+  Sugestões de palavras (`009-sugestao-de-palavras` D-09 a D-12; protocolo em `interfaces/remote-keyboard-protocol.md`
+  da 009): idioma e visibilidade da faixa ficam em `localStorage` e vão ao Mac em `prefs` depois de cada `welcome` e a
+  cada troca. As palavras de `suggest` são desenhadas por `textContent`. Ao enviar `down` de uma tecla comum, a faixa
+  esmaece até a próxima `suggest`; com modificador mantido ou preso, fica inativa. O toque numa sugestão envia `pick`
+  com a revisão da lista, sem `down` nem `up`.
 */
 (function () {
   "use strict";
@@ -18,6 +24,7 @@
   var RETRY_MS = 1000;
   var OPEN_TIMEOUT_MS = 5000;
   var TOKEN_KEY = "remoteKeyboardToken";
+  var PREFS_KEY = "remoteKeyboardPrefs";
   var ROW_UNITS = 15;
   var CAPS_LOCK = 57;
 
@@ -53,6 +60,12 @@
   var statusEl = document.getElementById("status");
   var noticeEl = document.getElementById("notice");
   var leaveEl = document.getElementById("leave");
+  var appEl = document.getElementById("app");
+  var indicatorEl = document.getElementById("indicator");
+  var stripEl = document.getElementById("strip");
+  var langEl = document.getElementById("lang");
+  var toggleEl = document.getElementById("toggle");
+  var suggestionEls = Array.prototype.slice.call(stripEl.querySelectorAll(".suggestion"));
 
   var code = readCode();
   var token = readToken();
@@ -69,6 +82,14 @@
   var capsOn = false;
   var keyElements = {};
   var touches = {};
+
+  var prefs = readPrefs();
+  var statusOk = false;
+  // Última lista do Mac: `rev` e até três palavras.
+  var offered = null;
+  // Esmaecida desde o último `down` de tecla comum, até a próxima `suggest` (D-10).
+  var stale = false;
+  var picks = {};
 
   // MARK: - Credenciais
 
@@ -99,6 +120,52 @@
     } catch (e) {
       // Sem armazenamento, a sessão vale só enquanto a página estiver aberta.
     }
+  }
+
+  // MARK: - Preferências da faixa (D-11)
+
+  function readPrefs() {
+    var value = { lang: "pt", visible: true };
+    try {
+      var stored = JSON.parse(window.localStorage.getItem(PREFS_KEY));
+      if (stored && (stored.lang === "pt" || stored.lang === "en")) {
+        value.lang = stored.lang;
+      }
+      if (stored && typeof stored.visible === "boolean") {
+        value.visible = stored.visible;
+      }
+    } catch (e) {
+      // Sem armazenamento ou valor corrompido, vale o padrão.
+    }
+    return value;
+  }
+
+  function storePrefs() {
+    try {
+      window.localStorage.setItem(PREFS_KEY, JSON.stringify({ lang: prefs.lang, visible: prefs.visible }));
+    } catch (e) {
+      // Sem armazenamento, a escolha vale só enquanto a página estiver aberta.
+    }
+  }
+
+  function sendPrefs() {
+    send({ t: "prefs", lang: prefs.lang, visible: prefs.visible });
+  }
+
+  function changePrefs(change) {
+    change();
+    storePrefs();
+    offered = null;
+    stale = false;
+    applyPrefs();
+    sendPrefs();
+  }
+
+  function applyPrefs() {
+    langEl.textContent = prefs.lang === "en" ? "EN" : "PT";
+    toggleEl.textContent = prefs.visible ? "Ocultar" : "Sugestões";
+    appEl.classList.toggle("collapsed", !prefs.visible);
+    renderStrip();
   }
 
   // MARK: - Canal
@@ -164,6 +231,8 @@
     socket = null;
     welcomed = false;
     releaseLocal();
+    offered = null;
+    renderStrip();
     if (finished) {
       return;
     }
@@ -242,8 +311,11 @@
         code = null;
         storeToken(message.token);
         noticeEl.hidden = true;
+        offered = null;
+        stale = false;
         setStatus("Conectado", "ok");
         startPing();
+        sendPrefs();
         break;
       case "reject":
         rejected(message.reason);
@@ -257,6 +329,9 @@
       case "caps":
         capsOn = message.on === true;
         applyCaps();
+        break;
+      case "suggest":
+        receiveSuggestions(message);
         break;
       case "status":
         if (message.injection === "on") {
@@ -283,6 +358,96 @@
       default:
         finish("Código recusado. Escaneie o QR na tela do Mac de novo.");
     }
+  }
+
+  // MARK: - Sugestões
+
+  function receiveSuggestions(message) {
+    if (typeof message.rev !== "number" || !Array.isArray(message.words)) {
+      return;
+    }
+    offered = {
+      rev: message.rev,
+      words: message.words.filter(function (word) {
+        return typeof word === "string" && word !== "";
+      }).slice(0, suggestionEls.length)
+    };
+    stale = false;
+    renderStrip();
+  }
+
+  function modifierActive() {
+    return Object.keys(modifiers).some(function (name) {
+      return modifiers[name] !== "released";
+    });
+  }
+
+  // Com estado diferente de "Conectado", o texto do estado ocupa o lugar das sugestões (D-09).
+  function renderStrip() {
+    var showWords = statusOk && prefs.visible;
+    statusEl.hidden = showWords;
+    suggestionEls.forEach(function (button, i) {
+      button.hidden = !showWords;
+      var word = showWords && offered && i < offered.words.length ? offered.words[i] : "";
+      button.textContent = word;
+    });
+    var state = modifierActive() ? "inactive" : stale ? "stale" : "";
+    if (state) {
+      stripEl.dataset.state = state;
+    } else {
+      delete stripEl.dataset.state;
+    }
+  }
+
+  function isModifierCode(k) {
+    return k === CAPS_LOCK || Object.keys(MODIFIER_CODES).some(function (name) {
+      return MODIFIER_CODES[name].indexOf(k) >= 0;
+    });
+  }
+
+  // Escolhe a sugestão sob o dedo (RN-11); lista velha, esmaecida ou inativa não faz nada no Mac.
+  function pick(button) {
+    var i = Number(button.dataset.i);
+    if (!statusOk || !prefs.visible || !offered || stale || modifierActive() || !(i < offered.words.length)) {
+      return;
+    }
+    send({ t: "pick", rev: offered.rev, i: i });
+    stale = true;
+    renderStrip();
+  }
+
+  function suggestionFor(target) {
+    return target && target.closest ? target.closest(".suggestion") : null;
+  }
+
+  function stripTouchStart(event) {
+    Array.prototype.forEach.call(event.changedTouches, function (touch) {
+      var button = suggestionFor(touch.target);
+      if (!button) {
+        return;
+      }
+      event.preventDefault();
+      if (button.textContent === "" || picks.hasOwnProperty(touch.identifier)) {
+        return;
+      }
+      picks[touch.identifier] = button;
+      button.classList.add("pressed");
+    });
+  }
+
+  function stripTouchEnd(event) {
+    Array.prototype.forEach.call(event.changedTouches, function (touch) {
+      var button = picks[touch.identifier];
+      if (!button) {
+        return;
+      }
+      event.preventDefault();
+      delete picks[touch.identifier];
+      button.classList.remove("pressed");
+      if (event.type === "touchend" && suggestionFor(document.elementFromPoint(touch.clientX, touch.clientY)) === button) {
+        pick(button);
+      }
+    });
   }
 
   // MARK: - Desenho
@@ -366,6 +531,7 @@
       });
     });
     relabel();
+    renderStrip();
   }
 
   // A trava do Caps Lock é do sistema; o Mac avisa a cada toque no ⇪ e no início da sessão.
@@ -419,7 +585,12 @@
       }
       touches[touch.identifier] = key;
       key.classList.add("pressed");
-      send({ t: "down", k: Number(key.dataset.k), ts: Date.now() });
+      var k = Number(key.dataset.k);
+      send({ t: "down", k: k, ts: Date.now() });
+      if (!isModifierCode(k) && !stale) {
+        stale = true;
+        renderStrip();
+      }
     });
   }
 
@@ -450,6 +621,10 @@
       touches[id].classList.remove("pressed");
     });
     touches = {};
+    Object.keys(picks).forEach(function (id) {
+      picks[id].classList.remove("pressed");
+    });
+    picks = {};
   }
 
   // Sair da tela solta tudo no Mac (D-11); a volta reconecta de imediato se o iOS fechou o canal.
@@ -461,9 +636,15 @@
   function setStatus(text, kind) {
     statusEl.textContent = text;
     statusEl.dataset.kind = kind;
+    indicatorEl.dataset.kind = kind;
+    statusOk = kind === "ok";
+    renderStrip();
   }
 
   keyboardEl.addEventListener("touchstart", touchStart, { passive: false });
+  stripEl.addEventListener("touchstart", stripTouchStart, { passive: false });
+  document.addEventListener("touchend", stripTouchEnd, { passive: false });
+  document.addEventListener("touchcancel", stripTouchEnd, { passive: false });
   document.addEventListener("touchend", touchEnd, { passive: false });
   document.addEventListener("touchcancel", touchEnd, { passive: false });
   document.addEventListener("touchmove", function (event) {
@@ -489,5 +670,18 @@
     finish("Sessão encerrada. Para voltar, escaneie o QR na tela do Mac.");
   });
 
+  langEl.addEventListener("click", function () {
+    changePrefs(function () {
+      prefs.lang = prefs.lang === "pt" ? "en" : "pt";
+    });
+  });
+
+  toggleEl.addEventListener("click", function () {
+    changePrefs(function () {
+      prefs.visible = !prefs.visible;
+    });
+  });
+
+  applyPrefs();
   connect();
 })();

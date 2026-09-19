@@ -13,6 +13,9 @@ final class InputRouter: InputSink {
 
     /// Observador de botões pressionados, usado pela tela de alvos; altere só na fila `input`.
     var onButtonDown: ((ButtonID) -> Void)?
+    /// Botão do controle pressionado, fora os sintéticos, independente da paleta e do modo de identificação; chamado na
+    /// fila `input`. O teclado remoto descarta o contexto das sugestões (`009-sugestao-de-palavras` D-06).
+    var onControllerButtonDown: (() -> Void)?
     /// Botão pressionado no modo de identificação, entregue na main thread; defina antes de ler o controle.
     var onIdentify: ((ButtonID) -> Void)?
     private var identifying = false
@@ -39,6 +42,7 @@ final class InputRouter: InputSink {
         switch event.kind {
         case .buttonDown, .buttonUp:
             buttons.handle(event)
+            if event.kind == .buttonDown, !event.synthetic { onControllerButtonDown?() }
             if identifying, case .button(let button)? = event.element, !ShortcutConfig.pointerButtons.contains(button) {
                 if event.kind == .buttonDown, !event.synthetic {
                     let onIdentify = onIdentify

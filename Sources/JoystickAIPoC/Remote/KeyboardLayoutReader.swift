@@ -39,14 +39,22 @@ final class KeyboardLayoutReader: NSObject {
         }
     }
 
-    /// Tabela para os códigos pedidos; teclas que não produzem caractere ficam de fora.
-    static func labels(for codes: [UInt16]) -> KeyLabelTable {
+    /// Dados do layout da fonte de entrada ativa, para os rótulos e para o `KeyTextTranslator`
+    /// (`009-sugestao-de-palavras` D-02).
+    static func currentLayout() -> KeyTextTranslator.Layout? {
         guard let source = TISCopyCurrentKeyboardLayoutInputSource()?.takeRetainedValue()
                 ?? TISCopyCurrentASCIICapableKeyboardLayoutInputSource()?.takeRetainedValue(),
               let pointer = TISGetInputSourceProperty(source, kTISPropertyUnicodeKeyLayoutData)
-        else { return KeyLabelTable() }
+        else { return nil }
         let data = Unmanaged<CFData>.fromOpaque(pointer).takeUnretainedValue() as Data
-        let keyboardType = UInt32(LMGetKbdType())
+        return KeyTextTranslator.Layout(data: data, keyboardType: UInt32(LMGetKbdType()))
+    }
+
+    /// Tabela para os códigos pedidos; teclas que não produzem caractere ficam de fora.
+    static func labels(for codes: [UInt16]) -> KeyLabelTable {
+        guard let current = currentLayout() else { return KeyLabelTable() }
+        let data = current.data
+        let keyboardType = current.keyboardType
         var table: [UInt16: KeyLabels] = [:]
         data.withUnsafeBytes { buffer in
             guard let layout = buffer.baseAddress?.assumingMemoryBound(to: UCKeyboardLayout.self) else { return }

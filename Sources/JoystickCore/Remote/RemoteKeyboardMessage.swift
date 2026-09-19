@@ -20,6 +20,10 @@ public enum RemoteKeyboardMessage {
         case ping
         case release
         case bye
+        /// Idioma e visibilidade da faixa de sugestões (`009-sugestao-de-palavras` D-11, D-12).
+        case prefs(language: SuggestionLanguage, visible: Bool)
+        /// Toque na sugestão `index` da lista enviada com `revision` (D-05).
+        case pick(revision: UInt64, index: Int)
 
         /// Decodifica um quadro de texto; `nil` quando inválido (tamanho, JSON, `t` desconhecido ou campos errados).
         public static func decode(_ data: Data) -> Client? {
@@ -46,6 +50,16 @@ public enum RemoteKeyboardMessage {
             case "ping": return .ping
             case "release": return .release
             case "bye": return .bye
+            case "prefs":
+                guard let raw = object["lang"] as? String, let language = SuggestionLanguage(rawValue: raw),
+                      let visible = object["visible"] as? NSNumber, CFGetTypeID(visible) == CFBooleanGetTypeID()
+                else { return nil }
+                return .prefs(language: language, visible: visible.boolValue)
+            case "pick":
+                guard let revision = integer(object["rev"]), revision >= 0, let index = integer(object["i"]),
+                      (0..<SuggestionContext.maxWords).contains(index)
+                else { return nil }
+                return .pick(revision: UInt64(revision), index: index)
             default: return nil
             }
         }
@@ -67,6 +81,8 @@ public enum RemoteKeyboardMessage {
         case status(injectionOn: Bool)
         /// Trava do Caps Lock do sistema (D-17 revista no PM-0).
         case capsLock(on: Bool)
+        /// Sugestões da revisão `revision`; vazia, a faixa esvazia (`009-sugestao-de-palavras` D-12).
+        case suggest(revision: UInt64, mode: SuggestionMode, words: [String])
 
         public func encoded() -> Data {
             var object: [String: Any]
@@ -97,6 +113,10 @@ public enum RemoteKeyboardMessage {
                 object = ["t": "status", "injection": on ? "on" : "no_permission"]
             case .capsLock(let on):
                 object = ["t": "caps", "on": on]
+            case .suggest(let revision, let mode, let words):
+                let bounded = words.filter { (1...SuggestionContext.maxWordLength).contains($0.count) }
+                    .prefix(SuggestionContext.maxWords)
+                object = ["t": "suggest", "rev": revision, "mode": mode.rawValue, "words": Array(bounded)]
             }
             return (try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])) ?? Data()
         }

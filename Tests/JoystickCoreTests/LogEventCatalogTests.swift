@@ -92,7 +92,7 @@ import Testing
             LogEventCatalog.remoteConnected(resumed: true),
             LogEventCatalog.remoteRejected(reason: .notLocal),
             LogEventCatalog.remoteWatchdog(held: 2),
-            LogEventCatalog.remoteDisconnected(reason: .invalidMessages, keys: 50),
+            LogEventCatalog.remoteDisconnected(reason: .invalidMessages, keys: 50, suggestions: 3),
         ]
     }
 
@@ -255,8 +255,12 @@ import Testing
         #expect(fields("remote.connected") == ["resumed": true])
         #expect(fields("remote.rejected") == ["reason": "not_local"])
         #expect(fields("remote.watchdog") == ["held": 2])
-        #expect(fields("remote.disconnected") == ["reason": "invalid_messages", "keys": 50])
-        let forbidden: Set<String> = ["k", "key", "code", "token", "label", "address", "host", "name", "ts", "device"]
+        #expect(fields("remote.disconnected") == ["reason": "invalid_messages", "keys": 50, "suggestions": 3])
+        let forbidden: Set<String> = [
+            "k", "key", "code", "token", "label", "address", "host", "name", "ts", "device",
+            // Sugestões (`009-sugestao-de-palavras` RN-08, `interfaces/diagnostic-log.md` §3).
+            "word", "words", "text", "context", "suggestion", "rev", "revision", "i", "index", "lang", "language", "visible",
+        ]
         for event in Self.remoteEvents {
             #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: forbidden), "\(event.name)")
         }
