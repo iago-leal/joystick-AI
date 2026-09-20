@@ -28,6 +28,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var displayMonitor: DisplayMonitor!
     private var remoteActions: RemoteKeyboardActions!
     private var remoteService: RemoteKeyboardService!
+    private var virtualController: VirtualControllerActions!
     private var layoutReader: KeyboardLayoutReader!
     private var appActivationObserver: NSObjectProtocol?
     private var pairingWindow: PairingWindow!
@@ -136,11 +137,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         remoteActions = RemoteKeyboardActions(
             context: inputContext, keyboard: keyboard, translator: KeyTextTranslator(),
             geometry: .standard(KeyboardLayoutReader.physicalLayout))
+        // Controle virtual do iPhone (`010-joystick-virtual-iphone` D-03): mesma fila e mesmo roteador do controle
+        // físico, sem entrar na fila de controles (D-13).
+        virtualController = VirtualControllerActions(context: inputContext)
         layoutReader = KeyboardLayoutReader()
         let remoteResources = Bundle.main.resourceURL?.appendingPathComponent("RemoteKeyboard", isDirectory: true)
         remoteService = RemoteKeyboardService(
-            context: inputContext, actions: remoteActions, suggester: WordSuggester(queue: inputQueue),
-            layoutReader: layoutReader,
+            context: inputContext, actions: remoteActions, controller: virtualController,
+            suggester: WordSuggester(queue: inputQueue), layoutReader: layoutReader,
             resources: remoteResources.flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil })
         // Sugestões (`009-sugestao-de-palavras` D-06): entrada do controle e troca do aplicativo em foco podem mover o
         // ponto de escrita sem o app saber, e descartam o contexto recente.
@@ -160,8 +164,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         statusMenu.onShowPairing = { [pairingWindow] in pairingWindow?.show() }
         gate.remote = remoteActions
+        gate.virtualController = virtualController
         gate.onAllowedChange = { [remoteService] allowed in remoteService?.injectionChanged(allowed) }
         lifecycle.remote = remoteActions
+        lifecycle.virtualController = virtualController
         lifecycle.onCleanUp = { [remoteService] in remoteService?.disable(reason: .quit) }
 
         displayMonitor = DisplayMonitor(log: log, injector: injector, inputQueue: inputQueue)

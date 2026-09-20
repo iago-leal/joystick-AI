@@ -12,6 +12,8 @@ final class RemotePageListener {
         "/": "index.html",
         "/keyboard.css": "keyboard.css",
         "/keyboard.js": "keyboard.js",
+        // Controle virtual (`010-joystick-virtual-iphone` D-02): mesmo caminho, mesmos cabeçalhos das demais respostas.
+        "/controller.js": "controller.js",
     ]
 
     private let queue = DispatchQueue(label: "remote.page", qos: .userInitiated)

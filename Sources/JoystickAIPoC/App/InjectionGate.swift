@@ -18,6 +18,8 @@ final class InjectionGate {
     var onSuspended: (() -> Void)?
     /// Teclado remoto (`008-iphone-teclado-remoto` D-13): solto na suspensão, com as solturas repetidas na retomada.
     var remote: RemoteKeyboardActions?
+    /// Controle virtual do iPhone: solto com a injeção suspensa, para não deixar botão preso na união (D-04).
+    var virtualController: VirtualControllerActions?
     /// Chamado na fila `input` com o estado inicial e a cada mudança, para avisar a página (RN-11, RF-10).
     var onAllowedChange: ((Bool) -> Void)?
 
@@ -58,6 +60,7 @@ final class InjectionGate {
                 // Solta antes de desativar, para não deixar botão de mouse preso quando a permissão voltar.
                 pendingKeyReleases = shortcuts.releaseAll()
                 pendingRemoteReleases = remote?.releaseAll() ?? []
+                virtualController?.releaseAll()
                 let held = buttons.releaseAll()
                 pendingMouseReleases = held
                 injector.enabled = false

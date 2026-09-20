@@ -143,6 +143,12 @@ final class RemoteKeyboardActions {
             self.machine = machine
             pick(revision: revision, index: index, modifiers: machine.modifierStates)
             return .ok
+        case .button?, .stick?, .pad?, .mode?:
+            // O controle virtual é do `VirtualControllerActions`; aqui a mensagem só mantém o vigia do teclado calmo,
+            // porque a sessão está viva enquanto ela chega (`010-joystick-virtual-iphone` §5 do protocolo).
+            machine.noteMessage(nowNs: now)
+            self.machine = machine
+            return .ok
         case .bye?:
             machine.noteMessage(nowNs: now)
             return .close(.bye)

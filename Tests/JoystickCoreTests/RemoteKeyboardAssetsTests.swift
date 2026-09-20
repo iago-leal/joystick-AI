@@ -2,9 +2,11 @@ import Foundation
 import Testing
 
 /// Isolamento da página do teclado remoto, verificado no repositório a cada `./scripts/test.sh`
-/// (`008-iphone-teclado-remoto` D-15), com a mesma leitura por `#filePath` de `FigureAssetsTests`.
+/// (`008-iphone-teclado-remoto` D-15, `010-joystick-virtual-iphone` D-12), com a mesma leitura por `#filePath` de
+/// `FigureAssetsTests`.
 @Suite struct RemoteKeyboardAssetsTests {
-    static let files = ["index.html", "keyboard.css", "keyboard.js"]
+    static let files = ["index.html", "keyboard.css", "keyboard.js", "controller.js"]
+    static let scripts = ["keyboard.js", "controller.js"]
 
     static var folder: URL {
         URL(fileURLWithPath: #filePath)
@@ -16,21 +18,23 @@ import Testing
         try String(contentsOf: folder.appendingPathComponent(name), encoding: .utf8)
     }
 
-    @Test func osTresArquivosExistem() throws {
+    @Test func osArquivosDaPaginaExistem() throws {
         for name in Self.files {
             #expect(FileManager.default.fileExists(atPath: Self.folder.appendingPathComponent(name).path), "\(name)")
         }
     }
 
-    /// Sem marcação a partir de texto nem avaliação de código.
+    /// Sem marcação a partir de texto nem avaliação de código, nos dois scripts da página.
     @Test func semMarcacaoNemAvaliacao() throws {
-        let script = try Self.contents("keyboard.js")
-        for token in ["innerHTML", "outerHTML", "insertAdjacentHTML", "document.write", "eval"] {
-            let regex = try Regex(#"\b"# + NSRegularExpression.escapedPattern(for: token) + #"\b"#)
-            #expect(script.firstMatch(of: regex) == nil, "\(token)")
+        for name in Self.scripts {
+            let script = try Self.contents(name)
+            for token in ["innerHTML", "outerHTML", "insertAdjacentHTML", "document.write", "eval"] {
+                let regex = try Regex(#"\b"# + NSRegularExpression.escapedPattern(for: token) + #"\b"#)
+                #expect(script.firstMatch(of: regex) == nil, "\(name): \(token)")
+            }
+            #expect(!script.contains("Function("), "\(name)")
+            #expect(script.contains("textContent"), "\(name)")
         }
-        #expect(!script.contains("Function("))
-        #expect(script.contains("textContent"))
     }
 
     /// Nada embutido: um só `<script src>` e um só `<link href>`, ambos irmãos; sem `style` nem manipuladores inline.
@@ -38,8 +42,8 @@ import Testing
         let html = try Self.contents("index.html")
         let sources = html.matches(of: try Regex(#"<(?:script|link)\b[^>]*\b(?:src|href)\s*=\s*["']([^"']*)["']"#))
             .map { String($0.output[1].substring!) }
-        #expect(Set(sources) == ["keyboard.css", "keyboard.js"], "\(sources)")
-        #expect(html.matches(of: try Regex(#"<script\b"#)).count == 1)
+        #expect(Set(sources) == ["keyboard.css", "keyboard.js", "controller.js"], "\(sources)")
+        #expect(html.matches(of: try Regex(#"<script\b"#)).count == 2)
         #expect(html.firstMatch(of: try Regex(#"<script\b[^>]*>\s*[^<\s]"#)) == nil)
         #expect(html.firstMatch(of: try Regex(#"<style\b"#)) == nil)
         #expect(html.firstMatch(of: try Regex(#"\sstyle\s*="#)) == nil)
@@ -82,5 +86,82 @@ import Testing
         #expect(script.contains("remoteKeyboardPrefs"))
         let html = try Self.contents("index.html")
         #expect(html.matches(of: try Regex(#"class="suggestion""#)).count == 3)
+    }
+
+    /// Controle virtual (`010-joystick-virtual-iphone` D-02, D-06, D-12 a D-15): mensagens novas, rastreio de dedos,
+    /// quadro de animação, preferências e tela acesa.
+    @Test func scriptConheceOControle() throws {
+        let script = try Self.contents("controller.js")
+        for type in ["btn", "stick", "pad", "mode"] {
+            #expect(script.contains(#""\#(type)""#), "\(type)")
+        }
+        for mode in ["pointer", "compact", "full"] {
+            #expect(script.contains(#""\#(mode)""#), "\(mode)")
+        }
+        // Todo botão do protocolo tem lugar na tela (§2 do protocolo), e `share` não entra (007 D-02).
+        for button in [
+            "cross", "circle", "square", "triangle", "dpadUp", "dpadDown", "dpadLeft", "dpadRight",
+            "l1", "r1", "l2", "r2", "l3", "r3", "options", "create", "ps", "touchpadClick",
+        ] {
+            #expect(script.contains(#""\#(button)""#), "\(button)")
+        }
+        #expect(!script.contains(#""share""#), "share é do controle da 007, não da página")
+        #expect(script.contains("requestAnimationFrame"))
+        #expect(script.contains("identifier"))
+        #expect(script.contains("touchcancel"))
+        #expect(script.contains("remoteKeyboardPrefs") || script.contains("channel.prefs"))
+        #expect(script.contains("wakeLock"))
+    }
+
+    /// As colunas e a faixa central do novo desenho existem na página (D-02, E-04, E-05).
+    @Test func htmlTemOArranjoDoControle() throws {
+        let html = try Self.contents("index.html")
+        for id in ["stick-left", "stick-right", "dpad", "faces", "tray",
+                   "shoulders-left", "shoulders-right", "controls",
+                   "center", "pointer", "center-mode", "sensitivity"] {
+            #expect(html.contains(#"id="\#(id)""#), "\(id)")
+        }
+        // A barra de estado e sugestões continua de pé (009 D-09).
+        #expect(html.contains(#"id="strip""#))
+        #expect(html.contains(#"id="keyboard""#))
+    }
+
+    /// Gatilhos aderentes e controle que se esconde (E-04, E-05): a página conhece os dois estados e não deixa
+    /// nenhum caminho de saída sem soltura.
+    @Test func scriptConheceAsEmendasDoToque() throws {
+        let script = try Self.contents("controller.js")
+        #expect(script.contains("LATCHABLE"))
+        #expect(script.contains("LATCH_MS"))
+        #expect(script.contains("releaseLatched"))
+        #expect(script.contains(#""latched""#))
+        #expect(script.contains("aria-pressed"))
+        let css = try Self.contents("keyboard.css")
+        #expect(css.contains(#"[data-state="latched"]"#))
+        #expect(css.contains(#"[data-controls="off"]"#))
+    }
+
+    /// Arrasto coalescido na área de apontamento (E-09): um envio por quadro e por dedo, e a caixa da área medida
+    /// por série em vez de por amostra, que era o que fazia o cursor andar aos pulos.
+    @Test func scriptCoalesceOArrastoDaAreaDeApontamento() throws {
+        let script = try Self.contents("controller.js")
+        #expect(script.contains("schedulePad"))
+        #expect(script.contains("flushPad"))
+        #expect(script.contains("padBox"))
+        // O movimento não chama mais o envio direto; pousar e levantar continuam imediatos.
+        #expect(script.contains(#"sendPad(entry.finger, "e""#))
+        #expect(script.firstMatch(of: try Regex(#"sendPad\(entry\.finger, "m""#)) == nil)
+        #expect(script.contains("padPending"))
+    }
+
+    /// Analógico de origem dinâmica (E-06): a área de toque é maior que o desenho, e o curso não depende dele.
+    @Test func scriptConheceOAnalogicoDeOrigemDinamica() throws {
+        let script = try Self.contents("controller.js")
+        #expect(script.contains("STICK_TRAVEL"))
+        #expect(script.contains("stick.origin"))
+        #expect(script.contains("placeStick"))
+        let html = try Self.contents("index.html")
+        #expect(html.matches(of: try Regex(#"class="stick-zone""#)).count == 2)
+        let css = try Self.contents("keyboard.css")
+        #expect(css.contains(".stick-zone"))
     }
 }

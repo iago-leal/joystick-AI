@@ -92,7 +92,8 @@ import Testing
             LogEventCatalog.remoteConnected(resumed: true),
             LogEventCatalog.remoteRejected(reason: .notLocal),
             LogEventCatalog.remoteWatchdog(held: 2),
-            LogEventCatalog.remoteDisconnected(reason: .invalidMessages, keys: 50, suggestions: 3),
+            LogEventCatalog.remoteDisconnected(reason: .invalidMessages, keys: 50, suggestions: 3, buttons: 12, clicks: 4),
+            LogEventCatalog.remoteMode(.pointer),
         ]
     }
 
@@ -128,7 +129,7 @@ import Testing
             "editor.opened": .info, "editor.closed": .info, "editor.conflict": .warn, "editor.identify": .info,
             "editor.activation_failed": .warn, "editor.figure_unavailable": .warn,
             "remote.enabled": .info, "remote.disabled": .info, "remote.connected": .info, "remote.rejected": .warn,
-            "remote.watchdog": .warn, "remote.disconnected": .info,
+            "remote.watchdog": .warn, "remote.disconnected": .info, "remote.mode": .info,
         ]
         let events = Self.sampleEvents
         #expect(Set(events.map(\.name)) == Set(expected.keys))
@@ -255,11 +256,16 @@ import Testing
         #expect(fields("remote.connected") == ["resumed": true])
         #expect(fields("remote.rejected") == ["reason": "not_local"])
         #expect(fields("remote.watchdog") == ["held": 2])
-        #expect(fields("remote.disconnected") == ["reason": "invalid_messages", "keys": 50, "suggestions": 3])
+        #expect(fields("remote.disconnected")
+            == ["reason": "invalid_messages", "keys": 50, "suggestions": 3, "buttons": 12, "clicks": 4])
+        #expect(fields("remote.mode") == ["mode": "pointer"])
+        #expect(CenterMode.allCases.map(\.rawValue) == ["pointer", "compact", "full"])
         let forbidden: Set<String> = [
             "k", "key", "code", "token", "label", "address", "host", "name", "ts", "device",
             // Sugestões (`009-sugestao-de-palavras` RN-08, `interfaces/diagnostic-log.md` §3).
             "word", "words", "text", "context", "suggestion", "rev", "revision", "i", "index", "lang", "language", "visible",
+            // Controle virtual (`010-joystick-virtual-iphone` RN-13, `interfaces/diagnostic-log.md` §4).
+            "b", "button", "s", "stick", "f", "finger", "p", "phase", "m",
         ]
         for event in Self.remoteEvents {
             #expect(Self.allKeys(.object(event.fields)).isDisjoint(with: forbidden), "\(event.name)")

@@ -88,7 +88,7 @@ final class TargetSession {
         let elapsedMs = Int((MonotonicClock.nowNs() &- targetShownNs) / 1_000_000)
         // O ponto do clique serve só para o acerto e não é guardado (RN-12).
         let hit = view.rect(of: positions[index]).contains(view.convert(event.locationInWindow, from: nil))
-        let l1Held = context.queue.sync { context.registry.pressed.contains(.l1) }
+        let l1Held = context.queue.sync { context.pressedAll.contains(.l1) }
         attempts.append(TargetAttempt(index: index + 1, targetRectPt: positions[index], hit: hit, timeToClickMs: elapsedMs, l1Held: l1Held))
         showNextTarget()
     }

@@ -78,6 +78,10 @@ public struct InputEvent: Equatable, Sendable {
     public var touchPhase: TouchPhase?
     /// `buttonUp` gerado por RN-04 antes da desconexão.
     public var synthetic: Bool
+    /// Veio do controle virtual do iPhone, e não de um controle no Mac (`010-joystick-virtual-iphone` E-10). O
+    /// caminho é o mesmo para as duas origens; o que muda é a cadência: a remota atravessa a rede, e o arrasto
+    /// precisa ser alisado antes de virar movimento do cursor.
+    public var remote: Bool
     /// `t_arrival`, em nanossegundos de `CLOCK_UPTIME_RAW`.
     public var timestamp: UInt64
     /// `lastEventTimestamp` do perfil físico, apenas informativo.
@@ -85,8 +89,8 @@ public struct InputEvent: Equatable, Sendable {
 
     public init(
         kind: InputEventKind, element: InputElement? = nil, value: Double? = nil, x: Double? = nil, y: Double? = nil,
-        touchIndex: Int? = nil, touchPhase: TouchPhase? = nil, synthetic: Bool = false, timestamp: UInt64,
-        frameworkTimestamp: Double? = nil
+        touchIndex: Int? = nil, touchPhase: TouchPhase? = nil, synthetic: Bool = false, remote: Bool = false,
+        timestamp: UInt64, frameworkTimestamp: Double? = nil
     ) {
         self.kind = kind
         self.element = element
@@ -96,6 +100,7 @@ public struct InputEvent: Equatable, Sendable {
         self.touchIndex = touchIndex
         self.touchPhase = touchPhase
         self.synthetic = synthetic
+        self.remote = remote
         self.timestamp = timestamp
         self.frameworkTimestamp = frameworkTimestamp
     }

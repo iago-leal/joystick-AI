@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <!--
-  Teclado remoto no iPhone (`008-iphone-teclado-remoto` D-01, D-15, RF-04, RF-06, RF-10), com a faixa de sugestões
-  de palavras na barra superior (`009-sugestao-de-palavras` D-09, RF-01, RF-07, RF-12).
-  Página servida pelo app na porta 47810; o canal fica na 47811 (`interfaces/remote-keyboard-protocol.md`).
+  Controle e teclado remotos no iPhone (`008-iphone-teclado-remoto` D-01, D-15, RF-04, RF-06, RF-10), com a faixa de
+  sugestões de palavras na barra superior (`009-sugestao-de-palavras` D-09, RF-01, RF-07, RF-12) e o controle virtual
+  em grade (`010-joystick-virtual-iphone` D-02, RF-01 a RF-03).
+
+  Desenho, revisto no PM-0 pela ergonomia de segurar o aparelho na horizontal e emendado depois pela limitação dos
+  dois polegares (E-04): os gatilhos ficam no topo da coluna do seu lado, ao alcance do polegar, e a faixa do alto
+  guarda só os botões de analógico e os secundários. O direcional e as quatro faces vêm logo abaixo dos gatilhos, e
+  os analógicos ficam no pé das colunas. O bloco central tem três estados, apontamento, teclado reduzido e teclado
+  completo, e a barra de estado e sugestões encolheu para devolver espaço ao controle (D-02 revista).
+
+  O botão `controls` esconde o controle inteiro, faixa e colunas, e deixa o bloco central com a tela toda (E-05):
+  é o arranjo de quem está com o DualSense na mão e quer do iPhone só o teclado ou uma área de apontamento grande.
+
+  O analógico não é o círculo, e sim a `stick-zone` que o contém (E-06): o toque em qualquer ponto dela fixa ali a
+  origem do comando, e o círculo desenhado vai ao encontro do dedo. O polegar não precisa procurar o centro, e o
+  curso até a amplitude máxima é uma distância fixa, independente do tamanho que o desenho tiver na tela.
+
+  A `stick-zone` é declarada aqui dentro da coluna, mas quem a põe no lugar é o `controller.js`, que a move para o
+  vão central da cruz daquele lado (E-07). No pé da coluna faltava tela para o dedo descer; no meio da cruz há curso
+  para todos os lados, e o polegar já vive ali.
+
+  Página servida pelo app na porta 47810; o canal fica na 47811 (`interfaces/remote-controller-protocol.md`).
   As teclas não estão aqui: keyboard.js as desenha a partir da mensagem `layout`, com os rótulos da fonte de entrada
-  do Mac. A política de conteúdo vem no cabeçalho da resposta, que conhece o nome do host para o `connect-src`.
+  do Mac, e controller.js desenha os analógicos e os botões. A política de conteúdo vem no cabeçalho da resposta, que
+  conhece o nome do host para o `connect-src`.
 -->
 <html lang="pt-BR">
 <head>
@@ -14,14 +34,14 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Teclado do Mac">
+  <meta name="apple-mobile-web-app-title" content="Controle do Mac">
   <meta name="format-detection" content="telephone=no">
-  <title>Teclado do Mac</title>
+  <title>Controle do Mac</title>
   <link rel="stylesheet" href="keyboard.css">
 </head>
 <body>
   <div class="rotate" role="alert">Gire o iPhone para a horizontal</div>
-  <main class="app" id="app">
+  <main class="app" id="app" data-center="compact" data-controls="on">
     <header class="bar">
       <span class="indicator" id="indicator" aria-hidden="true"></span>
       <div class="strip" id="strip">
@@ -30,15 +50,48 @@
         <button type="button" class="suggestion" data-i="1"></button>
         <button type="button" class="suggestion" data-i="2"></button>
       </div>
+      <button type="button" class="control" id="controls" aria-label="Mostrar ou esconder o controle" aria-pressed="true">Controle</button>
+      <button type="button" class="control" id="center-mode" aria-label="Estado do bloco central">Teclado</button>
       <button type="button" class="control" id="lang" aria-label="Idioma das sugestões">PT</button>
       <button type="button" class="control" id="toggle">Ocultar</button>
       <button type="button" class="control" id="leave">Sair</button>
     </header>
+    <div class="tray" id="tray" aria-label="Gatilhos e botões secundários"></div>
     <div class="board">
-      <div class="keyboard" id="keyboard" aria-label="Teclado do Mac"></div>
-      <div class="notice" id="notice" hidden></div>
+      <div class="side side-left">
+        <div class="shoulders" id="shoulders-left" aria-label="Gatilhos esquerdos"></div>
+        <div class="cluster dpad" id="dpad" aria-label="Direcional"></div>
+        <div class="stick-zone" data-s="l" aria-label="Analógico esquerdo">
+          <div class="stick" id="stick-left">
+            <div class="knob"></div>
+          </div>
+        </div>
+      </div>
+      <div class="center-col">
+        <div class="center" id="center">
+          <div class="keyboard" id="keyboard" aria-label="Teclado do Mac"></div>
+          <div class="pointer" id="pointer" aria-label="Área de apontamento">
+            <span class="pointer-hint" id="pointer-hint">Deslize para mover o cursor</span>
+            <label class="sensitivity" id="sensitivity-box">
+              <span class="sensitivity-label" id="sensitivity-label">Sensibilidade</span>
+              <input type="range" id="sensitivity" min="0.5" max="2" step="0.1" value="1">
+            </label>
+          </div>
+          <div class="notice" id="notice" hidden></div>
+        </div>
+      </div>
+      <div class="side side-right">
+        <div class="shoulders" id="shoulders-right" aria-label="Gatilhos direitos"></div>
+        <div class="cluster faces" id="faces" aria-label="Botões de ação"></div>
+        <div class="stick-zone" data-s="r" aria-label="Analógico direito">
+          <div class="stick" id="stick-right">
+            <div class="knob"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <script src="keyboard.js"></script>
+  <script src="controller.js"></script>
 </body>
 </html>

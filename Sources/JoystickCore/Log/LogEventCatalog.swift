@@ -364,10 +364,21 @@ public enum LogEventCatalog {
 
     /// `keys`: teclas pressionadas na sessão, sem distinguir quais (D-18).
     /// `suggestions`: sugestões aceitas na sessão, sem nenhuma palavra (`009-sugestao-de-palavras` D-13, RN-08).
-    public static func remoteDisconnected(reason: RemoteDisconnectReason, keys: Int, suggestions: Int) -> LogEvent {
+    /// `buttons` e `clicks`: botões do controle virtual pressionados na sessão e cliques de mouse vindos deles, sem
+    /// nome de botão, posição de analógico nem coordenada de dedo (`010-joystick-virtual-iphone` D-10).
+    public static func remoteDisconnected(
+        reason: RemoteDisconnectReason, keys: Int, suggestions: Int, buttons: Int, clicks: Int
+    ) -> LogEvent {
         LogEvent("remote.disconnected", level: .info, fields: [
             "reason": .string(reason.rawValue), "keys": .int(Int64(keys)), "suggestions": .int(Int64(suggestions)),
+            "buttons": .int(Int64(buttons)), "clicks": .int(Int64(clicks)),
         ])
+    }
+
+    /// Estado do bloco central da página, a cada troca confirmada (`010-joystick-virtual-iphone` D-10).
+    /// Só o estado: nada do que o usuário fez dentro dele.
+    public static func remoteMode(_ mode: CenterMode) -> LogEvent {
+        LogEvent("remote.mode", level: .info, fields: ["mode": .string(mode.rawValue)])
     }
 }
 

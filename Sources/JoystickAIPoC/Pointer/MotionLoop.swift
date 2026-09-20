@@ -29,7 +29,7 @@ final class MotionLoop {
 
     func handle(_ event: InputEvent) {
         context.assertOnQueue()
-        let pressed = context.registry.pressed
+        let pressed = context.pressedAll
         switch (event.kind, event.element) {
         case (.axis, .leftStick?):
             let out = engine.setLeftStick(x: event.x ?? 0, y: event.y ?? 0, pressed: pressed)
@@ -47,11 +47,18 @@ final class MotionLoop {
             guard let delta = tracker.update(
                 finger: finger, phase: phase, x: event.x ?? 0, y: event.y ?? 0, sensitivity: engine.settings.touchpadSensitivity)
             else { return }
-            apply(engine.touchDelta(delta, pressed: pressed), origin: .touch, tArrival: event.timestamp)
+            if event.remote {
+                // O arrasto do iPhone não vira movimento na chegada: entra no planador e sai pelo tick, com a
+                // cadência regular que a rede não tem (010 E-10). Por sair depois, não carrega `t_arrival`.
+                apply(engine.remoteTouchDelta(delta, pressed: pressed), origin: nil, tArrival: nil)
+            } else {
+                apply(engine.touchDelta(delta, pressed: pressed), origin: .touch, tArrival: event.timestamp)
+            }
         case (.controllerDisconnected, _):
             apply(engine.setLeftStick(x: 0, y: 0, pressed: []), origin: nil, tArrival: nil)
             apply(engine.setRightStick(x: 0, y: 0), origin: nil, tArrival: nil)
             tracker = TouchpadTracker()
+            engine.clearTouchGlide()
             scrollMapper.reset()
         default:
             break
@@ -73,10 +80,12 @@ final class MotionLoop {
         let now = MonotonicClock.nowNs()
         let dt = min(Self.maxTickSeconds, Double(now &- lastTickNs) / 1e9)
         lastTickNs = now
-        let out = engine.tick(dt: dt, pressed: context.registry.pressed)
+        let out = engine.tick(dt: dt, pressed: context.pressedAll)
         if let move = out.move {
             injector.move(by: move, kind: buttons.moveKind, origin: nil, tArrival: nil)
         }
+        // Só o tick sabe que o planador esvaziou; sem isto o temporizador ficaria ligado depois do último arrasto.
+        if out.timer == .stop { stopTimer() }
         let right = engine.state.rightStick
         if right.x != 0 || right.y != 0 {
             scrollStep(dt: dt, origin: nil, tArrival: nil)
@@ -85,7 +94,7 @@ final class MotionLoop {
 
     private func scrollStep(dt: Double, origin: PostSource?, tArrival: UInt64?) {
         let right = engine.state.rightStick
-        let precision = PointerMotionEngine.precisionActive(pressed: context.registry.pressed)
+        let precision = PointerMotionEngine.precisionActive(pressed: context.pressedAll)
         let step = scrollMapper.step(x: right.x, y: right.y, dt: dt, precision: precision)
         scrollInjector.scroll(vertical: step.vertical, horizontal: step.horizontal, origin: origin, tArrival: tArrival)
     }

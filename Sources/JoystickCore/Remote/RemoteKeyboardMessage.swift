@@ -24,6 +24,14 @@ public enum RemoteKeyboardMessage {
         case prefs(language: SuggestionLanguage, visible: Bool)
         /// Toque na sugestão `index` da lista enviada com `revision` (D-05).
         case pick(revision: UInt64, index: Int)
+        /// Botão do controle virtual (`010-joystick-virtual-iphone` D-01, `interfaces/remote-controller-protocol.md` §2).
+        case button(VirtualButton, down: Bool)
+        /// Amostra de analógico, bruta e já limitada a ±1 (D-05, D-06).
+        case stick(VirtualStick, StickSample)
+        /// Dedo na área de apontamento (D-05).
+        case pad(PadSample)
+        /// Estado novo do bloco central (D-08).
+        case mode(CenterMode)
 
         /// Decodifica um quadro de texto; `nil` quando inválido (tamanho, JSON, `t` desconhecido ou campos errados).
         public static func decode(_ data: Data) -> Client? {
@@ -60,8 +68,46 @@ public enum RemoteKeyboardMessage {
                       (0..<SuggestionContext.maxWords).contains(index)
                 else { return nil }
                 return .pick(revision: UInt64(revision), index: index)
+            case "btn":
+                guard let name = object["b"] as? String, let button = VirtualButton(rawValue: name),
+                      let flag = integer(object["d"]), flag == 0 || flag == 1
+                else { return nil }
+                return .button(button, down: flag == 1)
+            case "stick":
+                guard let raw = object["s"] as? String, let stick = VirtualStick(rawValue: raw),
+                      let x = number(object["x"]), let y = number(object["y"])
+                else { return nil }
+                // Fora de ±1 se limita, sem contar como inválida (§4 do protocolo).
+                return .stick(stick, StickSample(x: x, y: y).clamped)
+            case "pad":
+                guard let finger = integer(object["f"]), (0..<PadSample.maxFingers).contains(finger),
+                      let raw = object["p"] as? String, let phase = Self.phase(raw),
+                      let x = number(object["x"]), let y = number(object["y"])
+                else { return nil }
+                let position = Normalization.touchPosition(x: x, y: y)
+                return .pad(PadSample(finger: finger, phase: phase, x: position.x, y: position.y))
+            case "mode":
+                guard let raw = object["m"] as? String, let mode = CenterMode(rawValue: raw) else { return nil }
+                return .mode(mode)
             default: return nil
             }
+        }
+
+        /// Fases do protocolo, abreviadas no quadro para caber no limite de 1 KiB.
+        private static func phase(_ raw: String) -> TouchPhase? {
+            switch raw {
+            case "b": .began
+            case "m": .moved
+            case "e": .ended
+            default: nil
+            }
+        }
+
+        /// Número JSON finito; recusa booleanos e textos, mas aceita inteiro e fração.
+        private static func number(_ value: Any?) -> Double? {
+            guard let raw = value as? NSNumber, CFGetTypeID(raw) != CFBooleanGetTypeID() else { return nil }
+            let double = raw.doubleValue
+            return double.isFinite ? double : nil
         }
 
         /// Inteiro JSON exato; recusa booleanos, frações e textos.
@@ -83,6 +129,8 @@ public enum RemoteKeyboardMessage {
         case capsLock(on: Bool)
         /// Sugestões da revisão `revision`; vazia, a faixa esvazia (`009-sugestao-de-palavras` D-12).
         case suggest(revision: UInt64, mode: SuggestionMode, words: [String])
+        /// Confirmação do estado do bloco central, já com o estado anterior solto (`010` D-08, §3 do protocolo).
+        case mode(CenterMode)
 
         public func encoded() -> Data {
             var object: [String: Any]
@@ -117,6 +165,8 @@ public enum RemoteKeyboardMessage {
                 let bounded = words.filter { (1...SuggestionContext.maxWordLength).contains($0.count) }
                     .prefix(SuggestionContext.maxWords)
                 object = ["t": "suggest", "rev": revision, "mode": mode.rawValue, "words": Array(bounded)]
+            case .mode(let mode):
+                object = ["t": "mode", "m": mode.rawValue]
             }
             return (try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])) ?? Data()
         }

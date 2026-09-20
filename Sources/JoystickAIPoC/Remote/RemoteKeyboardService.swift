@@ -21,6 +21,8 @@ struct RemoteKeyboardStatus: Equatable {
 final class RemoteKeyboardService: RemoteChannelDelegate {
     private let context: InputContext
     private let actions: RemoteKeyboardActions
+    /// Controle virtual do iPhone (`010-joystick-virtual-iphone` D-01, D-03).
+    private let controller: VirtualControllerActions
     private let suggester: WordSuggester
     private let layoutReader: KeyboardLayoutReader
     private let resources: URL?
@@ -46,11 +48,12 @@ final class RemoteKeyboardService: RemoteChannelDelegate {
     var onConnected: (() -> Void)?
 
     init(
-        context: InputContext, actions: RemoteKeyboardActions, suggester: WordSuggester, layoutReader: KeyboardLayoutReader,
-        resources: URL?
+        context: InputContext, actions: RemoteKeyboardActions, controller: VirtualControllerActions,
+        suggester: WordSuggester, layoutReader: KeyboardLayoutReader, resources: URL?
     ) {
         self.context = context
         self.actions = actions
+        self.controller = controller
         self.suggester = suggester
         self.layoutReader = layoutReader
         self.resources = resources
@@ -128,6 +131,8 @@ final class RemoteKeyboardService: RemoteChannelDelegate {
         page?.stop()
         page = nil
         context.queue.sync {
+            // O `quit` já soltou tudo pelo `Lifecycle`; nos demais motivos, é aqui que o iPhone solta (§5).
+            controller.end()
             channel?.stop()
             channel = nil
         }
@@ -197,6 +202,7 @@ final class RemoteKeyboardService: RemoteChannelDelegate {
 
     func channelSessionStarted(resumed: Bool) {
         actions.begin()
+        controller.begin()
         DispatchQueue.main.async { [suggester] in suggester.begin(language: .pt) }
         channel?.send(.layout(geometry: sessionGeometry, labels: labels))
         channel?.send(.status(injectionOn: injectionOn))
@@ -208,14 +214,31 @@ final class RemoteKeyboardService: RemoteChannelDelegate {
         }
     }
 
+    /// Toda mensagem passa pelas duas origens: o controle virtual trata as que são suas e confirma a troca de estado
+    /// do bloco central; o teclado trata as demais e, das do controle, só anota a atividade para o vigia (D-01, D-08).
     func channelMessage(_ message: RemoteKeyboardMessage.Client?) -> RemoteChannelVerdict {
-        actions.handle(message)
+        if let message {
+            if case .mode(let mode) = message {
+                controller.handle(message)
+                // A soltura do estado abandonado já ocorreu; o teclado solta o que era dele ao sair de um dos teclados.
+                if !mode.isKeyboard { actions.releaseAll() }
+                channel?.send(.mode(mode))
+                context.log.log(LogEventCatalog.remoteMode(mode))
+            } else {
+                controller.handle(message)
+            }
+        }
+        return actions.handle(message)
     }
 
     func channelSessionEnded(reason: RemoteDisconnectReason) {
         let counts = actions.end()
+        // Cobre o `bye`, o fechamento por silêncio, a substituição de sessão e o desligamento (§5 do protocolo).
+        let controllerCounts = controller.end()
         DispatchQueue.main.async { [suggester] in suggester.end() }
-        context.log.log(LogEventCatalog.remoteDisconnected(reason: reason, keys: counts.keys, suggestions: counts.suggestions))
+        context.log.log(LogEventCatalog.remoteDisconnected(
+            reason: reason, keys: counts.keys, suggestions: counts.suggestions,
+            buttons: controllerCounts.buttons, clicks: controllerCounts.clicks))
         // Na substituição, a sessão continua com a conexão nova.
         guard reason != .replaced else { return }
         DispatchQueue.main.async { [self] in status.connected = false }

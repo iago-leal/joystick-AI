@@ -118,6 +118,62 @@ import Testing
         #expect(object["words"] as? [String] == ["um", edge, "dois"])
     }
 
+    // MARK: - Controle virtual (`010-joystick-virtual-iphone` §2 a §4)
+
+    @Test func decodificaAsMensagensDoControle() {
+        #expect(Self.decode(#"{"t":"btn","b":"cross","d":1}"#) == .button(.cross, down: true))
+        #expect(Self.decode(#"{"t":"btn","b":"touchpadClick","d":0}"#) == .button(.touchpadClick, down: false))
+        #expect(Self.decode(#"{"t":"btn","b":"dpadUp","d":1}"#) == .button(.dpadUp, down: true))
+        #expect(Self.decode(#"{"t":"stick","s":"l","x":0.5,"y":-0.25}"#) == .stick(.left, StickSample(x: 0.5, y: -0.25)))
+        #expect(Self.decode(#"{"t":"stick","s":"r","x":0,"y":1}"#) == .stick(.right, StickSample(x: 0, y: 1)))
+        #expect(Self.decode(#"{"t":"pad","f":0,"p":"b","x":0.1,"y":0.2}"#)
+            == .pad(PadSample(finger: 0, phase: .began, x: 0.1, y: 0.2)))
+        #expect(Self.decode(#"{"t":"pad","f":3,"p":"m","x":-1,"y":0}"#)
+            == .pad(PadSample(finger: 3, phase: .moved, x: -1, y: 0)))
+        #expect(Self.decode(#"{"t":"pad","f":1,"p":"e","x":0,"y":0}"#)
+            == .pad(PadSample(finger: 1, phase: .ended, x: 0, y: 0)))
+        for mode in CenterMode.allCases {
+            #expect(Self.decode(#"{"t":"mode","m":"\#(mode.rawValue)"}"#) == .mode(mode))
+        }
+    }
+
+    @Test func todoBotaoDoProtocoloEhAceito() {
+        for button in VirtualButton.allCases {
+            #expect(Self.decode(#"{"t":"btn","b":"\#(button.rawValue)","d":1}"#) == .button(button, down: true))
+        }
+    }
+
+    @Test func coordenadaForaDoIntervaloEhLimitadaSemRecusa() {
+        #expect(Self.decode(#"{"t":"stick","s":"l","x":2.5,"y":-9}"#) == .stick(.left, StickSample(x: 1, y: -1)))
+        #expect(Self.decode(#"{"t":"pad","f":0,"p":"m","x":-3,"y":8}"#)
+            == .pad(PadSample(finger: 0, phase: .moved, x: -1, y: 1)))
+    }
+
+    @Test(arguments: [
+        #"{"t":"btn","b":"share","d":1}"#, #"{"t":"btn","b":"Cross","d":1}"#, #"{"t":"btn","b":"","d":1}"#,
+        #"{"t":"btn","d":1}"#, #"{"t":"btn","b":"cross"}"#, #"{"t":"btn","b":"cross","d":2}"#,
+        #"{"t":"btn","b":"cross","d":-1}"#, #"{"t":"btn","b":"cross","d":true}"#, #"{"t":"btn","b":"cross","d":"1"}"#,
+        #"{"t":"btn","b":1,"d":1}"#,
+        #"{"t":"stick","s":"m","x":0,"y":0}"#, #"{"t":"stick","s":"L","x":0,"y":0}"#, #"{"t":"stick","x":0,"y":0}"#,
+        #"{"t":"stick","s":"l","y":0}"#, #"{"t":"stick","s":"l","x":0}"#, #"{"t":"stick","s":"l","x":"0","y":0}"#,
+        #"{"t":"stick","s":"l","x":0,"y":true}"#,
+        #"{"t":"pad","f":0,"p":"x","x":0,"y":0}"#, #"{"t":"pad","f":4,"p":"b","x":0,"y":0}"#,
+        #"{"t":"pad","f":-1,"p":"b","x":0,"y":0}"#, #"{"t":"pad","f":0.5,"p":"b","x":0,"y":0}"#,
+        #"{"t":"pad","p":"b","x":0,"y":0}"#, #"{"t":"pad","f":0,"x":0,"y":0}"#, #"{"t":"pad","f":0,"p":"b","y":0}"#,
+        #"{"t":"pad","f":0,"p":"b","x":null,"y":0}"#, #"{"t":"pad","f":true,"p":"b","x":0,"y":0}"#,
+        #"{"t":"mode","m":"keyboard"}"#, #"{"t":"mode","m":"Pointer"}"#, #"{"t":"mode"}"#, #"{"t":"mode","m":1}"#,
+    ])
+    func recusaMensagensDoControleInvalidas(_ text: String) {
+        #expect(Self.decode(text) == nil)
+    }
+
+    @Test func codificaOModoDoServidor() throws {
+        for mode in CenterMode.allCases {
+            let object = try Self.object(.mode(mode))
+            #expect(object as NSDictionary == ["t": "mode", "m": mode.rawValue] as NSDictionary)
+        }
+    }
+
     @Test func hexadecimalIdaEVolta() {
         let bytes: [UInt8] = [0, 15, 16, 255, 128]
         #expect(RemoteKeyboardMessage.hexBytes(RemoteKeyboardMessage.hex(bytes)) == bytes)

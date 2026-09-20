@@ -15,6 +15,12 @@
   cada troca. As palavras de `suggest` são desenhadas por `textContent`. Ao enviar `down` de uma tecla comum, a faixa
   esmaece até a próxima `suggest`; com modificador mantido ou preso, fica inativa. O toque numa sugestão envia `pick`
   com a revisão da lista, sem `down` nem `up`.
+
+  Controle virtual (`010-joystick-virtual-iphone` D-02, D-08, RF-13): o teclado passa a morar no bloco central, que
+  tem três estados. Em `full` desenha-se o teclado do Mac inteiro; em `compact`, o reduzido, com os modificadores,
+  Esc, Tab, Return, apagar, espaço e setas; em `pointer` o teclado some e a área de apontamento ocupa o lugar. Ao
+  trocar de estado, as teclas mantidas são soltas aqui mesmo, antes de o Mac saber (D-08). O canal é compartilhado
+  com `controller.js` por `window.RemoteKeyboard`, que expõe o envio e os avisos de sessão.
 */
 (function () {
   "use strict";
@@ -27,6 +33,13 @@
   var PREFS_KEY = "remoteKeyboardPrefs";
   var ROW_UNITS = 15;
   var CAPS_LOCK = 57;
+
+  // Teclado reduzido (`010-joystick-virtual-iphone` RF-13): duas linhas com o que a escrita curta pede.
+  var COMPACT_ROWS = [
+    [53, 48, 51, 36, 49],
+    [56, 59, 58, 55, 123, 125, 126, 124]
+  ];
+  var COMPACT_WIDTHS = { 49: 5, 36: 2, 51: 2, 48: 2, 53: 2 };
 
   var CLOSE_BUSY = 4001;
   var CLOSE_BEFORE_HELLO = 4002;
@@ -83,8 +96,14 @@
   var keyElements = {};
   var touches = {};
 
+  // Ganchos do `controller.js`, que desenha o controle virtual e comanda o bloco central.
+  var hooks = { welcome: null, message: null, release: null };
+
   var prefs = readPrefs();
   var statusOk = false;
+  // Estado do bloco central; `controller.js` o comanda e o guarda nas preferências (D-08, D-11).
+  var center = "compact";
+  var lastLayout = null;
   // Última lista do Mac: `rev` e até três palavras.
   var offered = null;
   // Esmaecida desde o último `down` de tecla comum, até a próxima `suggest` (D-10).
@@ -125,7 +144,7 @@
   // MARK: - Preferências da faixa (D-11)
 
   function readPrefs() {
-    var value = { lang: "pt", visible: true };
+    var value = { lang: "pt", visible: true, center: "compact", sensitivity: 1, controls: true };
     try {
       var stored = JSON.parse(window.localStorage.getItem(PREFS_KEY));
       if (stored && (stored.lang === "pt" || stored.lang === "en")) {
@@ -133,6 +152,16 @@
       }
       if (stored && typeof stored.visible === "boolean") {
         value.visible = stored.visible;
+      }
+      if (stored && (stored.center === "pointer" || stored.center === "compact" || stored.center === "full")) {
+        value.center = stored.center;
+      }
+      if (stored && typeof stored.sensitivity === "number"
+          && stored.sensitivity >= 0.5 && stored.sensitivity <= 2) {
+        value.sensitivity = stored.sensitivity;
+      }
+      if (stored && typeof stored.controls === "boolean") {
+        value.controls = stored.controls;
       }
     } catch (e) {
       // Sem armazenamento ou valor corrompido, vale o padrão.
@@ -142,7 +171,10 @@
 
   function storePrefs() {
     try {
-      window.localStorage.setItem(PREFS_KEY, JSON.stringify({ lang: prefs.lang, visible: prefs.visible }));
+      window.localStorage.setItem(PREFS_KEY, JSON.stringify({
+        lang: prefs.lang, visible: prefs.visible, center: prefs.center, sensitivity: prefs.sensitivity,
+        controls: prefs.controls
+      }));
     } catch (e) {
       // Sem armazenamento, a escolha vale só enquanto a página estiver aberta.
     }
@@ -316,6 +348,9 @@
         setStatus("Conectado", "ok");
         startPing();
         sendPrefs();
+        if (hooks.welcome) {
+          hooks.welcome();
+        }
         break;
       case "reject":
         rejected(message.reason);
@@ -340,6 +375,10 @@
           setStatus("Sem permissão de Acessibilidade no Mac", "warn");
         }
         break;
+      default:
+        if (hooks.message) {
+          hooks.message(message);
+        }
     }
   }
 
@@ -472,7 +511,6 @@
     if (!Array.isArray(message.rows) || !Array.isArray(message.keys)) {
       return;
     }
-    releaseLocal();
     physical = message.physical === "iso" ? "iso" : "ansi";
     labels = {};
     message.keys.forEach(function (entry) {
@@ -480,8 +518,21 @@
         labels[entry.k] = entry;
       }
     });
+    lastLayout = message.rows;
+    drawKeyboard();
+  }
+
+  /// Desenha o teclado do estado em vigor: completo em `full`, reduzido em `compact`, nenhum em `pointer`.
+  function drawKeyboard() {
+    releaseLocal();
     keyElements = {};
-    var rows = message.rows.map(function (codes) {
+    if (center === "pointer" || !lastLayout) {
+      keyboardEl.replaceChildren();
+      return;
+    }
+    var source = center === "compact" ? COMPACT_ROWS : lastLayout;
+    var full = center === "compact" ? compactUnits() : ROW_UNITS;
+    var rows = source.map(function (codes) {
       var row = document.createElement("div");
       row.className = "row";
       var total = 0;
@@ -492,16 +543,16 @@
         var key = document.createElement("div");
         key.className = labels[k] ? "key" : "key special";
         key.dataset.k = String(k);
-        var units = width(k);
-        key.style.flexGrow = String(units);
-        total += units;
+        var span = center === "compact" ? compactWidth(k) : width(k);
+        key.style.flexGrow = String(span);
+        total += span;
         keyElements[k] = key;
         row.appendChild(key);
       });
-      if (total < ROW_UNITS) {
+      if (total < full) {
         var spacer = document.createElement("div");
         spacer.className = "spacer";
-        spacer.style.flexGrow = String(ROW_UNITS - total);
+        spacer.style.flexGrow = String(full - total);
         row.appendChild(spacer);
       }
       return row;
@@ -509,6 +560,18 @@
     keyboardEl.replaceChildren.apply(keyboardEl, rows);
     applyModifiers(modifiers);
     applyCaps();
+  }
+
+  function compactWidth(k) {
+    return COMPACT_WIDTHS.hasOwnProperty(k) ? COMPACT_WIDTHS[k] : 1;
+  }
+
+  // As duas linhas do teclado reduzido somam o mesmo total, para as teclas ficarem alinhadas.
+  function compactUnits() {
+    return COMPACT_ROWS.reduce(function (most, codes) {
+      var total = codes.reduce(function (sum, k) { return sum + compactWidth(k); }, 0);
+      return Math.max(most, total);
+    }, 0);
   }
 
   function applyModifiers(message) {
@@ -625,6 +688,34 @@
       picks[id].classList.remove("pressed");
     });
     picks = {};
+    if (hooks.release) {
+      hooks.release();
+    }
+  }
+
+  /// Troca do bloco central, pedida pelo `controller.js` (D-08): as teclas mantidas por toque são soltas aqui, e o
+  /// Mac solta as suas ao receber o `mode`.
+  function setCenter(value) {
+    if (value !== "pointer" && value !== "compact" && value !== "full") {
+      return;
+    }
+    if (center === value) {
+      return;
+    }
+    releaseKeys();
+    center = value;
+    appEl.dataset.center = value;
+    drawKeyboard();
+  }
+
+  /// Solta no Mac as teclas que o dedo ainda mantém, antes de o desenho mudar sob ele.
+  function releaseKeys() {
+    Object.keys(touches).forEach(function (id) {
+      var key = touches[id];
+      delete touches[id];
+      key.classList.remove("pressed");
+      send({ t: "up", k: Number(key.dataset.k), ts: Date.now() });
+    });
   }
 
   // Sair da tela solta tudo no Mac (D-11); a volta reconecta de imediato se o iOS fechou o canal.
@@ -648,6 +739,10 @@
   document.addEventListener("touchend", touchEnd, { passive: false });
   document.addEventListener("touchcancel", touchEnd, { passive: false });
   document.addEventListener("touchmove", function (event) {
+    // O seletor de sensibilidade do apontamento é o único controle que precisa do arrasto do navegador (RF-20).
+    if (event.target && event.target.closest && event.target.closest(".sensitivity")) {
+      return;
+    }
     event.preventDefault();
   }, { passive: false });
   document.addEventListener("gesturestart", function (event) {
@@ -682,6 +777,18 @@
     });
   });
 
+  window.RemoteKeyboard = {
+    send: send,
+    prefs: prefs,
+    storePrefs: storePrefs,
+    setCenter: setCenter,
+    center: function () { return center; },
+    isConnected: function () { return welcomed; },
+    on: function (name, handler) { hooks[name] = handler; }
+  };
+
   applyPrefs();
-  connect();
+  appEl.dataset.center = center;
+  // O `connect` sai do quadro atual para o `controller.js` registrar seus ganchos antes do primeiro `welcome`.
+  window.setTimeout(connect, 0);
 })();

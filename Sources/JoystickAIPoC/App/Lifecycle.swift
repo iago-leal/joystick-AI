@@ -10,6 +10,8 @@ final class Lifecycle {
     private var cleanedUp = false
     /// Teclado remoto (`008-iphone-teclado-remoto` D-13, 001 RN-04): solto junto com o controle.
     var remote: RemoteKeyboardActions?
+    /// Controle virtual do iPhone (`010-joystick-virtual-iphone` §5): solto pelo mesmo caminho.
+    var virtualController: VirtualControllerActions?
     /// Chamado na main thread depois das solturas, para fechar os listeners do teclado remoto.
     var onCleanUp: (() -> Void)?
 
@@ -37,9 +39,10 @@ final class Lifecycle {
     func cleanUp(reason: TerminationReason) {
         guard !cleanedUp else { return }
         cleanedUp = true
-        let released = context.queue.sync { [remote] in
+        let released = context.queue.sync { [remote, virtualController] in
             shortcuts.releaseAll()
             remote?.releaseAll()
+            virtualController?.releaseAll()
             return buttons.releaseAll()
         }
         onCleanUp?()

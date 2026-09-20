@@ -1,5 +1,6 @@
 /*
-  Estilo do teclado remoto (`008-iphone-teclado-remoto` D-15, RF-04, RF-06, RF-10).
+  Estilo do controle e do teclado remotos (`008-iphone-teclado-remoto` D-15, RF-04, RF-06, RF-10;
+  `010-joystick-virtual-iphone` D-02, D-15).
   Uma só tela na horizontal, sem zoom nem rolagem. Cada linha soma 15 unidades de largura; keyboard.js dá a cada
   tecla o seu `flex-grow`. Modificadores: solto (normal), mantido (`data-state="held"`), preso (`latched`).
 
@@ -7,6 +8,22 @@
   teclas, dividindo a altura com o teclado na proporção das linhas (a de F1 a F12 vale 0,6, as outras cinco, 1).
   Com a faixa oculta (`.collapsed`), volta à altura de 26 px. Sugestões esmaecidas (`stale`) ou inativas (`inactive`)
   não aceitam toque.
+
+  Controle virtual (`010-joystick-virtual-iphone` D-02, revista no PM-0 e emendada por E-04 e E-07): sob a barra de
+  estado vem a faixa dos botões secundários, que atravessa a tela; abaixo dela, três colunas. As laterais têm largura
+  fixa e guardam os gatilhos do seu lado e o agrupamento em cruz, que traz o analógico daquele lado no vão central. A
+  do meio cresce e traz o bloco central. O estado dele vem de `data-center` no `.app`: `pointer` mostra a área de
+  apontamento, `compact` o teclado reduzido e `full` o teclado completo. Todo alvo de toque tem ao menos 44 px.
+
+  A altura é o recurso escasso na horizontal, e a coluna passou a disputá-la entre duas peças apenas, desde que o
+  analógico foi para dentro da cruz: no pé da tela faltava espaço para o dedo descer. O que sobra vira respiro em
+  volta, com as duas peças centradas, e o arranjo cabe do iPhone mini ao Pro Max sem rolagem.
+
+  Empilhamento dentro da cruz: o círculo do analógico é o fundo, e os botões ficam acima dele por `z-index`, de modo
+  que o toque numa seta é da seta e o toque em qualquer outro ponto do disco é do analógico.
+
+  Controle oculto (`data-controls="off"`, E-05): faixa e colunas saem do desenho e o bloco central fica com a tela
+  inteira, para usar o iPhone só como teclado, ou como área de apontamento grande, enquanto o DualSense faz o resto.
 */
 
 :root {
@@ -22,6 +39,8 @@
   --ok: #248a3d;
   --warn: #c93400;
   --suggestion: rgba(255, 255, 255, 0.7);
+  --pad: rgba(0, 0, 0, 0.05);
+  --pad-line: rgba(0, 0, 0, 0.18);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,6 +54,8 @@
     --ok: #30d158;
     --warn: #ff9f0a;
     --suggestion: rgba(255, 255, 255, 0.12);
+    --pad: rgba(255, 255, 255, 0.05);
+    --pad-line: rgba(255, 255, 255, 0.22);
   }
 }
 
@@ -71,20 +92,18 @@ body {
 }
 
 .bar {
-  flex: 1 1 0;
+  flex: 0 0 38px;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   gap: 6px;
-  min-height: 26px;
-  padding: 4px 8px 0;
+  padding: 2px 8px;
   box-sizing: border-box;
   background: var(--bar);
   font-size: 13px;
 }
 
 .collapsed .bar {
-  flex: 0 0 26px;
-  padding-top: 0;
+  flex: 0 0 24px;
 }
 
 .indicator {
@@ -125,10 +144,11 @@ body {
 .suggestion {
   flex: 1 1 0;
   min-width: 0;
-  margin: 0 0 4px;
+  height: 32px;
+  margin: 0;
   padding: 0 6px;
   font: inherit;
-  font-size: 18px;
+  font-size: 17px;
   color: inherit;
   background: var(--suggestion);
   border: none;
@@ -163,11 +183,239 @@ body {
 }
 
 .board {
-  position: relative;
   flex: 5.6 1 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 4px;
+  padding: 4px;
   min-height: 0;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Colunas laterais: largura fixa, para o bloco central ficar com o que sobra. Com o analógico dentro da cruz
+   (E-07), a coluna tem só duas peças, e elas ficam centradas na altura, onde o polegar alcança sem esticar. */
+.side {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.center-col {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+  min-width: 0;
+}
+
+.center {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  min-height: 0;
+  min-width: 0;
+}
+
+/* Faixa do alto: só os botões de analógico e os secundários; os gatilhos desceram para as colunas (E-04).
+   A altura acompanha os 44 px de alvo mínimo mais o respiro de cima. */
+.tray {
+  flex: 0 0 46px;
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  min-width: 0;
+  padding: 4px 4px 0;
+  box-sizing: border-box;
+}
+
+/* Vão entre os três grupos da faixa, para o polegar não confundir gatilho com secundário. */
+.tray-gap {
+  flex: 0 1 24px;
+  min-width: 4px;
+}
+
+/* Área do analógico (E-06 a E-08): ocupa a casa central da cruz, mas o círculo transborda dela e vira o fundo do
+   agrupamento inteiro, passando por baixo das setas e cobrindo os quatro cantos, que estavam vazios. O alvo do
+   polegar deixa de ser uma casa de 47 px e passa a ser um disco de 110 px, achável sem olhar; as setas continuam
+   com a casa inteira, porque ficam por cima no empilhamento e ganham o toque que cai nelas.
+
+   A origem do comando nasce onde o dedo pousa, de modo que pousar não move nada, e o curso até a amplitude máxima é
+   fixo em pixels: o dedo desliza para fora da cruz sem que o tamanho do desenho mande na sensibilidade. */
+.stick-zone {
+  position: relative;
+  z-index: 0;
+  touch-action: none;
+}
+
+/* O círculo é referência visual e alvo: cresce para além da própria casa e desloca-se dentro da cruz. As margens
+   negativas o centram sem gastar o `transform`, que é de `placeStick`. */
+.stick {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 235%;
+  aspect-ratio: 1 / 1;
+  margin-left: -117.5%;
+  margin-top: -117.5%;
+  border-radius: 50%;
+  background: var(--pad);
+  border: 1px solid var(--pad-line);
+  box-sizing: border-box;
+  will-change: transform;
+}
+
+.knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44%;
+  height: 44%;
+  margin: -22% 0 0 -22%;
+  border-radius: 50%;
+  background: var(--key);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  will-change: transform;
+}
+
+.stick-zone.pressed .knob {
+  background: var(--pressed);
+}
+
+.cluster {
+  flex: 0 0 auto;
+  display: grid;
+  gap: 4px;
+  min-height: 0;
+}
+
+/* Gatilhos do lado, no topo da coluna: um toque de distância do polegar que já está no analógico (E-04). */
+.shoulders {
+  flex: 0 0 44px;
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+}
+
+.shoulders .pad-button {
+  flex: 1 1 0;
+  font-size: 15px;
+}
+
+/* Gatilho de camada preso por toque curto, no mesmo laranja dos modificadores presos do teclado (E-04, D-15
+   revista). Vale para L1 e L2; os cliques do ponteiro não prendem. */
+.pad-button[data-state="latched"] {
+  background: var(--latched);
+  color: #000000;
+}
+
+/* Direcional e faces em cruz, com o analógico daquele lado no vão do meio (E-07). */
+.dpad, .faces {
+  aspect-ratio: 1 / 1;
+  align-self: center;
+  width: 100%;
+  max-width: 150px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.pad-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: none;
+  border-radius: 8px;
+  background: var(--key);
+  color: inherit;
+  font: inherit;
+  font-size: 17px;
+  line-height: 1;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  touch-action: none;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Acima do disco do analógico, que passa por baixo de toda a cruz (E-08). */
+  position: relative;
+  z-index: 1;
+}
+
+.tray .pad-button {
+  flex: 1 1 0;
+  font-size: 13px;
+}
+
+.pad-button.pressed {
+  background: var(--pressed);
+}
+
+/* Controle oculto: o bloco central fica com a tela toda (E-05). */
+.app[data-controls="off"] .tray,
+.app[data-controls="off"] .side {
+  display: none;
+}
+
+.control[aria-pressed="false"] {
+  opacity: 0.45;
+}
+
+/* Área de apontamento: só no estado `pointer` (D-02). */
+.pointer {
+  position: relative;
+  display: none;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--pad);
+  border: 1px dashed var(--pad-line);
+  box-sizing: border-box;
+  touch-action: none;
+}
+
+.pointer-hint {
+  font-size: 15px;
+  opacity: 0.5;
+}
+
+.sensitivity {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.sensitivity input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 44px;
+  /* O único controle da página que usa o arrasto do navegador. */
+  touch-action: auto;
+}
+
+.sensitivity-label {
+  flex: 0 0 auto;
+}
+
+.app[data-center="pointer"] .pointer {
+  display: flex;
+}
+
+.app[data-center="pointer"] .keyboard {
+  display: none;
 }
 
 .keyboard {
@@ -175,8 +423,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 4px;
   min-height: 0;
+  min-width: 0;
 }
 
 .row {
@@ -186,14 +434,19 @@ body {
   min-height: 0;
 }
 
-/* A linha de Esc e F1 a F12 é mais baixa, como no Mac. */
-.row:first-child {
+/* A linha de Esc e F1 a F12 é mais baixa, como no Mac; no teclado reduzido, todas as linhas têm a mesma altura. */
+.app[data-center="full"] .row:first-child {
   flex-grow: 0.6;
 }
 
 .key, .spacer {
   flex-basis: 0;
   min-width: 0;
+}
+
+/* Teclado reduzido: teclas maiores, porque são poucas (D-02, RF-13). */
+.app[data-center="compact"] .key {
+  font-size: 20px;
 }
 
 .key {
@@ -214,7 +467,7 @@ body {
   font-size: 14px;
 }
 
-.row:first-child .key {
+.app[data-center="full"] .row:first-child .key {
   font-size: 11px;
 }
 
@@ -239,6 +492,7 @@ body {
 .notice {
   position: absolute;
   inset: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -73,6 +73,50 @@ import Testing
         #expect(stop.move == PointDelta(dx: 4, dy: 2))
     }
 
+
+    @Test func arrastoRemotoNaoSaiNaChegadaEPedeTemporizador() {
+        var engine = PointerMotionEngine(settings: PointerSettings())
+        let out = engine.remoteTouchDelta(PointDelta(dx: 30, dy: 0), pressed: [])
+        #expect(out.move == nil)
+        #expect(out.timer == .start)
+        #expect(engine.timerRunning)
+    }
+
+    @Test func arrastoRemotoSaiRepartidoNosTicksEDesligaOTemporizadorNoFim() {
+        var engine = PointerMotionEngine(settings: PointerSettings())
+        _ = engine.remoteTouchDelta(PointDelta(dx: 60, dy: 0), pressed: [])
+        let first = engine.tick(dt: dt, pressed: []).move?.dx ?? 0
+        #expect(first > 0)
+        #expect(first < 60)
+        var total = first
+        var stopped = false
+        for _ in 0..<240 where !stopped {
+            let out = engine.tick(dt: dt, pressed: [])
+            total += out.move?.dx ?? 0
+            stopped = out.timer == .stop
+        }
+        #expect(stopped)
+        #expect(!engine.timerRunning)
+        #expect(abs(total - 60) <= 1)
+    }
+
+    @Test func oAnalogicoNaoDesligaOTemporizadorComArrastoRemotoPendente() {
+        var engine = PointerMotionEngine(settings: PointerSettings())
+        _ = engine.setLeftStick(x: 1.0, y: 0.0, pressed: [])
+        _ = engine.remoteTouchDelta(PointDelta(dx: 60, dy: 0), pressed: [])
+        let stop = engine.setLeftStick(x: 0.0, y: 0.0, pressed: [])
+        #expect(stop.timer == .none)
+        #expect(engine.timerRunning)
+    }
+
+    @Test func aPrecisaoValeTambemParaOArrastoRemoto() {
+        var engine = PointerMotionEngine(settings: PointerSettings())
+        _ = engine.remoteTouchDelta(PointDelta(dx: 100, dy: 0), pressed: [.l1])
+        var total = 0.0
+        for _ in 0..<240 { total += engine.tick(dt: dt, pressed: [.l1]).move?.dx ?? 0 }
+        #expect(abs(total - 30) <= 1)
+    }
+
     @Test func precisaoSoComL1SemOutroBotao() {
         #expect(PointerMotionEngine.precisionActive(pressed: [.l1]))
         #expect(!PointerMotionEngine.precisionActive(pressed: [.l1, .r2]))
