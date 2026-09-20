@@ -1,9 +1,9 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/009-sugestao-de-palavras",
-  "feature-id": "009",
-  "short-name": "sugestao-de-palavras",
-  "started-at": "2026-09-19T20:57:54Z",
+  "feature-dir": "_reversa_forward/010-joystick-virtual-iphone",
+  "feature-id": "010",
+  "short-name": "joystick-virtual-iphone",
+  "started-at": "2026-09-20T13:40:36Z",
   "current-stage": "to-do",
   "stages-completed": [
     "requirements",
