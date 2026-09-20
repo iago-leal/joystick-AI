@@ -1,17 +1,15 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/010-joystick-virtual-iphone",
-  "feature-id": "010",
-  "short-name": "joystick-virtual-iphone",
-  "started-at": "2026-09-20T13:40:36Z",
-  "current-stage": "sync",
+  "feature-dir": "_reversa_forward/011-bateria-e-cursor-no-menu",
+  "feature-id": "011",
+  "short-name": "bateria-e-cursor-no-menu",
+  "started-at": "2026-09-20T20:58:45Z",
+  "current-stage": "to-do",
   "stages-completed": [
     "requirements",
     "clarify",
     "plan",
-    "to-do",
-    "coding",
-    "sync"
+    "to-do"
   ],
   "paused-features": [
     {
