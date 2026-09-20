@@ -144,7 +144,7 @@ body {
 .suggestion {
   flex: 1 1 0;
   min-width: 0;
-  height: 32px;
+  align-self: stretch;
   margin: 0;
   padding: 0 6px;
   font: inherit;
@@ -171,15 +171,19 @@ body {
   opacity: 0.35;
 }
 
+/* Os botões da barra tomam toda a altura dela e ao menos 44 px de largura (E-11): a aferição da P-03 os pegou com
+   21 pt de altura, metade do mínimo, enquanto sobrava espaço vertical dentro da própria barra. Crescer a barra
+   desfaria a E-03, que a encolheu de propósito; esticar o alvo dentro dela não custa nada a ninguém. */
 .control {
   flex: 0 0 auto;
-  align-self: center;
+  align-self: stretch;
+  min-width: 44px;
   font: inherit;
   color: inherit;
   background: none;
   border: 1px solid currentColor;
   border-radius: 6px;
-  padding: 1px 10px;
+  padding: 0 10px;
 }
 
 .board {
@@ -449,6 +453,12 @@ body {
   font-size: 20px;
 }
 
+/* No teclado reduzido as treze teclas dividem a largura do bloco central: com 4 px de vão elas param em 42 pt, e com
+   2 px passam dos 44 exigidos pela diretriz. Vale só aqui, porque no teclado completo o vão não é o que aperta (E-12). */
+[data-center="compact"] .row {
+  gap: 2px;
+}
+
 .key {
   display: flex;
   align-items: center;
@@ -525,4 +535,48 @@ body {
     text-align: center;
     font-size: 22px;
   }
+}
+
+/* Painel da sonda P-03, só com `?p03` na URL: mede os alvos no próprio aparelho, em vez de pedir cabo e inspetor.
+   Fica no CSS, e não em estilo inline, porque a política de conteúdo da página é `style-src 'self'`. */
+.p03 {
+  position: fixed;
+  inset: 8px;
+  z-index: 9999;
+  overflow: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(18, 18, 20, 0.96);
+  color: #f2f2f2;
+  font-size: 13px;
+  line-height: 1.4;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.p03-titulo {
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.p03-linha {
+  margin: 2px 0;
+  white-space: pre;
+}
+
+.p03-falha {
+  color: #ff6b6b;
+}
+
+.p03-aviso {
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+.p03-botao {
+  margin: 10px 8px 0 0;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
 }

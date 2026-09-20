@@ -21,6 +21,11 @@
   Controle oculto (E-05): o botão `controls` da barra esconde a faixa e as colunas e entrega a tela inteira ao bloco
   central. Antes de sumir, o controle solta tudo o que mantinha, para nada ficar preso no Mac.
 
+  Sonda P-03, aferição dos alvos: abrir a página com `?p03` mede, no próprio aparelho, a caixa de cada alvo tocável
+  e mostra o veredito num painel. O inspetor do Safari faria o mesmo, mas exige cabo; a página se medir sozinha dá o
+  número no aparelho real, sem cabo, e continua valendo quando o desenho mudar. Nada é enviado ao Mac: a sonda só lê
+  e desenha.
+
   O estado do bloco central e a sensibilidade ficam em `remoteKeyboardPrefs`, ao lado das preferências da faixa de
   sugestões, sempre dentro de `try` (D-11). A tela fica acesa pelo bloqueio de tela do navegador enquanto a página
   estiver visível, e falha em silêncio quando o recurso não existir ou for negado (D-14, RF-19).
@@ -619,6 +624,113 @@
       applyCenter(message.m, false);
     }
   });
+  // ----- Sonda P-03: aferição dos alvos tocáveis -----
+
+  // Mínimo das diretrizes da Apple para alvo tocável, em pontos.
+  var P03_MIN = 44;
+  // O que conta como alvo: tudo o que responde ao dedo com uma ação própria. A área de apontamento e as zonas dos
+  // analógicos ficam de fora da conta porque são superfícies de arrasto, e não alvos a acertar.
+  var P03_ALVOS = ".pad-button, .key, .control, .suggestion";
+
+  function p03Nome(el) {
+    if (el.dataset && el.dataset.b) { return el.dataset.b; }
+    if (el.id) { return el.id; }
+    var texto = (el.textContent || "").trim();
+    if (texto) { return texto.length > 12 ? texto.slice(0, 12) + "…" : texto; }
+    return el.className || "sem nome";
+  }
+
+  function p03Medir() {
+    var linhas = [];
+    var alvos = document.querySelectorAll(P03_ALVOS);
+    for (var i = 0; i < alvos.length; i += 1) {
+      var el = alvos[i];
+      var caixa = el.getBoundingClientRect();
+      // Alvo escondido pelo estado atual da página não é alvo: medi-lo daria zero e sujaria o veredito.
+      if (caixa.width === 0 || caixa.height === 0) { continue; }
+      linhas.push({
+        nome: p03Nome(el),
+        largura: Math.round(caixa.width * 10) / 10,
+        altura: Math.round(caixa.height * 10) / 10,
+        menor: Math.round(Math.min(caixa.width, caixa.height) * 10) / 10
+      });
+    }
+    linhas.sort(function (a, b) { return a.menor - b.menor; });
+    return linhas;
+  }
+
+  function p03Linha(texto, destaque) {
+    var linha = document.createElement("div");
+    linha.className = destaque ? "p03-linha p03-falha" : "p03-linha";
+    linha.textContent = texto;
+    return linha;
+  }
+
+  function p03Botao(rotulo, acao) {
+    var botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "p03-botao";
+    botao.textContent = rotulo;
+    botao.addEventListener("click", acao);
+    return botao;
+  }
+
+  function p03Mostrar() {
+    var antigo = document.getElementById("p03-painel");
+    if (antigo) { antigo.remove(); }
+
+    var linhas = p03Medir();
+    var reprovados = linhas.filter(function (l) { return l.menor < P03_MIN; });
+
+    var painel = document.createElement("div");
+    painel.id = "p03-painel";
+    painel.className = "p03";
+
+    var titulo = document.createElement("div");
+    titulo.className = "p03-titulo";
+    titulo.textContent = "P-03 · alvos tocáveis";
+    painel.appendChild(titulo);
+
+    painel.appendChild(p03Linha("estado do bloco central: " + appEl.dataset.center
+      + " · controle " + appEl.dataset.controls));
+    painel.appendChild(p03Linha("tela: " + Math.round(window.innerWidth) + " × "
+      + Math.round(window.innerHeight) + " pt, escala " + (window.devicePixelRatio || 1)));
+    painel.appendChild(p03Linha(linhas.length + " alvos medidos, mínimo exigido " + P03_MIN + " pt"));
+
+    if (linhas.length) {
+      painel.appendChild(p03Linha("menor alvo: " + linhas[0].nome + " " + linhas[0].largura
+        + " × " + linhas[0].altura));
+    }
+
+    if (reprovados.length) {
+      painel.appendChild(p03Linha("abaixo do mínimo: " + reprovados.length, true));
+      reprovados.forEach(function (l) {
+        painel.appendChild(p03Linha("  " + l.nome + "  " + l.largura + " × " + l.altura, true));
+      });
+    } else {
+      painel.appendChild(p03Linha("nenhum alvo abaixo do mínimo"));
+    }
+
+    var aviso = document.createElement("div");
+    aviso.className = "p03-aviso";
+    aviso.textContent = "Cada estado do bloco central tem os seus alvos: troque de estado e meça de novo.";
+    painel.appendChild(aviso);
+
+    painel.appendChild(p03Botao("Medir de novo", p03Mostrar));
+    painel.appendChild(p03Botao("Fechar", function () { painel.remove(); }));
+
+    document.body.appendChild(painel);
+  }
+
+  function p03Iniciar() {
+    // A chave vale na consulta e no fragmento: o endereço do pareamento termina em `#c=`, e quem acrescenta `?p03`
+    // no fim de um endereço já com fragmento acaba escrevendo a chave dentro dele.
+    var chave = window.location.search.indexOf("p03") >= 0 || window.location.hash.indexOf("p03") >= 0;
+    if (!chave) { return; }
+    // O teclado e os clusters nascem do JS; medir antes de eles existirem daria uma lista vazia.
+    window.setTimeout(p03Mostrar, 1200);
+  }
+
   channel.on("release", releaseLocal);
 
   document.addEventListener("touchstart", touchStart, { passive: false });
@@ -643,4 +755,5 @@
     }
   });
   requestWakeLock();
+  p03Iniciar();
 })();

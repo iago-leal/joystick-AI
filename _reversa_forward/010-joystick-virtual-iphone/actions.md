@@ -68,7 +68,7 @@
 | T030 | Instalar o aplicativo com `JOYSTICK_SIGN_IDENTITY="JoystickAI Local Signing" ./scripts/build-app.sh`, conferir a assinatura com `./scripts/check-signature.sh` e parar no PM-0 | T029 | - | `scripts/build-app.sh` | 🟢 | `[X]` |
 | T031 | Registrar no `onboarding.md` §2 o resultado de P-01 a P-04; se P-01 for reprovada, parar e devolver ao usuário a decisão sobre o arranjo de áudio do ditado | PM-0 | - | `_reversa_forward/010-joystick-virtual-iphone/onboarding.md` | 🟡 | `[X]` |
 | T032 | Só se P-03 for reprovada: ajustar em `keyboard.css` as medidas das colunas e do bloco central às dimensões apuradas e reinstalar o aplicativo; aprovada, registrar "não aplicável" nas notas de execução (D-02) | T031 | - | `Resources/RemoteKeyboard/keyboard.css` | 🟡 | `[X]` |
-| T033 | Registrar no `onboarding.md` §3 o resultado do PM-1 por passo, com as observações (8 de 40 registrados em 2026-09-20) | PM-1 | - | `_reversa_forward/010-joystick-virtual-iphone/onboarding.md` | 🟢 | `[ ]` |
+| T033 | Registrar no `onboarding.md` §3 o resultado do PM-1 por passo, com as observações (os 40 registrados em 2026-09-20) | PM-1 | - | `_reversa_forward/010-joystick-virtual-iphone/onboarding.md` | 🟢 | `[X]` |
 | T034 | Emenda E-04: tirar os gatilhos da faixa do alto para o topo das colunas e fazer L1, L2, R1 e R2 prenderem por toque curto, com soltura em todo caminho de saída (D-15 revista, RF-21) | T031 | - | `Resources/RemoteKeyboard/index.html`, `Resources/RemoteKeyboard/keyboard.css`, `Resources/RemoteKeyboard/controller.js`, `Tests/JoystickCoreTests/RemoteKeyboardAssetsTests.swift` | 🟢 | `[X]` |
 | T035 | Emenda E-05: acrescentar o botão que esconde o controle inteiro, com soltura antes de sumir e preferência guardada (D-16, RF-22) | T034 | - | `Resources/RemoteKeyboard/index.html`, `Resources/RemoteKeyboard/keyboard.css`, `Resources/RemoteKeyboard/keyboard.js`, `Resources/RemoteKeyboard/controller.js` | 🟢 | `[X]` |
 | T036 | Emenda E-06: separar o comando do analógico do seu desenho, com origem fixada no pousar, área de toque maior que o círculo e curso fixo de 64 px (D-17, RF-23) | T035 | - | `Resources/RemoteKeyboard/index.html`, `Resources/RemoteKeyboard/keyboard.css`, `Resources/RemoteKeyboard/controller.js`, `Tests/JoystickCoreTests/RemoteKeyboardAssetsTests.swift` | 🟢 | `[X]` |
@@ -106,6 +106,17 @@
 - **T037 (2026-09-20):** a origem dinâmica de E-06 revelou um efeito de borda que o teste no aparelho expôs: com o analógico no pé da coluna, pousar o dedo baixo deixava pouca tela para descer, e a intenção do usuário era justamente usar a parte de baixo. Em vez de voltar à origem fixa, que traria de volta o movimento ao pousar fora do centro, o analógico mudou de lugar: cada um foi para o vão central do seu agrupamento em cruz, entre as setas à esquerda e entre ✕, ○, □ e △ à direita. Ali há curso para todos os lados, o polegar já vive no meio da cruz e o dedo pode deslizar por cima dos botões vizinhos sem acioná-los, porque o toque é capturado no pouso e o botão não acompanha o dedo. O `controller.js` move o elemento ao montar o desenho, de modo que o documento segue com um só analógico por lado e os identificadores dos testes não mudam. A coluna ficou com duas peças, gatilhos e cruz, centradas na altura, e a cruz cresceu de 142 px para 150 px. Suíte em 414 casos e roteiro fora do navegador em 64 passos, todos verdes.
 
 - **T038 (2026-09-20):** o teste no aparelho aprovou o passo 1c, nenhuma seta disparou com o dedo deslizando por cima delas, mas apontou que o alvo do analógico era pequeno para ser achado sem olhar. Em vez de encolher as setas, o que as levaria abaixo dos 44 px, ou de alargar a coluna, o que estreitaria o teclado completo, o disco cresceu para 110 px e passou a ser o fundo da cruz inteira, aproveitando os quatro cantos que estavam vazios. Os botões ganharam `z-index` acima dele e continuam recebendo o toque que cai neles. O limite de deslocamento do desenho passou da casa central para a cruz, e por isso a área de cada analógico só é resolvida depois de a cruz ser montada. Suíte em 414 casos e roteiro fora do navegador em 64 passos, todos verdes.
+
+- **T033 e P-03 (2026-09-20):** o PM-1 correu inteiro no aparelho e **os 40 passos foram aprovados**, sem
+  reprovação nem ressalva pendente; o passo 5, o arrasto no estado de apontamento, chegou a passar com ressalva e
+  subiu depois das emendas E-09 e E-10. Dois desvios ficam anotados: os passos 21 e 22 correram com o Ipega, porque
+  o DualSense não estava à mão, de modo que o cruzamento do touchpad físico com o apontamento do iPhone ficou sem
+  cobertura; e o passo 28, a leitura do log, foi executado pelo assistente, por ser leitura de arquivo. A **P-03,
+  que a T032 previa e que o PM-0 não pôde executar por falta de cabo, foi executada sem cabo**: a página passou a
+  se medir sozinha, com `?p03` na URL, e a medição foi repetida num navegador dirigido, com a tela em 896 × 350 pt.
+  Os 18 botões do controle passam em todos os estados; a barra foi a 34 pt e as sugestões a acompanham (E-11 e
+  E-12), o teclado reduzido cruzou os 44 pela E-12 e o teclado completo com o controle à vista não alcança 44 por
+  geometria, o que levou à reescrita do critério do O003.
 
 ## Histórico de alterações
 

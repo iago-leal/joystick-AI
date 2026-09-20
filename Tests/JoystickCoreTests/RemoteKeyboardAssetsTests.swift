@@ -164,4 +164,30 @@ import Testing
         let css = try Self.contents("keyboard.css")
         #expect(css.contains(".stick-zone"))
     }
+    /// Sonda P-03 (`010-joystick-virtual-iphone`): a página se mede sozinha no aparelho, em vez de exigir cabo e
+    /// inspetor. Só com `?p03` na URL, sem estilo inline, porque a política de conteúdo é `style-src 'self'`.
+    @Test func scriptAferirOsAlvosSoComAChaveNaURL() throws {
+        let script = try Self.contents("controller.js")
+        #expect(script.contains("P03_MIN = 44"))
+        #expect(script.contains("getBoundingClientRect"))
+        #expect(script.contains(#"window.location.search.indexOf("p03")"#))
+        #expect(script.contains(#"window.location.hash.indexOf("p03")"#))
+        #expect(script.contains("p03Iniciar"))
+        #expect(!script.contains("cssText"))
+
+        let css = try Self.contents("keyboard.css")
+        #expect(css.contains(".p03 {"))
+        #expect(css.contains(".p03-falha"))
+    }
+
+    /// E-11, saída da P-03: o alvo dos botões da barra cresceu dentro da barra, sem a barra crescer.
+    @Test func botoesDaBarraTomamAAlturaDaBarra() throws {
+        let css = try Self.contents("keyboard.css")
+        let control = try #require(css.range(of: ".control {"))
+        let bloco = String(css[control.lowerBound...].prefix(while: { $0 != "}" }))
+        #expect(bloco.contains("align-self: stretch"))
+        #expect(bloco.contains("min-width: 44px"))
+        #expect(!bloco.contains("align-self: center"))
+    }
+
 }
