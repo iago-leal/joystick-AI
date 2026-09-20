@@ -45,7 +45,7 @@ Preencher com o resultado de cada sonda de `investigation.md` §7. Reprovada a P
 | E-09 | O passo 5 do PM-1 passou com ressalva: o arrasto na área de apontamento movia o cursor a distância certa, mas aos pulos | Coalescer por quadro e medir a área por série | O `touchmove` do iOS entrega mais amostras do que o Mac transforma em movimento contínuo, e cada uma virava uma mensagem e um `move` imediato, de modo que a rajada chegava como salto; o analógico já não tinha o defeito porque drena por `requestAnimationFrame` desde a origem. O arrasto passou a usar o mesmo mecanismo, com no máximo um envio por quadro e por dedo, e pousar e levantar seguem imediatos, porque deles dependem o começo e o fim da série. Junto, a caixa da área deixou de ser pedida a cada amostra, o que forçava recálculo de layout no Safari no meio do gesto: agora é medida quando a série começa, o que também cobre giro do aparelho, troca de bloco central e controle escondido |
 | E-10 | O reteste do passo 5 depois da E-09 continuou travado, ainda que menos: coalescer na página regularizou o que sai do iPhone, mas não o que chega ao Mac | Alisar o arrasto remoto no laço de 120 Hz | O touchpad do controle entrega centenas de amostras por segundo em cadência estável, e por isso aplicar cada delta na chegada basta; o iPhone entrega no máximo uma por quadro e ainda por Wi-Fi, de modo que elas chegam em rajada e em vazio e o cursor transcreve o jitter da rede. O `InputEvent` passou a dizer se a entrada é remota, e o arrasto remoto deixou de virar movimento na chegada: entra num planador (`TouchGlide`), que gasta uma fração do que falta andar a cada tick, com constante de tempo de 22 ms. O temporizador de 120 Hz, antes ligado só pelos analógicos, passa a ser ligado também pelo arrasto remoto e a se desligar quando o planador esvazia. O touchpad físico segue pelo caminho de antes, sem atraso acrescentado |
 | E-11 | A P-03 pegou os botões da barra com 21 pt de altura, menos da metade do mínimo, enquanto sobrava altura dentro da própria barra | Esticar o alvo dentro da barra, sem crescer a barra | Os botões passaram a tomar a altura toda da barra e a ter ao menos 44 px de largura, indo de 21 para 34 pt de altura. Crescer a barra desfaria a E-03, que a encolheu de propósito para dar espaço ao controle; esticar o alvo dentro dela não custa nada a ninguém |
-| E-12 | Ainda pela P-03: no teclado reduzido as teclas paravam em 42,2 pt de largura, a menos de dois pontos do mínimo, e as sugestões tinham altura fixa de 32 pt | Apertar o vão e esticar a sugestão | O vão entre teclas caiu de 4 px para 2 px, mas só no teclado reduzido, onde as treze teclas dividem a largura do bloco central e o vão é o que aperta; no teclado completo o que aperta é outra coisa. As sugestões deixaram a altura fixa e passaram a acompanhar a barra, como os botões da E-11 |
+| E-12 | Ainda pela P-03: no teclado reduzido as teclas paravam em 42,2 pt de largura, a menos de dois pontos do mínimo, e as sugestões tinham altura fixa de 32 pt | Apertar o vão e esticar a sugestão | O vão entre teclas caiu de 4 px para 2 px, mas só no teclado reduzido, onde as treze teclas dividem a largura do bloco central e o vão é o que aperta; as teclas foram a 43,4 pt, e fechar os seis décimos que faltam custaria vão de 1 px ou largura das colunas, o que não compensa. As sugestões deixaram a altura fixa e passaram a acompanhar a barra, como na E-11. A remedição flagrou o efeito colateral: era a altura fixa das sugestões que sustentava a faixa, que ficou com zero e as deixou sem alvo nenhum; a faixa passou a tomar a altura da barra por conta própria, e sugestões e botões estão os dois em 34 pt |
 
 ## 3. PM-1, roteiro no hardware
 
@@ -140,11 +140,14 @@ coisas que não são:
 - **Controle virtual: aprovado em todos os estados.** Os 18 botões passam, e com folga. É o que esta feature
   desenhou, e o `min-width`/`min-height` de 44 px de `.pad-button`, que até aqui era promessa escrita, está
   aferido.
-- **Barra e sugestões: corrigidos até onde a barra permite.** Os botões estavam com 21 pt de altura e foram a
-  34 pela E-11; as sugestões, com altura fixa de 32, acompanham a barra desde a E-12. Chegar aos 44 exigiria
-  crescer a barra, o que desfaria a E-03. São alvos de uso esporádico, e a decisão de parar em 34 é consciente.
-- **Teclado reduzido: aprovado pela E-12.** As teclas paravam em 42,2 pt de largura, e o vão menor as levou
-  acima de 44.
+- **Barra e sugestões: corrigidos até onde a barra permite, e os dois em 34 pt.** Os botões estavam com 21 pt de
+  altura e foram a 34 pela E-11; as sugestões, com altura fixa de 32, acompanham a barra desde a E-12. Chegar aos
+  44 exigiria crescer a barra, o que desfaria a E-03. São alvos de uso esporádico, e a decisão de parar em 34 é
+  consciente. A remedição depois das emendas valeu por si: ela mostrou que a faixa das sugestões tinha ficado com
+  altura zero, isto é, sem alvo nenhum, porque era a altura fixa das sugestões que a sustentava.
+- **Teclado reduzido: melhorado pela E-12, a seis décimos do mínimo.** As teclas paravam em 42,2 pt de largura
+  e foram a 43,4. Fechar a fresta pediria vão de 1 px entre teclas de 126 pt de altura, ou roubar largura das
+  colunas, que o arranjo aceito em E-07 e E-08 distribuiu; nenhum dos dois compensa 0,6 pt.
 - **Teclado completo: reprovado com o controle à vista, e o critério é que não cabe.** Com o controle oculto só
   a fileira de função fica abaixo (30,4 pt de altura); as teclas normais chegam a 50,7. Com o controle à vista,
   o teclado divide a tela com a barra, a faixa de gatilhos e as duas colunas, e nenhuma tecla alcança 44.

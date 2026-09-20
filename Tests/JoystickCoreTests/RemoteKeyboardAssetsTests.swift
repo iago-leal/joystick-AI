@@ -188,6 +188,11 @@ import Testing
         #expect(bloco.contains("align-self: stretch"))
         #expect(bloco.contains("min-width: 44px"))
         #expect(!bloco.contains("align-self: center"))
+
+        // A faixa precisa da altura da barra: sem isso, as sugestões, que deixaram de ter altura fixa, ficam com
+        // alvo de altura zero, que é o que a remedição da P-03 flagrou.
+        let strip = try #require(css.range(of: ".strip {"))
+        #expect(String(css[strip.lowerBound...].prefix(while: { $0 != "}" })).contains("align-self: stretch"))
     }
 
 }

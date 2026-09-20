@@ -40,7 +40,7 @@ A feature estende a 008 (iPhone como teclado remoto), que está em código mas a
 
 ## Regras sob vigilância
 
-W001 a W009 no watch principal e O001 a O014 em "Observações", em [`_reversa_forward/010-joystick-virtual-iphone/regression-watch.md`](../../_reversa_forward/010-joystick-virtual-iphone/regression-watch.md). A O003, dos alvos tocáveis, teve o critério reescrito depois da medição: cobra 44 pt dos botões do controle, que passam, e tecla inteira com arranjo previsível do teclado, que por geometria não alcança 44 com o controle à vista. A O008, da coexistência com controle físico, foi verificada com o Ipega, de modo que o cruzamento do touchpad do DualSense com o apontamento do iPhone, que dividem o mesmo `TouchpadTracker`, segue sem cobertura.
+W001 a W009 no watch principal e O001 a O014 em "Observações", em [`_reversa_forward/010-joystick-virtual-iphone/regression-watch.md`](../../_reversa_forward/010-joystick-virtual-iphone/regression-watch.md). A O003, dos alvos tocáveis, teve o critério reescrito depois da medição: cobra 44 pt dos botões do controle, que passam, e tecla inteira com arranjo previsível do teclado, que por geometria não alcança 44 com o controle à vista. Os alvos da barra param em 34 pt, por decisão consciente, e o teclado reduzido em 43,4. A O008, da coexistência com controle físico, foi verificada com o Ipega, de modo que o cruzamento do touchpad do DualSense com o apontamento do iPhone, que dividem o mesmo `TouchpadTracker`, segue sem cobertura.
 
 ## Fontes
 

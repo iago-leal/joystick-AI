@@ -117,8 +117,11 @@ body {
 
 .indicator[data-kind="ok"] { background: var(--ok); }
 
+/* A faixa toma a altura da barra em vez de recebê-la dos filhos: enquanto as sugestões tinham altura fixa, era ela
+   que sustentava a faixa, e tirar essa altura na E-12 deixaria a faixa com zero e as sugestões sem alvo nenhum. */
 .strip {
   flex: 1 1 auto;
+  align-self: stretch;
   display: flex;
   align-items: stretch;
   gap: 4px;
