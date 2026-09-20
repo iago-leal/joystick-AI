@@ -34,6 +34,15 @@ final class PalettePanel: NSPanel {
         paletteView.items = items
     }
 
+    /// Troca só a carga do rodapé (`011-bateria-e-cursor-no-menu` RN-09, RF-10).
+    ///
+    /// Não mexe em itens nem em seleção, não reposiciona o painel, não o traz à frente e não o torna chave: o
+    /// painel continua não ativador e transparente ao mouse, e a contagem dos 60 s de inatividade segue medindo
+    /// apenas entrada do controle. Com o painel fechado, o valor fica guardado e aparece na próxima abertura.
+    func update(charge: ChargeDisplay) {
+        paletteView.charge = charge
+    }
+
     func show(_ snapshot: PaletteSnapshot) {
         guard snapshot.isOpen else {
             orderOut(nil)
@@ -72,6 +81,17 @@ final class PaletteView: NSView {
     static let separator = NSColor(calibratedWhite: 0.45, alpha: 1)
     /// Itens terminados em espaço esperam descrição; o sufixo deixa isso visível.
     static let continuationSuffix = " …"
+    /// Altura do rodapé fixo da carga (`011-bateria-e-cursor-no-menu` D-07). Igual à da linha, para o rodapé ler
+    /// na mesma escala dos itens a 3 m.
+    static let footerHeight: CGFloat = 40
+    static let lowCharge = NSColor.systemOrange
+
+    /// Carga do controle ativo, desenhada no rodapé e **fora** do arranjo de linhas (RN-08): não entra em
+    /// `rowCount`, não é alcançada por ↑ e ↓, não é confirmável por ✕, não desloca a entrada fixa "Editar atalhos"
+    /// e não muda o índice do último confirmado. Acrescentá-la como linha faria todas essas coisas.
+    var charge: ChargeDisplay = .noController {
+        didSet { if charge != oldValue { needsDisplay = true } }
+    }
 
     var items: [PaletteItem] {
         didSet {
@@ -120,14 +140,24 @@ final class PaletteView: NSView {
     /// Ajusta o tamanho ao espaço disponível; sem espaço para todas as linhas, mostra as que cabem e rola
     /// (RNF de legibilidade). Textos mais largos que a tela são truncados no desenho.
     func fit(maxHeight: CGFloat, maxWidth: CGFloat) {
-        let fitting = Int(((maxHeight - 2 * Self.padding) / Self.rowHeight).rounded(.down))
+        // O rodapé da carga disputa altura com as linhas: sem descontá-lo aqui, o painel passaria da área visível
+        // numa tela pequena, que é o risco registrado no `roadmap.md` §9.
+        let forRows = maxHeight - 2 * Self.padding - Self.footerHeight
+        let fitting = Int((forRows / Self.rowHeight).rounded(.down))
         visibleRows = max(1, min(rowCount, fitting))
         let attributes: [NSAttributedString.Key: Any] = [.font: Self.font(selected: true)]
         let textWidth = (0..<rowCount).map { label(row: $0).size(withAttributes: attributes).width }.max() ?? 0
-        let width = min(max(Self.minWidth, Self.markerWidth + textWidth + 3 * Self.padding), max(Self.minWidth, maxWidth))
-        setFrameSize(NSSize(width: width.rounded(.down), height: CGFloat(visibleRows) * Self.rowHeight + 2 * Self.padding))
+        // A frase mais longa do rodapé é a de indisponibilidade; medi-la evita que o texto entre truncado.
+        let footerWidth = Self.widestFooterText.size(withAttributes: attributes).width + Self.markerWidth
+        let width = min(max(Self.minWidth, Self.markerWidth + max(textWidth, footerWidth) + 3 * Self.padding),
+                        max(Self.minWidth, maxWidth))
+        let height = CGFloat(visibleRows) * Self.rowHeight + 2 * Self.padding + Self.footerHeight
+        setFrameSize(NSSize(width: width.rounded(.down), height: height))
         scrollToSelection()
     }
+
+    /// Medida de pior caso do rodapé, para o painel já nascer largo o bastante.
+    static let widestFooterText = footerText(.unavailable)
 
     private func scrollToSelection() {
         if selection < firstVisible {
@@ -172,6 +202,42 @@ final class PaletteView: NSView {
             }
             let textRect = NSRect(x: textX, y: textY, width: bounds.width - textX - Self.padding, height: textHeight)
             text.draw(with: textRect, options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine], attributes: attributes)
+        }
+
+        drawFooter(paragraph: paragraph)
+    }
+
+    /// Rodapé da carga, desenhado depois das linhas e independente delas: nada aqui consulta `selection` nem
+    /// `firstVisible`, e nada aqui altera qualquer um dos dois.
+    private func drawFooter(paragraph: NSParagraphStyle) {
+        let top = bounds.height - Self.padding - Self.footerHeight
+        Self.separator.setFill()
+        NSRect(x: Self.padding, y: top, width: bounds.width - 2 * Self.padding, height: 1).fill()
+
+        let low = charge.isLow
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: Self.font(selected: low),
+            .foregroundColor: low ? Self.lowCharge : NSColor(calibratedWhite: 0.7, alpha: 1),
+            .paragraphStyle: paragraph,
+        ]
+        let text = Self.footerText(charge)
+        let textHeight = text.size(withAttributes: attributes).height
+        let rect = NSRect(x: Self.padding, y: top + (Self.footerHeight - textHeight) / 2,
+                          width: bounds.width - 2 * Self.padding, height: textHeight)
+        text.draw(with: rect, options: [.usesLineFragmentOrigin, .truncatesLastVisibleLine], attributes: attributes)
+    }
+
+    /// O texto do rodapé reaproveita a redação do editor, de propósito: duas redações da mesma informação
+    /// divergiriam com o tempo, e é justamente a divergência entre as duas interfaces que D-03 existe para evitar.
+    /// O glifo à frente é o segundo canal do destaque, ao lado da cor (D-08): a 3 m, sobre o fundo escuro do
+    /// painel, matiz sozinha não sustenta o aviso.
+    static func footerText(_ charge: ChargeDisplay) -> String {
+        let label = EditorLabels.charge(charge)
+        switch charge {
+        case .noController, .unavailable: return label
+        case .known(_, let charging, let low):
+            if low { return "⚠ " + label }
+            return charging ? "⚡ " + label : label
         }
     }
 }

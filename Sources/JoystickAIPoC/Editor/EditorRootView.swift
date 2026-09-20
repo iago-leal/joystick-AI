@@ -19,6 +19,7 @@ struct EditorRootView: View {
                 Spacer()
                 Toggle("Identificar pelo controle", isOn: $model.identifying)
                     .toggleStyle(TVToggleStyle())
+                chargeView
             }
             if model.identifying {
                 Text("Pressione um botão do controle para selecioná-lo; R1, R2 e o touchpad continuam clicando.")
@@ -37,6 +38,26 @@ struct EditorRootView: View {
         }
         .padding(EditorMetrics.padding)
         .frame(maxWidth: .infinity, alignment: .topLeading)
+    }
+
+    /// Carga do controle ativo (`011-bateria-e-cursor-no-menu` D-06, RF-01, RF-03, RF-05).
+    ///
+    /// Vive no cabeçalho porque é a única faixa do editor sempre visível sem rolagem, e a rolagem do editor é só
+    /// vertical. O destaque da faixa baixa é por cor **e** por símbolo: a 3 m, e com o usuário de relance, matiz
+    /// sozinha não sustenta o aviso (D-08).
+    private var chargeView: some View {
+        let low = model.charge.isLow
+        return HStack(spacing: 8) {
+            if let symbol = EditorLabels.chargeSymbol(model.charge) {
+                Image(systemName: symbol)
+                    .font(EditorMetrics.body)
+            }
+            Text(EditorLabels.charge(model.charge))
+                .font(EditorMetrics.body)
+        }
+        .foregroundColor(low ? .orange : .secondary)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(EditorLabels.charge(model.charge))
     }
 
     private var footer: some View {

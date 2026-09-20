@@ -100,14 +100,45 @@ public enum LogEventCatalog {
         LogEvent("cursor.reclamped", level: .info)
     }
 
-    public static func controllerConnected(_ info: ControllerInfo, tArrival: UInt64) -> LogEvent {
-        LogEvent("controller.connected", level: .info, fields: [
+    /// `charge` e `chargeState` são **omitidos** quando a carga é indisponível, e não gravados como zero
+    /// (`011-bateria-e-cursor-no-menu`, `interfaces/diagnostic-log.md` §2): gravar zero tornaria indistinguíveis o
+    /// controle descarregado e o controle que não conta quanta carga tem, a mesma confusão que D-02 evita na tela.
+    public static func controllerConnected(_ info: ControllerInfo, charge: ControllerCharge?, tArrival: UInt64) -> LogEvent {
+        var fields: [String: JSONValue] = [
             "id": .string(info.id.uuidString),
             "name": .string(info.name),
             "connection": .string(info.connection.rawValue),
             "atStartup": .bool(info.atStartup),
             "model": .string(info.model.rawValue),
             "t_arrival": .uint(tArrival),
+        ]
+        if let charge, case .known(let percent, _, _) = ChargeDisplay.decide(hasActiveController: true, charge: charge) {
+            fields["charge"] = .int(Int64(percent))
+            fields["chargeState"] = .string(charge.state.rawValue)
+        }
+        return LogEvent("controller.connected", level: .info, fields: fields)
+    }
+
+    /// Emitido apenas na mudança de faixa de dez ou de estado, nunca a cada leitura; quem decide é a
+    /// `ChargeLogPolicy` (D-09, RN-12).
+    public static func controllerCharge(id: UUID, percent: Int, state: ControllerChargeState) -> LogEvent {
+        LogEvent("controller.charge", level: .info, fields: [
+            "id": .string(id.uuidString),
+            "charge": .int(Int64(percent)),
+            "state": .string(state.rawValue),
+        ])
+    }
+
+    /// Ciclo do menu do ícone da barra (`011-bateria-e-cursor-no-menu` E-04, RF-13).
+    ///
+    /// A forma original deste evento, com `released`, `resynced` e `timerRestarted`, supunha estado retido no fim
+    /// do ciclo, hipótese que as sondas P-01, P-02, P-04 e P-05 falsificaram: nada fica retido, o sistema apenas
+    /// toma os analógicos enquanto o menu rastreia. O que interessa registrar passou a ser se o controle
+    /// conseguiu navegar o menu, e por quanto tempo ele ficou aberto.
+    public static func menuCycle(keys: Int, durationMs: Int) -> LogEvent {
+        LogEvent("menu.cycle", level: .info, fields: [
+            "keys": .int(Int64(keys)),
+            "durationMs": .int(Int64(durationMs)),
         ])
     }
 

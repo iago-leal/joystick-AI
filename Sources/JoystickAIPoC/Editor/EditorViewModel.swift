@@ -45,6 +45,9 @@ final class EditorViewModel: ObservableObject {
     @Published var figureUnavailable: FigureFailureReason?
     /// Modelo do controle ativo, vindo do `ControllerReader`; `nil` sem controle (`007-controle-ipega` D-08).
     @Published var activeModel: ControllerModel?
+    /// Carga do controle ativo já decidida pelo núcleo, vinda do `ChargePoller`
+    /// (`011-bateria-e-cursor-no-menu` D-03, D-05). O editor desenha o que chega e não raciocina sobre nível.
+    @Published var charge: ChargeDisplay = .noController
 
     private let store: ConfigStore
     private let log: DiagnosticLog

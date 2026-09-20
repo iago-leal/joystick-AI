@@ -12,9 +12,23 @@ final class ControllerReader {
     /// Última amostra entregue de cada analógico do Ipega ativo, por controle; só na fila `input`.
     private var ipegaStickStates: [ObjectIdentifier: (left: AxisTouchReader.StickState, right: AxisTouchReader.StickState)] = [:]
     private lazy var extendedReportActivator = ExtendedReportActivator(log: context.log)
-    /// Modelo do controle ativo, publicado na main thread após conexão, desconexão e promoção; `nil` sem controle
-    /// (`007-controle-ipega` D-08). Deve ser atribuído antes de `start()`.
-    var onActiveModelChange: ((ControllerModel?) -> Void)?
+    /// Modelo e carga do controle ativo, publicados juntos na main thread após conexão, desconexão e promoção;
+    /// ausentes sem controle (`007-controle-ipega` D-08, `011-bateria-e-cursor-no-menu` D-05). Um canal só evita
+    /// dois caminhos concorrentes de verdade sobre o mesmo controle ativo. Deve ser atribuído antes de `start()`.
+    var onActiveControllerChange: ((ActiveController?) -> Void)?
+
+    /// O que o canal leva: o modelo, a carga no instante da publicação e o identificador da conexão, que a
+    /// política de registro do log usa para não herdar a faixa do controle anterior.
+    ///
+    /// Leva também o próprio controle, para que o consultor periódico releia a carga da main thread sem voltar à
+    /// fila de entrada. A referência serve **só** à leitura da propriedade de bateria: tudo o mais que se faz com
+    /// um `GCController` continua acontecendo na fila `input`, onde o `handlerQueue` o coloca.
+    struct ActiveController {
+        var id: UUID
+        var model: ControllerModel
+        var charge: ControllerCharge?
+        var device: GCController?
+    }
 
     init(context: InputContext, processStartNs: UInt64) {
         self.context = context
@@ -105,7 +119,7 @@ final class ControllerReader {
 
         controllers[key] = controller
         controller.handlerQueue = context.queue
-        context.log.log(LogEventCatalog.controllerConnected(info, tArrival: tArrival))
+        context.log.log(LogEventCatalog.controllerConnected(info, charge: Self.charge(of: controller), tArrival: tArrival))
         if case .queued(let position) = outcome {
             context.log.log(LogEventCatalog.controllerQueued(id: info.id, position: position))
         }
@@ -114,7 +128,7 @@ final class ControllerReader {
         ButtonReader.attach(controller: controller, gamepad: gamepad, model: model, key: key, info: info, context: context)
         AxisTouchReader.attach(controller: controller, gamepad: gamepad, model: model, key: key, info: info, context: context)
         ControllerDiagnostics.attach(controller: controller, gamepad: gamepad, context: context)
-        if outcome == .active { publishActiveModel() }
+        if outcome == .active { publishActiveController() }
     }
 
     private func disconnect(_ controller: GCController, tArrival: UInt64) {
@@ -140,13 +154,40 @@ final class ControllerReader {
         context.log.log(LogEventCatalog.controllerDisconnected(id: removed.id, tArrival: tArrival))
         controllers[key] = nil
         ipegaStickStates[key] = nil
-        if outcome.wasActive { publishActiveModel() }
+        if outcome.wasActive { publishActiveController() }
     }
 
-    /// Leva o modelo do ativo (o promovido, se houver) à main thread.
-    private func publishActiveModel() {
-        let model = context.registry.active?.model
-        guard let onActiveModelChange else { return }
-        DispatchQueue.main.async { onActiveModelChange(model) }
+    /// Leva o ativo (o promovido, se houver) à main thread, com modelo e carga no mesmo envio.
+    private func publishActiveController() {
+        guard let onActiveControllerChange else { return }
+        let current = activeController()
+        DispatchQueue.main.async { onActiveControllerChange(current) }
+    }
+
+    /// Leitura do controle ativo, na fila `input`. Devolve a ausência quando não há ativo.
+    private func activeController() -> ActiveController? {
+        guard let info = context.registry.active, let key = context.registry.activeKey else { return nil }
+        let device = controllers[key]
+        return ActiveController(id: info.id, model: info.model, charge: device.flatMap(Self.charge(of:)), device: device)
+    }
+
+    /// Traduz a propriedade de bateria do sistema para o tipo do núcleo (D-01).
+    ///
+    /// A propriedade existe desde macOS 11, abaixo do mínimo de macOS 13 do projeto, e por isso não há verificação
+    /// de versão em tempo de execução. Seu nível tem padrão 0 e seu estado tem padrão desconhecido, de modo que a
+    /// ausência de informação chega como estado desconhecido, e não como propriedade ausente; quem trata disso é
+    /// `ChargeDisplay.decide`, nunca esta função (D-02).
+    ///
+    /// Chamável da main thread pelo consultor periódico: é leitura de propriedade, sem estado do leitor e sem
+    /// tocar o registro do controle ativo, e por isso não entra no caminho de tempo real que RN-11 protege.
+    static func charge(of controller: GCController) -> ControllerCharge? {
+        guard let battery = controller.battery else { return nil }
+        let state: ControllerChargeState = switch battery.batteryState {
+        case .discharging: .discharging
+        case .charging: .charging
+        case .full: .full
+        default: .unknown
+        }
+        return ControllerCharge(level: Double(battery.batteryLevel), state: state)
     }
 }

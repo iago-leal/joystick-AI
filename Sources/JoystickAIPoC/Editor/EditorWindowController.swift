@@ -35,6 +35,9 @@ final class EditorWindowController: NSObject, NSWindowDelegate {
 
     /// Chamado antes de exibir a janela, para o rascunho partir da configuração vigente (RF-04).
     var onWillShow: (() -> Void)?
+    /// Fechamento da janela; o consultor de carga o usa para apagar o temporizador quando nada mais está aberto
+    /// (`011-bateria-e-cursor-no-menu` D-04).
+    var onDidClose: (() -> Void)?
     /// Informa se há alterações não salvas.
     var isDirty: () -> Bool = { false }
     /// Tenta gravar o rascunho; devolve verdadeiro se gravou. Se falhar, a janela continua aberta com a faixa do erro.
@@ -161,6 +164,7 @@ final class EditorWindowController: NSObject, NSWindowDelegate {
         closeOutcome = .clean
         closeApproved = false
         returnFocus()
+        onDidClose?()
     }
 
     /// Devolve o foco ao aplicativo guardado na abertura, se ele ainda estiver em execução.

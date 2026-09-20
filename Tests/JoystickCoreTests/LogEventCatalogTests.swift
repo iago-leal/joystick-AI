@@ -27,8 +27,10 @@ import Testing
             LogEventCatalog.permissionsGuidance(message: "Ajustes"),
             LogEventCatalog.displaysChanged(count: 2),
             LogEventCatalog.cursorReclamped(),
-            LogEventCatalog.controllerConnected(info, tArrival: 10),
-            LogEventCatalog.controllerConnected(ipega, tArrival: 11),
+            LogEventCatalog.controllerConnected(info, charge: ControllerCharge(level: 0.84, state: .discharging), tArrival: 10),
+            LogEventCatalog.controllerConnected(ipega, charge: nil, tArrival: 11),
+            LogEventCatalog.controllerCharge(id: info.id, percent: 38, state: .charging),
+            LogEventCatalog.menuCycle(keys: 4, durationMs: 3900),
             LogEventCatalog.controllerIgnored(name: "Xbox", productCategory: "Xbox One", reason: "unsupported_model"),
             LogEventCatalog.controllerQueued(id: info.id, position: 1),
             LogEventCatalog.controllerDisconnected(id: info.id, tArrival: 20),
@@ -115,6 +117,7 @@ import Testing
             "config.loaded": .info, "config.value_rejected": .warn, "config.invalid_json": .error, "config.unreadable": .error,
             "displays.changed": .info, "cursor.reclamped": .info,
             "controller.connected": .info, "controller.ignored": .info, "controller.queued": .info, "controller.disconnected": .info,
+            "controller.charge": .info, "menu.cycle": .info,
             "controller.elements": .debug, "controller.touch_source": .info, "controller.gesture_suppression": .info, "controller.extended_report": .info, "controller.error": .error,
             "input.button": .debug, "input.touch": .debug, "touch.raw_transition": .debug, "pointer.posted": .debug,
             "pointer.injection_suspended": .warn, "pointer.injection_resumed": .info,
@@ -146,8 +149,10 @@ import Testing
         #expect(Set(fields("session.start").keys) == ["logSchema", "appVersion", "macOS", "pid", "debug", "args", "signing"])
         #expect(fields("session.start")["logSchema"] == 1)
         #expect(Set(fields("permissions.status").keys) == ["postEvent", "listenEvent", "trigger"])
-        #expect(Set(fields("controller.connected").keys) == ["id", "name", "connection", "atStartup", "model", "t_arrival"])
+        #expect(Set(fields("controller.connected").keys) == ["id", "name", "connection", "atStartup", "model", "t_arrival", "charge", "chargeState"])
         #expect(fields("controller.connected")["atStartup"] == true)
+        #expect(fields("controller.connected")["charge"] == 84)
+        #expect(fields("controller.connected")["chargeState"] == "discharging")
         #expect(fields("controller.touch_source")["source"] == "zero_transition")
         #expect(fields("controller.gesture_suppression")["elements"] == .array(["buttonHome"]))
         #expect(Set(fields("input.button").keys) == ["button", "phase", "synthetic", "t_arrival", "t_delivered", "t_framework"])
@@ -159,6 +164,27 @@ import Testing
         #expect(fields("targets.finished")["abortReason"] == "screen_removed")
         #expect(Set(fields("app.terminating").keys) == ["reason", "releasedButtons"])
         #expect(fields("config.loaded")["reason"] == nil)
+    }
+
+    /// Carga no log (`011-bateria-e-cursor-no-menu` D-09, RN-12, `interfaces/diagnostic-log.md` §2 e §3).
+    ///
+    /// Os dois campos da carga são **omitidos**, e não gravados como zero, quando ela é indisponível: gravar zero
+    /// tornaria indistinguíveis o controle descarregado e o controle que não conta quanta carga tem, a mesma
+    /// confusão que D-02 evita na tela e que seria igualmente nociva na análise posterior.
+    @Test func cargaIndisponivelOmiteOsCamposEmVezDeZerar() {
+        let semCarga = Self.sampleEvents.filter { $0.name == "controller.connected" }.first { $0.fields["model"] == "ipega" }!
+        #expect(semCarga.fields["charge"] == nil)
+        #expect(semCarga.fields["chargeState"] == nil)
+        #expect(Set(semCarga.fields.keys) == ["id", "name", "connection", "atStartup", "model", "t_arrival"])
+    }
+
+    @Test func camposDaCargaEDoCicloDoMenu() {
+        #expect(fields("controller.charge").keys.contains("id"))
+        #expect(fields("controller.charge")["charge"] == 38)
+        #expect(fields("controller.charge")["state"] == "charging")
+        #expect(Set(fields("controller.charge").keys) == ["id", "charge", "state"])
+        #expect(fields("menu.cycle") == ["keys": 4, "durationMs": 3900])
+        #expect(ControllerChargeState.allCases.map(\.rawValue) == ["unknown", "discharging", "charging", "full"])
     }
 
     /// RN-07 da `002-paleta-comandos`: os eventos da paleta levam índice e motivo, nunca o texto do item.

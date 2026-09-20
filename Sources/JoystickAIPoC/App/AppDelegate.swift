@@ -10,6 +10,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var permissionMonitor: PermissionMonitor!
     private var inputContext: InputContext!
     private var controllerReader: ControllerReader!
+    private var chargePoller: ChargePoller!
     private var injector: EventInjector!
     private var buttonActions: ButtonActions!
     private var shortcutActions: ShortcutActions!
@@ -79,7 +80,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         paletteActions = PaletteActions(
             context: inputContext, keyboard: keyboard,
             enterDelayMs: arguments.paletteEnterDelayMs ?? PaletteActions.defaultEnterDelayMs, items: shortcuts.palette)
-        paletteActions.onRender = { [palettePanel] snapshot in palettePanel?.show(snapshot) }
+        paletteActions.onRender = { [palettePanel, weak self] snapshot in
+            self?.paletteVisibilityChanged(to: snapshot.isOpen)
+            palettePanel?.show(snapshot)
+        }
         paletteActions.onItems = { [palettePanel] items in palettePanel?.update(items: items) }
         shortcutActions.onOpenPalette = { [paletteActions] in paletteActions?.open() }
 
@@ -101,7 +105,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             log: log,
             activateByClick: { [injector, inputQueue] point in inputQueue.async { injector?.activationClick(at: point) } }
         ) { AnyView(EditorRootView(model: editorModel, figure: figureBridge)) }
-        editorWindow.onWillShow = { [weak editorModel] in editorModel?.prepareForOpen() }
         editorWindow.isDirty = { [weak editorModel] in editorModel?.draft.isDirty ?? false }
         editorWindow.saveForClose = { [weak editorModel] in editorModel?.save() ?? true }
         editorWindow.discardForClose = { [weak editorModel] in editorModel?.discard() }
@@ -118,7 +121,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         configWatcher = ConfigWatcher(url: ConfigLoader.defaultURL) { [configStore] in configStore?.reload(trigger: .external) }
         configWatcher.start()
 
-        router = InputRouter(buttons: buttonActions, motion: motionLoop, shortcuts: shortcutActions, palette: paletteActions)
+        router = InputRouter(buttons: buttonActions, motion: motionLoop, shortcuts: shortcutActions, palette: paletteActions,
+                             context: inputContext, keyboard: keyboard)
+        // Navegação do menu do ícone pelo controle (`011-bateria-e-cursor-no-menu` E-01 a E-04). A troca de estado
+        // atravessa para a fila `input` de forma assíncrona: não há chamada síncrona da main para a fila aqui, e
+        // nem poderia haver, porque a main está prestes a entrar no rastreamento modal do menu.
+        statusMenu.onMenuTrackingChange = { [inputQueue, router] tracking in
+            inputQueue.async {
+                if tracking { router?.menuTrackingBegan() } else { _ = router?.menuTrackingEnded() }
+            }
+        }
+        statusMenu.onMenuClosed = { [inputQueue, router, log] elapsed in
+            inputQueue.async { log?.log(LogEventCatalog.menuCycle(keys: router?.menuKeys ?? 0, durationMs: elapsed)) }
+        }
         // Modo de identificação do editor (D-24): o botão pressionado seleciona o cartão, e o estado vai à fila `input`.
         router.onIdentify = { [weak editorModel] button in editorModel?.identified(button) }
         editorModel.onIdentifyingChange = { [router, inputQueue, log] on in
@@ -178,13 +193,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         permissionMonitor.onInjectionEnabledChange = { [gate] allowed in gate?.setAllowed(allowed) }
         permissionMonitor.start()
 
+        // Carga do controle nas duas interfaces (`011-bateria-e-cursor-no-menu` D-04, D-05). O canal do leitor
+        // dá o reflexo imediato de conexão, desconexão e promoção; o consultor dá a atualização periódica.
+        chargePoller = ChargePoller(log: log)
+        chargePoller.onDisplay = { [weak editorModel, palettePanel] display in
+            editorModel?.charge = display
+            palettePanel?.update(charge: display)
+        }
+        editorWindow.onWillShow = { [weak editorModel, chargePoller] in
+            editorModel?.prepareForOpen()
+            chargePoller?.interfaceOpened()
+        }
+        editorWindow.onDidClose = { [chargePoller] in chargePoller?.interfaceClosed() }
+
         controllerReader = ControllerReader(context: inputContext, processStartNs: processStartNs)
-        controllerReader.onActiveModelChange = { [weak editorModel] model in editorModel?.activeModel = model }
+        controllerReader.onActiveControllerChange = { [weak editorModel, chargePoller] active in
+            editorModel?.activeModel = active?.model
+            chargePoller?.activeChanged(to: active)
+        }
         controllerReader.start()
 
         if arguments.targets {
             openTargets(arguments: arguments, settings: settings)
         }
+    }
+
+    /// A paleta não tem janela própria com ciclo de vida observável: o que se tem é o instantâneo que a máquina
+    /// emite a cada mudança. Contar abertura e fechamento a partir da transição evita ligar o consultor duas vezes
+    /// numa reabertura sem fechamento intermediário.
+    private var paletteOpen = false
+
+    private func paletteVisibilityChanged(to open: Bool) {
+        guard open != paletteOpen else { return }
+        paletteOpen = open
+        if open { chargePoller?.interfaceOpened() } else { chargePoller?.interfaceClosed() }
     }
 
     func applicationWillTerminate(_ notification: Notification) {

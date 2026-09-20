@@ -1,4 +1,5 @@
 import AppKit
+import JoystickCore
 
 /// Ícone na barra de menus com "Editar atalhos" e "Sair" (`003-editor-atalhos` D-18, RF-06). Só na main thread.
 ///
@@ -59,7 +60,27 @@ final class StatusMenu: NSObject, NSMenuDelegate {
     /// O arquivo da autoridade pode surgir com o app aberto (script rodado depois); confere a cada abertura do menu.
     func menuWillOpen(_ menu: NSMenu) {
         remoteCertificate.isEnabled = FileManager.default.fileExists(atPath: RemoteKeyboardIdentity.authorityCertificateURL.path)
+        openedAt = Date()
+        onMenuTrackingChange?(true)
     }
+
+    /// Fim do rastreamento modal (`011-bateria-e-cursor-no-menu` D-10, E-04).
+    ///
+    /// D-10 escolheu este ponto para reconciliar estado retido, e as sondas mostraram que não há estado retido a
+    /// reconciliar: o que o app precisa saber é quando parar de traduzir botão em navegação de menu. O método
+    /// continua sendo o ponto certo, pelo motivo que D-10 deu, só que para outro fim.
+    func menuDidClose(_ menu: NSMenu) {
+        let elapsed = openedAt.map { Int(Date().timeIntervalSince($0) * 1000) } ?? 0
+        openedAt = nil
+        onMenuTrackingChange?(false)
+        onMenuClosed?(elapsed)
+    }
+
+    /// Liga e desliga a tradução de botão em tecla de navegação; atravessa para a fila `input`.
+    var onMenuTrackingChange: ((Bool) -> Void)?
+    /// Fechamento, com a duração em milissegundos; registra o `menu.cycle`.
+    var onMenuClosed: ((Int) -> Void)?
+    private var openedAt: Date?
 
     func update(status: ConfigState.Status) {
         alertItems.forEach(menu.removeItem)

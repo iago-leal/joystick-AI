@@ -30,6 +30,12 @@ final class InputContext {
     /// (`010-joystick-virtual-iphone` D-04, D-13). Mantido pelo `VirtualControllerActions`.
     var virtualPressed: Set<ButtonID> = []
     var settings: PointerSettings
+    /// O menu do ícone da barra está em rastreamento modal (`011-bateria-e-cursor-no-menu` E-01).
+    ///
+    /// Enquanto dura, as sondas P-04 e P-05 mostraram que o sistema toma os analógicos, que chegam zerados, e
+    /// deixa os botões passarem. Sem este estado, cada aperto do direcional dispara o acorde da camada base no
+    /// aplicativo que está atrás do menu, e o menu em si fica inalcançável pelo controle. Só na fila `input`.
+    var menuTracking = false
     var sink: InputSink
 
     /// O que o resto do aplicativo consulta no lugar de `registry.pressed`: a união das duas origens, de modo que a

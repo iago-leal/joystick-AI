@@ -3,6 +3,30 @@ import JoystickCore
 /// Textos da interface do editor para camadas, teclas modificadoras e regras de validação.
 /// O rótulo de cada botão (`ButtonID.displayName`) vive no núcleo desde a `004-figura-controle-web` (D-13).
 enum EditorLabels {
+    /// Texto da carga do controle ativo (`011-bateria-e-cursor-no-menu` RN-03, RN-04, RN-06).
+    ///
+    /// As duas ausências são frases, e não números: sem controle não se mostra zero, e carga indisponível não se
+    /// estima. A marca de carregamento acompanha a porcentagem quando o sistema informa o estado, e some quando
+    /// não informa, sem nunca impedir a exibição do número.
+    static func charge(_ display: ChargeDisplay) -> String {
+        switch display {
+        case .noController: "Nenhum controle conectado"
+        case .unavailable: "Carga indisponível neste controle"
+        case .known(let percent, let charging, _): charging ? "\(percent)%, carregando" : "\(percent)%"
+        }
+    }
+
+    /// Símbolo que acompanha a carga. O destaque da faixa baixa é por cor **e** por símbolo, nunca só por cor:
+    /// a leitura é a 3 m, e o painel da paleta tem fundo escuro próprio, de modo que depender de matiz sozinha
+    /// seria frágil nessa distância (D-08).
+    static func chargeSymbol(_ display: ChargeDisplay) -> String? {
+        switch display {
+        case .noController, .unavailable: nil
+        case .known(_, let charging, let low):
+            if low { "exclamationmark.triangle.fill" } else if charging { "bolt.fill" } else { "battery.100" }
+        }
+    }
+
     static func layerName(_ layer: ButtonID?) -> String {
         layer.map { $0.displayName } ?? "Base"
     }
