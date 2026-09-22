@@ -5,9 +5,14 @@ import JoystickCore
 /// Analógicos e touchpad do controle ativo (D-05, RF-06, RF-08, RN-12, P-01, P-02).
 ///
 /// Nenhum valor de eixo nem posição do toque vai ao log: só inícios e fins de toque e as transições brutas.
-/// O touchpad vale só para o DualSense (`007-controle-ipega` D-03, RN-06). Os analógicos do DualSense vêm da interface
-/// de controles; os do Ipega, do relatório HID, porque o driver do sistema zera os eixos desse clone (revisão de D-03
-/// no PM-1): `ControllerReader` os entrega por `deliverStick`.
+/// O touchpad vale para os dois modelos Sony, DualSense e DualShock 4, com as superfícies obtidas por modelo
+/// (`007-controle-ipega` D-03, RN-06; `012-controle-dualshock-4` D-03); o Ipega não tem touchpad. Os analógicos dos
+/// modelos Sony vêm da interface de controles; os do Ipega, do relatório HID, porque o driver do sistema zera os eixos
+/// desse clone (revisão de D-03 no PM-1 da 007): `ControllerReader` os entrega por `deliverStick`.
+///
+/// Num clone sem touchpad físico, como o GameSir G8+ no modo PlayStation, as superfícies existem e ficam mudas, salvo
+/// pelo clique do touchpad, que o clone acompanha de um ponto de toque fixo (sonda P-01 de 2026-09-22): o par de
+/// eventos de toque resultante não move o cursor, porque `TouchpadTracker` descarta as amostras de eixo dividido.
 enum AxisTouchReader {
     /// Leitura por dedo, mantida pelo *closure* do elemento na fila `input`.
     private final class FingerState {
@@ -23,7 +28,7 @@ enum AxisTouchReader {
         controller: GCController, gamepad: GCExtendedGamepad, model: ControllerModel, key: ObjectIdentifier,
         info: ControllerInfo, context: InputContext
     ) {
-        guard model == .dualSense, let gamepad = gamepad as? GCDualSenseGamepad else { return }
+        guard let surfaces = touchSurfaces(of: gamepad, model: model) else { return }
         attachStick(gamepad.leftThumbstick, element: .leftStick, key: key, context: context)
         attachStick(gamepad.rightThumbstick, element: .rightStick, key: key, context: context)
 
@@ -31,7 +36,7 @@ enum AxisTouchReader {
         let source: TouchSource = touchpads.isEmpty ? .zeroTransition : .touchState
         context.log.log(LogEventCatalog.controllerTouchSource(id: info.id, source: source))
 
-        for (finger, surface) in [(0, gamepad.touchpadPrimary), (1, gamepad.touchpadSecondary)] {
+        for (finger, surface) in [(0, surfaces.primary), (1, surfaces.secondary)] {
             let state = FingerState()
             surface.valueChangedHandler = { _, x, y in
                 let tArrival = MonotonicClock.nowNs()
@@ -59,6 +64,24 @@ enum AxisTouchReader {
             touchpad.touchDown = handler(.began)
             touchpad.touchMoved = handler(.moved)
             touchpad.touchUp = handler(.ended)
+        }
+    }
+
+    /// Superfícies do touchpad por modelo; `nil` para o Ipega, que não liga nada aqui. No SDK, as do `GCDualShockGamepad`
+    /// são opcionais, ao contrário das do `GCDualSenseGamepad`; a sonda de 2026-09-22 as mostrou presentes no GameSir.
+    /// Sem elas, o DualShock 4 ficaria sem analógicos e sem touchpad, e por isso a ausência vale como perfil incompleto.
+    private static func touchSurfaces(
+        of gamepad: GCExtendedGamepad, model: ControllerModel
+    ) -> (primary: GCControllerDirectionPad, secondary: GCControllerDirectionPad)? {
+        switch model {
+        case .dualSense:
+            guard let pad = gamepad as? GCDualSenseGamepad else { return nil }
+            return (pad.touchpadPrimary, pad.touchpadSecondary)
+        case .dualShock4:
+            guard let pad = gamepad as? GCDualShockGamepad, let primary = pad.touchpadPrimary, let secondary = pad.touchpadSecondary else { return nil }
+            return (primary, secondary)
+        case .ipega:
+            return nil
         }
     }
 

@@ -150,8 +150,11 @@ body {
   font-size: 18px;
 }
 
-/* Controle ativo (`007-controle-ipega` D-08): o DualSense não tem Share; o Ipega não tem touchpad. */
-.figure[data-controller="dualSense"] [data-button="share"] {
+/* Controle ativo (`007-controle-ipega` D-08; `012-controle-dualshock-4` D-08): o DualSense e o DualShock 4 não têm o
+   botão de captura do Ipega (o Share do DualShock 4 ocupa a posição do Create e aparece como Create); o Ipega não tem
+   touchpad. A lista de seletores oculta o grupo do SVG e o balão. */
+.figure[data-controller="dualSense"] [data-button="share"],
+.figure[data-controller="dualShock4"] [data-button="share"] {
   display: none;
 }
 

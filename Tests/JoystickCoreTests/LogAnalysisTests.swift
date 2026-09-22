@@ -76,6 +76,35 @@ import Testing
         #expect(coverage.covered == 18)
     }
 
+    // MARK: `012-controle-dualshock-4` D-07
+
+    /// O último `controller.connected` decide o modelo; com o DualShock 4, os 18 esperados são os do DualSense.
+    @Test func coberturaDoDualShock4() {
+        var text = line("controller.connected", ["id": "a", "model": "ipega"])
+        text += line("controller.connected", ["id": "b", "model": "dualShock4"])
+        text += pressAndRelease(ButtonID.allCases)
+        let coverage = LogAnalysis.buttonCoverage(LogAnalysis.read(contents: text).records)
+        #expect(coverage.model == .dualShock4)
+        #expect(coverage.expected == ControllerModel.dualSense.buttons)
+        #expect(!coverage.expected.contains(.share))
+        #expect(coverage.expected.contains(.touchpadClick))
+        #expect(coverage.expected.contains(.create))
+        #expect(coverage.expected.count == 18)
+        // Os 19 foram observados, mas o Share não conta para o DualShock 4.
+        #expect(coverage.covered == 18)
+    }
+
+    /// O resultado esperado no PM-1 com um clone sem tecla para o clique do touchpad: 17 de 18, só `touchpadClick` faltando.
+    @Test func coberturaDoDualShock4SemCliqueDoTouchpad() {
+        let text = line("controller.connected", ["id": "b", "model": "dualShock4"])
+            + pressAndRelease(ButtonID.allCases.filter { $0 != .touchpadClick })
+        let coverage = LogAnalysis.buttonCoverage(LogAnalysis.read(contents: text).records)
+        #expect(coverage.model == .dualShock4)
+        #expect(coverage.covered == 17)
+        #expect(coverage.observed[.touchpadClick] == ButtonObservation(down: false, up: false))
+        #expect(coverage.observed[.share] == ButtonObservation(down: true, up: true))
+    }
+
     @Test func logSemModeloEsperaODualSense() {
         let text = line("controller.connected", ["id": "a"]) + pressAndRelease(ButtonID.allCases.filter { $0 != .touchpadClick })
         let coverage = LogAnalysis.buttonCoverage(LogAnalysis.read(contents: text).records)

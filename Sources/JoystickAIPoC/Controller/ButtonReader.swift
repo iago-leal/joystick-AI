@@ -4,16 +4,20 @@ import JoystickCore
 
 /// Os 18 botões físicos do controle ativo, com os gatilhos pela normalização (D-06, RF-05, RF-07, RF-11).
 ///
-/// A tabela depende do modelo (`007-controle-ipega` D-03): o Ipega chega com a mesma correspondência por posição do
-/// DualSense (sondas de 2026-09-19), troca o clique do touchpad pelo Share e não entrega o Home por esta via.
+/// A tabela depende do modelo (`007-controle-ipega` D-03; `012-controle-dualshock-4` D-02): o Ipega chega com a mesma
+/// correspondência por posição do DualSense (sondas de 2026-09-19), troca o clique do touchpad pelo Share e não entrega
+/// o Home por esta via. O DualShock 4 tem os 18 botões do DualSense nas mesmas posições: o Share físico chega por
+/// `buttonOptions` e vira `create`, o Options por `buttonMenu`, e o clique do touchpad por `touchpadButton` do
+/// `GCDualShockGamepad`; o PS não chega por esta via e é lido do relatório bruto (sonda P-01 de 2026-09-22).
 enum ButtonReader {
-    /// Mapeamento de D-06; `options` e `create` a confirmar no roteiro de 18 botões (P-05).
+    /// Mapeamento de D-06; `options` e `create` confirmados no roteiro de 18 botões (P-05) e na P-01 da 012.
     static func digitalButtons(
         _ pad: GCExtendedGamepad, profile: GCPhysicalInputProfile, model: ControllerModel
     ) -> [(ButtonID, GCControllerButtonInput?)] {
         let modelButton: (ButtonID, GCControllerButtonInput?) = switch model {
         case .dualSense: (.touchpadClick, (pad as? GCDualSenseGamepad)?.touchpadButton)
         case .ipega: (.share, profile.buttons[GCInputButtonShare])
+        case .dualShock4: (.touchpadClick, (pad as? GCDualShockGamepad)?.touchpadButton)
         }
         return [
             (.cross, pad.buttonA), (.circle, pad.buttonB), (.square, pad.buttonX), (.triangle, pad.buttonY),

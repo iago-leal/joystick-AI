@@ -41,8 +41,10 @@
     share: { x: 208, y: 552, side: 'top', width: 104 }
   };
 
-  /* `data-controller` da raiz; valor desconhecido ou ausente vale `dualSense` (`007-controle-ipega` D-08). */
-  var CONTROLLERS = { dualSense: true, ipega: true };
+  /* `data-controller` da raiz: os valores que a página conhece, `ControllerModel.rawValue` do app (`007-controle-ipega`
+     D-08; `012-controle-dualshock-4` D-08, que acrescenta o DualShock 4 com a figura do DualSense). Valor desconhecido
+     ou ausente vale `dualSense`. */
+  var CONTROLLERS = { dualSense: true, ipega: true, dualShock4: true };
 
   var KIND_CLASSES = { fixed: 'is-fixed', modifier: 'is-modifier', inherited: 'is-inherited' };
   var STATE_CLASSES = ['is-fixed', 'is-modifier', 'is-inherited', 'is-problem', 'is-selected'];

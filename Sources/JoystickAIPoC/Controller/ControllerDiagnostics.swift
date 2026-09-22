@@ -2,8 +2,8 @@ import Foundation
 import GameController
 import JoystickCore
 
-/// Lista de elementos e pedido de supressão de gestos (D-06, D-23, RF-24, P-03, P-07), para os dois modelos
-/// (`007-controle-ipega` D-03).
+/// Lista de elementos e pedido de supressão de gestos (D-06, D-23, RF-24, P-03, P-07), para os três modelos:
+/// DualSense, Ipega e DualShock 4 (`007-controle-ipega` D-03; `012-controle-dualshock-4` D-02).
 enum ControllerDiagnostics {
     static let suppressionMessage = """
     Pedido ao macOS: botão PS (Home no Ipega) sem gestos do sistema (preferredSystemGestureState = disabled). \

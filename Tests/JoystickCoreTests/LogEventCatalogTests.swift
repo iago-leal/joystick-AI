@@ -19,6 +19,7 @@ import Testing
     static var sampleEvents: [LogEvent] {
         let info = ControllerInfo(id: UUID(), name: "DualSense Wireless Controller", connection: .bluetooth, connectedAt: 10, atStartup: true)
         let ipega = ControllerInfo(id: UUID(), name: "Pro Controller", connection: .usb, connectedAt: 11, atStartup: false, model: .ipega)
+        let dualShock4 = ControllerInfo(id: UUID(), name: "DUALSHOCK 4 Wireless Controller", connection: .bluetooth, connectedAt: 12, atStartup: true, model: .dualShock4)
         var settings = PointerSettings()
         settings.stickMaxSpeed = 1800
         return [
@@ -29,6 +30,7 @@ import Testing
             LogEventCatalog.cursorReclamped(),
             LogEventCatalog.controllerConnected(info, charge: ControllerCharge(level: 0.84, state: .discharging), tArrival: 10),
             LogEventCatalog.controllerConnected(ipega, charge: nil, tArrival: 11),
+            LogEventCatalog.controllerConnected(dualShock4, charge: ControllerCharge(level: 0.55, state: .discharging), tArrival: 12),
             LogEventCatalog.controllerCharge(id: info.id, percent: 38, state: .charging),
             LogEventCatalog.menuCycle(keys: 4, durationMs: 3900),
             LogEventCatalog.controllerIgnored(name: "Xbox", productCategory: "Xbox One", reason: "unsupported_model"),
@@ -269,9 +271,22 @@ import Testing
     /// `007-controle-ipega` D-07: o modelo em `controller.connected` e o motivo de recusa.
     @Test func modeloNaConexaoEMotivoDeRecusa() {
         let connected = Self.sampleEvents.filter { $0.name == "controller.connected" }
-        #expect(connected.map { $0.fields["model"] } == ["dualSense", "ipega"])
+        #expect(connected.map { $0.fields["model"] } == ["dualSense", "ipega", "dualShock4"])
         #expect(fields("controller.ignored")["reason"] == "unsupported_model")
         #expect(Set(fields("controller.ignored").keys) == ["name", "productCategory", "reason"])
+    }
+
+    /// `012-controle-dualshock-4` D-07, D-09: o valor novo em `model`, com a carga que o sistema informou para o
+    /// controle (a sonda de 2026-09-22 mostrou 55 % descarregando), no mesmo `logSchema` e com os mesmos campos.
+    @Test func dualShock4NaConexaoComCarga() {
+        let connected = Self.sampleEvents.filter { $0.name == "controller.connected" }.first { $0.fields["model"] == "dualShock4" }!
+        #expect(connected.fields["name"] == "DUALSHOCK 4 Wireless Controller")
+        #expect(connected.fields["connection"] == "bluetooth")
+        #expect(connected.fields["atStartup"] == true)
+        #expect(connected.fields["charge"] == 55)
+        #expect(connected.fields["chargeState"] == "discharging")
+        #expect(Set(connected.fields.keys) == ["id", "name", "connection", "atStartup", "model", "t_arrival", "charge", "chargeState"])
+        #expect(fields("session.start")["logSchema"] == 1)
     }
 
     /// `008-iphone-teclado-remoto` RN-13, D-18: só motivos e contagens; nenhuma tecla, rótulo, código, token,

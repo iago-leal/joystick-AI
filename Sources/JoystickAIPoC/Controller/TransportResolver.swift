@@ -7,7 +7,9 @@ import JoystickCore
 ///
 /// Consultar propriedades do registro não depende de Input Monitoring. `GCController` não expõe fabricante,
 /// produto nem transporte, e a correlação é por exclusão: com candidatos de transportes diferentes, `unknown`.
-/// Os pares (fabricante, produtos) vêm de `ControllerModel` (`007-controle-ipega` D-01, D-06).
+/// Os pares (fabricante, produtos) vêm de `ControllerModel`, hoje DualSense, Ipega e DualShock 4
+/// (`007-controle-ipega` D-01, D-06; `012-controle-dualshock-4` D-01, D-06). O canal Bluetooth Low Energy do GameSir
+/// G8+ (0x3537/0x1108) não casa com nenhum par e fica de fora sem tratamento.
 enum TransportResolver {
     static func resolve(for model: ControllerModel) -> ConnectionType {
         let transports = Set(candidateTransports(for: model))

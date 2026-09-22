@@ -53,8 +53,8 @@ final class ControllerReader {
         })
 
         // Por Bluetooth, sem este pedido o DualSense não envia o touchpad.
-        // O PS e o Home do Ipega vêm do relatório bruto; se o GameController também os entregar, o registro descarta
-        // a repetição. Só o emissor do mesmo modelo do ativo conta (RN-01).
+        // O PS do DualSense e do DualShock 4 e o Home do Ipega vêm do relatório bruto; se o GameController também os
+        // entregar, o registro descarta a repetição. Só o emissor do mesmo modelo do ativo conta (RN-01).
         extendedReportActivator.onHomeButton = { [weak self] pressed, model, tArrival in
             guard let self else { return }
             self.context.queue.async {
@@ -92,12 +92,20 @@ final class ControllerReader {
         let key = ObjectIdentifier(controller)
         guard controllers[key] == nil, !ignored.contains(key) else { return }
 
-        // RN-01: DualSense pelo perfil; Ipega pela categoria e pelo par no IORegistry (`007-controle-ipega` D-01).
+        // RN-01: DualSense pelo perfil; DualShock 4 pelo perfil e por um par Sony do modelo no IORegistry; Ipega pela
+        // categoria e pelo par no IORegistry (`007-controle-ipega` D-01, `012-controle-dualshock-4` D-01). O IORegistry
+        // só é consultado quando o perfil não decide sozinho.
         let gamepad = controller.extendedGamepad
-        let isDualSense = gamepad is GCDualSenseGamepad
+        let profile: ControllerModel.SystemProfile = if gamepad is GCDualSenseGamepad {
+            .dualSense
+        } else if gamepad is GCDualShockGamepad {
+            .dualShock
+        } else {
+            .extended
+        }
         let model = gamepad == nil ? nil : ControllerModel.classify(
-            productCategory: controller.productCategory, isDualSenseProfile: isDualSense,
-            hidDevices: isDualSense ? [] : TransportResolver.presentDevices())
+            productCategory: controller.productCategory, profile: profile,
+            hidDevices: profile == .dualSense ? [] : TransportResolver.presentDevices())
         guard let gamepad, let model else {
             ignored.insert(key)
             controllers[key] = controller
@@ -107,9 +115,15 @@ final class ControllerReader {
         }
 
         let elapsed = tArrival >= processStartNs ? tArrival - processStartNs : 0
+        // Nome padrão por modelo, só quando o sistema não informa `vendorName` (`012-controle-dualshock-4` D-06).
+        let defaultName = switch model {
+        case .dualSense: "DualSense"
+        case .ipega: "Pro Controller"
+        case .dualShock4: "DualShock 4"
+        }
         let info = ControllerInfo(
             id: UUID(),
-            name: controller.vendorName ?? (model == .dualSense ? "DualSense" : "Pro Controller"),
+            name: controller.vendorName ?? defaultName,
             connection: TransportResolver.resolve(for: model),
             connectedAt: tArrival,
             atStartup: StartupAdoption.isAtStartup(source: source, elapsedNs: elapsed),

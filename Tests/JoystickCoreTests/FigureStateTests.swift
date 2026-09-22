@@ -154,6 +154,26 @@ import Testing
         #expect(Self.button(.share, in: Self.state(config: config, model: .ipega)).summary == "abrir paleta")
     }
 
+    /// `012-controle-dualshock-4` D-08, RN-10: o DualShock 4 vai à página com o próprio valor e a figura do DualSense,
+    /// com o touchpad presente (resumo normal) e o botão à esquerda do touchpad chamado "Create".
+    @Test func dualShock4NaFigura() {
+        let state = Self.state(model: .dualShock4)
+        #expect(state.controller == "dualShock4")
+        #expect(state.buttons.count == 19)
+        #expect(state.buttons.map(\.id) == ButtonID.allCases.map(\.rawValue))
+        let touchpad = Self.button(.touchpadClick, in: state)
+        #expect(touchpad.kind == .fixed)
+        #expect(touchpad.summary == "clique esquerdo, fixo")
+        #expect(touchpad.summary != FigureState.absentSummary)
+        #expect(Self.button(.create, in: state).label == "Create")
+        #expect(Self.button(.share, in: state).summary == "nenhuma")
+        #expect(Self.button(.share, in: state).kind == .own)
+        // Fora o `controller`, o estado é o mesmo do DualSense.
+        var asDualSense = state
+        asDualSense.controller = ControllerModel.dualSense.rawValue
+        #expect(asDualSense == Self.state(model: .dualSense))
+    }
+
     @Test func motivoDeFalhaEmSnakeCase() {
         #expect(FigureFailureReason.resourceMissing.rawValue == "resource_missing")
         #expect(FigureFailureReason.loadFailed.rawValue == "load_failed")

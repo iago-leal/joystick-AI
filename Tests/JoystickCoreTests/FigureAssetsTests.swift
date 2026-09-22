@@ -95,4 +95,15 @@ import Testing
         #expect(css.contains(#"[data-controller="dualSense"] [data-button="share"]"#))
         #expect(css.contains(#"[data-controller="ipega"] [data-button="touchpadClick"]"#))
     }
+
+    /// `012-controle-dualshock-4` D-08: a página conhece o valor `dualShock4` na tabela `CONTROLLERS` e o estilo oculta o
+    /// Share com ele, sem depender do padrão para valor desconhecido.
+    @Test func dualShock4NaPagina() throws {
+        let script = try Self.contents("figure.js")
+        let table = try Regex(#"CONTROLLERS\s*=\s*\{[^}]*\bdualShock4\s*:\s*true\b[^}]*\}"#)
+        #expect(script.firstMatch(of: table) != nil)
+        let css = try Self.contents("figure.css")
+        #expect(css.contains(#"[data-controller="dualShock4"] [data-button="share"]"#))
+        #expect(!css.contains(#"[data-controller="dualShock4"] [data-button="touchpadClick"]"#))
+    }
 }

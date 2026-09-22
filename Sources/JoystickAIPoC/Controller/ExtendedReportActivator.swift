@@ -2,14 +2,19 @@ import Foundation
 import IOKit.hid
 import JoystickCore
 
-/// Leitor HID do botão PS do DualSense e do Home do Ipega, e ativador do relatório completo do DualSense sem fio.
+/// Leitor HID do botão PS do DualSense e do DualShock 4 e do Home do Ipega, e ativador do relatório completo dos
+/// modelos Sony sem fio.
 ///
 /// Por Bluetooth o DualSense só passa ao relatório completo (`0x31`) quando o host lê o relatório de recurso
 /// `0x05` (calibração); o GameController do macOS não faz esse pedido, e o touchpad fica mudo (PM-2, P-02).
 /// Diverge de D-07: o dispositivo é aberto para esse pedido e para ler o PS, que o macOS retém antes do
 /// GameController (P-07). O Home do Ipega também não chega à interface de controles e é lido do relatório `0x30`
 /// (`007-controle-ipega` D-04), assim como os analógicos do Ipega, que o driver do sistema zera (revisão de D-03 no
-/// PM-1). Dos relatórios de entrada só o bit do PS ou do Home e os analógicos do Ipega são examinados, por dispositivo.
+/// PM-1). O PS do DualShock 4 é retido do mesmo modo e lido do relatório `0x11` (ou `0x01`) por `DualShock4Report`;
+/// o pedido do recurso `0x05` é estendido a ele por ser o mesmo mecanismo da literatura, embora a sonda P-02 de
+/// 2026-09-22 tenha mostrado o sistema já entregando o `0x11` sem o pedido, que resultou `ok` e inócuo
+/// (`012-controle-dualshock-4` D-04, D-05). Dos relatórios de entrada só o bit do PS ou do Home e os analógicos do
+/// Ipega são examinados, por dispositivo.
 final class ExtendedReportActivator {
     static let calibrationReportID: CFIndex = 0x05
 
@@ -69,6 +74,7 @@ final class ExtendedReportActivator {
         let pressed: Bool? = switch state.model {
         case .dualSense: DualSenseReport.homeButton(reportID: reportID, bytes: bytes)
         case .ipega: SwitchProReport.homeButton(reportID: reportID, bytes: bytes)
+        case .dualShock4: DualShock4Report.homeButton(reportID: reportID, bytes: bytes)
         case nil: nil
         }
         defer { devices[sender] = state }
@@ -86,8 +92,8 @@ final class ExtendedReportActivator {
     private func activate(_ device: IOHIDDevice) {
         let model = Self.model(of: device)
         devices[Unmanaged.passUnretained(device).toOpaque()] = DeviceState(model: model)
-        // O pedido do relatório de recurso vale só para o DualSense sem fio.
-        guard model == .dualSense else { return }
+        // O pedido do relatório de recurso vale para os modelos Sony sem fio; o Ipega não tem esse mecanismo.
+        guard model == .dualSense || model == .dualShock4 else { return }
         let transport = (IOHIDDeviceGetProperty(device, kIOHIDTransportKey as CFString) as? String ?? "").lowercased()
         guard transport.contains("bluetooth") else { return }
         var buffer = [UInt8](repeating: 0, count: 64)

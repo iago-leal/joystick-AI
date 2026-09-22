@@ -129,4 +129,48 @@ import Testing
         #expect(outcome.syntheticReleases == [.cross, .r2, .dpadRight, .share])
         #expect(registry.pressed.isEmpty)
     }
+
+    // MARK: `012-controle-dualshock-4` D-06, D-09, RN-02, RN-07
+
+    /// Fila com os três modelos e promoção em cadeia até o DualShock 4; o registro não conhece o modelo novo por
+    /// código nenhum, só pela enumeração.
+    @Test func filaComTresModelosEPromocaoEmCadeia() {
+        var registry = ActiveControllerRegistry<Int>()
+        #expect(registry.connect(key: 1, info: info("DualSense", at: 1), accepted: true) == .active)
+        #expect(registry.connect(key: 2, info: info("Pro Controller", at: 2, model: .ipega), accepted: true) == .queued(position: 1))
+        #expect(registry.connect(key: 3, info: info("DUALSHOCK 4 Wireless Controller", at: 3, model: .dualShock4), accepted: true) == .queued(position: 2))
+        #expect(registry.active?.model == .dualSense)
+        #expect(registry.queue.map(\.model) == [.dualSense, .ipega, .dualShock4])
+
+        let first = registry.disconnect(key: 1)
+        #expect(first.wasActive)
+        #expect(first.promoted?.model == .ipega)
+        #expect(registry.active?.model == .ipega)
+
+        let second = registry.disconnect(key: 2)
+        #expect(second.wasActive)
+        #expect(second.promoted?.model == .dualShock4)
+        #expect(registry.active?.model == .dualShock4)
+        #expect(registry.isActive(3))
+        #expect(registry.queue.count == 1)
+    }
+
+    /// Soltura sintética de `ps` e `touchpadClick` de um DualShock 4 ativo, em ordem de `ButtonID`, com o conjunto
+    /// de pressionados vazio para o promovido.
+    @Test func solturaSinteticaDoDualShock4EmOrdem() {
+        var registry = ActiveControllerRegistry<Int>()
+        _ = registry.connect(key: 1, info: info("DUALSHOCK 4 Wireless Controller", at: 1, model: .dualShock4), accepted: true)
+        _ = registry.connect(key: 2, info: info("DualSense", at: 2), accepted: true)
+        for button in [ButtonID.touchpadClick, .ps, .l1] {
+            let accepted = registry.press(button, from: 1)
+            #expect(accepted)
+        }
+        #expect(registry.pressed == [.l1, .ps, .touchpadClick])
+
+        let outcome = registry.disconnect(key: 1)
+        #expect(outcome.syntheticReleases == [.l1, .ps, .touchpadClick])
+        #expect(outcome.promoted?.model == .dualSense)
+        #expect(registry.active?.model == .dualSense)
+        #expect(registry.pressed.isEmpty)
+    }
 }

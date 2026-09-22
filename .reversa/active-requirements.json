@@ -1,9 +1,9 @@
 {
   "schema-version": 1,
-  "feature-dir": "_reversa_forward/011-bateria-e-cursor-no-menu",
-  "feature-id": "011",
-  "short-name": "bateria-e-cursor-no-menu",
-  "started-at": "2026-09-20T20:58:45Z",
+  "feature-dir": "_reversa_forward/012-controle-dualshock-4",
+  "feature-id": "012",
+  "short-name": "controle-dualshock-4",
+  "started-at": "2026-09-22T16:37:10Z",
   "current-stage": "to-do",
   "stages-completed": [
     "requirements",
@@ -34,6 +34,21 @@
         "plan"
       ],
       "paused-at": "2026-09-19T20:57:54Z",
+      "paused-from-stage": "coding-em-progresso"
+    },
+    {
+      "feature-dir": "_reversa_forward/011-bateria-e-cursor-no-menu",
+      "feature-id": "011",
+      "short-name": "bateria-e-cursor-no-menu",
+      "started-at": "2026-09-20T20:58:45Z",
+      "current-stage": "to-do",
+      "stages-completed": [
+        "requirements",
+        "clarify",
+        "plan",
+        "to-do"
+      ],
+      "paused-at": "2026-09-22T16:37:10Z",
       "paused-from-stage": "coding-em-progresso"
     }
   ]
