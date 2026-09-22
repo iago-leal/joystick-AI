@@ -1,0 +1,181 @@
+import Foundation
+import Testing
+@testable import JoystickCore
+
+/// `BUG-20260922-33HN`: os botões de membrana do GameSir G8+ em modo DualShock 4 chegam em rajadas de bordas
+/// (duração 15 a 80 ms, intervalo 15 a 100 ms) numa única pressão. O filtro retém o `up` por uma janela e o cancela
+/// quando outro `down` chega antes; o `down` segue imediato. Tempos das sequências gravadas em
+/// `_reversa_bugs/botoes-do-controle/bugs/BUG-20260922-33HN-*/evidence/`.
+@Suite struct ButtonDebouncerTests {
+    static let ms: UInt64 = 1_000_000
+
+    /// Pipeline mínima do app: filtro e depois registro do controle ativo (RN-EC-06), anotando o que chega ao destino
+    /// e os `flush` que o app agendaria em `t + janela`.
+    struct Pipeline {
+        var debouncer = ButtonDebouncer()
+        var registry = ActiveControllerRegistry<Int>()
+        var delivered: [String] = []
+        var scheduled: [(button: ButtonID, due: UInt64)] = []
+
+        init() {
+            let info = ControllerInfo(
+                id: UUID(), name: "DUALSHOCK 4 Wireless Controller", connection: .bluetooth, connectedAt: 0,
+                atStartup: false, model: .dualShock4)
+            _ = registry.connect(key: 1, info: info, accepted: true)
+        }
+
+        mutating func edge(_ button: ButtonID, pressed: Bool, atMs t: UInt64) {
+            let t = t * ButtonDebouncerTests.ms
+            if pressed {
+                guard debouncer.press(button, at: t), registry.press(button, from: 1) else { return }
+                delivered.append("\(button.rawValue) down")
+            } else {
+                guard debouncer.release(button, at: t) else { return }
+                scheduled.append((button, t + ButtonDebouncer.windowNs))
+            }
+        }
+
+        mutating func flush(atMs t: UInt64) {
+            let t = t * ButtonDebouncerTests.ms
+            for entry in scheduled where entry.due <= t {
+                guard debouncer.flush(entry.button, at: t), registry.release(entry.button, from: 1) else { continue }
+                delivered.append("\(entry.button.rawValue) up")
+            }
+            scheduled.removeAll { $0.due <= t }
+        }
+    }
+
+    // MARK: Reprodução
+
+    /// Sequência gravada às 14:34:54 de 2026-09-22 (△ com a ação `text`): três `down` em 120 ms viraram três
+    /// "CONTINUAR". Com o filtro, uma pressão e uma soltura.
+    @Test func rajadaGravadaDoTrianguloViraUmaPressao() {
+        var pipeline = Pipeline()
+        pipeline.edge(.triangle, pressed: true, atMs: 0)
+        pipeline.edge(.triangle, pressed: false, atMs: 15)
+        pipeline.edge(.triangle, pressed: true, atMs: 45)
+        pipeline.edge(.triangle, pressed: false, atMs: 75)
+        pipeline.edge(.triangle, pressed: true, atMs: 105)
+        pipeline.edge(.triangle, pressed: false, atMs: 120)
+        #expect(pipeline.delivered == ["triangle down"])
+        pipeline.flush(atMs: 239)
+        #expect(pipeline.delivered == ["triangle down"])
+        pipeline.flush(atMs: 240)
+        #expect(pipeline.delivered == ["triangle down", "triangle up"])
+        #expect(pipeline.registry.pressed.isEmpty)
+    }
+
+    /// Rajada longa do □ (cadência de 60 ms pressionado, 60 ms solto, por vários segundos no log).
+    @Test func rajadaDoQuadradoComCadenciaDe60msViraUmaPressao() {
+        var pipeline = Pipeline()
+        for cycle in 0..<20 {
+            pipeline.edge(.square, pressed: true, atMs: UInt64(cycle) * 120)
+            pipeline.edge(.square, pressed: false, atMs: UInt64(cycle) * 120 + 60)
+            pipeline.flush(atMs: UInt64(cycle) * 120 + 119)
+        }
+        #expect(pipeline.delivered == ["square down"])
+        pipeline.flush(atMs: 19 * 120 + 60 + 120)
+        #expect(pipeline.delivered == ["square down", "square up"])
+    }
+
+    /// Caracterização do defeito: só com o registro (RN-EC-06), a mesma rajada entrega três pressões.
+    @Test func semFiltroORegistroEntregaTresPressoes() {
+        var registry = ActiveControllerRegistry<Int>()
+        let info = ControllerInfo(id: UUID(), name: "GameSir", connection: .bluetooth, connectedAt: 0, atStartup: false, model: .dualShock4)
+        _ = registry.connect(key: 1, info: info, accepted: true)
+        var downs = 0
+        for _ in 0..<3 {
+            if registry.press(.triangle, from: 1) { downs += 1 }
+            _ = registry.release(.triangle, from: 1)
+        }
+        #expect(downs == 3)
+    }
+
+    // MARK: Regressão
+
+    @Test func janelaDe120ms() {
+        #expect(ButtonDebouncer.windowNs == 120 * Self.ms)
+    }
+
+    @Test func dualSenseEIpegaNaoSaoFiltrados() {
+        for model in [ControllerModel.dualSense, .ipega] {
+            for button in ButtonID.allCases {
+                #expect(!ButtonDebouncer.applies(to: button, model: model), "\(model) \(button)")
+            }
+        }
+    }
+
+    /// Ombros, gatilhos, cliques dos analógicos, clique do touchpad, PS e direcional não oscilam na sonda; R1 e o
+    /// clique do touchpad são botões de apontamento, cujo duplo clique (RN-09) não pode ter o `up` retido.
+    @Test func soOsBotoesDeMembranaDoDualShock4SaoFiltrados() {
+        let filtered: Set<ButtonID> = [.cross, .circle, .square, .triangle, .options, .create]
+        for button in ButtonID.allCases {
+            #expect(ButtonDebouncer.applies(to: button, model: .dualShock4) == filtered.contains(button), "\(button)")
+        }
+        #expect(ButtonDebouncer.filteredButtons == filtered)
+    }
+
+    @Test func toquesHumanosDistintosSaoEntreguesUmAUm() {
+        var pipeline = Pipeline()
+        pipeline.edge(.cross, pressed: true, atMs: 0)
+        pipeline.edge(.cross, pressed: false, atMs: 100)
+        pipeline.flush(atMs: 220)
+        pipeline.edge(.cross, pressed: true, atMs: 300)
+        pipeline.edge(.cross, pressed: false, atMs: 400)
+        pipeline.flush(atMs: 520)
+        #expect(pipeline.delivered == ["cross down", "cross up", "cross down", "cross up"])
+    }
+
+    @Test func flushAntesDaJanelaNaoEntregaEDepoisEntregaUmaVez() {
+        // `#expect` não aceita chamada mutante como expressão de topo; os resultados vão para constantes.
+        var debouncer = ButtonDebouncer()
+        let scheduled = debouncer.release(.circle, at: 0)
+        #expect(scheduled)
+        let early = debouncer.flush(.circle, at: 119 * Self.ms)
+        #expect(!early)
+        let onTime = debouncer.flush(.circle, at: 120 * Self.ms)
+        #expect(onTime)
+        let again = debouncer.flush(.circle, at: 121 * Self.ms)
+        #expect(!again)
+        #expect(debouncer.pending.isEmpty)
+    }
+
+    @Test func downDentroDaJanelaCancelaOUpPendente() {
+        var pipeline = Pipeline()
+        pipeline.edge(.triangle, pressed: true, atMs: 0)
+        pipeline.edge(.triangle, pressed: false, atMs: 15)
+        let noise = pipeline.debouncer.press(.triangle, at: 45 * Self.ms)
+        #expect(!noise)
+        pipeline.flush(atMs: 135)
+        #expect(pipeline.delivered == ["triangle down"])
+        #expect(pipeline.registry.pressed == [.triangle])
+        #expect(pipeline.debouncer.pending.isEmpty)
+    }
+
+    @Test func pressSemUpPendenteEntregaEReleaseRepetidoNaoReagenda() {
+        var debouncer = ButtonDebouncer()
+        let first = debouncer.press(.square, at: 0)
+        #expect(first)
+        let scheduled = debouncer.release(.square, at: 50 * Self.ms)
+        #expect(scheduled)
+        let repeated = debouncer.release(.square, at: 60 * Self.ms)
+        #expect(!repeated)
+        #expect(debouncer.pending == [.square])
+    }
+
+    /// Na desconexão, o app descarta o filtro; o registro já solta sinteticamente o que ainda estava pressionado
+    /// (RN-EC-07), e o `up` retido não pode voltar depois.
+    @Test func cancelAllDevolvePendentesEmOrdemEImpedeFlushPosterior() {
+        var pipeline = Pipeline()
+        pipeline.edge(.square, pressed: true, atMs: 0)
+        pipeline.edge(.cross, pressed: true, atMs: 1)
+        pipeline.edge(.square, pressed: false, atMs: 10)
+        pipeline.edge(.cross, pressed: false, atMs: 12)
+        let cancelled = pipeline.debouncer.cancelAll()
+        #expect(cancelled == [.cross, .square])
+        let late = pipeline.debouncer.flush(.cross, at: 500 * Self.ms)
+        #expect(!late)
+        let outcome = pipeline.registry.disconnect(key: 1)
+        #expect(outcome.syntheticReleases == [.cross, .square])
+    }
+}

@@ -1,0 +1,84 @@
+Building for debugging...
+[Pre-planning 1 / 153]
+[Planning deferred tasks]
+[1 / 3] JoystickAIPoC-product
+[6 / 17] JoystickCoreTests-product
+error: SwiftCompile normal arm64 /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift failed with a nonzero exit code. Command line:     cd /Users/iagoleal/dev
+    builtin-SwiftPerFileCompile ButtonDebouncerTests.swift
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:15:25: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+ [0;36m13 |[0;0m     /// e os `flush` que o app agendaria em `t + janela`.
+ [0;36m14 |[0;0m     struct Pipeline {
+ [0;36m15 |[0;0m         var debouncer = [4;39mButtonDebouncer[0;0m()
+    [0;36m|[0;0m                         `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+ [0;36m16 |[0;0m         var registry = ActiveControllerRegistry<Int>()
+ [0;36m17 |[0;0m         var delivered: [String] = []
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:34:47: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+ [0;36m32 |[0;0m             } else {
+ [0;36m33 |[0;0m                 guard debouncer.release(button, at: t) else { return }
+ [0;36m34 |[0;0m                 scheduled.append((button, t + [4;39mButtonDebouncer[0;0m.windowNs))
+    [0;36m|[0;0m                                               `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+ [0;36m35 |[0;0m             }
+ [0;36m36 |[0;0m         }
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:97:17: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+ [0;36m95 |[0;0m 
+ [0;36m96 |[0;0m     @Test func janelaDe120ms() {
+ [0;36m97 |[0;0m         #expect([4;39mButtonDebouncer[0;0m.windowNs == 120 * Self.ms)
+    [0;36m|[0;0m                 `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+ [0;36m98 |[0;0m     }
+ [0;36m99 |[0;0m 
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:103:26: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m101 |[0;0m         for model in [ControllerModel.dualSense, .ipega] {
+[0;36m102 |[0;0m             for button in ButtonID.allCases {
+[0;36m103 |[0;0m                 #expect(![4;39mButtonDebouncer[0;0m.applies(to: button, model: model), "\(model) \(button)")
+    [0;36m|[0;0m                          `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m104 |[0;0m             }
+[0;36m105 |[0;0m         }
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:113:21: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m111 |[0;0m         let filtered: Set<ButtonID> = [.cross, .circle, .square, .triangle, .options, .create]
+[0;36m112 |[0;0m         for button in ButtonID.allCases {
+[0;36m113 |[0;0m             #expect([4;39mButtonDebouncer[0;0m.applies(to: button, model: .dualShock4) == filtered.contains(button), "\(button)")
+    [0;36m|[0;0m                     `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m114 |[0;0m         }
+[0;36m115 |[0;0m         #expect(ButtonDebouncer.filteredButtons == filtered)
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:115:17: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m113 |[0;0m             #expect(ButtonDebouncer.applies(to: button, model: .dualShock4) == filtered.contains(button), "\(button)")
+[0;36m114 |[0;0m         }
+[0;36m115 |[0;0m         #expect([4;39mButtonDebouncer[0;0m.filteredButtons == filtered)
+    [0;36m|[0;0m                 `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m116 |[0;0m     }
+[0;36m117 |[0;0m 
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:130:25: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m128 |[0;0m 
+[0;36m129 |[0;0m     @Test func flushAntesDaJanelaNaoEntregaEDepoisEntregaUmaVez() {
+[0;36m130 |[0;0m         var debouncer = [4;39mButtonDebouncer[0;0m()
+    [0;36m|[0;0m                         `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m131 |[0;0m         #expect(debouncer.release(.circle, at: 0))
+[0;36m132 |[0;0m         #expect(!debouncer.flush(.circle, at: 119 * Self.ms))
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:150:25: [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m148 |[0;0m 
+[0;36m149 |[0;0m     @Test func pressSemUpPendenteEntregaEReleaseRepetidoNaoReagenda() {
+[0;36m150 |[0;0m         var debouncer = [4;39mButtonDebouncer[0;0m()
+    [0;36m|[0;0m                         `- [1;31merror: [1;39mcannot find 'ButtonDebouncer' in scope[0;0m
+[0;36m151 |[0;0m         #expect(debouncer.press(.square, at: 0))
+[0;36m152 |[0;0m         #expect(debouncer.release(.square, at: 50 * Self.ms))
+
+/Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift:154:40: [1;31merror: [1;39mreference to member 'square' cannot be resolved without a contextual type[0;0m
+[0;36m152 |[0;0m         #expect(debouncer.release(.square, at: 50 * Self.ms))
+[0;36m153 |[0;0m         #expect(!debouncer.release(.square, at: 60 * Self.ms))
+[0;36m154 |[0;0m         #expect(debouncer.pending == [.square])
+    [0;36m|[0;0m                                        `- [1;31merror: [1;39mreference to member 'square' cannot be resolved without a contextual type[0;0m
+[0;36m155 |[0;0m     }
+[0;36m156 |[0;0m 
+Failed frontend command:
+/Library/Developer/CommandLineTools/usr/bin/swift-frontend -frontend -c /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/DerivedSources/test_entry_point.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ActionSummaryTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ActiveControllerRegistryTests.swift -primary-file /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ButtonDebouncerTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ChargeLogPolicyTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ClickStateMachineTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/CombinedPressedTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/CommandPaletteTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ConfigDocumentTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ConfigLineLocatorTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ConfigLoaderTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ControllerChargeTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ControllerModelTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/DualSenseReportTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/DualShock4ReportTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/EditorDraftTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/FigureAssetsTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/FigureStateTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/KeyCatalogTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/LatencyStatsTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/LaunchArgumentsTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/LocalAddressPolicyTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/LogAnalysisTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/LogEventCatalogTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/NormalizationTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/PointerMotionEngineTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/PointerSettingsValidationTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/RemoteKeyGeometryTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/RemoteKeyboardAssetsTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/RemoteKeyboardMachineTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/RemoteKeyboardMessageTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/RemotePairingTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/RunsReportTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ScreenUnionTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ScrollMapperTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ShortcutConfigTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ShortcutConfigValidationTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ShortcutDefaultsTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/ShortcutMapperTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/StartupAdoptionTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/StickKinematicsTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/SuggestionContextTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/SupportTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/SwitchProReportTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/TargetRunTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/TouchGlideTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/TouchpadTrackerTests.swift /Users/iagoleal/dev/joystick-AI/Tests/JoystickCoreTests/VirtualControllerMachineTests.swift -emit-dependencies-path /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/ButtonDebouncerTests.d -emit-const-values-path /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/ButtonDebouncerTests.swiftconstvalues -emit-reference-dependencies-path /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/ButtonDebouncerTests.swiftdeps -serialize-diagnostics-path /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/ButtonDebouncerTests.dia -target arm64-apple-macos13.0 -module-can-import-version Testing 2084 0 -disable-cross-import-overlay-search -swift-module-cross-import Testing /Library/Developer/CommandLineTools/Library/Developer/Frameworks/Testing.framework/Modules/Testing.swiftcrossimport/AppKit.swiftoverlay -swift-module-cross-import Testing /Library/Developer/CommandLineTools/Library/Developer/Frameworks/Testing.framework/Modules/Testing.swiftcrossimport/CoreGraphics.swiftoverlay -swift-module-cross-import Testing /Library/Developer/CommandLineTools/Library/Developer/Frameworks/Testing.framework/Modules/Testing.swiftcrossimport/CoreImage.swiftoverlay -swift-module-cross-import Testing /Library/Developer/CommandLineTools/Library/Developer/Frameworks/Testing.framework/Modules/Testing.swiftcrossimport/CoreTransferable.swiftoverlay -swift-module-cross-import Testing /Library/Developer/CommandLineTools/Library/Developer/Frameworks/Testing.framework/Modules/Testing.swiftcrossimport/Foundation.swiftoverlay -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libObservationMacros.dylib\#\#ObservationMacros -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/libSwiftMacros.dylib\#\#SwiftMacros -load-resolved-plugin /Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing/libTestingMacros.dylib\#\#TestingMacros -disable-implicit-swift-modules -Xcc -fno-implicit-modules -Xcc -fno-implicit-module-maps -explicit-swift-module-map-file /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/JoystickCoreTests-dependencies-1.json -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk -I /Users/iagoleal/dev/joystick-AI/.build/out/Products/Debug -Isystem /Library/Developer/CommandLineTools/Developer/usr/lib -F /Library/Developer/CommandLineTools/Library/Developer/Frameworks -F /Library/Developer/CommandLineTools/Library/Developer/Frameworks -F /Users/iagoleal/dev/joystick-AI/.build/out/Products/Debug/PackageFrameworks -F /Users/iagoleal/dev/joystick-AI/.build/out/Products/Debug -F /Library/Developer/CommandLineTools/Library/Developer/Frameworks -F /Library/Developer/CommandLineTools/Developer/Library/Frameworks -module-cache-path /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/SwiftExplicitPrecompiledModules -color-diagnostics -Xcc -fcolor-diagnostics -enable-testing -g -debug-info-format\=dwarf -dwarf-version\=4 -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D Xcode -serialize-debugging-options -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -validate-clang-modules-once -clang-build-session-file /Users/iagoleal/dev/joystick-AI/.build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /Users/iagoleal/dev -enable-anonymous-context-mangled-names -file-compilation-dir /Users/iagoleal/dev -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -ivfsstatcache -Xcc /Users/iagoleal/dev/joystick-AI/.build/out/SDKStatCaches.noindex/macosx26.5-25F70-a0facfad118c1a7a18f0aad9463f6549742078817fd907cefe959747f00b8bba.sdkstatcache -Xcc -fmodules-prune-interval\=86400 -Xcc -fmodules-prune-after\=345600 -Xcc -I/Users/iagoleal/dev/joystick-AI/.build/out/Products/Debug/include -Xcc -I/Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/DerivedSources-normal/arm64 -Xcc -I/Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/DerivedSources/arm64 -Xcc -I/Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\=1 -no-auto-bridging-header-chaining -module-name JoystickCoreTests -package-name joystick_ai -const-gather-protocols-file /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/JoystickCoreTests_const_extract_protocols.json -disable-clang-spi -clang-target arm64-apple-macos26.5 -target-sdk-version 26.5 -target-sdk-name macosx26.5 -in-process-plugin-server-path /Library/Developer/CommandLineTools/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -parse-as-library -o /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/ButtonDebouncerTests.o -debug-module-path /Users/iagoleal/dev/joystick-AI/.build/out/Intermediates.noindex/JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/JoystickCoreTests.swiftmodule -index-unit-output-path /JoystickAI.build/Debug/JoystickCoreTests-p.build/Objects-normal/arm64/ButtonDebouncerTests.o -index-store-path /Users/iagoleal/dev/joystick-AI/.build/out -index-system-modules
+[8 / 19] JoystickCoreTests-product
+error: Build failed
+error: fatalError
+exit=1

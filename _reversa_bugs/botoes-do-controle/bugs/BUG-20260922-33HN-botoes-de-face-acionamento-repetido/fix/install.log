@@ -1,0 +1,39 @@
+==> swift build -c release
+Building for production...
+[Planning deferred tasks]
+[3 / 10] JoystickCore
+[5 / 11] JoystickCore
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[10 / 11] JoystickAIPoC-product
+[11 / 53]
+[17 / 53]
+[18 / 53]
+[24 / 53]
+[25 / 53]
+[26 / 53]
+[29 / 53]
+[31 / 53]
+[39 / 53]
+[40 / 53]
+[43 / 53]
+[44 / 53]
+[47 / 53]
+[48 / 53]
+[51 / 53]
+[52 / 53] JoystickAIPoC-product
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickAIPoC-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickAIPoC-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[55 / 57] JoystickAIPoC-product
+[56 / 57] JoystickAIPoC-product
+Build complete! (49,95 seg)
+==> montagem de /Users/iagoleal/dev/joystick-AI/.build/app/JoystickAIPoC.app
+==> assinatura com "JoystickAI Local Signing"
+/Users/iagoleal/dev/joystick-AI/.build/app/JoystickAIPoC.app: replacing existing signature
+==> encerrando a instância aberta
+==> instalação em /Users/iagoleal/Applications/JoystickAIPoC.app
+pronto. Abra com: open "/Users/iagoleal/Applications/JoystickAIPoC.app"
+build exit=0
+identifier: dev.iagoleal.joystick-ai.poc
+authority: JoystickAI Local Signing
+designated: identifier "dev.iagoleal.joystick-ai.poc" and certificate leaf = H"bd5fe5690ad38f5f4aa4395aaf28299c53c53839"
+check exit=0

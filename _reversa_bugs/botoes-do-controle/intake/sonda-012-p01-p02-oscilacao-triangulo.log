@@ -1,0 +1,97 @@
+# Extrato de _reversa_forward/012-controle-dualshock-4/sondas/probe-ds4-2026-09-22.log (sonda da feature 012, sem o app rodando), 2026-09-22 14:22
+# Linhas 440-520: P-01 (GameController) e P-02 (relatório HID 0x11/78 B) durante a pressão única de △ (byte 7 bit 7)
+[14:22:56.003] P-02 rel 0x11/78 B: byte 15: 0x1E→0x2B bit(s) [4, 5]; byte 21: 0x66→0x80 bit(s) [7]
+[14:22:56.018] P-02 rel 0x11/78 B: byte 15: 0x2B→0x32 bit(s) [3, 4]; byte 26: 0x07→0x08 bit(s) [0]
+[14:22:56.033] P-02 rel 0x11/78 B: byte 15: 0x32→0x22 bit(s) [4]; byte 19: 0xEF→0xF1 bit(s) [4]; byte 21: 0x82→0x5E bit(s) [7]; byte 23: 0x92→0x4C bit(s) [7]
+[14:22:56.048] P-02 rel 0x11/78 B: byte 15: 0x22→0x03 bit(s) [5]
+[14:22:56.063] P-02 rel 0x11/78 B: byte 15: 0x03→0xF8 bit(s) [3, 4, 5, 6, 7]; byte 16: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x1A→0x17 bit(s) [3]
+[14:22:56.078] P-02 rel 0x11/78 B: byte 15: 0xF8→0xE3 bit(s) [3, 4]
+[14:22:56.093] P-02 rel 0x11/78 B: byte 15: 0xE3→0xD6 bit(s) [4, 5]; byte 19: 0xF8→0x03 bit(s) [4, 5, 6, 7]; byte 20: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 23: 0x48→0x82 bit(s) [7]; byte 26: 0x08→0x07 bit(s) [0]
+[14:22:56.108] P-02 rel 0x11/78 B: byte 15: 0xD6→0xCA bit(s) [3, 4]
+[14:22:56.123] P-02 rel 0x11/78 B: byte 15: 0xCA→0xC7 bit(s) [3]; byte 19: 0x0C→0x10 bit(s) [4]; byte 26: 0x07→0x08 bit(s) [0]
+[14:22:56.139] P-02 rel 0x11/78 B: byte 17: 0x11→0x08 bit(s) [3, 4]; byte 21: 0x10→0xE6 bit(s) [7]; byte 22: 0xFA→0xF9 bit(s) [0, 1]
+[14:22:56.153] P-02 rel 0x11/78 B: byte 15: 0xC7→0xD1 bit(s) [4]; byte 17: 0x08→0x00 bit(s) [3]; byte 19: 0x10→0x0A bit(s) [4]; byte 23: 0x86→0x42 bit(s) [7]
+[14:22:56.168] P-02 rel 0x11/78 B: byte 17: 0x00→0xFB bit(s) [3, 4, 5, 6, 7]; byte 18: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 19: 0x0A→0xFB bit(s) [4, 5, 6, 7]; byte 20: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]
+[14:22:56.183] P-02 rel 0x11/78 B: byte 15: 0xD2→0xCD bit(s) [3, 4]; byte 17: 0xFB→0xF4 bit(s) [3]; byte 23: 0x56→0x80 bit(s) [7]; byte 26: 0x08→0x07 bit(s) [0]
+[14:22:56.198] P-02 rel 0x11/78 B: byte 17: 0xF4→0xF9 bit(s) [3]; byte 19: 0xF4→0xE7 bit(s) [4]; byte 23: 0x80→0x4A bit(s) [7]; byte 24: 0x14→0x15 bit(s) [0]
+[14:22:56.213] P-02 rel 0x11/78 B: byte 15: 0xCA→0xD9 bit(s) [4]; byte 17: 0xF9→0x00 bit(s) [3, 4, 5, 6, 7]; byte 18: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 19: 0xE7→0xF0 bit(s) [4]; byte 23: 0x4A→0xC6 bit(s) [7]
+[14:22:56.228] P-02 rel 0x11/78 B: byte 15: 0xD9→0xE2 bit(s) [3, 4, 5]; byte 23: 0xC6→0x1C bit(s) [7]; byte 24: 0x15→0x16 bit(s) [0, 1]
+[14:22:56.243] P-02 rel 0x11/78 B: byte 15: 0xE2→0xFC bit(s) [3, 4]; byte 17: 0x07→0x0E bit(s) [3]; byte 19: 0xF8→0x00 bit(s) [4, 5, 6, 7]; byte 20: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]
+[14:22:56.258] P-02 rel 0x11/78 B: byte 15: 0xFC→0x1C bit(s) [5, 6, 7]; byte 16: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x0E→0x19 bit(s) [4]
+[14:22:56.287] P-02 rel 0x11/78 B: byte 15: 0x1C→0x2C bit(s) [4, 5]; byte 23: 0x3A→0xB0 bit(s) [7]; byte 24: 0x16→0x15 bit(s) [0, 1]
+[14:22:56.318] P-02 rel 0x11/78 B: byte 15: 0x2E→0x27 bit(s) [3]; byte 24: 0x15→0x14 bit(s) [0]
+[14:22:56.347] P-02 rel 0x11/78 B: byte 15: 0x27→0x2D bit(s) [3]
+[14:22:56.363] P-02 rel 0x11/78 B: byte 15: 0x2D→0x20 bit(s) [3]; byte 17: 0x19→0x17 bit(s) [3]; byte 19: 0x01→0xFA bit(s) [4, 5, 6, 7]; byte 20: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 21: 0xF6→0x14 bit(s) [7]; byte 22: 0xF9→0xFA bit(s) [0, 1]
+[14:22:56.378] P-02 rel 0x11/78 B: byte 15: 0x20→0x17 bit(s) [4, 5]; byte 21: 0x14→0xFA bit(s) [7]; byte 22: 0xFA→0xF9 bit(s) [0, 1]
+[14:22:56.393] P-02 rel 0x11/78 B: byte 15: 0x17→0x26 bit(s) [4, 5]; byte 17: 0x16→0x0F bit(s) [3, 4]; byte 21: 0xFA→0x3C bit(s) [7]; byte 22: 0xF9→0xFA bit(s) [0, 1]
+[14:22:56.408] P-02 rel 0x11/78 B: byte 19: 0xF7→0x01 bit(s) [4, 5, 6, 7]; byte 20: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 23: 0xDE→0x08 bit(s) [7]; byte 24: 0x14→0x15 bit(s) [0]
+[14:22:56.423] P-02 rel 0x11/78 B: byte 17: 0x0D→0x10 bit(s) [3, 4]; byte 23: 0x08→0xA2 bit(s) [7]; byte 24: 0x15→0x14 bit(s) [0]
+[14:22:56.438] P-02 rel 0x11/78 B: byte 15: 0x27→0x2E bit(s) [3]; byte 17: 0x10→0x0A bit(s) [3, 4]; byte 19: 0x0F→0x13 bit(s) [4]
+[14:22:56.453] P-02 rel 0x11/78 B: byte 15: 0x2E→0x27 bit(s) [3]
+[14:22:56.468] P-02 rel 0x11/78 B: byte 15: 0x27→0x1A bit(s) [3, 4, 5]; byte 23: 0x9E→0x56 bit(s) [7]
+[14:22:56.483] P-02 rel 0x11/78 B: byte 15: 0x1A→0x2F bit(s) [4, 5]; byte 17: 0x09→0x05 bit(s) [3]; byte 24: 0x14→0x15 bit(s) [0]; byte 26: 0x07→0x08 bit(s) [0]
+[14:22:56.498] P-02 rel 0x11/78 B: byte 7: 0x08→0x88 bit(s) [7]; byte 15: 0x2F→0xBA bit(s) [4, 7]; byte 16: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x05→0xF5 bit(s) [4, 5, 6, 7]; byte 18: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 19: 0x1F→0xE
+[14:22:56.498] P-01 botão "Button Y" [buttonY]: PRESSIONADO
+[14:22:56.513] P-02 rel 0x11/78 B: byte 15: 0xBA→0x40 bit(s) [3, 4, 5, 6, 7]; byte 17: 0xF5→0xE6 bit(s) [4]; byte 21: 0xDE→0x5E bit(s) [7]; byte 26: 0x08→0x07 bit(s) [0]
+[14:22:56.528] P-02 rel 0x11/78 B: byte 7: 0x88→0x08 bit(s) [7]; byte 15: 0x40→0x32 bit(s) [4, 5, 6]; byte 17: 0xE6→0xEB bit(s) [3]; byte 21: 0x5E→0xEA bit(s) [7]; byte 22: 0xF9→0xF8 bit(s) [0]; byte 24: 0x13→0x14 bit(s) [0, 1, 2]
+[14:22:56.528] P-01 botão "Button Y" [buttonY]: solto
+[14:22:56.543] P-02 rel 0x11/78 B: byte 19: 0xEF→0xF7 bit(s) [4]; byte 22: 0xF8→0xF9 bit(s) [0]
+[14:22:56.558] P-02 rel 0x11/78 B: byte 15: 0x34→0x0D bit(s) [3, 4, 5]; byte 17: 0xEF→0xF4 bit(s) [3, 4]; byte 19: 0xF7→0x05 bit(s) [4, 5, 6, 7]; byte 20: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 21: 0x86→0x0A bit(s) [7]; byte 22: 0xF9→0xFA bit(s) [0, 1
+[14:22:56.573] P-02 rel 0x11/78 B: byte 7: 0x08→0x88 bit(s) [7]; byte 15: 0x0D→0x1F bit(s) [4]; byte 17: 0xF4→0xFC bit(s) [3]; byte 19: 0x05→0x19 bit(s) [4]; byte 23: 0x04→0x80 bit(s) [7]
+[14:22:56.573] P-01 botão "Button Y" [buttonY]: PRESSIONADO
+[14:22:56.588] P-02 rel 0x11/78 B: byte 15: 0x1F→0x8D bit(s) [4, 7]; byte 19: 0x19→0x34 bit(s) [5]; byte 23: 0x80→0x74 bit(s) [7]; byte 24: 0x15→0x16 bit(s) [0, 1]; byte 26: 0x07→0x08 bit(s) [0]
+[14:22:56.603] P-02 rel 0x11/78 B: byte 7: 0x88→0x08 bit(s) [7]; byte 15: 0x8D→0x0D bit(s) [7]; byte 16: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0xFF→0x01 bit(s) [3, 4, 5, 6, 7]; byte 18: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 19: 0x34→0x4
+[14:22:56.603] P-01 botão "Button Y" [buttonY]: solto
+[14:22:56.618] P-02 rel 0x11/78 B: byte 15: 0x0D→0x91 bit(s) [3, 4, 7]; byte 19: 0x4E→0x6B bit(s) [5]; byte 23: 0x1A→0xDE bit(s) [7]; byte 24: 0x17→0x16 bit(s) [0]; byte 26: 0x08→0x07 bit(s) [0]
+[14:22:56.633] P-02 rel 0x11/78 B: byte 7: 0x08→0x88 bit(s) [7]; byte 15: 0x91→0xBE bit(s) [3, 5]; byte 17: 0x07→0x0F bit(s) [3]; byte 19: 0x6B→0x75 bit(s) [4]; byte 23: 0xDE→0x04 bit(s) [7]
+[14:22:56.633] P-01 botão "Button Y" [buttonY]: PRESSIONADO
+[14:22:56.663] P-01 botão "Button Y" [buttonY]: solto
+[14:22:57.008]      … 24 linha(s) suprimida(s) neste segundo
+[14:22:57.008] P-02 rel 0x11/78 B: byte 15: 0x31→0x58 bit(s) [3, 5, 6]; byte 17: 0x14→0x18 bit(s) [3]; byte 19: 0x3D→0x5E bit(s) [5, 6]; byte 23: 0xD2→0x6A bit(s) [7]
+[14:22:57.023] P-02 rel 0x11/78 B: byte 15: 0x58→0x90 bit(s) [3, 6, 7]; byte 19: 0x5E→0x7A bit(s) [5]
+[14:22:57.052] P-02 rel 0x11/78 B: byte 15: 0x90→0xCA bit(s) [3, 4, 6]; byte 17: 0x1D→0x2F bit(s) [4, 5]; byte 19: 0x7A→0x9A bit(s) [5, 6, 7]
+[14:22:57.068] P-02 rel 0x11/78 B: byte 15: 0xCA→0xED bit(s) [5]; byte 17: 0x2F→0x46 bit(s) [3, 5, 6]; byte 19: 0x9A→0xC1 bit(s) [4, 6]; byte 21: 0x82→0x3A bit(s) [7]; byte 23: 0x6C→0xBE bit(s) [7]; byte 26: 0x0A→0x0B bit(s) [0]
+[14:22:57.083] P-02 rel 0x11/78 B: byte 15: 0xED→0x3A bit(s) [4, 6, 7]; byte 16: 0xFE→0xFF bit(s) [0]; byte 17: 0x46→0x53 bit(s) [4]; byte 19: 0xC1→0x05 bit(s) [6, 7]; byte 20: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 23: 0xBE→0x7A bit(s) [7]
+[14:22:57.098] P-02 rel 0x11/78 B: byte 15: 0x3A→0xCA bit(s) [4, 5, 6, 7]; byte 17: 0x53→0xB2 bit(s) [5, 6, 7]; byte 19: 0x05→0x3B bit(s) [4, 5]; byte 21: 0x00→0xEE bit(s) [7]; byte 22: 0xF8→0xF6 bit(s) [1, 2, 3]; byte 23: 0x7A→0xD0 bit(s) [7]; byte 26: 0x0B→0
+[14:22:57.113] P-02 rel 0x11/78 B: byte 15: 0xCA→0xE1 bit(s) [3, 5]; byte 17: 0xB2→0x09 bit(s) [3, 4, 5, 7]; byte 18: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 21: 0xEE→0x2A bit(s) [7]; byte 22: 0xF6→0xF7 bit(s) [0]; byte 23: 0xD0→0x1C bit(s) [7]; byte 2
+[14:22:57.128] P-02 rel 0x11/78 B: byte 15: 0xE1→0x02 bit(s) [5, 6, 7]; byte 16: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x09→0x5F bit(s) [4, 6]; byte 26: 0x0C→0x0D bit(s) [0]
+[14:22:57.143] P-02 rel 0x11/78 B: byte 15: 0x02→0x7C bit(s) [3, 4, 5, 6]; byte 17: 0x5F→0x71 bit(s) [3, 5]; byte 19: 0x36→0x44 bit(s) [4, 5, 6]; byte 26: 0x0D→0x0C bit(s) [0]
+[14:22:57.158] P-02 rel 0x11/78 B: byte 15: 0x7C→0xAB bit(s) [4, 6, 7]; byte 17: 0x71→0x89 bit(s) [3, 4, 5, 6, 7]; byte 19: 0x44→0x58 bit(s) [4]; byte 26: 0x0C→0x0B bit(s) [0]
+[14:22:57.173] P-02 rel 0x11/78 B: byte 19: 0x58→0x6A bit(s) [4, 5]; byte 21: 0x64→0xD8 bit(s) [7]
+[14:22:57.188] P-02 rel 0x11/78 B: byte 15: 0xA8→0xC0 bit(s) [3, 5, 6]; byte 17: 0x8B→0x87 bit(s) [3]; byte 19: 0x6A→0x73 bit(s) [4]; byte 21: 0xD8→0x20 bit(s) [7]; byte 22: 0xF7→0xF8 bit(s) [0, 1, 2, 3]
+[14:22:57.203] P-02 rel 0x11/78 B: byte 15: 0xC0→0xCC bit(s) [3]; byte 17: 0x87→0x7E bit(s) [3, 4, 5, 6, 7]; byte 23: 0x22→0xE6 bit(s) [7]; byte 24: 0x18→0x17 bit(s) [0, 1, 2, 3]
+[14:22:57.218] P-02 rel 0x11/78 B: byte 15: 0xCC→0xA4 bit(s) [3, 5, 6]; byte 17: 0x7E→0x54 bit(s) [3, 5]; byte 19: 0x78→0x62 bit(s) [4]; byte 21: 0x76→0x8E bit(s) [7]; byte 22: 0xF8→0xF9 bit(s) [0]; byte 26: 0x0B→0x0A bit(s) [0]
+[14:22:57.233] P-02 rel 0x11/78 B: byte 15: 0xA4→0x8F bit(s) [3, 5]; byte 17: 0x54→0x1C bit(s) [3, 6]; byte 19: 0x62→0x57 bit(s) [4, 5]; byte 26: 0x0A→0x09 bit(s) [0]
+[14:22:57.248] P-02 rel 0x11/78 B: byte 15: 0x8F→0x82 bit(s) [3]; byte 17: 0x1C→0x01 bit(s) [3, 4]; byte 19: 0x57→0x4E bit(s) [4]; byte 21: 0xC4→0x10 bit(s) [7]; byte 23: 0x90→0x42 bit(s) [7]
+[14:22:57.263] P-02 rel 0x11/78 B: byte 15: 0x82→0x5E bit(s) [3, 4, 6, 7]; byte 21: 0x10→0x96 bit(s) [7]; byte 22: 0xF9→0xF8 bit(s) [0]; byte 23: 0x42→0xEE bit(s) [7]; byte 24: 0x17→0x16 bit(s) [0]
+[14:22:57.291] P-02 rel 0x11/78 B: byte 15: 0x5E→0x3D bit(s) [5, 6]; byte 17: 0x06→0x0C bit(s) [3]; byte 19: 0x48→0x38 bit(s) [4, 5, 6]; byte 21: 0x96→0x42 bit(s) [7]; byte 26: 0x09→0x0A bit(s) [0]
+[14:22:57.336] P-02 rel 0x11/78 B: byte 15: 0x3D→0x22 bit(s) [3, 4]; byte 19: 0x38→0x2E bit(s) [4]
+[14:22:57.353] P-02 rel 0x11/78 B: byte 15: 0x22→0xEE bit(s) [3, 6, 7]; byte 16: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x0D→0x16 bit(s) [3, 4]; byte 23: 0xA4→0x12 bit(s) [7]; byte 24: 0x16→0x17 bit(s) [0]
+[14:22:57.368] P-02 rel 0x11/78 B: byte 15: 0xEE→0x10 bit(s) [3, 4, 5, 6, 7]; byte 16: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x16→0x18 bit(s) [3]; byte 19: 0x21→0x1D bit(s) [4, 5]; byte 23: 0x12→0x8C bit(s) [7]
+[14:22:57.397] P-02 rel 0x11/78 B: byte 15: 0x10→0x21 bit(s) [4, 5]; byte 17: 0x18→0x12 bit(s) [3]; byte 19: 0x1D→0x35 bit(s) [5]; byte 21: 0x36→0xB6 bit(s) [7]
+[14:22:57.413] P-02 rel 0x11/78 B: byte 15: 0x21→0x14 bit(s) [4, 5]; byte 23: 0x88→0x6A bit(s) [7]
+[14:22:57.428] P-02 rel 0x11/78 B: byte 15: 0x14→0x07 bit(s) [4]; byte 17: 0x13→0x19 bit(s) [3]; byte 23: 0x6A→0xA8 bit(s) [7]
+[14:22:57.443] P-02 rel 0x11/78 B: byte 15: 0x07→0x2F bit(s) [3, 5]; byte 17: 0x19→0x13 bit(s) [3]
+[14:22:57.458] P-02 rel 0x11/78 B: byte 17: 0x13→0x0A bit(s) [3, 4]; byte 23: 0xA4→0x7A bit(s) [7]
+[14:22:57.473] P-02 rel 0x11/78 B: byte 15: 0x28→0x0E bit(s) [5]; byte 17: 0x0A→0x04 bit(s) [3]; byte 23: 0x7A→0x8C bit(s) [7]
+[14:22:57.488] P-02 rel 0x11/78 B: byte 15: 0x0E→0xFE bit(s) [4, 5, 6, 7]; byte 16: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 17: 0x04→0x09 bit(s) [3]; byte 19: 0x31→0x17 bit(s) [5]; byte 24: 0x17→0x16 bit(s) [0]
+[14:22:57.503] P-02 rel 0x11/78 B: byte 15: 0xFE→0xEF bit(s) [4]; byte 17: 0x09→0x13 bit(s) [3, 4]; byte 19: 0x17→0x07 bit(s) [4]; byte 21: 0xEE→0x1E bit(s) [7]; byte 22: 0xF8→0xF9 bit(s) [0]; byte 23: 0xEC→0x74 bit(s) [7]; byte 24: 0x16→0x17 bit(s) [0]
+[14:22:57.518] P-02 rel 0x11/78 B: byte 15: 0xEF→0x1E bit(s) [4, 5, 6, 7]; byte 16: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 23: 0x74→0x8C bit(s) [7]
+[14:22:57.533] P-02 rel 0x11/78 B: byte 15: 0x1E→0x2A bit(s) [4, 5]; byte 19: 0x02→0xFE bit(s) [4, 5, 6, 7]; byte 20: 0x00→0xFF bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 21: 0x30→0xFE bit(s) [7]; byte 22: 0xF9→0xF8 bit(s) [0]
+[14:22:57.548] P-02 rel 0x11/78 B: byte 15: 0x2A→0x16 bit(s) [3, 4, 5]; byte 19: 0xFE→0x03 bit(s) [4, 5, 6, 7]; byte 20: 0xFF→0x00 bit(s) [0, 1, 2, 3, 4, 5, 6, 7]; byte 23: 0xA6→0x56 bit(s) [7]
+[14:22:57.563] P-02 rel 0x11/78 B: byte 15: 0x16→0x0F bit(s) [3, 4]
+[14:22:57.578] P-02 rel 0x11/78 B: byte 15: 0x0F→0x00 bit(s) [3]
+
+# Contagem de PRESSIONADO por botão na P-01 (cada botão foi pressionado uma vez):
+   6 botão "Button B" [buttonB]: PRESSIONADO
+   4 botão "Button X" [buttonX]: PRESSIONADO
+   3 botão "Button Y" [buttonY]: PRESSIONADO
+   3 botão "Button Options" [buttonOptions]: PRESSIONADO
+   3 botão "Button Menu" [buttonMenu]: PRESSIONADO
+   3 botão "Button A" [buttonA]: PRESSIONADO
+   2 botão "Right Trigger" [rightTrigger]: PRESSIONADO
+   2 botão "Left Trigger" [leftTrigger]: PRESSIONADO
+   1 botão "Right Thumbstick Button" [rightThumbstickButton]: PRESSIONADO
+   1 botão "Right Shoulder" [rightShoulder]: PRESSIONADO
+   1 botão "Left Thumbstick Button" [leftThumbstickButton]: PRESSIONADO
+   1 botão "Left Shoulder" [leftShoulder]: PRESSIONADO

@@ -29,6 +29,9 @@ final class InputContext {
     /// Botões mantidos pelo controle virtual do iPhone; fora do registro, que só descreve o hardware
     /// (`010-joystick-virtual-iphone` D-04, D-13). Mantido pelo `VirtualControllerActions`.
     var virtualPressed: Set<ButtonID> = []
+    /// Filtro de rajadas por controle, só para os modelos e botões em que `ButtonDebouncer.applies` vale
+    /// (`BUG-20260922-33HN`). Criado em `ButtonReader.attach`, descartado na desconexão. Só na fila `input`.
+    var debouncers: [ObjectIdentifier: ButtonDebouncer] = [:]
     var settings: PointerSettings
     /// O menu do ícone da barra está em rastreamento modal (`011-bateria-e-cursor-no-menu` E-01).
     ///

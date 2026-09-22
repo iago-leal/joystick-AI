@@ -153,6 +153,8 @@ final class ControllerReader {
             return
         }
         let outcome = context.registry.disconnect(key: key)
+        // `BUG-20260922-33HN`: os `up` retidos morrem com o filtro; RN-04 solta o que ainda estava pressionado.
+        context.debouncers[key] = nil
         guard let removed = outcome.removed else { return }
 
         // RN-04: todo botão ainda pressionado é solto antes de o controle ser dado por desconectado.

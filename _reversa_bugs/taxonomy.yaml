@@ -1,0 +1,32 @@
+# Vocabulário controlado do registro de bugs (semeado em 2026-09-22 a partir de _reversa_sdd/architecture.md §3 e domain.md §3).
+# Bugs usam apenas valores daqui; termo ausente vira `unclassified` com proposta em Agent Notes.
+area:
+  - app                  # alvo JoystickAIPoC (AppKit, GameController, IOKit, CoreGraphics)
+  - core                 # alvo JoystickCore (máquinas e algoritmos, só Foundation)
+  - tools                # alvo poc-tools (análise de log)
+  - web                  # Resources/ControllerFigure (figura do controle e iPhone)
+module:
+  - app-shell
+  - controller-input
+  - pointer
+  - injection
+  - shortcuts
+  - palette
+  - config
+  - editor
+  - diagnostics-log
+  - targets-analysis
+  - remote               # iPhone como teclado e joystick virtual (features 008 e 010)
+feature:
+  - 001-poc-entrada-ponteiro
+  - 002-paleta-comandos
+  - 003-editor-atalhos
+  - 004-figura-controle-web
+  - 005-sinais-matematicos
+  - 006-teclado-virtual
+  - 007-controle-ipega
+  - 008-iphone-teclado-remoto
+  - 009-sugestao-de-palavras
+  - 010-joystick-virtual-iphone
+  - 011-bateria-e-cursor-no-menu
+  - 012-controle-dualshock-4

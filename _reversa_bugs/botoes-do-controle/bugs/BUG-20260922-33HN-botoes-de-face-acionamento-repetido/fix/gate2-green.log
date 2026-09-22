@@ -1,0 +1,1216 @@
+Building for debugging...
+[Pre-planning 1 / 153]
+[Planning deferred tasks]
+[2 / 26] JoystickCore
+[11 / 35] JoystickCore
+[16 / 36] poc-tools-product
+[19 / 43] poc-tools-product
+[23 / 43] JoystickAIPoC-product
+[24 / 94] poc-tools-product
+[25 / 94] JoystickCore
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickCore: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[31 / 94] poc-tools-product
+/Users/iagoleal/dev/joystick-AI/Package.swift: poc-tools-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/iagoleal/dev/joystick-AI/Package.swift: poc-tools-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[40 / 104] JoystickCoreTests-product
+[43 / 103] JoystickCoreTests-product
+[45 / 104] JoystickCoreTests-product
+[47 / 104] JoystickCoreTests-product/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickCoreTests-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickCoreTests-product: ld: warning: building for macOS-13.0, but linking with dylib '@rpath/Testing.framework/Versions/A/Testing' which was built for newer version 14.0
+
+[51 / 104]
+[58 / 104]
+[59 / 104]
+[65 / 104]
+[66 / 104]
+[67 / 104]
+[70 / 104]
+[72 / 104]
+[80 / 104]
+[81 / 104]
+[84 / 104]
+[85 / 104]
+[88 / 104]
+[89 / 104]
+[92 / 104]
+[101 / 104] JoystickAIPoC-product
+[102 / 104] JoystickAIPoC-product
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickAIPoC-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/usr/lib' not found
+/Users/iagoleal/dev/joystick-AI/Package.swift: JoystickAIPoC-product: ld: warning: search path '/Library/Developer/CommandLineTools/Developer/Library/Frameworks' not found
+[104 / 106] JoystickAIPoC-product
+Build complete! (35,66 seg)
+◇ Test run started.
+↳ Testing Library Version: 2084
+↳ Target Platform: arm64e-apple-macos14.0
+◇ Suite ConfigLoaderTests started.
+◇ Suite LatencyStatsTests started.
+◇ Suite ChargeLogPolicyTests started.
+◇ Suite ShortcutConfigValidationTests started.
+◇ Suite DualSenseReportTests started.
+◇ Suite ScrollMapperTests started.
+◇ Suite SwitchProReportTests started.
+◇ Suite StartupAdoptionTests started.
+◇ Suite ControllerChargeTests started.
+◇ Suite LogEventCatalogTests started.
+◇ Suite NormalizationTests started.
+◇ Suite ButtonDebouncerTests started.
+◇ Suite ActiveControllerRegistryTests started.
+◇ Suite RemotePairingTests started.
+◇ Suite ScreenUnionTests started.
+◇ Suite VirtualControllerMachineTests started.
+◇ Suite ConfigDocumentTests started.
+◇ Suite ControllerModelTests started.
+◇ Suite ConfigLineLocatorTests started.
+◇ Suite CombinedPressedTests started.
+◇ Suite StickKinematicsTests started.
+◇ Suite PointerSettingsValidationTests started.
+◇ Suite LogAnalysisTests started.
+◇ Suite RemoteKeyboardMessageTests started.
+◇ Suite SupportTests started.
+◇ Suite FigureAssetsTests started.
+◇ Suite EditorDraftTests started.
+◇ Suite RemoteKeyboardMachineTests started.
+◇ Suite FigureStateTests started.
+◇ Suite LaunchArgumentsTests started.
+◇ Suite ClickStateMachineTests started.
+◇ Suite ShortcutMapperTests started.
+◇ Suite KeyCatalogTests started.
+◇ Suite RemoteKeyboardAssetsTests started.
+◇ Suite TargetRunTests started.
+◇ Suite ShortcutDefaultsTests started.
+◇ Suite RemoteKeyGeometryTests started.
+◇ Suite ShortcutConfigTests started.
+◇ Suite PointerMotionEngineTests started.
+◇ Suite TouchGlideTests started.
+◇ Suite SuggestionContextTests started.
+◇ Suite DualShock4ReportTests started.
+◇ Suite LocalAddressPolicyTests started.
+◇ Suite ActionSummaryTests started.
+◇ Suite TouchpadTrackerTests started.
+◇ Suite CommandPaletteTests started.
+◇ Suite RunsReportTests started.
+◇ Test amostraVazia() started.
+◇ Test arquivoAcimaDeUmMiB() started.
+◇ Test linhaPeloDeslocamentoQuandoADescricaoNaoTraz() started.
+◇ Test aprovacaoContraAsMetas() started.
+◇ Test amostraUnica() started.
+◇ Test percentisPorPosicaoMaisProxima() started.
+◇ Test primeiraLeituraDaConexaoRegistra() started.
+◇ Test jsonInvalidoComLinha() started.
+◇ Test linkSimbolicoLidoPeloDestino() started.
+◇ Test arquivoAusenteComPadroesDeAtalhos() started.
+◇ Test mudancaDeDezenaRegistra() started.
+◇ Test arquivoAusenteUsaPadroesSemCriarArquivo() started.
+◇ Test diretorioNoLugarDoArquivo() started.
+◇ Test erroDeSintaxeComRegraELinha() started.
+◇ Test atalhosInvalidosMantemPointerLido() started.
+◇ Test campoAusenteCitaALinhaDoAncestral() started.
+◇ Test chavesExtrasIgnoradasEValoresLidos() started.
+◇ Test conexaoNovaReiniciaOEstado() started.
+◇ Test trocaDeEstadoRegistraMesmoNaMesmaDezena() started.
+◇ Test semSecaoPointer() started.
+◇ Test descargaCompletaCabeEmPoucosRegistros() started.
+◇ Test secoesDeAtalhosLidas() started.
+◇ Test soPointerComPadroesDeAtalhos() started.
+◇ Test arquivoIlegivelComRegraUnreadable() started.
+◇ Test tipoDeAcaoDesconhecido() started.
+◇ Test tiposErrados() started.
+◇ Test leituraNaMesmaFaixaDeDezNaoRegistra() started.
+◇ Test shareComoGatilhoEModificador() started.
+◇ Test versaoNaoSuportada() started.
+◇ Test formatoDoCaminho() started.
+◇ Test teclaDesconhecida() started.
+◇ Test raizQueNaoEhObjetoEhInvalida() started.
+◇ Test padraoSemProblemas() started.
+◇ Test secaoCompletaDecodificada() started.
+◇ Test problemaSemValorRecusado() started.
+◇ Test textoERotuloNosLimites() started.
+◇ Test relatorioDesconhecidoNaoDecide() started.
+◇ Test secoesAusentesValemOPadrao() started.
+◇ Test textoDeAcaoForaDosLimites() started.
+◇ Test bitDoPSNasTresFormas() started.
+◇ Test soUmaSecaoPresente() started.
+◇ Test erroNumaSecaoRecusaAsDuas() started.
+◇ Test quantidadeDeItens() started.
+◇ Test atalhoDeSistemaDesconhecido() started.
+◇ Test camadaSemModificador() started.
+◇ Test proporcionalAInclinacao() started.
+◇ Test outrosBitsDoByte4NaoAfetam() started.
+◇ Test atalhoDeAcessibilidadeAceito() started.
+◇ Test invertScrollYTrocaOSinal() started.
+◇ Test modificadorDeTeclaDesconhecido() started.
+◇ Test itemDecodificadoComPadroes() started.
+◇ Test eixoHorizontal() started.
+◇ Test analogicosNoCentro() started.
+◇ Test modificadorComAcao() started.
+◇ Test botoesDeApontamentoFixos() started.
+◇ Test precisaoReduzRolagem() started.
+◇ Test relatorioCurtoOuDeOutroIdentificadorNaoDecide() started.
+◇ Test notificacaoAPartirDeDoisSegundos() started.
+◇ Test eixosIndependentes() started.
+◇ Test analogicoParaBaixoRolaParaBaixo() started.
+◇ Test linhasPorSegundoNaInclinacaoTotal() started.
+◇ Test bitDoHome() started.
+◇ Test vintePixelsPorLinha() started.
+◇ Test descarregandoNaoTrazMarcaDeCarregamento() started.
+◇ Test fracaoDeLinhaAcumula() started.
+◇ Test analogicosEmRelatorioCurtoOuDeOutroIdentificador() started.
+◇ Test notificacaoAntesDeDoisSegundos() started.
+◇ Test porcentagemEhONivelVezesCemArredondado() started.
+◇ Test carregandoValeNosDoisEstadosDeCabo() started.
+◇ Test enumeracaoInicialEhSempreAoIniciar() started.
+◇ Test semControleAtivoIgnoraLeituraResidual() started.
+◇ Test cargaBaixaNoCaboContinuaBaixaEComMarcaDeCarregamento() started.
+◇ Test semControleEIndisponivelNaoTemFaixaBaixa() started.
+◇ Test analogicosNosExtremos() started.
+◇ Test estadoDesconhecidoEhIndisponivelSejaQualForONivel() started.
+◇ Test faixaBaixaVaiAteQuinzePorCentoInclusive() started.
+◇ Test nivelZeroComEstadoConhecidoNaoEhIndisponivel() started.
+◇ Test semControleAtivoNaoMostraNumero() started.
+◇ Test cargaIndisponivelOmiteOsCamposEmVezDeZerar() started.
+◇ Test eventosDoTecladoRemotoSemConteudo() started.
+◇ Test acimaDeQuinzePorCentoNaoRecebeDestaque() started.
+◇ Test dualShock4NaConexaoComCarga() started.
+◇ Test campoOpcionalAusenteNaoAparece() started.
+◇ Test porcentagemFicaEntreZeroECem() started.
+◇ Test eventosDaPaletaSemTextoDeItem() started.
+◇ Test camposDosEventosDeAtalhos() started.
+◇ Test gatilhoSemHisterese() started.
+◇ Test nenhumEventoTemCoordenadasOuValoresDeEixo() started.
+◇ Test figuraIndisponivelSoComMotivo() started.
+◇ Test camposDosEventosPrincipais() started.
+◇ Test modeloNaConexaoEMotivoDeRecusa() started.
+◇ Test controleSemPropriedadeDeCargaEhIndisponivel() started.
+◇ Test eventosDeAtalhosSemTextoTeclaNemAcorde() started.
+◇ Test paletaFechadaPorConfiguracaoNova() started.
+◇ Test camposDaCargaEDoCicloDoMenu() started.
+◇ Test fronteiraDaFaixaBaixaEhDoNumeroLido() started.
+◇ Test zonaMortaConfiguravel() started.
+◇ Test desvioFisicoDentroDaZonaMortaViraZero() started.
+◇ Test zonaMortaPorEixo() started.
+◇ Test gatilhoPressionadoAPartirDeMeioCurso() started.
+◇ Test repousoResultaEmZero() started.
+◇ Test posicaoDoToqueLimitadaAoIntervalo() started.
+◇ Test cancelAllDevolvePendentesEmOrdemEImpedeFlushPosterior() started.
+◇ Test rajadaDoQuadradoComCadenciaDe60msViraUmaPressao() started.
+◇ Test rajadaGravadaDoTrianguloViraUmaPressao() started.
+◇ Test semFiltroORegistroEntregaTresPressoes() started.
+◇ Test downDentroDaJanelaCancelaOUpPendente() started.
+◇ Test limiteDaZonaMortaEhMantido() started.
+◇ Test pressSemUpPendenteEntregaEReleaseRepetidoNaoReagenda() started.
+◇ Test nomesENiveisDoContrato() started.
+◇ Test dualSenseEIpegaNaoSaoFiltrados() started.
+◇ Test soOsBotoesDeMembranaDoDualShock4SaoFiltrados() started.
+◇ Test primeiroDualSenseEhOAtivo() started.
+◇ Test janelaDe120ms() started.
+◇ Test flushAntesDaJanelaNaoEntregaEDepoisEntregaUmaVez() started.
+◇ Test codigoOuTokenDesconhecidoComSessaoAtivaDaBusySemSomarFalha() started.
+◇ Test tokenDaSessaoSubstituiAConexaoAtiva() started.
+◇ Test codigoCertoGeraTokenEZeraFalhas() started.
+◇ Test desconexaoDesconhecidaNaoAlteraNada() started.
+◇ Test solturaSinteticaDoDualShock4EmOrdem() started.
+◇ Test comparacaoEmTempoConstante() started.
+◇ Test solturaSinteticaIncluiShareEmOrdem() started.
+◇ Test desconexaoDoAtivoSoltaBotoesEPromoveOSeguinte() started.
+◇ Test cursoMaximoResultaEmUm() started.
+◇ Test desligarInvalidaCodigoEToken() started.
+◇ Test botoesDoControleNaoAtivoSaoIgnorados() started.
+◇ Test tokenReconectaSemSessaoAtiva() started.
+◇ Test filaMistaComPromocao() started.
+◇ Test quedaEReconexaoRapidasMantemUmUnicoAtivo() started.
+◇ Test quintaFalhaGiraOCodigo() started.
+◇ Test pontoContidoEhMantido() started.
+◇ Test codigoDeSeisDigitos() started.
+◇ Test toquesHumanosDistintosSaoEntreguesUmAUm() started.
+◇ Test tokenDesconhecidoSemSessaoDaBadToken() started.
+◇ Test vaoDoArranjoEmLVaiAoRetanguloMaisProximo() started.
+◇ Test modeloNaoAceitoEhIgnorado() started.
+◇ Test remocaoDoRetanguloQueContinhaOPonto() started.
+◇ Test segundaConexaoDoMesmoControleEhDescartada() started.
+◇ Test bordaExterna() started.
+◇ Test segundoFicaNaFilaComPosicao() started.
+◇ Test perfilDualShockSemOParEhRecusado() started.
+◇ Test filaComTresModelosEPromocaoEmCadeia() started.
+◇ Test paresDeCadaModelo() started.
+◇ Test switchProSemOParEhRecusado() started.
+◇ Test outroModeloEhIgnorado() started.
+◇ Test adaptadorSemFioDaSonyFicaFora() started.
+◇ Test outraCategoriaEhRecusada() started.
+◇ Test desconexaoDeNaoAtivoApenasRemove() started.
+◇ Test dualShock4PeloPerfilComOPar() started.
+◇ Test listaVaziaDevolveOPonto() started.
+◇ Test caminhoInexistente() started.
+◇ Test sairDoApontamentoSoltaBotoesEZeraAnalogicosEDedos() started.
+◇ Test dualSensePeloPerfil() started.
+◇ Test parSemACategoriaEhRecusado() started.
+◇ Test fusaoPreservaOutrasSecoes() started.
+◇ Test parSonySemOPerfilDualShockNaoEhDualShock4() started.
+◇ Test trocaEntreTecladosNaoSoltaNadaDoControle() started.
+◇ Test mesmaChaveEmObjetosDiferentes() started.
+◇ Test precisaoDeL1ValeComQualquerDasOrigens() started.
+◇ Test ipegaPelaCategoriaComOPar() started.
+◇ Test mesmoBotaoNasDuasOrigensSoSaiQuandoAsDuasSoltam() started.
+◇ Test delimitadoresEAspasDentroDeCadeias() started.
+◇ Test analogicosSaoIndependentes() started.
+◇ Test idaEVoltaDoPadrao() started.
+◇ Test solturaDeUmaOrigemNaoRemoveOsDaOutra() started.
+◇ Test repousoNaoMove() started.
+◇ Test uniaoDevolveOsBotoesDasDuasOrigens() started.
+◇ Test uniaoVaziaQuandoNenhumaOrigemMantemNada() started.
+◇ Test caminhosComIndice() started.
+◇ Test mesmosBytesEmDuasGravacoes() started.
+◇ Test idaEVoltaComCamadaNova() started.
+◇ Test eixoYInvertidoParaCoordenadasDeTela() started.
+◇ Test chaveComEscapeUnicode() started.
+◇ Test soltarBotaoNaoPressionadoNaoTemEfeito() started.
+◇ Test botoesDeCadaModelo() started.
+◇ Test dedoRepetidoNaoReabre() started.
+◇ Test quebrasDeLinhaCRLF() started.
+◇ Test magnitudeLimitadaAUmNaDiagonal() started.
+◇ Test camadaVaziaEquivaleAAusente() started.
+◇ Test formatoLegivel() started.
+◇ Test velocidadeRadialComExpoente() started.
+◇ Test solturaGeralDevolveBotoesSinteticosEmOrdemEstavel() started.
+◇ Test precisaoReduzAoFator() started.
+◇ Test restoSubpixelAcumula() started.
+◇ Test botaoViraEntradaDoControleCorrespondente() started.
+◇ Test inclinacaoDeTrintaPorCentoAbaixoDeDezPorCento() started.
+◇ Test caminhosAninhados() started.
+◇ Test repousoGeraUmUnicoEvento() started.
+◇ Test solturaGeralComNadaMantidoNaoEmiteNada() started.
+◇ Test solturaGeralNaoZeraAsContagensDaSessao() started.
+◇ Test noMaximoQuatroDedosSimultaneos() started.
+◇ Test todoBotaoTemCorrespondenteNoControleFisico() started.
+◇ Test amostraDoAnalogicoViraEixoComYParaCima() started.
+◇ Test idaEVoltaComAtalhoDeAcessibilidade() started.
+◇ Test travessiaDaTelaEmAteUmSegundoEMeio() started.
+◇ Test faseOrfaEhDescartada() started.
+◇ Test teclaForaDoCatalogoRecusada() started.
+◇ Test coordenadaDoDedoEhLimitada() started.
+◇ Test contagensSomamSoOQueTemEfeito() started.
+◇ Test estadoRepetidoNaoSoltaNada() started.
+◇ Test logSemModeloEsperaODualSense() started.
+◇ Test amostrasDeLatencia() started.
+◇ Test amostraIgualNaoGeraEvento() started.
+◇ Test pressionarDeNovoNaoTemEfeito() started.
+◇ Test invertScrollYSoBooleano() started.
+◇ Test foraDaFaixaRejeitadoComDetalhes() started.
+◇ Test linhasMalformadasContadasAParte() started.
+◇ Test coberturaDoDualShock4() started.
+◇ Test valoresForaDoIntervaloSaoLimitados() started.
+◇ Test nuloEAusenteSemAviso() started.
+◇ Test raizAusenteOuNaoObjetoCriaObjeto() started.
+◇ Test inteiroAceitoEmCampoDecimal() started.
+◇ Test coberturaDoIpega() started.
+◇ Test coberturaDoDualShock4SemCliqueDoTouchpad() started.
+◇ Test politicaDeSegurancaDeConteudo() started.
+◇ Test coberturaIgnoraEventosSinteticos() started.
+◇ Test padroesDosOitoCampos() started.
+◇ Test relogioMonotonico() started.
+◇ Test idaEVoltaPeloCodable() started.
+◇ Test scriptSemMarcacaoArmazenamentoNemRede() started.
+◇ Test serializacaoEhJSONValido() started.
+◇ Test tipoErradoRejeitadoComDetalhes() started.
+◇ Test osTresArquivosExistem() started.
+◇ Test intervaloDeDuploCliqueSoInteiro() started.
+◇ Test faixasDeRF26(field:min:max:) started.
+◇ Test rebaseDescartandoOuMantendo() started.
+◇ Test semReferenciasExternas() started.
+◇ Test decimalInteiroMantemPonto() started.
+◇ Test hexadecimalIdaEVolta() started.
+◇ Test atribuirEVoltarAHerdar() started.
+◇ Test dedoViraToqueComFaseEIndice() started.
+◇ Test serializacaoDeterministica() started.
+◇ Test ciclosConexoesSemDesconexaoESessoes() started.
+◇ Test nenhumaPropriaNaCamada() started.
+◇ Test recusaQuadroAcimaDe1KiB() started.
+◇ Test dualShock4NaPagina() started.
+◇ Test marcarEDesmarcarModificador() started.
+◇ Test textoDeAcaoRecusadoOuComProblema() started.
+◇ Test incluirNoTopo() started.
+◇ Test isDirtyVoltaAFalsoAoDesfazer() started.
+◇ Test restaurarPadrao() started.
+◇ Test cincoMensagensInvalidasSeguidasEncerram() started.
+◇ Test codificaOModoDoServidor() started.
+◇ Test subrecursosSoIrmaos() started.
+◇ Test dezenoveBotoesEControleAtivo() started.
+◇ Test decodificaAsMensagensDoControle() started.
+◇ Test tocarUmPresoOSolta() started.
+◇ Test coordenadaForaDoIntervaloEhLimitadaSemRecusa() started.
+◇ Test codificaWelcomeERejeicao() started.
+◇ Test codificacao() started.
+◇ Test comandoDireitoEEsquerdoSomam() started.
+◇ Test contaAsTeclasDaSessao() started.
+◇ Test recusaMensagensDoControleInvalidas(_:) started.
+◇ Test capsLockPorCaminhoProprio() started.
+◇ Test edicoesDeItem() started.
+◇ Test tocadoESoltoFicaPresoESoltaDepoisDaProximaTeclaComum() started.
+◇ Test desmarcarDevolveNenhumaRemovida() started.
+◇ Test alvoPeloCaminho() started.
+◇ Test quedaSoltaTudo() started.
+◇ Test selecao() started.
+◇ Test codificaLayoutComLinhasERotulos() started.
+◇ Test desmarcarNaoDevolveNenhumaSobreAcaoNova() started.
+◇ Test codigoForaDaGeometriaEInvalido() started.
+◇ Test rotulosDos19Botoes() started.
+◇ Test edicoesRecusadasComMotivo() started.
+◇ Test avisoSemGatilhoDaPaleta() started.
+◇ Test limitesDaPaleta() started.
+◇ Test suggestLimitaATresPalavrasDeAte48Caracteres() started.
+◇ Test codificaModificadoresEStatus() started.
+◇ Test semModificadores() started.
+◇ Test ordemEContagem() started.
+◇ Test reordenacao() started.
+◇ Test recusaMensagensInvalidas(_:) started.
+◇ Test decodificaPrefsEPick() started.
+◇ Test textoDoUsuarioIntacto() started.
+◇ Test todoBotaoDoProtocoloEhAceito() started.
+◇ Test botoesDeApontamentoRecusados() started.
+◇ Test modificadorNaoRepete() started.
+◇ Test camadaL2() started.
+◇ Test dualShock4NaFigura() started.
+◇ Test modificadorComAcaoRealGeraProblema() started.
+◇ Test recusaPrefsEPickInvalidos(_:) started.
+◇ Test problema() started.
+◇ Test soAUltimaTeclaComumRepete() started.
+◇ Test vigiaSoltaTudoSoComAlgoMantido() started.
+◇ Test padraoNaBase() started.
+◇ Test motivoDeFalhaEmSnakeCase() started.
+◇ Test intervaloDoEnterDaPaleta() started.
+◇ Test codificaSuggest() started.
+◇ Test argumentosDesconhecidosIgnorados() started.
+◇ Test vigiaSoltaModificadorPreso() started.
+◇ Test ambienteInvalido() started.
+◇ Test sementeSemSinal() started.
+◇ Test unidadeDeRolagem() started.
+◇ Test semArgumentos() started.
+◇ Test telaNaoInteira() started.
+◇ Test targetsComAmbienteValido() started.
+◇ Test modificadorSeguradoValeEnquantoODedoEsta() started.
+◇ Test valorAusenteNoFim() started.
+◇ Test controleAtivo() started.
+◇ Test foraDaDistanciaEhCliqueSimples() started.
+◇ Test r2NoBotaoDireito() started.
+◇ Test ordemDosBotoesAnterioresPreservada() started.
+◇ Test debug() started.
+◇ Test abortReasonSoEmSequenciaIncompleta() started.
+◇ Test modificadorSoltoAntes() started.
+◇ Test downEUpRepetidosSaoIgnorados() started.
+◇ Test padraoSemAtalhoDeAcessibilidade() started.
+◇ Test botoesDeApontamentoEModificadoresSemTeclas() started.
+◇ Test decodificaAsMensagensDoCliente() started.
+◇ Test chavesDoJSONIguaisAoContrato() started.
+◇ Test exibicaoDoSinalDeSoma() started.
+◇ Test targetsExigeAmbiente() started.
+◇ Test isoTemSecaoEAnsiNao() started.
+◇ Test semMarcacaoNemAvaliacao() started.
+◇ Test exibicaoDeAcorde() started.
+◇ Test intervaloConfiguravel() started.
+◇ Test escolhaEntreMovimentoEArraste() started.
+◇ Test mesmaSementeMesmasPosicoes() started.
+◇ Test aplicacaoESelecaoDasEscolhas() started.
+◇ Test scriptConheceOAnalogicoDeOrigemDinamica() started.
+◇ Test nomeDeArquivoComSufixoEmColisao() started.
+◇ Test resumoComTaxasPorGrupo() started.
+◇ Test resumoParcialEmSequenciaIncompleta() started.
+◇ Test invariantesEmSequenciasAleatorias() started.
+◇ Test foraDoIntervaloEhCliqueSimples() started.
+◇ Test r1ETouchpadCompartilhamOBotaoEsquerdo() started.
+◇ Test optionsSeguraCommandParaAlternarApps() started.
+◇ Test modificadoresDireitosResolvemParaOsMesmosDosEsquerdos() started.
+◇ Test camadaEquivalenteAoPrototipo(layer:) started.
+◇ Test scriptConheceOControle() started.
+◇ Test botoesDaBarraTomamAAlturaDaBarra() started.
+◇ Test omiteTaxaDeGrupoSemTentativas() started.
+◇ Test duploCliqueDentroDoIntervaloEDaDistancia() started.
+◇ Test margemEAlvoDentroDaTela() started.
+◇ Test todosOsGruposPresentes() started.
+◇ Test rotulosNaoVazios() started.
+◇ Test psAbreAPaleta() started.
+◇ Test semReferenciasExternas() started.
+◇ Test scriptConheceAsEmendasDoToque() started.
+◇ Test atalhoDeAcessibilidadeRemapeadoOuDesativado() started.
+◇ Test temAsTeclasDeRF04(_:) started.
+◇ Test teclasDeD03() started.
+◇ Test capsLockPresenteEOpcional() started.
+◇ Test padraoSemShare() started.
+◇ Test nomesETeclasVirtuaisUnicos() started.
+◇ Test atalhosDeSistemaLidosDasPreferencias() started.
+◇ Test teclasDeFuncao() started.
+◇ Test recusaCodigosForaDaGeometria() started.
+◇ Test outrosBotoesNaoClicam() started.
+◇ Test resumoVazio() started.
+◇ Test scriptAferirOsAlvosSoComAChaveNaURL() started.
+◇ Test osArquivosDaPaginaExistem() started.
+◇ Test scriptConheceOProtocolo() started.
+◇ Test scriptCoalesceOArrastoDaAreaDeApontamento() started.
+◇ Test pressionarRepetidoNaoDuplica() started.
+◇ Test escolhasDaGrade() started.
+◇ Test releaseAllDevolveOsMouseUpPendentes() started.
+◇ Test idaEVoltaEntreNomeETecla() started.
+◇ Test camadaNovaComHeranca() started.
+◇ Test ultimoGatilhoPorTipo() started.
+◇ Test camadaSemEntradaNoDicionarioHerda() started.
+◇ Test botoesSozinhos() started.
+◇ Test l1ComXDigitaContinuar() started.
+◇ Test nenhumaPropriaBloqueiaHeranca() started.
+◇ Test scriptConheceAsSugestoes() started.
+◇ Test htmlTemOArranjoDoControle() started.
+◇ Test htmlSemScriptNemEstiloEmbutidos() started.
+◇ Test aPrecisaoValeTambemParaOArrastoRemoto() started.
+◇ Test atalhoDeSistemaIdaEVoltaPeloNome() started.
+◇ Test combinacaoDecididaNoPressionar() started.
+◇ Test acaoPropriaNaCamada() started.
+◇ Test releaseAllSoltaTeclasAtalhosEModificador() started.
+◇ Test oResetDescartaOQueFaltava() started.
+◇ Test acaoHerdadaDaBase() started.
+◇ Test precedenciaDoModificadorMaisAntigo() started.
+◇ Test aceitarRecusaOQueNaoEstendeAPalavra() started.
+◇ Test rajadaNovaSomaAoQueFaltavaEmVezDeRecomecar() started.
+◇ Test precisaoSoComL1SemOutroBotao() started.
+◇ Test aSomaDosTicksEntregaODeslocamentoInteiro() started.
+◇ Test nenhumaPropriaBloqueiaHeranca() started.
+◇ Test semPrevisaoComContextoVazioOuFaixaOculta() started.
+◇ Test planadorVazioNaoDevolveNada() started.
+◇ Test botaoAusenteNaBase() started.
+◇ Test l2ComDirecionalTrocaDeMesa() started.
+◇ Test filtroTiraEspacoEAPropriaPalavra() started.
+◇ Test arrastoRemotoNaoSaiNaChegadaEPedeTemporizador() started.
+◇ Test oAnalogicoNaoDesligaOTemporizadorComArrastoRemotoPendente() started.
+◇ Test tipoDaAcao() started.
+◇ Test fronteirasEncerramAPalavraEMantemOContexto() started.
+◇ Test oRestoMinusculoSaiInteiroEEncerraASerie() started.
+◇ Test deltaDeToqueSemTemporizadorEhEmitidoDeImediato() started.
+◇ Test toqueContrarioDesaceleraOAnalogico() started.
+◇ Test contextoGuardaSoOsUltimos200Caracteres() started.
+◇ Test umTickGastaSoUmaFracaoDoQueFaltaAndar() started.
+◇ Test temporizadorUnicoParaSoComOsDoisEmRepouso() started.
+◇ Test controlesSaoIgnorados() started.
+◇ Test modificadoresSobrepostosMantemTeclasEmOrdemEstavel() started.
+◇ Test precisaoReduzToqueEAnalogico() started.
+◇ Test aceitarPrevisaoDigitaAPalavraInteira() started.
+◇ Test filtroSemAcentoNaoCasaComAcento() started.
+◇ Test ticksSemAnalogicoNaoMovem() started.
+◇ Test semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test cadaMudancaSobeARevisao() started.
+◇ Test primeiraAmostraDoAnalogicoEsquerdoEhEmitidaEPedeTemporizador() started.
+◇ Test descarteEsvaziaTudo() started.
+◇ Test textoAcumulaNaPalavraENoContexto() started.
+◇ Test amostraDaSondaEOutrosBitsDoMesmoByte() started.
+◇ Test apagarComContextoVazioDescarta() started.
+◇ Test relatorioCurtoNaoDecide() started.
+◇ Test bitDoPSNasTresFormas() started.
+◇ Test aceitarDevolveSufixoEAtualizaOContexto() started.
+◇ Test analogicoDireitoTambemLigaOTemporizador() started.
+◇ Test toquePendenteSaiAoPararOTemporizador() started.
+◇ Test revisaoVelhaDevolveNil() started.
+◇ Test arrastoRemotoSaiRepartidoNosTicksEDesligaOTemporizadorNoFim() started.
+◇ Test relatorioDesconhecidoNaoDecide() started.
+◇ Test modoNextMantemACaixaDoMotor() started.
+◇ Test indicesDiferemDosDoDualSense() started.
+◇ Test camadaL2DoPadrao() started.
+◇ Test r3AcionaOTranscritorDoRaycast() started.
+◇ Test filtroMantemSoExtensoesExatasDeLetrasSemRepeticaoAteTres() started.
+◇ Test apagarRemoveOUltimoCaractere() started.
+◇ Test filtroSegueACaixaDaPrimeiraLetra() started.
+◇ Test completaPalavraSoDeLetras() started.
+◇ Test atalhoDeAcessibilidade() started.
+◇ Test sinaisDeAberturaIniciaisFicamForaDaPalavra() started.
+◇ Test botoesFixosEModificadores() started.
+◇ Test proximaPalavraSoAposEspacoDePalavraDeLetras() started.
+◇ Test segundoDedoAssumeAoSairOPrimeiroSemSalto() started.
+◇ Test aceitaRedeLocal(_:) started.
+◇ Test recusaForaDaRedeLocal(_:) started.
+◇ Test lacoLocalSoComAOpcaoDeTeste() started.
+◇ Test deltaDeToqueComTemporizadorAcumulaESomaNoTick() started.
+◇ Test textoLongoTruncado() started.
+◇ Test palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test deslizeDaEsquerdaParaADireitaGeraDeltaXPositivo() started.
+◇ Test recusaEnderecoMalformado(_:) started.
+◇ Test tiposDeAcao() started.
+◇ Test posicaoNormalizadaDeMenosUmAUmNosDoisEixos() started.
+◇ Test inferenciaPelaTransicaoDeEParaZero() started.
+◇ Test acordesDeZoom() started.
+◇ Test deltaEscalaPelaSensibilidade() started.
+◇ Test soOPrimeiroDedoMove() started.
+◇ Test fimEReinicioDeToqueNaoSaltam() started.
+◇ Test pousarODedoNaoGeraDelta() started.
+◇ Test herdadoDeBaseSemAcao() started.
+◇ Test share() started.
+◇ Test eixosAtualizadosUmDeCadaVezNaoSaltam() started.
+◇ Test primeiraAmostraMovidaSemInicioTambemEhDescartada() started.
+◇ Test repeticaoSoComDirecaoAtiva() started.
+◇ Test listaComDezesseteItensNaOrdem() started.
+◇ Test outrosBotoesIgnorados() started.
+◇ Test motivoDeConfiguracaoNova() started.
+◇ Test rotuloExibidoNoLugarDoTexto() started.
+◇ Test aberturaNoPrimeiroItem() started.
+◇ Test fechadaNaoProduzEfeito() started.
+◇ Test itensDeUmaLinhaEDentroDoLimite() started.
+◇ Test confirmarEntradaFixaAbreOEditorSemDigitar() started.
+◇ Test navegacaoCircular() started.
+◇ Test entradaFixaDepoisDosItens() started.
+◇ Test fechamentoPorCirculoEPorPS() started.
+◇ Test selecaoSempreDentroDaLista() started.
+◇ Test listaConfiguradaComEntradaFixa() started.
+◇ Test confirmacaoFechaEEntregaOItem() started.
+◇ Test dezIntervalosDeRepeticaoAvancamDez() started.
+◇ Test itensPadraoSemRotulo() started.
+◇ Test nenhumItemEnviaEnter() started.
+◇ Test aberturaNoUltimoConfirmado() started.
+◇ Test fechamentoExterno() started.
+◇ Test case passing 3 arguments field → "touchpadSensitivity", min → 0.1, max → 5.0 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 3 arguments field → "stickMaxSpeed", min → 150.0, max → 7500.0 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 3 arguments field → "stickExponent", min → 0.5, max → 4.0 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 3 arguments field → "deadzone", min → 0.0, max → 0.5 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 3 arguments field → "scrollSpeed", min → 1.0, max → 1000.0 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 3 arguments field → "precisionFactor", min → 0.05, max → 1.0 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 3 arguments field → "doubleClickIntervalMs", min → 100.0, max → 2000.0 to faixasDeRF26(field:min:max:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"share","d":1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"Cross","d":1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"","d":1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","d":1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"cross"}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"cross","d":2}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"cross","d":-1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"cross","d":true}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":"cross","d":"1"}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"btn","b":1,"d":1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","s":"m","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","s":"L","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","s":"l","y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","s":"l","x":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","s":"l","x":"0","y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"stick","s":"l","x":0,"y":true}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":0,"p":"x","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":4,"p":"b","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":-1,"p":"b","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":0.5,"p":"b","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":0,"x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":0,"p":"b","y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":0,"p":"b","x":null,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","f":true,"p":"b","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pad","p":"b","x":0,"y":0}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"mode","m":"keyboard"}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"mode","m":"Pointer"}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"mode"}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"mode","m":1}" to recusaMensagensDoControleInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"shout"}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"k":0}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "não é json" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "[1,2]" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"down"}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"down","k":1.5}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"down","k":"a"}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"down","k":-1}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"down","k":70000}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","code":"12345","v":1}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"down","k":true}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","code":"12345a","v":1}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","code":"123456"}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","code":"123456","v":2}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","token":"zz","v":1}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","v":1}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"hello","code":"123456","token":"00000000000000000000000000000000","v":1}" to recusaMensagensInvalidas(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","lang":"es","visible":true}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","visible":true}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","lang":"PT","visible":true}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","lang":"pt"}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","lang":"pt","visible":1}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","lang":"pt","visible":"true"}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"prefs","lang":1,"visible":true}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":1,"i":3}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":1,"i":-1}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":1,"i":1.5}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":1}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","i":0}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":-1,"i":0}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":"1","i":0}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument text → "{"t":"pick","rev":1,"i":true}" to recusaPrefsEPickInvalidos(_:) started.
+◇ Test case passing 1 argument layer → nil to camadaEquivalenteAoPrototipo(layer:) started.
+◇ Test case passing 1 argument layer → .l1 to camadaEquivalenteAoPrototipo(layer:) started.
+◇ Test case passing 1 argument layer → .l2 to camadaEquivalenteAoPrototipo(layer:) started.
+◇ Test case passing 1 argument layer → .options to camadaEquivalenteAoPrototipo(layer:) started.
+◇ Test case passing 1 argument physical → .ansi to temAsTeclasDeRF04(_:) started.
+◇ Test case passing 1 argument physical → .iso to temAsTeclasDeRF04(_:) started.
+◇ Test case passing 1 argument text → "tudo" to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test case passing 1 argument text → "tudo	" to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test case passing 1 argument text → "Olá, " to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test case passing 1 argument text → "ls -la " to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test case passing 1 argument text → "a  " to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test case passing 1 argument text → " " to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test case passing 1 argument text → "abc1 " to semPrevisaoForaDoEspacoAposLetras(_:) started.
+◇ Test colunasDoContrato() started.
+◇ Test excluiSequenciasIncompletas() started.
+◇ Test semSequenciasCompletas() started.
+◇ Test filtroPorAmbiente() started.
+◇ Test parametrosDiferentesDoPadrao() started.
+◇ Test tentativaAcimaDeSessentaSegundosSinalizada() started.
+◇ Test case passing 1 argument address → "10.255.255.254" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "172.16.0.1" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "10.0.0.1" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "172.31.255.255" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "192.168.1.20" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "169.254.3.4" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "fe80::1" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "fe80::1c2b:3aff:fe4d:5e6f%en0" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "febf::1" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument text → "cd ~/dev/joy" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument text → "ls -la" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "172.32.0.1" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "fd12:3456::1" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument text → "a/b" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument text → "arq.txt" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "172.15.255.255" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "fc00::1" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument text → "snake_case" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "::ffff:192.168.0.7" to aceitaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument text → "x=1" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "localhost" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument text → "abc1" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "8.8.8.8" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument text → "~" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "192.168.1.256" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument address → "192.168.1" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument address → "192.168.01.1x" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument text → "-" to palavraComCaraDeCodigoNaoPede(_:) started.
+◇ Test case passing 1 argument address → "192.169.0.1" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "1.2.3.4.5" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument address → "fe80::g" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument address → "abc" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument address → "100.64.0.1" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → ":::" to recusaEnderecoMalformado(_:) started.
+◇ Test case passing 1 argument address → "2606:4700::1111" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "2001:db8::1" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "fec0::1" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "::ffff:8.8.8.8" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "127.0.0.1" to recusaForaDaRedeLocal(_:) started.
+◇ Test case passing 1 argument address → "::1" to recusaForaDaRedeLocal(_:) started.
+✔ Test amostraVazia() passed after 0.056 seconds.
+✔ Test amostraUnica() passed after 0.056 seconds.
+✔ Test mudancaDeDezenaRegistra() passed after 0.056 seconds.
+✔ Test aprovacaoContraAsMetas() passed after 0.056 seconds.
+✔ Test primeiraLeituraDaConexaoRegistra() passed after 0.056 seconds.
+✔ Test linhaPeloDeslocamentoQuandoADescricaoNaoTraz() passed after 0.056 seconds.
+✔ Test jsonInvalidoComLinha() passed after 0.056 seconds.
+✔ Test percentisPorPosicaoMaisProxima() passed after 0.056 seconds.
+✔ Test erroDeSintaxeComRegraELinha() passed after 0.056 seconds.
+✔ Test conexaoNovaReiniciaOEstado() passed after 0.056 seconds.
+✔ Test atalhosInvalidosMantemPointerLido() passed after 0.056 seconds.
+✔ Test diretorioNoLugarDoArquivo() passed after 0.056 seconds.
+✔ Test trocaDeEstadoRegistraMesmoNaMesmaDezena() passed after 0.056 seconds.
+✔ Test campoAusenteCitaALinhaDoAncestral() passed after 0.056 seconds.
+✔ Test descargaCompletaCabeEmPoucosRegistros() passed after 0.056 seconds.
+✔ Test arquivoAusenteUsaPadroesSemCriarArquivo() passed after 0.056 seconds.
+✔ Test arquivoAusenteComPadroesDeAtalhos() passed after 0.056 seconds.
+✔ Test tipoDeAcaoDesconhecido() passed after 0.056 seconds.
+✔ Test semSecaoPointer() passed after 0.056 seconds.
+✔ Test soPointerComPadroesDeAtalhos() passed after 0.056 seconds.
+✔ Test leituraNaMesmaFaixaDeDezNaoRegistra() passed after 0.056 seconds.
+✔ Test secoesDeAtalhosLidas() passed after 0.056 seconds.
+✔ Test formatoDoCaminho() passed after 0.056 seconds.
+✔ Test versaoNaoSuportada() passed after 0.056 seconds.
+✔ Test padraoSemProblemas() passed after 0.056 seconds.
+✔ Test teclaDesconhecida() passed after 0.056 seconds.
+✔ Test arquivoIlegivelComRegraUnreadable() passed after 0.056 seconds.
+✔ Test raizQueNaoEhObjetoEhInvalida() passed after 0.056 seconds.
+✔ Test problemaSemValorRecusado() passed after 0.056 seconds.
+✔ Test arquivoAcimaDeUmMiB() passed after 0.056 seconds.
+✔ Test relatorioDesconhecidoNaoDecide() passed after 0.056 seconds.
+✔ Test linkSimbolicoLidoPeloDestino() passed after 0.056 seconds.
+✔ Test secoesAusentesValemOPadrao() passed after 0.056 seconds.
+✔ Test shareComoGatilhoEModificador() passed after 0.056 seconds.
+✔ Test bitDoPSNasTresFormas() passed after 0.056 seconds.
+✔ Test chavesExtrasIgnoradasEValoresLidos() passed after 0.056 seconds.
+✔ Test secaoCompletaDecodificada() passed after 0.056 seconds.
+✔ Test soUmaSecaoPresente() passed after 0.056 seconds.
+✔ Test outrosBitsDoByte4NaoAfetam() passed after 0.056 seconds.
+✔ Test camadaSemModificador() passed after 0.056 seconds.
+✔ Test atalhoDeSistemaDesconhecido() passed after 0.056 seconds.
+✔ Test textoDeAcaoForaDosLimites() passed after 0.056 seconds.
+✔ Test analogicosNoCentro() passed after 0.056 seconds.
+✔ Test invertScrollYTrocaOSinal() passed after 0.056 seconds.
+✔ Test tiposErrados() passed after 0.056 seconds.
+✔ Test eixoHorizontal() passed after 0.056 seconds.
+✔ Test itemDecodificadoComPadroes() passed after 0.056 seconds.
+✔ Test erroNumaSecaoRecusaAsDuas() passed after 0.056 seconds.
+✔ Test precisaoReduzRolagem() passed after 0.056 seconds.
+✔ Test proporcionalAInclinacao() passed after 0.056 seconds.
+✔ Test relatorioCurtoOuDeOutroIdentificadorNaoDecide() passed after 0.056 seconds.
+✔ Test notificacaoAPartirDeDoisSegundos() passed after 0.056 seconds.
+✔ Test analogicoParaBaixoRolaParaBaixo() passed after 0.056 seconds.
+✔ Test eixosIndependentes() passed after 0.056 seconds.
+✔ Test descarregandoNaoTrazMarcaDeCarregamento() passed after 0.056 seconds.
+✔ Test linhasPorSegundoNaInclinacaoTotal() passed after 0.056 seconds.
+✔ Test bitDoHome() passed after 0.056 seconds.
+✔ Test fracaoDeLinhaAcumula() passed after 0.056 seconds.
+✔ Test notificacaoAntesDeDoisSegundos() passed after 0.056 seconds.
+✔ Test analogicosEmRelatorioCurtoOuDeOutroIdentificador() passed after 0.056 seconds.
+✔ Test enumeracaoInicialEhSempreAoIniciar() passed after 0.056 seconds.
+✔ Test vintePixelsPorLinha() passed after 0.056 seconds.
+✔ Test porcentagemEhONivelVezesCemArredondado() passed after 0.056 seconds.
+✔ Test carregandoValeNosDoisEstadosDeCabo() passed after 0.056 seconds.
+✔ Test semControleAtivoIgnoraLeituraResidual() passed after 0.056 seconds.
+✔ Test cargaBaixaNoCaboContinuaBaixaEComMarcaDeCarregamento() passed after 0.056 seconds.
+✔ Test atalhoDeAcessibilidadeAceito() passed after 0.056 seconds.
+✔ Test semControleEIndisponivelNaoTemFaixaBaixa() passed after 0.056 seconds.
+✔ Test analogicosNosExtremos() passed after 0.056 seconds.
+✔ Test faixaBaixaVaiAteQuinzePorCentoInclusive() passed after 0.056 seconds.
+✔ Test semControleAtivoNaoMostraNumero() passed after 0.056 seconds.
+✔ Test estadoDesconhecidoEhIndisponivelSejaQualForONivel() passed after 0.056 seconds.
+✔ Test modificadorDeTeclaDesconhecido() passed after 0.056 seconds.
+✔ Test nivelZeroComEstadoConhecidoNaoEhIndisponivel() passed after 0.056 seconds.
+✔ Test acimaDeQuinzePorCentoNaoRecebeDestaque() passed after 0.056 seconds.
+✔ Test cargaIndisponivelOmiteOsCamposEmVezDeZerar() passed after 0.056 seconds.
+✔ Test campoOpcionalAusenteNaoAparece() passed after 0.056 seconds.
+✔ Test modificadorComAcao() passed after 0.056 seconds.
+✔ Test porcentagemFicaEntreZeroECem() passed after 0.056 seconds.
+✔ Test gatilhoSemHisterese() passed after 0.056 seconds.
+✔ Test dualShock4NaConexaoComCarga() passed after 0.056 seconds.
+✔ Test eventosDoTecladoRemotoSemConteudo() passed after 0.056 seconds.
+✔ Test botoesDeApontamentoFixos() passed after 0.056 seconds.
+✔ Test nenhumEventoTemCoordenadasOuValoresDeEixo() passed after 0.056 seconds.
+✔ Test controleSemPropriedadeDeCargaEhIndisponivel() passed after 0.056 seconds.
+✔ Test paletaFechadaPorConfiguracaoNova() passed after 0.056 seconds.
+✔ Test fronteiraDaFaixaBaixaEhDoNumeroLido() passed after 0.056 seconds.
+✔ Test desvioFisicoDentroDaZonaMortaViraZero() passed after 0.056 seconds.
+✔ Test figuraIndisponivelSoComMotivo() passed after 0.056 seconds.
+✔ Test zonaMortaConfiguravel() passed after 0.056 seconds.
+✔ Test zonaMortaPorEixo() passed after 0.056 seconds.
+✔ Test repousoResultaEmZero() passed after 0.056 seconds.
+✔ Test posicaoDoToqueLimitadaAoIntervalo() passed after 0.056 seconds.
+✔ Test gatilhoPressionadoAPartirDeMeioCurso() passed after 0.056 seconds.
+✔ Test cancelAllDevolvePendentesEmOrdemEImpedeFlushPosterior() passed after 0.056 seconds.
+✔ Test eventosDeAtalhosSemTextoTeclaNemAcorde() passed after 0.056 seconds.
+✔ Test rajadaGravadaDoTrianguloViraUmaPressao() passed after 0.056 seconds.
+✔ Test semFiltroORegistroEntregaTresPressoes() passed after 0.056 seconds.
+✔ Test limiteDaZonaMortaEhMantido() passed after 0.056 seconds.
+✔ Test rajadaDoQuadradoComCadenciaDe60msViraUmaPressao() passed after 0.056 seconds.
+✔ Test downDentroDaJanelaCancelaOUpPendente() passed after 0.056 seconds.
+✔ Test dualSenseEIpegaNaoSaoFiltrados() passed after 0.056 seconds.
+✔ Test pressSemUpPendenteEntregaEReleaseRepetidoNaoReagenda() passed after 0.056 seconds.
+✔ Test soOsBotoesDeMembranaDoDualShock4SaoFiltrados() passed after 0.056 seconds.
+✔ Test camposDosEventosDeAtalhos() passed after 0.056 seconds.
+✔ Test primeiroDualSenseEhOAtivo() passed after 0.056 seconds.
+✔ Test flushAntesDaJanelaNaoEntregaEDepoisEntregaUmaVez() passed after 0.056 seconds.
+✔ Test nomesENiveisDoContrato() passed after 0.056 seconds.
+✔ Test janelaDe120ms() passed after 0.056 seconds.
+✔ Test codigoOuTokenDesconhecidoComSessaoAtivaDaBusySemSomarFalha() passed after 0.056 seconds.
+✔ Test tokenDaSessaoSubstituiAConexaoAtiva() passed after 0.056 seconds.
+✔ Test camposDaCargaEDoCicloDoMenu() passed after 0.056 seconds.
+✔ Test codigoCertoGeraTokenEZeraFalhas() passed after 0.056 seconds.
+✔ Test desconexaoDesconhecidaNaoAlteraNada() passed after 0.056 seconds.
+✔ Test comparacaoEmTempoConstante() passed after 0.056 seconds.
+✔ Test solturaSinteticaIncluiShareEmOrdem() passed after 0.056 seconds.
+✔ Test solturaSinteticaDoDualShock4EmOrdem() passed after 0.056 seconds.
+✔ Test cursoMaximoResultaEmUm() passed after 0.056 seconds.
+✔ Test modeloNaConexaoEMotivoDeRecusa() passed after 0.057 seconds.
+✔ Test tokenReconectaSemSessaoAtiva() passed after 0.056 seconds.
+✔ Test desconexaoDoAtivoSoltaBotoesEPromoveOSeguinte() passed after 0.056 seconds.
+✔ Test botoesDoControleNaoAtivoSaoIgnorados() passed after 0.056 seconds.
+✔ Test desligarInvalidaCodigoEToken() passed after 0.056 seconds.
+✔ Test pontoContidoEhMantido() passed after 0.056 seconds.
+✔ Test filaMistaComPromocao() passed after 0.056 seconds.
+✔ Test quedaEReconexaoRapidasMantemUmUnicoAtivo() passed after 0.056 seconds.
+✔ Test tokenDesconhecidoSemSessaoDaBadToken() passed after 0.056 seconds.
+✔ Test toquesHumanosDistintosSaoEntreguesUmAUm() passed after 0.056 seconds.
+✔ Test quintaFalhaGiraOCodigo() passed after 0.056 seconds.
+✔ Test vaoDoArranjoEmLVaiAoRetanguloMaisProximo() passed after 0.056 seconds.
+✔ Test remocaoDoRetanguloQueContinhaOPonto() passed after 0.056 seconds.
+✔ Test segundoFicaNaFilaComPosicao() passed after 0.056 seconds.
+✔ Test camposDosEventosPrincipais() passed after 0.057 seconds.
+✔ Test perfilDualShockSemOParEhRecusado() passed after 0.056 seconds.
+✔ Test bordaExterna() passed after 0.056 seconds.
+✔ Test codigoDeSeisDigitos() passed after 0.056 seconds.
+✔ Test switchProSemOParEhRecusado() passed after 0.056 seconds.
+✔ Test modeloNaoAceitoEhIgnorado() passed after 0.056 seconds.
+✔ Test outroModeloEhIgnorado() passed after 0.056 seconds.
+✔ Test filaComTresModelosEPromocaoEmCadeia() passed after 0.056 seconds.
+✔ Test segundaConexaoDoMesmoControleEhDescartada() passed after 0.056 seconds.
+✔ Test adaptadorSemFioDaSonyFicaFora() passed after 0.056 seconds.
+✔ Test dualShock4PeloPerfilComOPar() passed after 0.056 seconds.
+✔ Test outraCategoriaEhRecusada() passed after 0.056 seconds.
+✔ Test listaVaziaDevolveOPonto() passed after 0.056 seconds.
+✔ Test desconexaoDeNaoAtivoApenasRemove() passed after 0.056 seconds.
+✔ Test dualSensePeloPerfil() passed after 0.056 seconds.
+✔ Test eventosDaPaletaSemTextoDeItem() passed after 0.057 seconds.
+✔ Test parSonySemOPerfilDualShockNaoEhDualShock4() passed after 0.056 seconds.
+✔ Test parSemACategoriaEhRecusado() passed after 0.056 seconds.
+✔ Test ipegaPelaCategoriaComOPar() passed after 0.056 seconds.
+✔ Test paresDeCadaModelo() passed after 0.056 seconds.
+✔ Test sairDoApontamentoSoltaBotoesEZeraAnalogicosEDedos() passed after 0.056 seconds.
+✔ Test trocaEntreTecladosNaoSoltaNadaDoControle() passed after 0.056 seconds.
+✔ Test caminhoInexistente() passed after 0.056 seconds.
+✔ Test mesmaChaveEmObjetosDiferentes() passed after 0.056 seconds.
+✔ Test analogicosSaoIndependentes() passed after 0.056 seconds.
+✔ Test precisaoDeL1ValeComQualquerDasOrigens() passed after 0.056 seconds.
+✔ Test mesmoBotaoNasDuasOrigensSoSaiQuandoAsDuasSoltam() passed after 0.056 seconds.
+✔ Test repousoNaoMove() passed after 0.056 seconds.
+✔ Test uniaoDevolveOsBotoesDasDuasOrigens() passed after 0.056 seconds.
+✔ Test delimitadoresEAspasDentroDeCadeias() passed after 0.056 seconds.
+✔ Test chaveComEscapeUnicode() passed after 0.056 seconds.
+✔ Test uniaoVaziaQuandoNenhumaOrigemMantemNada() passed after 0.056 seconds.
+✔ Test soltarBotaoNaoPressionadoNaoTemEfeito() passed after 0.056 seconds.
+✔ Test eixoYInvertidoParaCoordenadasDeTela() passed after 0.056 seconds.
+✔ Test dedoRepetidoNaoReabre() passed after 0.056 seconds.
+✔ Test solturaDeUmaOrigemNaoRemoveOsDaOutra() passed after 0.056 seconds.
+✔ Test quebrasDeLinhaCRLF() passed after 0.056 seconds.
+✔ Test magnitudeLimitadaAUmNaDiagonal() passed after 0.056 seconds.
+✔ Test caminhosComIndice() passed after 0.056 seconds.
+✔ Test botoesDeCadaModelo() passed after 0.057 seconds.
+✔ Test textoERotuloNosLimites() passed after 0.058 seconds.
+✔ Test solturaGeralDevolveBotoesSinteticosEmOrdemEstavel() passed after 0.056 seconds.
+✔ Test velocidadeRadialComExpoente() passed after 0.056 seconds.
+✔ Test precisaoReduzAoFator() passed after 0.056 seconds.
+✔ Test restoSubpixelAcumula() passed after 0.056 seconds.
+✔ Test botaoViraEntradaDoControleCorrespondente() passed after 0.056 seconds.
+✔ Test formatoLegivel() passed after 0.056 seconds.
+✔ Test inclinacaoDeTrintaPorCentoAbaixoDeDezPorCento() passed after 0.056 seconds.
+✔ Test repousoGeraUmUnicoEvento() passed after 0.056 seconds.
+✔ Test solturaGeralComNadaMantidoNaoEmiteNada() passed after 0.056 seconds.
+✔ Test amostraDoAnalogicoViraEixoComYParaCima() passed after 0.056 seconds.
+✔ Test caminhosAninhados() passed after 0.056 seconds.
+✔ Test noMaximoQuatroDedosSimultaneos() passed after 0.056 seconds.
+✔ Test todoBotaoTemCorrespondenteNoControleFisico() passed after 0.056 seconds.
+✔ Test solturaGeralNaoZeraAsContagensDaSessao() passed after 0.056 seconds.
+✔ Test faseOrfaEhDescartada() passed after 0.056 seconds.
+✔ Test travessiaDaTelaEmAteUmSegundoEMeio() passed after 0.056 seconds.
+✔ Test teclaForaDoCatalogoRecusada() passed after 0.056 seconds.
+✔ Test estadoRepetidoNaoSoltaNada() passed after 0.056 seconds.
+✔ Test contagensSomamSoOQueTemEfeito() passed after 0.056 seconds.
+✔ Test coordenadaDoDedoEhLimitada() passed after 0.056 seconds.
+✔ Test amostraIgualNaoGeraEvento() passed after 0.056 seconds.
+✔ Test idaEVoltaComCamadaNova() passed after 0.057 seconds.
+✔ Test quantidadeDeItens() passed after 0.058 seconds.
+✔ Test pressionarDeNovoNaoTemEfeito() passed after 0.056 seconds.
+✔ Test foraDaFaixaRejeitadoComDetalhes() passed after 0.056 seconds.
+✔ Test invertScrollYSoBooleano() passed after 0.056 seconds.
+✔ Test linhasMalformadasContadasAParte() passed after 0.056 seconds.
+✔ Test mesmosBytesEmDuasGravacoes() passed after 0.057 seconds.
+✔ Test inteiroAceitoEmCampoDecimal() passed after 0.056 seconds.
+✔ Test amostrasDeLatencia() passed after 0.056 seconds.
+✔ Test valoresForaDoIntervaloSaoLimitados() passed after 0.056 seconds.
+✔ Test nuloEAusenteSemAviso() passed after 0.056 seconds.
+✔ Test idaEVoltaComAtalhoDeAcessibilidade() passed after 0.056 seconds.
+✔ Test camadaVaziaEquivaleAAusente() passed after 0.057 seconds.
+✔ Test idaEVoltaDoPadrao() passed after 0.057 seconds.
+✔ Test logSemModeloEsperaODualSense() passed after 0.056 seconds.
+✔ Test padroesDosOitoCampos() passed after 0.056 seconds.
+✔ Test tipoErradoRejeitadoComDetalhes() passed after 0.056 seconds.
+✔ Test idaEVoltaPeloCodable() passed after 0.056 seconds.
+✔ Test relogioMonotonico() passed after 0.056 seconds.
+✔ Test osTresArquivosExistem() passed after 0.056 seconds.
+✔ Test politicaDeSegurancaDeConteudo() passed after 0.056 seconds.
+✔ Test rebaseDescartandoOuMantendo() passed after 0.056 seconds.
+✔ Test serializacaoEhJSONValido() passed after 0.056 seconds.
+✔ Test intervaloDeDuploCliqueSoInteiro() passed after 0.056 seconds.
+✔ Test hexadecimalIdaEVolta() passed after 0.056 seconds.
+✔ Test fusaoPreservaOutrasSecoes() passed after 0.057 seconds.
+✔ Test decimalInteiroMantemPonto() passed after 0.056 seconds.
+✔ Test dedoViraToqueComFaseEIndice() passed after 0.056 seconds.
+✔ Test ciclosConexoesSemDesconexaoESessoes() passed after 0.057 seconds.
+✔ Test nenhumaPropriaNaCamada() passed after 0.056 seconds.
+✔ Test serializacaoDeterministica() passed after 0.056 seconds.
+✔ Test atribuirEVoltarAHerdar() passed after 0.056 seconds.
+✔ Test faixasDeRF26(field:min:max:) with 7 test cases passed after 0.056 seconds.
+✔ Test dualShock4NaPagina() passed after 0.056 seconds.
+✔ Test recusaQuadroAcimaDe1KiB() passed after 0.056 seconds.
+✔ Test coberturaIgnoraEventosSinteticos() passed after 0.057 seconds.
+✔ Test marcarEDesmarcarModificador() passed after 0.056 seconds.
+✔ Test incluirNoTopo() passed after 0.056 seconds.
+✔ Test isDirtyVoltaAFalsoAoDesfazer() passed after 0.056 seconds.
+✔ Test cincoMensagensInvalidasSeguidasEncerram() passed after 0.056 seconds.
+✔ Test restaurarPadrao() passed after 0.056 seconds.
+✔ Test coberturaDoIpega() passed after 0.057 seconds.
+✔ Test coberturaDoDualShock4() passed after 0.057 seconds.
+✔ Test decodificaAsMensagensDoControle() passed after 0.056 seconds.
+✔ Test textoDeAcaoRecusadoOuComProblema() passed after 0.056 seconds.
+✔ Test coberturaDoDualShock4SemCliqueDoTouchpad() passed after 0.057 seconds.
+✔ Test comandoDireitoEEsquerdoSomam() passed after 0.056 seconds.
+✔ Test coordenadaForaDoIntervaloEhLimitadaSemRecusa() passed after 0.056 seconds.
+✔ Test tocarUmPresoOSolta() passed after 0.056 seconds.
+✔ Test codificacao() passed after 0.056 seconds.
+✔ Test contaAsTeclasDaSessao() passed after 0.056 seconds.
+✔ Test capsLockPorCaminhoProprio() passed after 0.056 seconds.
+✔ Test recusaMensagensDoControleInvalidas(_:) with 30 test cases passed after 0.056 seconds.
+✔ Test tocadoESoltoFicaPresoESoltaDepoisDaProximaTeclaComum() passed after 0.056 seconds.
+✔ Test edicoesDeItem() passed after 0.056 seconds.
+✔ Test desmarcarDevolveNenhumaRemovida() passed after 0.056 seconds.
+✔ Test selecao() passed after 0.056 seconds.
+✔ Test alvoPeloCaminho() passed after 0.056 seconds.
+✔ Test quedaSoltaTudo() passed after 0.056 seconds.
+✔ Test semReferenciasExternas() passed after 0.057 seconds.
+✔ Test desmarcarNaoDevolveNenhumaSobreAcaoNova() passed after 0.056 seconds.
+✔ Test codificaOModoDoServidor() passed after 0.057 seconds.
+✔ Test codigoForaDaGeometriaEInvalido() passed after 0.056 seconds.
+✔ Test codificaWelcomeERejeicao() passed after 0.056 seconds.
+✔ Test semModificadores() passed after 0.056 seconds.
+✔ Test codificaLayoutComLinhasERotulos() passed after 0.056 seconds.
+✔ Test avisoSemGatilhoDaPaleta() passed after 0.056 seconds.
+✔ Test suggestLimitaATresPalavrasDeAte48Caracteres() passed after 0.056 seconds.
+✔ Test subrecursosSoIrmaos() passed after 0.057 seconds.
+✔ Test ordemEContagem() passed after 0.056 seconds.
+✔ Test limitesDaPaleta() passed after 0.056 seconds.
+✔ Test codificaModificadoresEStatus() passed after 0.056 seconds.
+✔ Test recusaMensagensInvalidas(_:) with 17 test cases passed after 0.056 seconds.
+✔ Test edicoesRecusadasComMotivo() passed after 0.056 seconds.
+✔ Test rotulosDos19Botoes() passed after 0.057 seconds.
+✔ Test decodificaPrefsEPick() passed after 0.056 seconds.
+✔ Test botoesDeApontamentoRecusados() passed after 0.056 seconds.
+✔ Test todoBotaoDoProtocoloEhAceito() passed after 0.056 seconds.
+✔ Test modificadorNaoRepete() passed after 0.056 seconds.
+✔ Test reordenacao() passed after 0.056 seconds.
+✔ Test textoDoUsuarioIntacto() passed after 0.056 seconds.
+✔ Test camadaL2() passed after 0.056 seconds.
+✔ Test vigiaSoltaTudoSoComAlgoMantido() passed after 0.056 seconds.
+✔ Test dualShock4NaFigura() passed after 0.056 seconds.
+✔ Test padraoNaBase() passed after 0.056 seconds.
+✔ Test motivoDeFalhaEmSnakeCase() passed after 0.056 seconds.
+✔ Test soAUltimaTeclaComumRepete() passed after 0.057 seconds.
+✔ Test intervaloDoEnterDaPaleta() passed after 0.056 seconds.
+✔ Test codificaSuggest() passed after 0.056 seconds.
+✔ Test vigiaSoltaModificadorPreso() passed after 0.056 seconds.
+✔ Test recusaPrefsEPickInvalidos(_:) with 15 test cases passed after 0.056 seconds.
+✔ Test sementeSemSinal() passed after 0.056 seconds.
+✔ Test argumentosDesconhecidosIgnorados() passed after 0.056 seconds.
+✔ Test semArgumentos() passed after 0.056 seconds.
+✔ Test unidadeDeRolagem() passed after 0.056 seconds.
+✔ Test telaNaoInteira() passed after 0.056 seconds.
+✔ Test valorAusenteNoFim() passed after 0.056 seconds.
+✔ Test ambienteInvalido() passed after 0.056 seconds.
+✔ Test targetsComAmbienteValido() passed after 0.056 seconds.
+✔ Test foraDaDistanciaEhCliqueSimples() passed after 0.056 seconds.
+✔ Test modificadorSeguradoValeEnquantoODedoEsta() passed after 0.057 seconds.
+✔ Test modificadorSoltoAntes() passed after 0.056 seconds.
+✔ Test debug() passed after 0.056 seconds.
+✔ Test ordemDosBotoesAnterioresPreservada() passed after 0.056 seconds.
+✔ Test r2NoBotaoDireito() passed after 0.056 seconds.
+✔ Test abortReasonSoEmSequenciaIncompleta() passed after 0.056 seconds.
+✔ Test controleAtivo() passed after 0.056 seconds.
+✔ Test decodificaAsMensagensDoCliente() passed after 0.056 seconds.
+✔ Test padraoSemAtalhoDeAcessibilidade() passed after 0.056 seconds.
+✔ Test botoesDeApontamentoEModificadoresSemTeclas() passed after 0.056 seconds.
+✔ Test exibicaoDoSinalDeSoma() passed after 0.056 seconds.
+✔ Test targetsExigeAmbiente() passed after 0.057 seconds.
+✔ Test raizAusenteOuNaoObjetoCriaObjeto() passed after 0.058 seconds.
+✔ Test modificadorComAcaoRealGeraProblema() passed after 0.057 seconds.
+✔ Test downEUpRepetidosSaoIgnorados() passed after 0.057 seconds.
+✔ Test exibicaoDeAcorde() passed after 0.056 seconds.
+✔ Test escolhaEntreMovimentoEArraste() passed after 0.056 seconds.
+✔ Test chavesDoJSONIguaisAoContrato() passed after 0.056 seconds.
+✔ Test intervaloConfiguravel() passed after 0.056 seconds.
+✔ Test mesmaSementeMesmasPosicoes() passed after 0.056 seconds.
+✔ Test isoTemSecaoEAnsiNao() passed after 0.056 seconds.
+✔ Test resumoComTaxasPorGrupo() passed after 0.056 seconds.
+✔ Test resumoParcialEmSequenciaIncompleta() passed after 0.056 seconds.
+✔ Test aplicacaoESelecaoDasEscolhas() passed after 0.056 seconds.
+✔ Test modificadoresDireitosResolvemParaOsMesmosDosEsquerdos() passed after 0.056 seconds.
+✔ Test problema() passed after 0.057 seconds.
+✔ Test foraDoIntervaloEhCliqueSimples() passed after 0.056 seconds.
+✔ Test optionsSeguraCommandParaAlternarApps() passed after 0.056 seconds.
+✔ Test camadaEquivalenteAoPrototipo(layer:) with 4 test cases passed after 0.056 seconds.
+✔ Test r1ETouchpadCompartilhamOBotaoEsquerdo() passed after 0.056 seconds.
+✔ Test scriptConheceOAnalogicoDeOrigemDinamica() passed after 0.057 seconds.
+✔ Test omiteTaxaDeGrupoSemTentativas() passed after 0.056 seconds.
+✔ Test duploCliqueDentroDoIntervaloEDaDistancia() passed after 0.056 seconds.
+✔ Test botoesDaBarraTomamAAlturaDaBarra() passed after 0.056 seconds.
+✔ Test rotulosNaoVazios() passed after 0.056 seconds.
+✔ Test psAbreAPaleta() passed after 0.056 seconds.
+✔ Test todosOsGruposPresentes() passed after 0.056 seconds.
+✔ Test margemEAlvoDentroDaTela() passed after 0.056 seconds.
+✔ Test nomeDeArquivoComSufixoEmColisao() passed after 0.057 seconds.
+✔ Test atalhoDeAcessibilidadeRemapeadoOuDesativado() passed after 0.056 seconds.
+✔ Test scriptConheceOControle() passed after 0.057 seconds.
+✔ Test temAsTeclasDeRF04(_:) with 2 test cases passed after 0.056 seconds.
+✔ Test teclasDeD03() passed after 0.057 seconds.
+✔ Test nomesETeclasVirtuaisUnicos() passed after 0.056 seconds.
+✔ Test capsLockPresenteEOpcional() passed after 0.056 seconds.
+✔ Test outrosBotoesNaoClicam() passed after 0.056 seconds.
+✔ Test padraoSemShare() passed after 0.056 seconds.
+✔ Test atalhosDeSistemaLidosDasPreferencias() passed after 0.056 seconds.
+✔ Test teclasDeFuncao() passed after 0.056 seconds.
+✔ Test recusaCodigosForaDaGeometria() passed after 0.056 seconds.
+✔ Test resumoVazio() passed after 0.056 seconds.
+✔ Test osArquivosDaPaginaExistem() passed after 0.056 seconds.
+✔ Test pressionarRepetidoNaoDuplica() passed after 0.056 seconds.
+✔ Test scriptConheceAsEmendasDoToque() passed after 0.057 seconds.
+✔ Test semReferenciasExternas() passed after 0.057 seconds.
+✔ Test releaseAllDevolveOsMouseUpPendentes() passed after 0.056 seconds.
+✔ Test escolhasDaGrade() passed after 0.056 seconds.
+✔ Test camadaSemEntradaNoDicionarioHerda() passed after 0.056 seconds.
+✔ Test botoesSozinhos() passed after 0.056 seconds.
+✔ Test camadaNovaComHeranca() passed after 0.056 seconds.
+✔ Test idaEVoltaEntreNomeETecla() passed after 0.056 seconds.
+✔ Test ultimoGatilhoPorTipo() passed after 0.056 seconds.
+✔ Test nenhumaPropriaBloqueiaHeranca() passed after 0.056 seconds.
+✔ Test l1ComXDigitaContinuar() passed after 0.056 seconds.
+✔ Test htmlTemOArranjoDoControle() passed after 0.056 seconds.
+✔ Test scriptConheceAsSugestoes() passed after 0.057 seconds.
+✔ Test scriptAferirOsAlvosSoComAChaveNaURL() passed after 0.057 seconds.
+✔ Test aPrecisaoValeTambemParaOArrastoRemoto() passed after 0.056 seconds.
+✔ Test combinacaoDecididaNoPressionar() passed after 0.056 seconds.
+✔ Test atalhoDeSistemaIdaEVoltaPeloNome() passed after 0.056 seconds.
+✔ Test releaseAllSoltaTeclasAtalhosEModificador() passed after 0.056 seconds.
+✔ Test acaoPropriaNaCamada() passed after 0.056 seconds.
+✔ Test oResetDescartaOQueFaltava() passed after 0.056 seconds.
+✔ Test precedenciaDoModificadorMaisAntigo() passed after 0.056 seconds.
+✔ Test acaoHerdadaDaBase() passed after 0.057 seconds.
+✔ Test rajadaNovaSomaAoQueFaltavaEmVezDeRecomecar() passed after 0.056 seconds.
+✔ Test aSomaDosTicksEntregaODeslocamentoInteiro() passed after 0.057 seconds.
+✔ Test precisaoSoComL1SemOutroBotao() passed after 0.057 seconds.
+✔ Test botaoAusenteNaBase() passed after 0.056 seconds.
+✔ Test planadorVazioNaoDevolveNada() passed after 0.056 seconds.
+✔ Test aceitarRecusaOQueNaoEstendeAPalavra() passed after 0.056 seconds.
+✔ Test semPrevisaoComContextoVazioOuFaixaOculta() passed after 0.057 seconds.
+✔ Test nenhumaPropriaBloqueiaHeranca() passed after 0.057 seconds.
+✔ Test l2ComDirecionalTrocaDeMesa() passed after 0.057 seconds.
+✔ Test arrastoRemotoNaoSaiNaChegadaEPedeTemporizador() passed after 0.057 seconds.
+✔ Test tipoDaAcao() passed after 0.057 seconds.
+✔ Test filtroTiraEspacoEAPropriaPalavra() passed after 0.057 seconds.
+✔ Test oAnalogicoNaoDesligaOTemporizadorComArrastoRemotoPendente() passed after 0.056 seconds.
+✔ Test fronteirasEncerramAPalavraEMantemOContexto() passed after 0.056 seconds.
+✔ Test oRestoMinusculoSaiInteiroEEncerraASerie() passed after 0.057 seconds.
+✔ Test toqueContrarioDesaceleraOAnalogico() passed after 0.057 seconds.
+✔ Test contextoGuardaSoOsUltimos200Caracteres() passed after 0.057 seconds.
+✔ Test deltaDeToqueSemTemporizadorEhEmitidoDeImediato() passed after 0.057 seconds.
+✔ Test controlesSaoIgnorados() passed after 0.057 seconds.
+✔ Test temporizadorUnicoParaSoComOsDoisEmRepouso() passed after 0.057 seconds.
+✔ Test modificadoresSobrepostosMantemTeclasEmOrdemEstavel() passed after 0.057 seconds.
+✔ Test umTickGastaSoUmaFracaoDoQueFaltaAndar() passed after 0.057 seconds.
+✔ Test aceitarPrevisaoDigitaAPalavraInteira() passed after 0.057 seconds.
+✔ Test primeiraAmostraDoAnalogicoEsquerdoEhEmitidaEPedeTemporizador() passed after 0.056 seconds.
+✔ Test semPrevisaoForaDoEspacoAposLetras(_:) with 7 test cases passed after 0.056 seconds.
+✔ Test descarteEsvaziaTudo() passed after 0.056 seconds.
+✔ Test filtroSemAcentoNaoCasaComAcento() passed after 0.057 seconds.
+✔ Test precisaoReduzToqueEAnalogico() passed after 0.057 seconds.
+✔ Test textoAcumulaNaPalavraENoContexto() passed after 0.056 seconds.
+✔ Test amostraDaSondaEOutrosBitsDoMesmoByte() passed after 0.056 seconds.
+✔ Test apagarComContextoVazioDescarta() passed after 0.057 seconds.
+✔ Test relatorioCurtoNaoDecide() passed after 0.057 seconds.
+✔ Test analogicoDireitoTambemLigaOTemporizador() passed after 0.057 seconds.
+✔ Test toquePendenteSaiAoPararOTemporizador() passed after 0.056 seconds.
+✔ Test cadaMudancaSobeARevisao() passed after 0.056 seconds.
+✔ Test bitDoPSNasTresFormas() passed after 0.056 seconds.
+✔ Test scriptSemMarcacaoArmazenamentoNemRede() passed after 0.058 seconds.
+✔ Test ticksSemAnalogicoNaoMovem() passed after 0.057 seconds.
+✔ Test aceitarDevolveSufixoEAtualizaOContexto() passed after 0.057 seconds.
+✔ Test relatorioDesconhecidoNaoDecide() passed after 0.056 seconds.
+✔ Test scriptConheceOProtocolo() passed after 0.057 seconds.
+✔ Test revisaoVelhaDevolveNil() passed after 0.057 seconds.
+✔ Test arrastoRemotoSaiRepartidoNosTicksEDesligaOTemporizadorNoFim() passed after 0.057 seconds.
+✔ Test modoNextMantemACaixaDoMotor() passed after 0.057 seconds.
+✔ Test indicesDiferemDosDoDualSense() passed after 0.057 seconds.
+✔ Test apagarRemoveOUltimoCaractere() passed after 0.057 seconds.
+✔ Test r3AcionaOTranscritorDoRaycast() passed after 0.057 seconds.
+✔ Test filtroMantemSoExtensoesExatasDeLetrasSemRepeticaoAteTres() passed after 0.057 seconds.
+✔ Test atalhoDeAcessibilidade() passed after 0.057 seconds.
+✔ Test completaPalavraSoDeLetras() passed after 0.057 seconds.
+✔ Test filtroSegueACaixaDaPrimeiraLetra() passed after 0.057 seconds.
+✔ Test camadaL2DoPadrao() passed after 0.057 seconds.
+✔ Test botoesFixosEModificadores() passed after 0.057 seconds.
+✔ Test sinaisDeAberturaIniciaisFicamForaDaPalavra() passed after 0.057 seconds.
+✔ Test segundoDedoAssumeAoSairOPrimeiroSemSalto() passed after 0.057 seconds.
+✔ Test aceitaRedeLocal(_:) with 12 test cases passed after 0.057 seconds.
+✔ Test textoLongoTruncado() passed after 0.057 seconds.
+✔ Test lacoLocalSoComAOpcaoDeTeste() passed after 0.057 seconds.
+✔ Test deltaDeToqueComTemporizadorAcumulaESomaNoTick() passed after 0.057 seconds.
+✔ Test palavraComCaraDeCodigoNaoPede(_:) with 9 test cases passed after 0.057 seconds.
+✔ Test deslizeDaEsquerdaParaADireitaGeraDeltaXPositivo() passed after 0.057 seconds.
+✔ Test posicaoNormalizadaDeMenosUmAUmNosDoisEixos() passed after 0.057 seconds.
+✔ Test recusaEnderecoMalformado(_:) with 9 test cases passed after 0.057 seconds.
+✔ Test tiposDeAcao() passed after 0.057 seconds.
+✔ Test inferenciaPelaTransicaoDeEParaZero() passed after 0.057 seconds.
+✔ Test recusaForaDaRedeLocal(_:) with 11 test cases passed after 0.057 seconds.
+✔ Test deltaEscalaPelaSensibilidade() passed after 0.057 seconds.
+✔ Test proximaPalavraSoAposEspacoDePalavraDeLetras() passed after 0.057 seconds.
+✔ Test acordesDeZoom() passed after 0.057 seconds.
+✔ Test soOPrimeiroDedoMove() passed after 0.057 seconds.
+✔ Test herdadoDeBaseSemAcao() passed after 0.057 seconds.
+✔ Test fimEReinicioDeToqueNaoSaltam() passed after 0.057 seconds.
+✔ Test pousarODedoNaoGeraDelta() passed after 0.057 seconds.
+✔ Test scriptCoalesceOArrastoDaAreaDeApontamento() passed after 0.058 seconds.
+✔ Test eixosAtualizadosUmDeCadaVezNaoSaltam() passed after 0.057 seconds.
+✔ Test primeiraAmostraMovidaSemInicioTambemEhDescartada() passed after 0.057 seconds.
+✔ Test share() passed after 0.057 seconds.
+✔ Test listaComDezesseteItensNaOrdem() passed after 0.051 seconds.
+✔ Test repeticaoSoComDirecaoAtiva() passed after 0.051 seconds.
+✔ Test htmlSemScriptNemEstiloEmbutidos() passed after 0.058 seconds.
+✔ Test aberturaNoPrimeiroItem() passed after 0.050 seconds.
+✔ Test outrosBotoesIgnorados() passed after 0.051 seconds.
+✔ Test motivoDeConfiguracaoNova() passed after 0.051 seconds.
+✔ Test itensDeUmaLinhaEDentroDoLimite() passed after 0.050 seconds.
+✔ Test navegacaoCircular() passed after 0.050 seconds.
+✔ Test fechadaNaoProduzEfeito() passed after 0.050 seconds.
+✔ Test entradaFixaDepoisDosItens() passed after 0.050 seconds.
+✔ Test fechamentoPorCirculoEPorPS() passed after 0.050 seconds.
+✔ Test listaConfiguradaComEntradaFixa() passed after 0.050 seconds.
+✔ Test confirmarEntradaFixaAbreOEditorSemDigitar() passed after 0.050 seconds.
+✔ Test rotuloExibidoNoLugarDoTexto() passed after 0.051 seconds.
+✔ Test selecaoSempreDentroDaLista() passed after 0.050 seconds.
+✔ Test dezIntervalosDeRepeticaoAvancamDez() passed after 0.050 seconds.
+✔ Test confirmacaoFechaEEntregaOItem() passed after 0.050 seconds.
+✔ Test fechamentoExterno() passed after 0.049 seconds.
+✔ Test aberturaNoUltimoConfirmado() passed after 0.050 seconds.
+✔ Test nenhumItemEnviaEnter() passed after 0.050 seconds.
+✔ Test itensPadraoSemRotulo() passed after 0.050 seconds.
+✔ Test dezenoveBotoesEControleAtivo() passed after 0.059 seconds.
+✔ Test colunasDoContrato() passed after 0.007 seconds.
+✔ Test tentativaAcimaDeSessentaSegundosSinalizada() passed after 0.007 seconds.
+✔ Test excluiSequenciasIncompletas() passed after 0.007 seconds.
+✔ Test semSequenciasCompletas() passed after 0.007 seconds.
+✔ Test filtroPorAmbiente() passed after 0.007 seconds.
+✔ Suite ChargeLogPolicyTests passed after 0.063 seconds.
+✔ Suite DualSenseReportTests passed after 0.063 seconds.
+✔ Suite SwitchProReportTests passed after 0.063 seconds.
+✔ Suite ShortcutConfigValidationTests passed after 0.063 seconds.
+✔ Suite LatencyStatsTests passed after 0.063 seconds.
+✔ Suite ScrollMapperTests passed after 0.063 seconds.
+✔ Suite StartupAdoptionTests passed after 0.063 seconds.
+✔ Suite ConfigLoaderTests passed after 0.063 seconds.
+✔ Suite ControllerChargeTests passed after 0.063 seconds.
+✔ Test parametrosDiferentesDoPadrao() passed after 0.007 seconds.
+✔ Suite ButtonDebouncerTests passed after 0.063 seconds.
+✔ Suite RemotePairingTests passed after 0.063 seconds.
+✔ Suite ScreenUnionTests passed after 0.063 seconds.
+✔ Suite NormalizationTests passed after 0.063 seconds.
+✔ Suite LogEventCatalogTests passed after 0.063 seconds.
+✔ Suite ControllerModelTests passed after 0.063 seconds.
+✔ Suite CombinedPressedTests passed after 0.063 seconds.
+✔ Suite ConfigLineLocatorTests passed after 0.063 seconds.
+✔ Suite ConfigDocumentTests passed after 0.063 seconds.
+✔ Suite ActiveControllerRegistryTests passed after 0.063 seconds.
+✔ Suite StickKinematicsTests passed after 0.063 seconds.
+✔ Suite SupportTests passed after 0.063 seconds.
+✔ Suite VirtualControllerMachineTests passed after 0.063 seconds.
+✔ Suite EditorDraftTests passed after 0.063 seconds.
+✔ Suite LogAnalysisTests passed after 0.063 seconds.
+✔ Suite PointerSettingsValidationTests passed after 0.063 seconds.
+✔ Suite LaunchArgumentsTests passed after 0.063 seconds.
+✔ Suite FigureStateTests passed after 0.063 seconds.
+✔ Suite RemoteKeyboardMachineTests passed after 0.063 seconds.
+✔ Suite ShortcutDefaultsTests passed after 0.063 seconds.
+✔ Suite TargetRunTests passed after 0.063 seconds.
+✔ Suite RemoteKeyGeometryTests passed after 0.063 seconds.
+✔ Suite KeyCatalogTests passed after 0.063 seconds.
+✔ Suite ClickStateMachineTests passed after 0.063 seconds.
+✔ Suite RemoteKeyboardMessageTests passed after 0.063 seconds.
+✔ Suite ShortcutConfigTests passed after 0.063 seconds.
+✔ Suite TouchGlideTests passed after 0.063 seconds.
+✔ Suite DualShock4ReportTests passed after 0.063 seconds.
+✔ Suite ActionSummaryTests passed after 0.063 seconds.
+✔ Suite PointerMotionEngineTests passed after 0.063 seconds.
+✔ Suite TouchpadTrackerTests passed after 0.063 seconds.
+✔ Suite LocalAddressPolicyTests passed after 0.063 seconds.
+✔ Suite SuggestionContextTests passed after 0.063 seconds.
+✔ Suite RunsReportTests passed after 0.063 seconds.
+✔ Suite FigureAssetsTests passed after 0.064 seconds.
+✔ Suite CommandPaletteTests passed after 0.063 seconds.
+✔ Test invariantesEmSequenciasAleatorias() passed after 0.064 seconds.
+✔ Suite ShortcutMapperTests passed after 0.069 seconds.
+✔ Test semMarcacaoNemAvaliacao() passed after 0.091 seconds.
+✔ Suite RemoteKeyboardAssetsTests passed after 0.096 seconds.
+✔ Test run with 476 tests in 47 suites passed after 0.096 seconds.
+exit=0

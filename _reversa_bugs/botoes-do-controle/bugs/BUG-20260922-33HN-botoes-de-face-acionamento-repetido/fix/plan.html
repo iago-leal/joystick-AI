@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plano de correção · BUG-20260922-33HN</title>
+<style>
+:root{color-scheme:dark}body{margin:0;background:#0d1117;color:#e6edf3;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;padding:24px 16px;max-width:1100px;margin-inline:auto}
+h1{font-size:22px;margin:0 0 6px}h2{font-size:17px;margin:28px 0 10px;border-bottom:1px solid #30363d;padding-bottom:6px}
+.meta{color:#8b949e;font-size:13px;margin-bottom:18px}.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;margin-right:6px}
+.high{background:#3d1214;color:#ff7b72;border:1px solid #e5484d}.p1{background:#3a2a05;color:#f5a524;border:1px solid #f5a524}.ok{background:#0f2e1c;color:#3fb950;border:1px solid #30a46c}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #30363d;vertical-align:top}th{color:#8b949e;font-weight:600}
+code{background:#161b22;border:1px solid #30363d;border-radius:5px;padding:1px 5px;font-size:12.5px}pre{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px;overflow-x:auto;font-size:12.5px}
+.box{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:14px 16px;margin:10px 0}
+a{color:#58a6ff;text-decoration:none}a:hover{text-decoration:underline}
+.graph{overflow-x:auto;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:8px}
+ul{padding-left:22px}li{margin:4px 0}
+</style></head><body>
+<h1>Plano de correção · #1 · BUG-20260922-33HN</h1>
+<div class="meta">Contexto <code>botoes-do-controle</code> · 2026-09-22 · <span class="tag high">severity high</span><span class="tag p1">priority P1</span><span class="tag ok">change_risk baixa</span> · gerado pelo /reversa-debugger-fix antes de tocar qualquer arquivo</div>
+
+<h2>1. Defeito e causa raiz (estado: confirmed)</h2>
+<div class="box">
+<p><b>Defeito.</b> Com o GameSir G8+ em modo DualShock 4, uma pressão única em ✕, □, △ ou ○ chega ao app como rajada de bordas pressiona/solta (duração 15 a 80 ms, intervalo 15 a 100 ms). Cada borda de pressionar dispara a ação configurada: o △ digitou "CONTINUAR" três vezes em 120 ms.</p>
+<p><b>Causa raiz.</b> O controle alterna o bit do botão no relatório HID <code>0x11</code> enquanto um botão de membrana é segurado com pressão variável. O app repassa cada borda sem filtro temporal, porque nenhuma regra da extração prevê um.</p>
+<p><b>Caminho causal fechado pelas evidências.</b></p>
+<ol>
+<li>Sonda P-02 (sem o app): bit 7 do byte 7 do relatório <code>0x11</code> (△) alterna 0x08→0x88→0x08 a cada 30 ms. <a href="../evidence/sonda-012-p01-p02-oscilacao-triangulo.log">evidence/sonda-012-p01-p02-oscilacao-triangulo.log</a></li>
+<li>Sonda P-01: <code>pressedChangedHandler</code> de <code>buttonY</code> acompanha cada alternância; A, B, X, Y, Options e Menu com 3 a 6 bordas por pressão única; L1, R1, L3 e R3 com uma.</li>
+<li><code>ButtonReader.deliver</code> converte cada borda em <code>press</code>/<code>release</code> no <code>ActiveControllerRegistry</code>, que deduplica só estado repetido (RN-EC-06).</li>
+<li><code>ShortcutActions.handle(.buttonDown)</code> dispara a ação a cada <code>down</code> (RN-AT-08). Log do app: <code>input.button</code> e <code>shortcut.triggered</code> em sincronia. <a href="../evidence/log-app-2026-09-22-rajadas-botoes-de-face.jsonl">evidence/log-app-…jsonl</a></li>
+<li>Contraprova: DualSense e Ipega sem o padrão (logs de 20 e 21 de setembro; relato do usuário). <a href="../evidence/reproduction.md">evidence/reproduction.md</a></li>
+</ol>
+</div>
+
+<h2>2. Estratégia escolhida: correção direta</h2>
+<div class="box">
+<p>Filtro de rajadas no núcleo (<code>ButtonDebouncer</code>, só <code>Foundation</code>, no molde de <code>TriggerTracker</code>), aplicado pelo app apenas ao modelo <code>dualShock4</code> e apenas aos botões de membrana que a sonda mostrou oscilando: ✕, ○, □, △, Options e Create. <b>Por quê:</b> o <code>down</code> segue imediato (nenhuma latência na ação); o <code>up</code> fica retido por uma janela de 120 ms e é cancelado se um novo <code>down</code> chegar antes, de modo que a rajada inteira vira uma única pressão. Ombros, cliques dos analógicos, direcional, gatilhos, PS e clique do touchpad ficam fora: não oscilam na sonda, e o R1 e o clique do touchpad são botões de apontamento, cujo duplo clique (RN-09, 400 ms) não pode ter o <code>up</code> retido.</p>
+<p><b>Janela de 120 ms, pelos dados:</b> as rajadas ficam entre 15 e 100 ms (□: 213 de 262 intervalos entre 40 e 100 ms; △: 21 de 35 entre 15 e 60 ms); pressões humanas distintas ficam a partir de 150 ms, salvo toques rápidos deliberados no direcional, que não é filtrado.</p>
+<p><b>Semântica do <code>up</code> retido:</b> quando vence a janela, o <code>up</code> é entregue com <code>t_arrival</code> igual ao instante da confirmação, para que a métrica de processamento (<code>t_delivered − t_arrival</code>, RI-29) continue medindo o app, e não a janela. Fica documentado no código e no adendo.</p>
+</div>
+
+<h2>3. Correction Change Set proposto</h2>
+<table><thead><tr><th>CHG</th><th>Tipo</th><th>Artefato</th><th>Propósito</th></tr></thead><tbody>
+<tr><td>CHG-001</td><td>test</td><td><code>Tests/JoystickCoreTests/ButtonDebouncerTests.swift</code> (novo)</td><td>Teste de reprodução (rajada gravada do △) e testes de regressão (ver §4)</td></tr>
+<tr><td>CHG-002</td><td>code</td><td><code>Sources/JoystickCore/Input/ButtonDebouncer.swift</code> (novo)</td><td><code>struct ButtonDebouncer</code>: <code>press(_:at:)</code>, <code>release(_:at:)</code>, <code>flush(_:at:)</code>, <code>cancelAll()</code>, <code>applies(to:model:)</code>, <code>windowNs</code>, <code>filteredButtons</code></td></tr>
+<tr><td>CHG-003</td><td>code</td><td><code>Sources/JoystickAIPoC/Controller/InputSink.swift</code></td><td><code>InputContext.debouncers: [ObjectIdentifier: ButtonDebouncer]</code>, só na fila <code>input</code></td></tr>
+<tr><td>CHG-004</td><td>code</td><td><code>Sources/JoystickAIPoC/Controller/ButtonReader.swift</code></td><td>Em <code>attach</code>: cria o filtro para <code>dualShock4</code> e, nos botões filtrados, passa cada borda por ele; <code>up</code> retido agendado com <code>asyncAfter</code> na fila <code>input</code> e entregue por <code>flush</code>. <code>deliver</code> não muda (o PS pelo HID continua igual)</td></tr>
+<tr><td>CHG-005</td><td>code</td><td><code>Sources/JoystickAIPoC/Controller/ControllerReader.swift</code></td><td>Na desconexão, remove o filtro do controle; as solturas sintéticas de RN-EC-07 já cobrem o botão cujo <code>up</code> estava retido</td></tr>
+<tr><td>CHG-006</td><td>specification</td><td><code>_reversa_sdd/addenda/bug-BUG-20260922-33HN-v001.md</code> (novo)</td><td>Adendo aditivo (veredito <code>spec-gap</code>, a decidir no §7 do ciclo): regra nova de filtro de rajadas para o DualShock 4</td></tr>
+</tbody></table>
+<p>Nenhum arquivo é apagado. Nenhuma refatoração fora do defeito. <code>.reversa/reversa-config.json</code>: <code>allowLegacyEdits: true</code>, <code>allowedPaths</code> vazio (liberação irrestrita, avisada nesta sessão).</p>
+
+<h2>4. Testes planejados (Gate 1)</h2>
+<table><thead><tr><th>Teste</th><th>Intenção</th><th>O que prova</th></tr></thead><tbody>
+<tr><td><code>rajadaGravadaDoTrianguloViraUmaPressao</code></td><td>reprodução</td><td>A sequência gravada às 14:34:54 (down .677, up .692, down .722, up .752, down .782, up .797) atravessa <code>ButtonDebouncer</code> + <code>ActiveControllerRegistry</code> e produz exatamente um <code>down</code> e, após a janela, um <code>up</code>. Vermelho hoje: o tipo não existe; sem o filtro, o registro entrega três <code>down</code></td></tr>
+<tr><td><code>rajadaDoQuadradoComCadenciaDe60ms</code></td><td>reprodução</td><td>Rajada longa (□, 20 ciclos de 60/60 ms) vira uma pressão</td></tr>
+<tr><td><code>dualSenseEIpegaNaoSaoFiltrados</code></td><td>regressão</td><td><code>applies(to:model:)</code> é falso para todo botão dos dois modelos (critério de aceite 2)</td></tr>
+<tr><td><code>botoesDeApontamentoDirecionalEPsNaoSaoFiltradosNoDualShock4</code></td><td>regressão</td><td>R1, R2, L1, L2, L3, R3, clique do touchpad, PS e as quatro direções ficam fora do filtro (duplo clique e repetição do direcional preservados)</td></tr>
+<tr><td><code>toquesHumanosDistintosSaoEntreguesUmAUm</code></td><td>regressão</td><td>Duas pressões com 200 ms entre o <code>up</code> e o <code>down</code> seguinte geram dois <code>down</code> e dois <code>up</code></td></tr>
+<tr><td><code>flushAntesDaJanelaNaoEntrega</code></td><td>regressão</td><td><code>flush</code> antes de <code>t + 120 ms</code> devolve falso; depois, verdadeiro uma única vez</td></tr>
+<tr><td><code>downCancelaUpPendente</code></td><td>regressão</td><td>Após <code>press</code> dentro da janela, o <code>flush</code> não entrega nada e o registro segue com o botão pressionado</td></tr>
+<tr><td><code>cancelAllDevolvePendentesEmOrdem</code></td><td>regressão</td><td>Na desconexão, os <code>up</code> retidos são devolvidos em ordem de <code>ButtonID</code> e coincidem com as solturas sintéticas do registro (RN-EC-07)</td></tr>
+</tbody></table>
+
+<h2>5. Riscos e o que fica de fora</h2>
+<div class="box">
+<p><b>change_risk: baixa.</b> Raio de alcance restrito a um modelo e seis botões; sem contrato externo, sem dados persistidos, sem concorrência nova (tudo na fila <code>input</code>); reversível apagando o filtro. Custo: o <code>up</code> dos seis botões do DualShock 4 chega 120 ms depois do físico. Consequências aceitáveis: acordes ficam 120 ms mais tempo pressionados; o modificador Options solta 120 ms depois; <code>text</code> e <code>openPalette</code> não mudam (agem no <code>down</code>).</p>
+<p><b>Fora da correção (Agent Notes):</b> nenhum toque em DualSense, Ipega, PS pelo HID, gatilhos, ponteiro ou log; nenhuma mudança nas specs originais; a árvore de trabalho da feature 012 (T023, T025, T026 abertas, sem commit) não é alterada além dos dois arquivos do app que ela já toca (<code>ButtonReader.swift</code> e <code>ControllerReader.swift</code>), com diffs cirúrgicos salvos em <code>fix/</code>.</p>
+<p><b>Hipóteses rejeitadas:</b> limiar do GameController sobre valor analógico (o bit digital do relatório bruto já oscila); repetição de acorde (RN-AT-09: só com <code>repeat: true</code>, e o △ é <code>text</code>).</p>
+</div>
+
+<h2>6. Mini-grafo do bug</h2>
+<div class="graph"><svg width="720" height="180" viewBox="0 0 720 180" xmlns="http://www.w3.org/2000/svg">
+<a href="../bug.md"><g><rect x="210" y="30" width="300" height="120" rx="12" fill="#1c2128" stroke="#e5484d" stroke-width="2.5"/>
+<text x="226" y="60" fill="#e6edf3" font-size="15" font-weight="700">#1 · 33HN</text>
+<text x="226" y="86" fill="#c9d1d9" font-size="13">Botões de face do GameSir em modo DS4…</text>
+<text x="226" y="110" fill="#8b949e" font-size="12">high · app/controller-input</text>
+<text x="226" y="134" fill="#f5a524" font-size="12" font-weight="600">active · diagnosing</text></g></a>
+<text x="360" y="170" fill="#8b949e" font-size="12" text-anchor="middle">Único bug do contexto; nenhuma relação registrada.</text>
+</svg></div>
+
+<h2>7. Matriz de relações</h2>
+<table><thead><tr><th>origem</th><th>tipo</th><th>destino</th><th>estado</th></tr></thead><tbody>
+<tr><td colspan="4">Nenhuma aresta. Bug isolado; ordem de correção não se aplica.</td></tr>
+</tbody></table>
+
+<h2>8. Depois dos gates</h2>
+<ul>
+<li>Veredito de spec (decisão sua): recomendação <code>spec-gap</code>, com adendo aditivo <code>bug-BUG-20260922-33HN-v001.md</code>.</li>
+<li>Closure policy <code>local-software</code>: regressão verde + veredito → <code>resolved · fixed</code>, <code>DONE.md</code>, views regeneradas.</li>
+<li>Sugestão para a feature 012: incluir o filtro entre as observações do <code>regression-watch.md</code> (T026) e conferir no PM-1 que uma pressão do △ digita um único "CONTINUAR".</li>
+</ul>
+</body></html>
